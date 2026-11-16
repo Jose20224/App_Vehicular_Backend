@@ -20,7 +20,7 @@ export class FcmService implements OnModuleInit {
     }, 'vehicular-api');
   }
 
-  async sendToUser(userId: string, reminderId: string, title: string, body: string): Promise<{ sent: number; invalidTokenIds: string[]; messageIds: string[] }> {
+  async sendToUser(userId: string, reminderId: string, title: string, body: string): Promise<{ sent: number; failedCount: number; invalidTokenIds: string[]; messageIds: string[] }> {
     const tokens = await this.prisma.deviceToken.findMany({
       where: { userId, status: 'active', tokenCiphertext: { not: null }, tokenNonce: { not: null }, tokenTag: { not: null }, tokenEncryptedDek: { not: null }, tokenKeyVersion: { not: null } },
       select: { id: true, userId: true, tokenCiphertext: true, tokenNonce: true, tokenTag: true, tokenEncryptedDek: true, tokenKeyVersion: true, tokenAadVersion: true },

@@ -39,7 +39,7 @@ export class FieldCryptoService {
 
   async encrypt(plaintext: string, purpose: string, binding?: FieldBinding): Promise<EncryptedField> {
     const aadVersion = binding ? 2 : 1;
-    const context = {
+    const context: Record<string, string> = {
       ...this.contextBase,
       purpose,
       ...(binding ? { user_id: binding.userId, record_id: binding.recordId } : {}),
@@ -103,7 +103,7 @@ export class FieldCryptoService {
   async decrypt(field: EncryptedField, purpose: string, binding?: FieldBinding): Promise<string> {
     const aadVersion = field.aadVersion ?? 1;
     if (aadVersion === 2 && !binding) throw new Error('El contexto de fila es obligatorio para descifrar este campo.');
-    const context = {
+    const context: Record<string, string> = {
       ...this.contextBase,
       purpose,
       ...(aadVersion === 2 && binding ? { user_id: binding.userId, record_id: binding.recordId } : {}),

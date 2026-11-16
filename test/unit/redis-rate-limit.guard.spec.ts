@@ -1,4 +1,5 @@
-import { ServiceUnavailableException, TooManyRequestsException } from '@nestjs/common';
+import { ServiceUnavailableException } from '@nestjs/common';
+import { TooManyRequestsException } from '../../src/common/exceptions/too-many-requests.exception';
 import type { ExecutionContext } from '@nestjs/common';
 import type { Reflector } from '@nestjs/core';
 import { createHash } from 'node:crypto';

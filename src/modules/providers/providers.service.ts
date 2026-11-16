@@ -24,6 +24,12 @@ const OFFLINE_PACKAGE_TTL_SECONDS = 7 * 24 * 60 * 60;
 const OFFLINE_PACKAGE_MAX_BYTES = 99_999;
 const STALE_PRICE_AFTER_DAYS = 90;
 
+function prismaBytes(value: Uint8Array): Uint8Array<ArrayBuffer> {
+  const copy = new Uint8Array(value.byteLength);
+  copy.set(value);
+  return copy;
+}
+
 type ProviderSearchRow = {
   id: string; distance_meters: number; latitude: number | null; longitude: number | null;
   price_min: string | null; price_max: string | null; price_updated_at: Date | null;
@@ -86,13 +92,13 @@ export class ProvidersService {
         description: dto.description?.trim() || null, addressReferenceText: dto.address_reference_text.trim(),
         departmentId: dto.department_id ?? null, municipalityId: dto.municipality_id ?? null,
         is24Hours: dto.is_24_hours ?? false, availabilityStatus: dto.availability_status ?? 'available',
-        phoneCiphertext: phone.ciphertext, phoneNonce: phone.nonce, phoneTag: phone.tag,
-        phoneEncryptedDek: phone.encryptedDek, phoneKeyVersion: phone.keyVersion, phoneAadVersion: phone.aadVersion ?? 2,
-        phoneHmac: phoneIndex.digest, phoneHmacKeyVersion: phoneIndex.keyVersion,
+        phoneCiphertext: prismaBytes(phone.ciphertext), phoneNonce: prismaBytes(phone.nonce), phoneTag: prismaBytes(phone.tag),
+        phoneEncryptedDek: prismaBytes(phone.encryptedDek), phoneKeyVersion: phone.keyVersion, phoneAadVersion: phone.aadVersion ?? 2,
+        phoneHmac: prismaBytes(phoneIndex.digest), phoneHmacKeyVersion: phoneIndex.keyVersion,
         ...(whatsapp ? {
-          whatsappCiphertext: whatsapp.ciphertext, whatsappNonce: whatsapp.nonce, whatsappTag: whatsapp.tag,
-          whatsappEncryptedDek: whatsapp.encryptedDek, whatsappKeyVersion: whatsapp.keyVersion,
-          whatsappAadVersion: whatsapp.aadVersion ?? 2, whatsappHmac: whatsappIndex?.digest,
+          whatsappCiphertext: prismaBytes(whatsapp.ciphertext), whatsappNonce: prismaBytes(whatsapp.nonce), whatsappTag: prismaBytes(whatsapp.tag),
+          whatsappEncryptedDek: prismaBytes(whatsapp.encryptedDek), whatsappKeyVersion: whatsapp.keyVersion,
+          whatsappAadVersion: whatsapp.aadVersion ?? 2, whatsappHmac: whatsappIndex ? prismaBytes(whatsappIndex.digest) : undefined,
           whatsappHmacKeyVersion: whatsappIndex?.keyVersion,
         } : {}),
       } });
@@ -137,9 +143,9 @@ export class ProvidersService {
       const [encrypted, index] = await Promise.all([
         this.encryptContact(dto.phone_e164, 'phone', userId, id), this.crypto.blindIndex(dto.phone_e164, 'assistance_providers.phone'),
       ]);
-      Object.assign(data, { phoneCiphertext: encrypted.ciphertext, phoneNonce: encrypted.nonce, phoneTag: encrypted.tag,
-        phoneEncryptedDek: encrypted.encryptedDek, phoneKeyVersion: encrypted.keyVersion, phoneAadVersion: encrypted.aadVersion ?? 2,
-        phoneHmac: index.digest, phoneHmacKeyVersion: index.keyVersion });
+      Object.assign(data, { phoneCiphertext: prismaBytes(encrypted.ciphertext), phoneNonce: prismaBytes(encrypted.nonce), phoneTag: prismaBytes(encrypted.tag),
+        phoneEncryptedDek: prismaBytes(encrypted.encryptedDek), phoneKeyVersion: encrypted.keyVersion, phoneAadVersion: encrypted.aadVersion ?? 2,
+        phoneHmac: prismaBytes(index.digest), phoneHmacKeyVersion: index.keyVersion });
     }
     if (dto.whatsapp_e164 !== undefined) {
       if (dto.whatsapp_e164 === null || dto.whatsapp_e164 === '') {
@@ -149,9 +155,9 @@ export class ProvidersService {
         const [encrypted, index] = await Promise.all([
           this.encryptContact(dto.whatsapp_e164, 'whatsapp', userId, id), this.crypto.blindIndex(dto.whatsapp_e164, 'assistance_providers.whatsapp'),
         ]);
-        Object.assign(data, { whatsappCiphertext: encrypted.ciphertext, whatsappNonce: encrypted.nonce, whatsappTag: encrypted.tag,
-          whatsappEncryptedDek: encrypted.encryptedDek, whatsappKeyVersion: encrypted.keyVersion, whatsappAadVersion: encrypted.aadVersion ?? 2,
-          whatsappHmac: index.digest, whatsappHmacKeyVersion: index.keyVersion });
+      Object.assign(data, { whatsappCiphertext: prismaBytes(encrypted.ciphertext), whatsappNonce: prismaBytes(encrypted.nonce), whatsappTag: prismaBytes(encrypted.tag),
+        whatsappEncryptedDek: prismaBytes(encrypted.encryptedDek), whatsappKeyVersion: encrypted.keyVersion, whatsappAadVersion: encrypted.aadVersion ?? 2,
+        whatsappHmac: prismaBytes(index.digest), whatsappHmacKeyVersion: index.keyVersion });
       }
     }
     if (Object.keys(data).length === 0 && !latitudePresent && dto.coverage_geojson === undefined) throw new BadRequestException({
@@ -484,7 +490,7 @@ export class ProvidersService {
 
   async previewProviderAction(rawToken: string): Promise<Record<string, unknown>> {
     const tokenHash = this.hashActionToken(rawToken);
-    const row = await this.prisma.assistanceActionToken.findFirst({ where: { tokenHash } , include: { request: { select: { id: true, issueDescription: true, addressReferenceText: true, status: true, assistanceProvider: { select: { name: true } } } } } });
+    const row = await this.prisma.assistanceActionToken.findFirst({ where: { tokenHash: prismaBytes(tokenHash) }, include: { request: { select: { id: true, issueDescription: true, addressReferenceText: true, status: true, assistanceProvider: { select: { name: true } } } } } });
     if (!row) throw new GoneException({ code: 'ASSISTANCE_ACTION_TOKEN_INVALID', message: 'El enlace no existe o ya no está disponible.', details: {} });
     if (row.usedAt || row.expiresAt <= new Date()) throw new GoneException({ code: 'ASSISTANCE_ACTION_TOKEN_EXPIRED', message: 'El enlace ya se utilizó o venció. Solicita un nuevo enlace al sistema.', details: {} });
     return { request_id: row.requestId, target_status: row.targetStatus, current_status: row.request.status,
@@ -534,7 +540,7 @@ export class ProvidersService {
         const raw = randomBytes(32).toString('base64url');
         const expiresAt = new Date(now.getTime() + this.config.value.assistanceActionTokenTtlSeconds * 1000);
         await tx.assistanceActionToken.create({ data: {
-          requestId: request.id, tokenHash: this.hashActionToken(raw), targetStatus: nextTarget, expiresAt,
+          requestId: request.id, tokenHash: prismaBytes(this.hashActionToken(raw)), targetStatus: nextTarget, expiresAt,
         } });
         nextActions.push({ target_status: nextTarget, url: `${this.publicApiBaseUrl()}/assistance-actions/${raw}`, expires_at: expiresAt.toISOString() });
       }
@@ -609,8 +615,8 @@ export class ProvidersService {
     await this.prisma.$transaction(async (tx) => {
       await tx.assistanceActionToken.updateMany({ where: { requestId, usedAt: null }, data: { usedAt: now } });
       await tx.assistanceActionToken.createMany({ data: [
-        { requestId, tokenHash: this.hashActionToken(accept), targetStatus: 'accepted', expiresAt },
-        { requestId, tokenHash: this.hashActionToken(cancel), targetStatus: 'cancelled', expiresAt },
+        { requestId, tokenHash: prismaBytes(this.hashActionToken(accept)), targetStatus: 'accepted', expiresAt },
+        { requestId, tokenHash: prismaBytes(this.hashActionToken(cancel)), targetStatus: 'cancelled', expiresAt },
       ] });
     });
     return { accept: `${this.publicApiBaseUrl()}/assistance-actions/${accept}`, cancel: `${this.publicApiBaseUrl()}/assistance-actions/${cancel}` };
@@ -720,9 +726,9 @@ export class ProvidersService {
       this.crypto.encrypt(value, 'assistance_requests.contact_phone', { userId, recordId }),
       this.crypto.blindIndex(value, 'assistance_requests.contact_phone'),
     ]);
-    return { contactPhoneCiphertext: encrypted.ciphertext, contactPhoneNonce: encrypted.nonce, contactPhoneTag: encrypted.tag,
-      contactPhoneEncryptedDek: encrypted.encryptedDek, contactPhoneKeyVersion: encrypted.keyVersion,
-      contactPhoneAadVersion: encrypted.aadVersion ?? 2, contactPhoneHmac: index.digest, contactPhoneHmacKeyVersion: index.keyVersion };
+    return { contactPhoneCiphertext: prismaBytes(encrypted.ciphertext), contactPhoneNonce: prismaBytes(encrypted.nonce), contactPhoneTag: prismaBytes(encrypted.tag),
+      contactPhoneEncryptedDek: prismaBytes(encrypted.encryptedDek), contactPhoneKeyVersion: encrypted.keyVersion,
+      contactPhoneAadVersion: encrypted.aadVersion ?? 2, contactPhoneHmac: prismaBytes(index.digest), contactPhoneHmacKeyVersion: index.keyVersion };
   }
 
   private async assertTerritory(departmentId: string | null, municipalityId: string | null, db: PrismaService | Prisma.TransactionClient = this.prisma): Promise<void> {
@@ -773,9 +779,9 @@ export class ProvidersService {
   private assertQueryPoint(lat?: number, lng?: number): void {
     if (lat === undefined || lng === undefined) throw new BadRequestException({ code: 'GPS_REQUIRED', message: 'Se requieren lat y lng para consultar cobertura geográfica.', details: {} });
   }
-  private hashActionToken(token: string): Buffer {
+  private hashActionToken(token: string): Uint8Array<ArrayBuffer> {
     if (!/^[A-Za-z0-9_-]{43}$/.test(token)) throw new GoneException({ code: 'ASSISTANCE_ACTION_TOKEN_INVALID', message: 'El enlace no es válido.', details: {} });
-    return createHash('sha256').update(token, 'utf8').digest();
+    return prismaBytes(createHash('sha256').update(token, 'utf8').digest());
   }
   private publicApiBaseUrl(): string {
     return (this.config.value.publicApiBaseUrl ?? `http://localhost:${this.config.value.appPort}/${this.config.value.apiPrefix}`).replace(/\/$/, '');

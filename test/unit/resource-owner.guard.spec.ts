@@ -6,6 +6,8 @@ import type { PrismaService } from '../../src/database/prisma.service';
 
 function contextFor(id = '0192f2a0-7d2a-7c11-9d5a-123456789abc'): ExecutionContext {
   return {
+    getHandler: () => ({}),
+    getClass: () => ({}),
     switchToHttp: () => ({
       getRequest: () => ({ params: { id }, user: { id: 'user-1', role: 'user', device_id: 'device-1' } }),
     }),

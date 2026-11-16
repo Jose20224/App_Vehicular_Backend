@@ -1,4 +1,5 @@
-import { ForbiddenException, TooManyRequestsException, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
+import { TooManyRequestsException } from '../../src/common/exceptions/too-many-requests.exception';
 import type { Request } from 'express';
 import { AuthService } from '../../src/modules/auth/auth.service';
 import type { AppConfigService } from '../../src/config/config.module';

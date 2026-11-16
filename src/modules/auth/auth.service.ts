@@ -5,9 +5,9 @@ import {
   Injectable,
   Logger,
   ServiceUnavailableException,
-  TooManyRequestsException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { TooManyRequestsException } from '../../common/exceptions/too-many-requests.exception';
 import { JwtService } from '@nestjs/jwt';
 import { createHash } from 'node:crypto';
 import { Prisma } from '../../generated/prisma/client';

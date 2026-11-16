@@ -5,6 +5,8 @@ import { RolesGuard } from '../../src/common/guards/roles.guard';
 
 function contextFor(user?: { id: string; role: 'user' | 'workshop_owner' | 'provider_owner' | 'admin'; device_id: string }): ExecutionContext {
   return {
+    getHandler: () => ({}),
+    getClass: () => ({}),
     switchToHttp: () => ({ getRequest: () => ({ user }) }),
   } as unknown as ExecutionContext;
 }

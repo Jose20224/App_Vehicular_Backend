@@ -1,5 +1,6 @@
-import { Injectable, TooManyRequestsException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client';
+import { TooManyRequestsException } from '../../common/exceptions/too-many-requests.exception';
 import { AppConfigService } from '../../config/config.module';
 
 @Injectable()

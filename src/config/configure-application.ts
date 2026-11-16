@@ -30,7 +30,7 @@ export function configureApplication(
     exclude: [{ path: 'health', method: RequestMethod.GET }],
   });
   app.enableCors({
-    origin: (origin, callback) => {
+    origin: (origin: string | undefined, callback: (error: Error | null, allow?: boolean) => void) => {
       if (!origin || environment.corsOrigins.includes(origin)) {
         callback(null, true);
         return;

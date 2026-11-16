@@ -15,6 +15,12 @@ import type { PatchMeDto } from './dto/patch-me.dto';
 import type { RegisterDeviceDto } from './dto/register-device.dto';
 import type { AuthenticatedUser } from '../../common/decorators/current-user.decorator';
 
+function prismaBytes(value: Uint8Array): Uint8Array<ArrayBuffer> {
+  const copy = new Uint8Array(value.byteLength);
+  copy.set(value);
+  return copy;
+}
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -142,7 +148,7 @@ export class UsersService {
         },
       });
 
-      const existingToken = await tx.deviceToken.findFirst({ where: { tokenHash: tokenIndex.digest } });
+      const existingToken = await tx.deviceToken.findFirst({ where: { tokenHash: prismaBytes(tokenIndex.digest) } });
       if (existingToken && existingToken.userId !== user.id) throw new ConflictException({
         code: 'FCM_TOKEN_ALREADY_REGISTERED',
         message: 'El token de notificaciones ya está asociado a otra cuenta.',
@@ -166,13 +172,13 @@ export class UsersService {
           data: {
             syncDeviceId: dto.device_id,
             platform: dto.platform,
-            tokenCiphertext: encryptedToken.ciphertext,
-            tokenNonce: encryptedToken.nonce,
-            tokenTag: encryptedToken.tag,
-            tokenEncryptedDek: encryptedToken.encryptedDek,
+            tokenCiphertext: prismaBytes(encryptedToken.ciphertext),
+            tokenNonce: prismaBytes(encryptedToken.nonce),
+            tokenTag: prismaBytes(encryptedToken.tag),
+            tokenEncryptedDek: prismaBytes(encryptedToken.encryptedDek),
             tokenKeyVersion: encryptedToken.keyVersion,
             tokenAadVersion: encryptedToken.aadVersion ?? 2,
-            tokenHash: tokenIndex.digest,
+            tokenHash: prismaBytes(tokenIndex.digest),
             tokenHmacKeyVersion: tokenIndex.keyVersion,
             status: 'active',
             revokedAt: null,
@@ -187,13 +193,13 @@ export class UsersService {
           userId: user.id,
           syncDeviceId: dto.device_id,
           platform: dto.platform,
-          tokenCiphertext: encryptedToken.ciphertext,
-          tokenNonce: encryptedToken.nonce,
-          tokenTag: encryptedToken.tag,
-          tokenEncryptedDek: encryptedToken.encryptedDek,
+          tokenCiphertext: prismaBytes(encryptedToken.ciphertext),
+          tokenNonce: prismaBytes(encryptedToken.nonce),
+          tokenTag: prismaBytes(encryptedToken.tag),
+          tokenEncryptedDek: prismaBytes(encryptedToken.encryptedDek),
           tokenKeyVersion: encryptedToken.keyVersion,
           tokenAadVersion: encryptedToken.aadVersion ?? 2,
-          tokenHash: tokenIndex.digest,
+          tokenHash: prismaBytes(tokenIndex.digest),
           tokenHmacKeyVersion: tokenIndex.keyVersion,
           status: 'active',
           lastSeenAt: now,

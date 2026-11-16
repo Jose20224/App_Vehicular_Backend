@@ -3,8 +3,8 @@ import {
   ExecutionContext,
   Injectable,
   ServiceUnavailableException,
-  TooManyRequestsException,
 } from '@nestjs/common';
+import { TooManyRequestsException } from '../exceptions/too-many-requests.exception';
 import { Reflector } from '@nestjs/core';
 import { createHash } from 'node:crypto';
 import type { Request } from 'express';
