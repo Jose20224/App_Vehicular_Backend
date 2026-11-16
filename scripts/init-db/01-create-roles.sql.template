@@ -1,0 +1,23 @@
+\set ON_ERROR_STOP on
+
+SELECT format('CREATE ROLE app_migrator LOGIN PASSWORD %L', :'migrator_password')
+WHERE NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'app_migrator')
+\gexec
+
+SELECT format('CREATE ROLE app_runtime LOGIN PASSWORD %L', :'runtime_password')
+WHERE NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'app_runtime')
+\gexec
+
+ALTER ROLE app_migrator WITH LOGIN PASSWORD :'migrator_password' NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT;
+ALTER ROLE app_runtime WITH LOGIN PASSWORD :'runtime_password' NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT;
+
+GRANT CONNECT ON DATABASE :"database_name" TO app_migrator, app_runtime;
+GRANT USAGE, CREATE ON SCHEMA public TO app_migrator;
+GRANT USAGE ON SCHEMA public TO app_runtime;
+
+-- El runtime no recibe DDL, DELETE general ni privilegios sobre secuencias globales.
+-- No conceder USAGE/SELECT sobre sync_version_seq: el trigger SECURITY DEFINER usa la secuencia como app_migrator.
+-- Si una tabla futura necesitase una secuencia propia para un ID, concederla explícitamente en su migración.
+GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO app_runtime;
+ALTER DEFAULT PRIVILEGES FOR ROLE app_migrator IN SCHEMA public
+  GRANT SELECT, INSERT, UPDATE ON TABLES TO app_runtime;

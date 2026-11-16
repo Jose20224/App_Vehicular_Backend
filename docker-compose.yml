@@ -1,0 +1,65 @@
+services:
+  db:
+    image: postgis/postgis:16-3.5
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-vehicular_dev}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_local_only}
+      APP_MIGRATOR_PASSWORD: ${APP_MIGRATOR_PASSWORD:-migrator_dev_only}
+      APP_RUNTIME_PASSWORD: ${APP_RUNTIME_PASSWORD:-runtime_dev_only}
+    ports: ["5432:5432"]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db/01-create-roles.sh:/docker-entrypoint-initdb.d/01-create-roles.sh:ro
+      - ./scripts/init-db/01-create-roles.sql.template:/docker-entrypoint-initdb.d/01-create-roles.sql.template:ro
+      - ./scripts/init-db/02-enable-extensions.sql:/docker-entrypoint-initdb.d/02-enable-extensions.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-vehicular_dev}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    command: ["sh", "-c", "redis-server --appendonly yes --requirepass \"$${REDIS_PASSWORD}\""]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis_dev_only}
+    ports: ["6379:6379"]
+    volumes: [redis_data:/data]
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$${REDIS_PASSWORD}\" ping | grep -q PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://app_runtime:${APP_RUNTIME_PASSWORD:-runtime_dev_only}@db:5432/${POSTGRES_DB:-vehicular_dev}?schema=public
+      REDIS_URL: redis://:${REDIS_PASSWORD:-redis_dev_only}@redis:6379/0
+    ports: ["3000:3000"]
+    depends_on:
+      db: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  migrate:
+    build: .
+    profiles: ["tools"]
+    environment:
+      DATABASE_MIGRATION_URL: postgresql://app_migrator:${APP_MIGRATOR_PASSWORD:-migrator_dev_only}@db:5432/${POSTGRES_DB:-vehicular_dev}?schema=public
+    command: ["sh", "-c", "npx prisma migrate deploy"]
+    depends_on:
+      db: { condition: service_healthy }
+
+volumes:
+  postgres_data:
+  redis_data:

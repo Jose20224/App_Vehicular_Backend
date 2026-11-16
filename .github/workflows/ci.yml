@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      NODE_ENV: test
+      APP_PORT: "3000"
+      API_PREFIX: api/v1
+      APP_TIMEZONE: America/Managua
+      LOG_LEVEL: error
+      DATABASE_URL: postgresql://app_runtime:test-runtime@127.0.0.1:5432/vehicular_test?schema=public
+      DATABASE_MIGRATION_URL: postgresql://app_migrator:test-migrator@127.0.0.1:5432/vehicular_test?schema=public
+      DATABASE_POOL_MAX: "3"
+      DATABASE_POOL_TIMEOUT_SECONDS: "10"
+      DATABASE_SSL_MODE: disable
+      REDIS_URL: redis://:test-redis@127.0.0.1:6379/0
+      REDIS_TLS_REQUIRED: "false"
+      CORS_ORIGINS: http://localhost:3000
+      RATE_LIMIT_TTL_MS: "60000"
+      RATE_LIMIT_MAX_REQUESTS: "120"
+      AWS_REGION: us-east-1
+      AWS_S3_PRIVATE_BUCKET: vehicular-ci-fake
+      AWS_S3_PRESIGN_UPLOAD_TTL_SECONDS: "300"
+      AWS_S3_PRESIGN_DOWNLOAD_TTL_SECONDS: "600"
+      ENCRYPTION_MODE: local
+      LOCAL_DATA_KEY_BASE64: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      LOCAL_BLIND_INDEX_KEY_BASE64: AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQE=
+      OTP_MODE: mock
+      OTP_MOCK_CODE: '123456'
+      OTP_CODE_TTL_SECONDS: '300'
+      OTP_MAX_REQUESTS_PER_HOUR: '5'
+      OTP_MAX_FAILED_ATTEMPTS: '5'
+      OTP_LOCK_MINUTES: '15'
+      CONSENT_POLICY_VERSION: privacy-2026-11-v1
+      S3_CLEANUP_MODE: mock
+      JWT_ACCESS_SECRET: ci-access-secret-000000000000000000000000000000000000
+      JWT_REFRESH_SECRET: ci-refresh-secret-000000000000000000000000000000000000
+      JWT_ACCESS_TTL_SECONDS: "900"
+      JWT_REFRESH_TTL_SECONDS: "2592000"
+      REDIS_PASSWORD: test-redis
+      POSTGRES_DB: vehicular_test
+      POSTGRES_ADMIN_USER: postgres_admin
+      POSTGRES_ADMIN_PASSWORD: test-admin
+      APP_MIGRATOR_PASSWORD: test-migrator
+      APP_RUNTIME_PASSWORD: test-runtime
+
+    steps:
+      - name: Obtener código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+
+      - name: Generar Prisma Client
+        run: npm run prisma:generate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Pruebas unitarias y de integración
+        run: npm run test:ci
+
+      - name: Verificar reversa de migraciones con Testcontainers
+        run: npm run test:migrations
+
+      - name: Compilar API
+        run: npm run build
+
+      - name: Construir imagen Docker
+        run: docker build --tag vehicular-api:ci .
