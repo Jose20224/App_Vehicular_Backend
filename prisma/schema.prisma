@@ -178,11 +178,6 @@ model SyncDevice {
   deviceTokens  DeviceToken[]
   refreshTokens RefreshToken[]
   syncChannelStates SyncChannelState[]
-  workshops Workshop[]
-  assistanceProviders AssistanceProvider[]
-  workshopSpecialties WorkshopSpecialty[]
-  workshopPhotos WorkshopPhoto[]
-  serviceOfferings ServiceOffering[]
   syncBootstraps SyncBootstrap[]
   processedMutations ProcessedMutation[]
 
