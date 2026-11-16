@@ -26,7 +26,7 @@ export class AccountStorageCleanupService {
     try {
       for (const prefix of prefixes) await this.deletePrefix(prefix);
       return 'deleted';
-    } catch (error) {
+    } catch {
       this.logger.error(JSON.stringify({ event: 'account_storage_cleanup_failed', user_id: userId }));
       throw new ServiceUnavailableException({
         code: 'ACCOUNT_DELETION_PENDING',

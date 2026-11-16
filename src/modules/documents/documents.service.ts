@@ -16,7 +16,7 @@ import { RemindersService } from '../reminders/reminders.service';
 
 const ALLOWED_TYPES = new Set(['application/pdf', 'image/jpeg', 'image/png', 'image/heic']);
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
-type DocumentRecord = Prisma.VehicleDocumentGetPayload<{}>;
+type DocumentRecord = Prisma.VehicleDocumentGetPayload<Prisma.VehicleDocumentDefaultArgs>;
 type PolicyRecord = Prisma.InsurancePolicyGetPayload<{ include: { insurer: true; document: true } }>;
 
 @Injectable()

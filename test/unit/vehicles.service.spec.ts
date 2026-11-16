@@ -5,7 +5,6 @@ import type { PrismaService } from '../../src/database/prisma.service';
 
 const USER_ID = '0192f2a0-7d2a-7c11-9d5a-123456789abc';
 const VEHICLE_ID = '018bcfe5-6800-7abc-8def-0123456789ab';
-const include = { brand: true, model: true } as const;
 type VehicleFixture = Prisma.VehicleGetPayload<{ include: typeof include }>;
 
 function vehicleFixture(overrides: Partial<VehicleFixture> = {}): VehicleFixture {

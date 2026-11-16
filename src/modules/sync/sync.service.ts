@@ -12,7 +12,7 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
-import { Prisma } from '../../generated/prisma/client';
+import { Prisma, type VehicleDocumentType, type VehicleType } from '../../generated/prisma/client';
 import { AppConfigService } from '../../config/config.module';
 import { PrismaService } from '../../database/prisma.service';
 import { isUuidV7 } from '../../common/uuid-v7';
@@ -25,8 +25,31 @@ import type { SyncBootstrapQueryDto, SyncPullQueryDto, SyncStatusQueryDto } from
 import type { PushSyncDto, SyncMutationDto } from './dto/push-sync.dto';
 import type { SyncChannel } from './dto/sync-query.dto';
 
-type JsonObject = Record<string, any>;
+type JsonObject = Record<string, unknown>;
 type SyncEntity = 'profile' | 'vehicle' | 'vehicle_document' | 'insurance_policy' | 'notification_preference' | 'emergency_contact' | 'assistance_request' | 'reminder';
+type UserRow = Prisma.UserGetPayload<Prisma.UserDefaultArgs>;
+type VehicleRow = Prisma.VehicleGetPayload<Prisma.VehicleDefaultArgs>;
+type VehicleDocumentRow = Prisma.VehicleDocumentGetPayload<Prisma.VehicleDocumentDefaultArgs>;
+type InsurancePolicyRow = Prisma.InsurancePolicyGetPayload<Prisma.InsurancePolicyDefaultArgs> & Partial<{
+  insurer: Prisma.InsurerGetPayload<Prisma.InsurerDefaultArgs> | null;
+  document: VehicleDocumentRow | null;
+}>;
+type NotificationPreferenceRow = Prisma.NotificationPreferenceGetPayload<Prisma.NotificationPreferenceDefaultArgs>;
+type EmergencyContactRow = Prisma.EmergencyContactGetPayload<Prisma.EmergencyContactDefaultArgs>;
+type AssistanceRequestRow = Prisma.AssistanceRequestGetPayload<Prisma.AssistanceRequestDefaultArgs>;
+type ReminderRow = Prisma.ReminderGetPayload<Prisma.ReminderDefaultArgs>;
+type SyncEntityRow = UserRow | VehicleRow | VehicleDocumentRow | InsurancePolicyRow | NotificationPreferenceRow | EmergencyContactRow | AssistanceRequestRow | ReminderRow;
+type ProcessedMutationRow = Prisma.ProcessedMutationGetPayload<Prisma.ProcessedMutationDefaultArgs>;
+type VehicleVinFields = Partial<Pick<Prisma.VehicleUncheckedCreateInput, 'vinCiphertext' | 'vinNonce' | 'vinTag' | 'vinEncryptedDek' | 'vinKeyVersion' | 'vinAadVersion' | 'vinHmac' | 'vinHmacKeyVersion'>>;
+type PolicyNumberFields = Partial<Pick<Prisma.InsurancePolicyUncheckedCreateInput, 'policyNumberCiphertext' | 'policyNumberNonce' | 'policyNumberTag' | 'policyNumberEncryptedDek' | 'policyNumberKeyVersion' | 'policyNumberAadVersion'>>;
+type PolicyClaimsPhoneFields = Partial<Pick<Prisma.InsurancePolicyUncheckedCreateInput, 'claimsPhoneCiphertext' | 'claimsPhoneNonce' | 'claimsPhoneTag' | 'claimsPhoneEncryptedDek' | 'claimsPhoneKeyVersion' | 'claimsPhoneAadVersion'>>;
+type EmergencyContactPhoneFields = Partial<Pick<Prisma.EmergencyContactUncheckedCreateInput, 'phoneCiphertext' | 'phoneNonce' | 'phoneTag' | 'phoneEncryptedDek' | 'phoneKeyVersion' | 'phoneAadVersion' | 'phoneHmac' | 'phoneHmacKeyVersion'>>;
+type AssistanceRequestPhoneFields = Partial<Pick<Prisma.AssistanceRequestUncheckedCreateInput, 'contactPhoneCiphertext' | 'contactPhoneNonce' | 'contactPhoneTag' | 'contactPhoneEncryptedDek' | 'contactPhoneKeyVersion' | 'contactPhoneAadVersion' | 'contactPhoneHmac' | 'contactPhoneHmacKeyVersion'>>;
+function prismaBytes(value: Uint8Array): Uint8Array<ArrayBuffer> {
+  const copy = new Uint8Array(value.byteLength);
+  copy.set(value);
+  return copy;
+}
 type MutationResult = {
   mutation_id: string; entity: string; id: string; status: 'applied' | 'conflict' | 'rejected';
   server_sync_version?: string | null; server_updated_at?: string | null;
@@ -246,7 +269,6 @@ export class SyncService {
     await this.assertDevice(user, query.device_id);
     const limit = Math.min(Math.max(query.limit ?? 50, 1), 50);
     const channel = query.channel ?? 'all';
-    let ack: bigint;
     let floor: bigint;
     let watermark: bigint;
     let afterVersion: bigint | null = null;
@@ -264,7 +286,7 @@ export class SyncService {
     if (token.v !== 1 || (token.kind !== 'ready' && token.kind !== 'scan')) throw this.invalidCursor();
     if (token.userId !== user.id || token.deviceId !== query.device_id || token.channel !== channel) throw this.invalidCursor();
     if (!this.isValidVersionString(token.ack)) throw this.invalidCursor();
-    ack = BigInt(token.ack);
+    const ack = BigInt(token.ack);
     if (ack < minimumCursor) throw this.resyncRequired();
     if (token.kind === 'ready') {
       await this.acknowledgeCursor(user.id, query.device_id, channel, ack);
@@ -427,7 +449,7 @@ export class SyncService {
     }
   }
 
-  private async loadBootstrapRows(userId: string, entity: SyncEntity, snapshot: bigint, afterId: string | null, take: number): Promise<any[]> {
+  private async loadBootstrapRows(userId: string, entity: SyncEntity, snapshot: bigint, afterId: string | null, take: number): Promise<SyncEntityRow[]> {
     const common = { userId, deletedAt: null, syncVersion: { lte: snapshot }, ...(afterId ? { id: { gt: afterId } } : {}) };
     switch (entity) {
       case 'profile': {
@@ -457,8 +479,8 @@ export class SyncService {
   private async loadPullChanges(
     userId: string, entities: SyncEntity[], floor: bigint, watermark: bigint,
     afterVersion: bigint | null, afterEntity: string | null, afterId: string | null, take: number,
-  ): Promise<Array<{ entity: SyncEntity; id: string; syncVersion: bigint; deletedAt: Date | null; updatedAt: Date; row: any }>> {
-    const output: Array<{ entity: SyncEntity; id: string; syncVersion: bigint; deletedAt: Date | null; updatedAt: Date; row: any }> = [];
+  ): Promise<Array<{ entity: SyncEntity; id: string; syncVersion: bigint; deletedAt: Date | null; updatedAt: Date; row: SyncEntityRow }>> {
+    const output: Array<{ entity: SyncEntity; id: string; syncVersion: bigint; deletedAt: Date | null; updatedAt: Date; row: SyncEntityRow }> = [];
     for (const entity of entities) {
       const versionFilter: Record<string, bigint> = { gt: floor, lte: watermark };
       let additionalWhere: Record<string, unknown> = {};
@@ -488,16 +510,16 @@ export class SyncService {
         continue;
       }
 
-      const baseWhere: any = { userId, syncVersion: versionFilter, ...additionalWhere };
-      let rows: any[] = [];
+      const baseWhere = { userId, syncVersion: versionFilter, ...additionalWhere };
+      let rows: SyncEntityRow[] = [];
       switch (entity) {
-        case 'vehicle': rows = await this.prisma.vehicle.findMany({ where: baseWhere, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
-        case 'vehicle_document': rows = await this.prisma.vehicleDocument.findMany({ where: baseWhere, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
-        case 'insurance_policy': rows = await this.prisma.insurancePolicy.findMany({ where: baseWhere, include: { insurer: true, document: true }, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
-        case 'notification_preference': rows = await this.prisma.notificationPreference.findMany({ where: baseWhere, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
-        case 'emergency_contact': rows = await this.prisma.emergencyContact.findMany({ where: baseWhere, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
-        case 'assistance_request': rows = await this.prisma.assistanceRequest.findMany({ where: baseWhere, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
-        case 'reminder': rows = await this.prisma.reminder.findMany({ where: baseWhere, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
+        case 'vehicle': rows = await this.prisma.vehicle.findMany({ where: baseWhere as Prisma.VehicleWhereInput, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
+        case 'vehicle_document': rows = await this.prisma.vehicleDocument.findMany({ where: baseWhere as Prisma.VehicleDocumentWhereInput, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
+        case 'insurance_policy': rows = await this.prisma.insurancePolicy.findMany({ where: baseWhere as Prisma.InsurancePolicyWhereInput, include: { insurer: true, document: true }, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
+        case 'notification_preference': rows = await this.prisma.notificationPreference.findMany({ where: baseWhere as Prisma.NotificationPreferenceWhereInput, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
+        case 'emergency_contact': rows = await this.prisma.emergencyContact.findMany({ where: baseWhere as Prisma.EmergencyContactWhereInput, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
+        case 'assistance_request': rows = await this.prisma.assistanceRequest.findMany({ where: baseWhere as Prisma.AssistanceRequestWhereInput, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
+        case 'reminder': rows = await this.prisma.reminder.findMany({ where: baseWhere as Prisma.ReminderWhereInput, orderBy: [{ syncVersion: 'asc' }, { id: 'asc' }], take }); break;
       }
       for (const row of rows) output.push({ entity, id: row.id, syncVersion: row.syncVersion, deletedAt: row.deletedAt, updatedAt: row.updatedAt, row });
     }
@@ -509,27 +531,27 @@ export class SyncService {
     try { return BigInt(value) <= 9_223_372_036_854_775_807n; } catch { return false; }
   }
 
-  private async serializeEntity(entity: SyncEntity, row: any, db: PrismaService | Prisma.TransactionClient): Promise<Record<string, unknown>> {
+  private async serializeEntity(entity: SyncEntity, row: SyncEntityRow, db: PrismaService | Prisma.TransactionClient): Promise<Record<string, unknown>> {
     switch (entity) {
-      case 'profile': return this.serializeProfile(row);
-      case 'vehicle': return this.serializeVehicle(row);
-      case 'vehicle_document': return this.serializeDocument(row);
-      case 'insurance_policy': return this.serializePolicy(row, db);
-      case 'notification_preference': return this.serializePreference(row);
-      case 'emergency_contact': return this.serializeEmergencyContact(row);
-      case 'assistance_request': return this.serializeAssistanceRequest(row, db);
-      case 'reminder': return this.serializeReminder(row);
+      case 'profile': return this.serializeProfile(row as UserRow);
+      case 'vehicle': return this.serializeVehicle(row as VehicleRow);
+      case 'vehicle_document': return this.serializeDocument(row as VehicleDocumentRow);
+      case 'insurance_policy': return this.serializePolicy(row as InsurancePolicyRow, db);
+      case 'notification_preference': return this.serializePreference(row as NotificationPreferenceRow);
+      case 'emergency_contact': return this.serializeEmergencyContact(row as EmergencyContactRow);
+      case 'assistance_request': return this.serializeAssistanceRequest(row as AssistanceRequestRow, db);
+      case 'reminder': return this.serializeReminder(row as ReminderRow);
     }
   }
 
-  private async serializeProfile(row: any): Promise<Record<string, unknown>> {
+  private async serializeProfile(row: UserRow): Promise<Record<string, unknown>> {
     const email = row.emailCiphertext && row.emailNonce && row.emailTag && row.emailEncryptedDek && row.emailKeyVersion
       ? await this.crypto.decrypt({ ciphertext: Buffer.from(row.emailCiphertext), nonce: Buffer.from(row.emailNonce), tag: Buffer.from(row.emailTag), encryptedDek: Buffer.from(row.emailEncryptedDek), keyVersion: row.emailKeyVersion }, 'users.email')
       : null;
     return { id: row.id, display_name: row.displayName, email, created_at: row.createdAt.toISOString(), updated_at: row.updatedAt.toISOString(), sync_version: row.syncVersion.toString() };
   }
 
-  private async serializeVehicle(row: any): Promise<Record<string, unknown>> {
+  private async serializeVehicle(row: VehicleRow): Promise<Record<string, unknown>> {
     const plate = await this.crypto.decrypt({
       ciphertext: Buffer.from(row.plateCiphertext), nonce: Buffer.from(row.plateNonce), tag: Buffer.from(row.plateTag),
       encryptedDek: Buffer.from(row.plateEncryptedDek), keyVersion: row.plateKeyVersion, aadVersion: row.plateAadVersion,
@@ -549,7 +571,7 @@ export class SyncService {
     };
   }
 
-  private serializeDocument(row: any): Record<string, unknown> {
+  private serializeDocument(row: VehicleDocumentRow): Record<string, unknown> {
     return {
       id: row.id, vehicle_id: row.vehicleId, document_type: row.documentType, title: row.title,
       issuer_name: row.issuerName, valid_from: this.dateOnly(row.validFrom), valid_until: this.dateOnly(row.validUntil),
@@ -561,7 +583,7 @@ export class SyncService {
     };
   }
 
-  private async serializePolicy(row: any, db: PrismaService | Prisma.TransactionClient): Promise<Record<string, unknown>> {
+  private async serializePolicy(row: InsurancePolicyRow, db: PrismaService | Prisma.TransactionClient): Promise<Record<string, unknown>> {
     const policy = row.insurer !== undefined && row.document !== undefined ? row : await db.insurancePolicy.findFirst({ where: { id: row.id, userId: row.userId }, include: { insurer: true, document: true } });
     if (!policy) throw new NotFoundException({ code: 'RESOURCE_NOT_FOUND', message: 'No se encontró la póliza.', details: {} });
     const policyNumber = await this.crypto.decrypt({
@@ -588,7 +610,7 @@ export class SyncService {
     };
   }
 
-  private serializePreference(row: any): Record<string, unknown> {
+  private serializePreference(row: NotificationPreferenceRow): Record<string, unknown> {
     return {
       id: row.id, category: row.category, enabled_offsets: row.enabledOffsets, preferred_time: row.preferredTime,
       push_enabled: row.pushEnabled, local_enabled: row.localEnabled, in_app_enabled: row.inAppEnabled,
@@ -597,7 +619,7 @@ export class SyncService {
     };
   }
 
-  private async serializeEmergencyContact(row: any): Promise<Record<string, unknown>> {
+  private async serializeEmergencyContact(row: EmergencyContactRow): Promise<Record<string, unknown>> {
     const phone = row.phoneCiphertext && row.phoneNonce && row.phoneTag && row.phoneEncryptedDek && row.phoneKeyVersion
       ? await this.crypto.decrypt({
         ciphertext: Buffer.from(row.phoneCiphertext), nonce: Buffer.from(row.phoneNonce), tag: Buffer.from(row.phoneTag),
@@ -611,7 +633,7 @@ export class SyncService {
     };
   }
 
-  private async serializeAssistanceRequest(row: any, db: PrismaService | Prisma.TransactionClient): Promise<Record<string, unknown>> {
+  private async serializeAssistanceRequest(row: AssistanceRequestRow, db: PrismaService | Prisma.TransactionClient): Promise<Record<string, unknown>> {
     const phone = row.contactPhoneCiphertext && row.contactPhoneNonce && row.contactPhoneTag && row.contactPhoneEncryptedDek && row.contactPhoneKeyVersion
       ? await this.crypto.decrypt({
         ciphertext: Buffer.from(row.contactPhoneCiphertext), nonce: Buffer.from(row.contactPhoneNonce), tag: Buffer.from(row.contactPhoneTag),
@@ -635,7 +657,7 @@ export class SyncService {
     };
   }
 
-  private serializeReminder(row: any): Record<string, unknown> {
+  private serializeReminder(row: ReminderRow): Record<string, unknown> {
     return {
       id: row.id, vehicle_document_id: row.vehicleDocumentId, title: row.title, description: row.description,
       reminder_type: row.reminderType, due_at: row.dueAt.toISOString(), scheduled_at: row.scheduledAt.toISOString(),
@@ -753,12 +775,12 @@ export class SyncService {
     });
     await tx.processedMutation.create({ data: {
       userId, mutationId: mutation.mutation_id, deviceId, entity: mutation.entity, entityId: mutation.id,
-      payloadHash, resultCiphertext: encrypted.ciphertext, resultNonce: encrypted.nonce,
-      resultTag: encrypted.tag, resultEncryptedDek: encrypted.encryptedDek, resultKeyVersion: encrypted.keyVersion,
+      payloadHash: prismaBytes(payloadHash), resultCiphertext: prismaBytes(encrypted.ciphertext), resultNonce: prismaBytes(encrypted.nonce),
+      resultTag: prismaBytes(encrypted.tag), resultEncryptedDek: prismaBytes(encrypted.encryptedDek), resultKeyVersion: encrypted.keyVersion,
     } });
   }
 
-  private async decryptStoredResult(row: any, userId: string, mutationId: string): Promise<MutationResult> {
+  private async decryptStoredResult(row: ProcessedMutationRow, userId: string, mutationId: string): Promise<MutationResult> {
     const plaintext = await this.crypto.decrypt({
       ciphertext: Buffer.from(row.resultCiphertext), nonce: Buffer.from(row.resultNonce), tag: Buffer.from(row.resultTag),
       encryptedDek: Buffer.from(row.resultEncryptedDek), keyVersion: row.resultKeyVersion, aadVersion: 2,
@@ -770,12 +792,13 @@ export class SyncService {
     return createHash('sha256').update(this.canonicalJson(mutation)).digest();
   }
 
-  private canonicalJson(value: any): string {
+  private canonicalJson(value: unknown): string {
     if (Array.isArray(value)) return `[${value.map((item) => this.canonicalJson(item)).join(',')}]`;
     if (value && typeof value === 'object') {
-      return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${this.canonicalJson(value[key])}`).join(',')}}`;
+      const record = value as Record<string, unknown>;
+      return `{${Object.keys(record).sort().map((key) => `${JSON.stringify(key)}:${this.canonicalJson(record[key])}`).join(',')}}`;
     }
-    return JSON.stringify(value);
+    return JSON.stringify(value) ?? 'null';
   }
 
   private resultBase(
@@ -792,8 +815,8 @@ export class SyncService {
 
   private safeExceptionCode(error: HttpException): string {
     const response = error.getResponse();
-    if (response && typeof response === 'object' && 'code' in response && typeof (response as any).code === 'string') {
-      const code = (response as any).code as string;
+    if (response && typeof response === 'object' && 'code' in response && typeof response.code === 'string') {
+      const code = response.code;
       return /^[A-Z0-9_]{2,80}$/.test(code) ? code : 'VALIDATION_ERROR';
     }
     return error.getStatus() === 404 ? 'RESOURCE_NOT_FOUND' : error.getStatus() === 409 ? 'MUTATION_CONFLICT' : 'VALIDATION_ERROR';
@@ -818,7 +841,7 @@ export class SyncService {
     const now = new Date();
     const clientTime = clientTimeRaw.getTime() > now.getTime() + 5 * 60_000 ? now : clientTimeRaw;
 
-    let row: any;
+    let row: SyncEntityRow | null = null;
     let version: bigint | null = null;
     let updatedAt: Date | null = null;
     let isConflict = false;
@@ -862,12 +885,15 @@ export class SyncService {
         row = result.row; isConflict = result.conflict;
         break;
       }
+      default:
+        throw new UnprocessableEntityException({ code: 'ENTITY_NOT_SYNCABLE', message: 'La entidad no admite escritura mediante sincronización offline.', details: {} });
     }
 
+    if (!row) throw new NotFoundException({ code: 'RESOURCE_NOT_FOUND', message: 'No se encontró el registro de sincronización.', details: {} });
     const entity = mutation.entity as SyncEntity;
     const serialized = await this.serializeEntity(entity, row, tx);
-    version = row.syncVersion as bigint;
-    updatedAt = row.updatedAt as Date;
+    version = row.syncVersion;
+    updatedAt = row.updatedAt;
     return {
       mutation_id: mutation.mutation_id, entity: mutation.entity, id: mutation.id,
       status: isConflict ? 'conflict' : 'applied',
@@ -923,25 +949,35 @@ export class SyncService {
     return text || null;
   }
 
-  private async conflictOrOwned(tx: Prisma.TransactionClient, model: string, id: string, userId: string): Promise<any | null> {
-    const delegates: Record<string, any> = {
-      vehicle: tx.vehicle, vehicle_document: tx.vehicleDocument, insurance_policy: tx.insurancePolicy,
-      emergency_contact: tx.emergencyContact, assistance_request: tx.assistanceRequest,
-    };
-    const record = await delegates[model].findUnique({ where: { id } });
+  private async conflictOrOwned(tx: Prisma.TransactionClient, model: 'vehicle', id: string, userId: string): Promise<VehicleRow | null>;
+  private async conflictOrOwned(tx: Prisma.TransactionClient, model: 'vehicle_document', id: string, userId: string): Promise<VehicleDocumentRow | null>;
+  private async conflictOrOwned(tx: Prisma.TransactionClient, model: 'insurance_policy', id: string, userId: string): Promise<InsurancePolicyRow | null>;
+  private async conflictOrOwned(tx: Prisma.TransactionClient, model: 'emergency_contact', id: string, userId: string): Promise<EmergencyContactRow | null>;
+  private async conflictOrOwned(tx: Prisma.TransactionClient, model: 'assistance_request', id: string, userId: string): Promise<AssistanceRequestRow | null>;
+  private async conflictOrOwned(
+    tx: Prisma.TransactionClient,
+    model: 'vehicle' | 'vehicle_document' | 'insurance_policy' | 'emergency_contact' | 'assistance_request',
+    id: string,
+    userId: string,
+  ): Promise<VehicleRow | VehicleDocumentRow | InsurancePolicyRow | EmergencyContactRow | AssistanceRequestRow | null> {
+    const record = model === 'vehicle' ? await tx.vehicle.findUnique({ where: { id } })
+      : model === 'vehicle_document' ? await tx.vehicleDocument.findUnique({ where: { id } })
+        : model === 'insurance_policy' ? await tx.insurancePolicy.findUnique({ where: { id } })
+          : model === 'emergency_contact' ? await tx.emergencyContact.findUnique({ where: { id } })
+            : await tx.assistanceRequest.findUnique({ where: { id } });
     if (record && record.userId !== userId) throw new ConflictException({ code: 'ID_COLLISION', message: 'El identificador ya está ocupado por otro registro.', details: {} });
     return record;
   }
 
-  private async checkLww(existing: any, clientTime: Date): Promise<boolean> {
+  private async checkLww(existing: { updatedAt: Date }, clientTime: Date): Promise<boolean> {
     return clientTime.getTime() <= existing.updatedAt.getTime();
   }
 
-  private async applyProfileMutation(tx: Prisma.TransactionClient, userId: string, data: JsonObject): Promise<any> {
+  private async applyProfileMutation(tx: Prisma.TransactionClient, userId: string, data: JsonObject): Promise<UserRow> {
     this.assertAllowedKeys(data, ['display_name', 'email']);
     if (data.display_name === undefined && data.email === undefined) throw new BadRequestException({ code: 'EMPTY_PROFILE_UPDATE', message: 'Indica al menos un campo del perfil.', details: {} });
-    const update: any = {};
-    if (data.display_name !== undefined) update.displayName = this.ensureString(data.display_name, 'display_name', 1, 120, true);
+    const update: Prisma.UserUpdateInput = {};
+    if (data.display_name !== undefined) update.displayName = this.ensureString(data.display_name, 'display_name', 1, 120, true)!;
     if (data.email !== undefined) {
       const email = this.ensureString(data.email, 'email', 3, 254, true)!.toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'El correo electrónico no tiene un formato válido.', details: {} });
@@ -949,9 +985,9 @@ export class SyncService {
         this.crypto.encrypt(email, 'users.email'), this.crypto.blindIndex(email, 'users.email'),
       ]);
       Object.assign(update, {
-        emailCiphertext: encrypted.ciphertext, emailNonce: encrypted.nonce, emailTag: encrypted.tag,
-        emailEncryptedDek: encrypted.encryptedDek, emailKeyVersion: encrypted.keyVersion,
-        emailHmac: index.digest, emailHmacKeyVersion: index.keyVersion,
+        emailCiphertext: prismaBytes(encrypted.ciphertext), emailNonce: prismaBytes(encrypted.nonce), emailTag: prismaBytes(encrypted.tag),
+        emailEncryptedDek: prismaBytes(encrypted.encryptedDek), emailKeyVersion: encrypted.keyVersion,
+        emailHmac: prismaBytes(index.digest), emailHmacKeyVersion: index.keyVersion,
       });
     }
     try {
@@ -961,7 +997,7 @@ export class SyncService {
 
   private async applyVehicleMutation(
     tx: Prisma.TransactionClient, userId: string, mutation: SyncMutationDto, clientTime: Date,
-  ): Promise<{ row: any; conflict: boolean }> {
+  ): Promise<{ row: VehicleRow; conflict: boolean }> {
     const data = mutation.data ?? {};
     const existing = await this.conflictOrOwned(tx, 'vehicle', mutation.id, userId);
     if (mutation.operation === 'delete') {
@@ -1010,7 +1046,7 @@ export class SyncService {
 
     const modelYear = data.model_year === undefined ? existing?.modelYear : Number(data.model_year);
     const currentYear = Number(new Intl.DateTimeFormat('en', { timeZone: 'America/Managua', year: 'numeric' }).format(new Date()));
-    if (!Number.isInteger(modelYear) || modelYear < 1950 || modelYear > currentYear + 1) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'model_year está fuera del rango permitido.', details: {} });
+    if (typeof modelYear !== 'number' || !Number.isInteger(modelYear) || modelYear < 1950 || modelYear > currentYear + 1) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'model_year está fuera del rango permitido.', details: {} });
     const vehicleType = data.vehicle_type === undefined ? existing?.vehicleType : data.vehicle_type;
     if (typeof vehicleType !== 'string' || !ALLOWED_VEHICLE_TYPES.has(vehicleType)) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'vehicle_type no es válido.', details: {} });
     const color = data.color === undefined ? existing?.color ?? null : this.ensureString(data.color, 'color', 1, 40);
@@ -1019,11 +1055,11 @@ export class SyncService {
     if (mileage !== null && (!Number.isInteger(mileage) || mileage < 0 || mileage > 2_000_000)) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'mileage_km debe ser un entero no negativo.', details: {} });
 
     const plateIndex = await this.crypto.blindIndex(plateRaw, 'vehicles.plate');
-    const duplicate = await tx.vehicle.findFirst({ where: { userId, plateHmac: plateIndex.digest, deletedAt: null, id: { not: mutation.id } }, select: { id: true } });
+    const duplicate = await tx.vehicle.findFirst({ where: { userId, plateHmac: prismaBytes(plateIndex.digest), deletedAt: null, id: { not: mutation.id } }, select: { id: true } });
     if (duplicate) throw new ConflictException({ code: 'PLATE_ALREADY_REGISTERED', message: 'Esta placa ya está registrada en la cuenta.', details: {} });
     const plateEncrypted = data.plate !== undefined || !existing
       ? await this.crypto.encrypt(plateRaw, 'vehicles.plate', { userId, recordId: mutation.id }) : null;
-    let vinFields: any = {};
+    let vinFields: VehicleVinFields = {};
     if (data.vin !== undefined) {
       if (data.vin === null || data.vin === '') {
         vinFields = { vinCiphertext: null, vinNonce: null, vinTag: null, vinEncryptedDek: null, vinKeyVersion: null, vinAadVersion: null, vinHmac: null, vinHmacKeyVersion: null };
@@ -1031,7 +1067,7 @@ export class SyncService {
         const vin = this.ensureString(data.vin, 'vin', 5, 32, true)!.toUpperCase().replace(/\s+/g, '');
         if (!/^[A-HJ-NPR-Z0-9]+$/.test(vin)) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'vin contiene caracteres no permitidos.', details: {} });
         const [encrypted, index] = await Promise.all([this.crypto.encrypt(vin, 'vehicles.vin', { userId, recordId: mutation.id }), this.crypto.blindIndex(vin, 'vehicles.vin')]);
-        vinFields = { vinCiphertext: encrypted.ciphertext, vinNonce: encrypted.nonce, vinTag: encrypted.tag, vinEncryptedDek: encrypted.encryptedDek, vinKeyVersion: encrypted.keyVersion, vinAadVersion: encrypted.aadVersion ?? 2, vinHmac: index.digest, vinHmacKeyVersion: index.keyVersion };
+        vinFields = { vinCiphertext: prismaBytes(encrypted.ciphertext), vinNonce: prismaBytes(encrypted.nonce), vinTag: prismaBytes(encrypted.tag), vinEncryptedDek: prismaBytes(encrypted.encryptedDek), vinKeyVersion: encrypted.keyVersion, vinAadVersion: encrypted.aadVersion ?? 2, vinHmac: prismaBytes(index.digest), vinHmacKeyVersion: index.keyVersion };
       }
     }
 
@@ -1040,25 +1076,25 @@ export class SyncService {
       const count = await tx.vehicle.count({ where: { userId, deletedAt: null } });
       if (count >= this.config.value.maxVehiclesPerUser) throw new ConflictException({ code: 'VEHICLE_LIMIT_REACHED', message: 'Se alcanzó el máximo de vehículos activos de la cuenta.', details: { maximum: this.config.value.maxVehiclesPerUser } });
       const row = await tx.vehicle.create({ data: {
-        id: mutation.id, userId, plateCiphertext: plateEncrypted!.ciphertext, plateNonce: plateEncrypted!.nonce,
-        plateTag: plateEncrypted!.tag, plateEncryptedDek: plateEncrypted!.encryptedDek, plateKeyVersion: plateEncrypted!.keyVersion,
-        plateAadVersion: plateEncrypted!.aadVersion ?? 2, plateHmac: plateIndex.digest, plateHmacKeyVersion: plateIndex.keyVersion,
-        brandId, brandLabel, modelId, modelLabel, modelYear: modelYear!, vehicleType: vehicleType as any,
+        id: mutation.id, userId, plateCiphertext: prismaBytes(plateEncrypted!.ciphertext), plateNonce: prismaBytes(plateEncrypted!.nonce),
+        plateTag: prismaBytes(plateEncrypted!.tag), plateEncryptedDek: prismaBytes(plateEncrypted!.encryptedDek), plateKeyVersion: plateEncrypted!.keyVersion,
+        plateAadVersion: plateEncrypted!.aadVersion ?? 2, plateHmac: prismaBytes(plateIndex.digest), plateHmacKeyVersion: plateIndex.keyVersion,
+        brandId, brandLabel, modelId, modelLabel, modelYear: modelYear!, vehicleType: vehicleType as VehicleType,
         color, nickname, mileageKm: mileage, ...vinFields,
       } });
       return { row, conflict: false };
     }
-    const update: any = { brandId, brandLabel, modelId, modelLabel, modelYear, vehicleType, color, nickname, mileageKm: mileage, ...vinFields };
+    const update: Prisma.VehicleUncheckedUpdateInput = { brandId, brandLabel, modelId, modelLabel, modelYear, vehicleType: vehicleType as VehicleType, color, nickname, mileageKm: mileage, ...vinFields };
     if (plateEncrypted) Object.assign(update, {
-      plateCiphertext: plateEncrypted.ciphertext, plateNonce: plateEncrypted.nonce, plateTag: plateEncrypted.tag,
-      plateEncryptedDek: plateEncrypted.encryptedDek, plateKeyVersion: plateEncrypted.keyVersion,
-      plateAadVersion: plateEncrypted.aadVersion ?? 2, plateHmac: plateIndex.digest, plateHmacKeyVersion: plateIndex.keyVersion,
+      plateCiphertext: prismaBytes(plateEncrypted.ciphertext), plateNonce: prismaBytes(plateEncrypted.nonce), plateTag: prismaBytes(plateEncrypted.tag),
+      plateEncryptedDek: prismaBytes(plateEncrypted.encryptedDek), plateKeyVersion: plateEncrypted.keyVersion,
+      plateAadVersion: plateEncrypted.aadVersion ?? 2, plateHmac: prismaBytes(plateIndex.digest), plateHmacKeyVersion: plateIndex.keyVersion,
     });
     const row = await tx.vehicle.update({ where: { id: mutation.id }, data: update });
     return { row, conflict: false };
   }
 
-  private async decryptVehiclePlate(row: any): Promise<string> {
+  private async decryptVehiclePlate(row: VehicleRow): Promise<string> {
     return this.crypto.decrypt({
       ciphertext: Buffer.from(row.plateCiphertext), nonce: Buffer.from(row.plateNonce), tag: Buffer.from(row.plateTag),
       encryptedDek: Buffer.from(row.plateEncryptedDek), keyVersion: row.plateKeyVersion, aadVersion: row.plateAadVersion,
@@ -1067,7 +1103,7 @@ export class SyncService {
 
   private async applyDocumentMutation(
     tx: Prisma.TransactionClient, userId: string, mutation: SyncMutationDto, clientTime: Date,
-  ): Promise<{ row: any; conflict: boolean }> {
+  ): Promise<{ row: VehicleDocumentRow; conflict: boolean }> {
     const data = mutation.data ?? {};
     const existing = await this.conflictOrOwned(tx, 'vehicle_document', mutation.id, userId);
     if (mutation.operation === 'delete') {
@@ -1104,16 +1140,16 @@ export class SyncService {
     if (!title) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'title es obligatorio.', details: {} });
     if (validFrom && validUntil && validUntil <= validFrom) throw new BadRequestException({ code: 'DOCUMENT_VALIDITY_INVALID', message: 'valid_until debe ser posterior a valid_from.', details: {} });
 
-    let row: any;
+    let row: VehicleDocumentRow;
     if (!existing) {
       row = await tx.vehicleDocument.create({ data: {
-        id: mutation.id, userId, vehicleId: vehicleId!, documentType: documentType as any,
+        id: mutation.id, userId, vehicleId: vehicleId!, documentType: documentType as VehicleDocumentType,
         title, issuerName, validFrom, validUntil, fileStatus: 'pendiente_subida',
       } });
     } else {
       row = await tx.vehicleDocument.update({ where: { id: mutation.id }, data: {
         ...(data.vehicle_id !== undefined ? { vehicleId: vehicleId! } : {}),
-        ...(data.document_type !== undefined ? { documentType: documentType as any } : {}),
+        ...(data.document_type !== undefined ? { documentType: documentType as VehicleDocumentType } : {}),
         ...(data.title !== undefined ? { title } : {}),
         ...(data.issuer_name !== undefined ? { issuerName } : {}),
         ...(data.valid_from !== undefined ? { validFrom } : {}),
@@ -1126,7 +1162,7 @@ export class SyncService {
 
   private async applyPolicyMutation(
     tx: Prisma.TransactionClient, userId: string, mutation: SyncMutationDto, clientTime: Date,
-  ): Promise<{ row: any; conflict: boolean }> {
+  ): Promise<{ row: InsurancePolicyRow; conflict: boolean }> {
     const data = mutation.data ?? {};
     const existing = await this.conflictOrOwned(tx, 'insurance_policy', mutation.id, userId);
     if (mutation.operation === 'delete') {
@@ -1187,8 +1223,8 @@ export class SyncService {
     if (!validFrom || !validUntil || validUntil <= validFrom) throw new BadRequestException({ code: 'POLICY_VALIDITY_REQUIRED', message: 'La póliza requiere un rango de vigencia válido.', details: {} });
     const currency = data.currency === undefined ? existing?.currency ?? 'USD' : data.currency;
     if (currency !== 'USD' && currency !== 'NIO') throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'currency debe ser USD o NIO.', details: {} });
-    const deductible = data.deductible === undefined ? existing?.deductible ?? null : data.deductible === null ? null : Number(data.deductible);
-    const premium = data.premium === undefined ? existing?.premium ?? null : data.premium === null ? null : Number(data.premium);
+    const deductible = data.deductible === undefined ? existing?.deductible?.toNumber() ?? null : data.deductible === null ? null : Number(data.deductible);
+    const premium = data.premium === undefined ? existing?.premium?.toNumber() ?? null : data.premium === null ? null : Number(data.premium);
     if ((deductible !== null && (!Number.isFinite(deductible) || deductible < 0)) || (premium !== null && (!Number.isFinite(premium) || premium < 0))) {
       throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'deductible y premium deben ser importes no negativos.', details: {} });
     }
@@ -1199,17 +1235,17 @@ export class SyncService {
       ? existingDocument?.title ?? 'Póliza de seguro'
       : this.ensureString(data.title, 'title', 1, 120, true)!;
 
-    let policyNumberFields: any = {};
+    let policyNumberFields: PolicyNumberFields = {};
     if (data.policy_number !== undefined || !existing) {
       const policyNumber = this.ensureString(data.policy_number, 'policy_number', 1, 120, true)!;
       const encrypted = await this.crypto.encrypt(policyNumber, 'insurance_policies.policy_number', { userId, recordId: mutation.id });
       policyNumberFields = {
-        policyNumberCiphertext: encrypted.ciphertext, policyNumberNonce: encrypted.nonce, policyNumberTag: encrypted.tag,
-        policyNumberEncryptedDek: encrypted.encryptedDek, policyNumberKeyVersion: encrypted.keyVersion,
+        policyNumberCiphertext: prismaBytes(encrypted.ciphertext), policyNumberNonce: prismaBytes(encrypted.nonce), policyNumberTag: prismaBytes(encrypted.tag),
+        policyNumberEncryptedDek: prismaBytes(encrypted.encryptedDek), policyNumberKeyVersion: encrypted.keyVersion,
         policyNumberAadVersion: encrypted.aadVersion ?? 2,
       };
     }
-    let claimsPhoneFields: any = {};
+    let claimsPhoneFields: PolicyClaimsPhoneFields = {};
     if (data.claims_phone !== undefined) {
       if (data.claims_phone === null || data.claims_phone === '') {
         claimsPhoneFields = { claimsPhoneCiphertext: null, claimsPhoneNonce: null, claimsPhoneTag: null, claimsPhoneEncryptedDek: null, claimsPhoneKeyVersion: null, claimsPhoneAadVersion: null };
@@ -1217,11 +1253,11 @@ export class SyncService {
         const phone = this.ensureString(data.claims_phone, 'claims_phone', 8, 20, true)!;
         if (!/^\+?[0-9]{8,19}$/.test(phone)) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'claims_phone no tiene un formato válido.', details: {} });
         const encrypted = await this.crypto.encrypt(phone, 'insurance_policies.claims_phone', { userId, recordId: mutation.id });
-        claimsPhoneFields = { claimsPhoneCiphertext: encrypted.ciphertext, claimsPhoneNonce: encrypted.nonce, claimsPhoneTag: encrypted.tag, claimsPhoneEncryptedDek: encrypted.encryptedDek, claimsPhoneKeyVersion: encrypted.keyVersion, claimsPhoneAadVersion: encrypted.aadVersion ?? 2 };
+        claimsPhoneFields = { claimsPhoneCiphertext: prismaBytes(encrypted.ciphertext), claimsPhoneNonce: prismaBytes(encrypted.nonce), claimsPhoneTag: prismaBytes(encrypted.tag), claimsPhoneEncryptedDek: prismaBytes(encrypted.encryptedDek), claimsPhoneKeyVersion: encrypted.keyVersion, claimsPhoneAadVersion: encrypted.aadVersion ?? 2 };
       }
     }
 
-    let row: any;
+    let row: InsurancePolicyRow;
     if (!existing) {
       const previous = await tx.insurancePolicy.findFirst({ where: { userId, vehicleId: vehicleId!, status: 'active', deletedAt: null }, orderBy: { createdAt: 'desc' } });
       if (previous) {
@@ -1232,7 +1268,13 @@ export class SyncService {
       row = await tx.insurancePolicy.create({
         data: {
           id: mutation.id, userId, vehicleId: vehicleId!, insurerId, otherInsurerName,
-          ...policyNumberFields, validFrom, validUntil, deductible, premium, currency,
+          policyNumberCiphertext: policyNumberFields.policyNumberCiphertext!,
+          policyNumberNonce: policyNumberFields.policyNumberNonce!,
+          policyNumberTag: policyNumberFields.policyNumberTag!,
+          policyNumberEncryptedDek: policyNumberFields.policyNumberEncryptedDek!,
+          policyNumberKeyVersion: policyNumberFields.policyNumberKeyVersion!,
+          policyNumberAadVersion: policyNumberFields.policyNumberAadVersion!,
+          validFrom, validUntil, deductible, premium, currency,
           ...claimsPhoneFields, previousPolicyId: previous?.id ?? null,
           document: { create: {
             id: documentId!, userId, vehicleId: vehicleId!, documentType: 'poliza', title,
@@ -1259,7 +1301,7 @@ export class SyncService {
 
   private async applyPreferenceMutation(
     tx: Prisma.TransactionClient, userId: string, mutation: SyncMutationDto, clientTime: Date,
-  ): Promise<{ row: any; conflict: boolean }> {
+  ): Promise<{ row: NotificationPreferenceRow; conflict: boolean }> {
     const data = mutation.data ?? {};
     this.assertAllowedKeys(data, ['enabled_offsets', 'preferred_time', 'push_enabled', 'local_enabled', 'in_app_enabled']);
     if (mutation.operation === 'delete') throw new UnprocessableEntityException({ code: 'ENTITY_NOT_SYNCABLE', message: 'La preferencia única de notificaciones no se elimina desde sync/push.', details: {} });
@@ -1283,9 +1325,9 @@ export class SyncService {
     }
     const updateData = {
       enabledOffsets: offsets, preferredTime,
-      pushEnabled: data.push_enabled === undefined ? existing?.pushEnabled ?? true : data.push_enabled,
-      localEnabled: data.local_enabled === undefined ? existing?.localEnabled ?? true : data.local_enabled,
-      inAppEnabled: data.in_app_enabled === undefined ? existing?.inAppEnabled ?? true : data.in_app_enabled,
+      pushEnabled: data.push_enabled === undefined ? existing?.pushEnabled ?? true : data.push_enabled as boolean,
+      localEnabled: data.local_enabled === undefined ? existing?.localEnabled ?? true : data.local_enabled as boolean,
+      inAppEnabled: data.in_app_enabled === undefined ? existing?.inAppEnabled ?? true : data.in_app_enabled as boolean,
       timezone: 'America/Managua', category: 'document_expiry',
     };
     const row = existing
@@ -1298,7 +1340,7 @@ export class SyncService {
 
   private async applyEmergencyContactMutation(
     tx: Prisma.TransactionClient, userId: string, mutation: SyncMutationDto, clientTime: Date,
-  ): Promise<{ row: any; conflict: boolean }> {
+  ): Promise<{ row: EmergencyContactRow; conflict: boolean }> {
     const data = mutation.data ?? {};
     await tx.$queryRaw(Prisma.sql`SELECT pg_advisory_xact_lock(hashtextextended(${userId}, 0))`);
     const existing = await this.conflictOrOwned(tx, 'emergency_contact', mutation.id, userId);
@@ -1320,7 +1362,7 @@ export class SyncService {
     const relationship = data.relationship_label === undefined ? existing?.relationshipLabel ?? null : this.ensureString(data.relationship_label, 'relationship_label', 1, 40);
     const isPrimary = data.is_primary === undefined ? existing?.isPrimary ?? false : data.is_primary;
     if (typeof isPrimary !== 'boolean') throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'is_primary debe ser booleano.', details: {} });
-    let phoneFields: any = {};
+    let phoneFields: EmergencyContactPhoneFields = {};
     if (data.phone_e164 !== undefined || !existing) {
       const phone = this.ensureString(data.phone_e164, 'phone_e164', 8, 16, true)!.replace(/[\s()-]/g, '');
       if (!/^\+[1-9][0-9]{7,14}$/.test(phone)) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'phone_e164 debe usar formato internacional E.164.', details: {} });
@@ -1329,13 +1371,13 @@ export class SyncService {
         this.crypto.blindIndex(phone, 'emergency_contacts.phone'),
       ]);
       phoneFields = {
-        phoneCiphertext: encrypted.ciphertext, phoneNonce: encrypted.nonce, phoneTag: encrypted.tag,
-        phoneEncryptedDek: encrypted.encryptedDek, phoneKeyVersion: encrypted.keyVersion,
-        phoneAadVersion: encrypted.aadVersion ?? 2, phoneHmac: index.digest, phoneHmacKeyVersion: index.keyVersion,
+        phoneCiphertext: prismaBytes(encrypted.ciphertext), phoneNonce: prismaBytes(encrypted.nonce), phoneTag: prismaBytes(encrypted.tag),
+        phoneEncryptedDek: prismaBytes(encrypted.encryptedDek), phoneKeyVersion: encrypted.keyVersion,
+        phoneAadVersion: encrypted.aadVersion ?? 2, phoneHmac: prismaBytes(index.digest), phoneHmacKeyVersion: index.keyVersion,
       };
     }
     if (isPrimary) await tx.emergencyContact.updateMany({ where: { userId, deletedAt: null, isPrimary: true, id: { not: mutation.id } }, data: { isPrimary: false } });
-    let row: any;
+    let row: EmergencyContactRow;
     if (!existing) {
       const count = await tx.emergencyContact.count({ where: { userId, deletedAt: null } });
       if (count >= 5) throw new ConflictException({ code: 'EMERGENCY_CONTACT_LIMIT_REACHED', message: 'Solo se permiten cinco contactos de emergencia por cuenta.', details: { maximum: 5 } });
@@ -1353,7 +1395,7 @@ export class SyncService {
 
   private async applyAssistanceRequestMutation(
     tx: Prisma.TransactionClient, userId: string, mutation: SyncMutationDto, clientTime: Date,
-  ): Promise<{ row: any; conflict: boolean }> {
+  ): Promise<{ row: AssistanceRequestRow; conflict: boolean }> {
     const data = mutation.data ?? {};
     if (mutation.operation === 'delete') {
       // Serializa la cancelación del conductor con las acciones por enlace del proveedor.
@@ -1425,7 +1467,7 @@ export class SyncService {
     const preferredContact = data.preferred_contact === undefined ? existing?.preferredContact ?? 'whatsapp' : data.preferred_contact;
     if (!['whatsapp', 'call', 'in_app'].includes(String(preferredContact))) throw new BadRequestException({ code: 'VALIDATION_ERROR', message: 'preferred_contact no es válido.', details: {} });
 
-    let phoneFields: any = {};
+    let phoneFields: AssistanceRequestPhoneFields = {};
     if (data.contact_phone !== undefined) {
       if (data.contact_phone === null || data.contact_phone === '') {
         phoneFields = { contactPhoneCiphertext: null, contactPhoneNonce: null, contactPhoneTag: null, contactPhoneEncryptedDek: null, contactPhoneKeyVersion: null, contactPhoneAadVersion: null, contactPhoneHmac: null, contactPhoneHmacKeyVersion: null };
@@ -1437,9 +1479,9 @@ export class SyncService {
           this.crypto.blindIndex(phone, 'assistance_requests.contact_phone'),
         ]);
         phoneFields = {
-          contactPhoneCiphertext: encrypted.ciphertext, contactPhoneNonce: encrypted.nonce, contactPhoneTag: encrypted.tag,
-          contactPhoneEncryptedDek: encrypted.encryptedDek, contactPhoneKeyVersion: encrypted.keyVersion,
-          contactPhoneAadVersion: encrypted.aadVersion ?? 2, contactPhoneHmac: index.digest, contactPhoneHmacKeyVersion: index.keyVersion,
+          contactPhoneCiphertext: prismaBytes(encrypted.ciphertext), contactPhoneNonce: prismaBytes(encrypted.nonce), contactPhoneTag: prismaBytes(encrypted.tag),
+          contactPhoneEncryptedDek: prismaBytes(encrypted.encryptedDek), contactPhoneKeyVersion: encrypted.keyVersion,
+          contactPhoneAadVersion: encrypted.aadVersion ?? 2, contactPhoneHmac: prismaBytes(index.digest), contactPhoneHmacKeyVersion: index.keyVersion,
         };
       }
     }
@@ -1461,7 +1503,7 @@ export class SyncService {
       }
     }
 
-    let row: any;
+    let row: AssistanceRequestRow;
     if (!existing) {
       row = await tx.assistanceRequest.create({ data: {
         id: mutation.id, userId, vehicleId, serviceTypeId, issueDescription, addressReferenceText: addressReference,

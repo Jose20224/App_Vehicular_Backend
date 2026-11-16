@@ -88,7 +88,7 @@ export class RemindersService {
     return processed;
   }
 
-  async regenerateForDocument(tx: Prisma.TransactionClient, userId: string, documentId: string, knownPref?: Prisma.NotificationPreferenceGetPayload<{}> | null): Promise<void> {
+  async regenerateForDocument(tx: Prisma.TransactionClient, userId: string, documentId: string, knownPref?: Prisma.NotificationPreferenceGetPayload<Prisma.NotificationPreferenceDefaultArgs> | null): Promise<void> {
     await tx.reminder.updateMany({ where: { userId, vehicleDocumentId: documentId, status: { in: ['scheduled', 'processing'] }, deletedAt: null }, data: { status: 'cancelled', cancelledAt: new Date() } });
     const doc = await tx.vehicleDocument.findFirst({ where: { id: documentId, userId, deletedAt: null, validUntil: { not: null } }, include: { vehicle: { select: { nickname: true, brandLabel: true, modelLabel: true } }, insurancePolicy: { select: { status: true, deletedAt: true } } } });
     if (!doc?.validUntil || doc.insurancePolicy?.status === 'archived' || doc.insurancePolicy?.deletedAt) return;

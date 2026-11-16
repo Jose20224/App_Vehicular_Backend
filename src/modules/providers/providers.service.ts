@@ -36,6 +36,15 @@ type ContactColumns = {
   whatsappTag: Uint8Array | null; whatsappEncryptedDek: Uint8Array | null; whatsappKeyVersion: string | null;
   whatsappAadVersion: number | null;
 };
+const ASSISTANCE_REQUEST_HISTORY_INCLUDE = {
+  assistanceProvider: { select: { id: true, name: true, providerType: true } },
+  serviceType: { select: { id: true, name: true } },
+  vehicle: { select: { id: true, brandLabel: true, modelLabel: true, modelYear: true, vehicleType: true } },
+  events: { orderBy: { createdAt: 'asc' }, select: { fromStatus: true, toStatus: true, actorType: true, createdAt: true } },
+} as const;
+type AssistanceRequestHistoryRow = Prisma.AssistanceRequestGetPayload<{
+  include: typeof ASSISTANCE_REQUEST_HISTORY_INCLUDE;
+}>;
 
 @Injectable()
 export class ProvidersService {
@@ -444,9 +453,7 @@ export class ProvidersService {
   async listMyRequests(userId: string, query: AssistanceHistoryQueryDto): Promise<Record<string, unknown>> {
     const [rows, total] = await Promise.all([
       this.prisma.assistanceRequest.findMany({ where: { userId, deletedAt: null }, orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
-        skip: query.offset, take: query.limit, include: { assistanceProvider: { select: { id: true, name: true, providerType: true } },
-          serviceType: { select: { id: true, name: true } }, vehicle: { select: { id: true, brandLabel: true, modelLabel: true, modelYear: true, vehicleType: true } },
-          events: { orderBy: { createdAt: 'asc' }, select: { fromStatus: true, toStatus: true, actorType: true, createdAt: true } } } }),
+        skip: query.offset, take: query.limit, include: ASSISTANCE_REQUEST_HISTORY_INCLUDE }),
       this.prisma.assistanceRequest.count({ where: { userId, deletedAt: null } }),
     ]);
     return { items: rows.map((row) => this.serializeRequestHistory(row)), total, limit: query.limit, offset: query.offset,
@@ -454,11 +461,7 @@ export class ProvidersService {
   }
 
   async getMyRequest(userId: string, id: string): Promise<Record<string, unknown>> {
-    const row = await this.prisma.assistanceRequest.findFirst({ where: { id, userId, deletedAt: null }, include: {
-      assistanceProvider: { select: { id: true, name: true, providerType: true } }, serviceType: { select: { id: true, name: true } },
-      vehicle: { select: { id: true, brandLabel: true, modelLabel: true, modelYear: true, vehicleType: true } },
-      events: { orderBy: { createdAt: 'asc' }, select: { fromStatus: true, toStatus: true, actorType: true, createdAt: true } },
-    } });
+    const row = await this.prisma.assistanceRequest.findFirst({ where: { id, userId, deletedAt: null }, include: ASSISTANCE_REQUEST_HISTORY_INCLUDE });
     if (!row) throw new NotFoundException({ code: 'ASSISTANCE_REQUEST_NOT_FOUND', message: 'No se encontró la solicitud.', details: {} });
     const coords = await this.prisma.$queryRaw<Array<{ latitude: number | null; longitude: number | null }>>(Prisma.sql`
       SELECT ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude FROM public.assistance_requests WHERE id = ${id}::uuid
@@ -665,7 +668,7 @@ export class ProvidersService {
     `);
   }
 
-  private async loadProviderContacts(ids: string[]): Promise<Map<string, any>> {
+  private async loadProviderContacts(ids: string[]): Promise<Map<string, Prisma.AssistanceProviderGetPayload<Prisma.AssistanceProviderDefaultArgs>>> {
     if (!ids.length) return new Map();
     const rows = await this.prisma.assistanceProvider.findMany({ where: { id: { in: ids }, status: 'active', verifiedAt: { not: null }, deletedAt: null } });
     return new Map(rows.map((row) => [row.id, row]));
@@ -777,14 +780,14 @@ export class ProvidersService {
   private publicApiBaseUrl(): string {
     return (this.config.value.publicApiBaseUrl ?? `http://localhost:${this.config.value.appPort}/${this.config.value.apiPrefix}`).replace(/\/$/, '');
   }
-  private serializeRequestHistory(row: any): Record<string, unknown> {
+  private serializeRequestHistory(row: AssistanceRequestHistoryRow): Record<string, unknown> {
     return { id: row.id, status: row.status, issue_description: row.issueDescription, address_reference_text: row.addressReferenceText,
       service_type: row.serviceType, vehicle: row.vehicle, provider: row.assistanceProvider,
       requested_at: row.requestedAt.toISOString(), sent_at: row.sentAt?.toISOString() ?? null,
       accepted_at: row.acceptedAt?.toISOString() ?? null, en_camino_at: row.enRouteAt?.toISOString() ?? null,
       completed_at: row.completedAt?.toISOString() ?? null, cancelled_at: row.cancelledAt?.toISOString() ?? null,
       created_at: row.createdAt.toISOString(), updated_at: row.updatedAt.toISOString(),
-      events: row.events.map((event: any) => ({ from_status: event.fromStatus, to_status: event.toStatus,
+      events: row.events.map((event) => ({ from_status: event.fromStatus, to_status: event.toStatus,
         actor_type: event.actorType, created_at: event.createdAt.toISOString() })) };
   }
   private statusLabel(status: string): string {

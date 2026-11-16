@@ -51,7 +51,7 @@ export class CreateServiceOfferingDto {
   @ApiPropertyOptional({ enum: ['USD'], default: 'USD' })
   @IsOptional()
   @IsIn(['USD'])
-  currency: 'USD' = 'USD';
+  currency = 'USD' as const;
 
   @ApiProperty({ example: 'por servicio' })
   @IsString()

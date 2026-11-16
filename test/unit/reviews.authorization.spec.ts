@@ -6,9 +6,10 @@ import { AdsModule } from '../../src/modules/ads/ads.module';
 import { ReviewsAdminController } from '../../src/modules/reviews/reviews-admin.controller';
 import { ReviewsController } from '../../src/modules/reviews/reviews.controller';
 
+type ControllerType = { prototype: object };
 type RouteMetadata = { name: string; path: string; method: RequestMethod; roles: string[] };
 
-function routesFor(target: Function): RouteMetadata[] {
+function routesFor(target: ControllerType): RouteMetadata[] {
   const prototype = target.prototype as Record<string, unknown>;
   return Object.getOwnPropertyNames(prototype)
     .filter((name) => name !== 'constructor' && typeof prototype[name] === 'function')
@@ -43,7 +44,7 @@ describe('B8 · aislamiento de reseñas frente a publicidad y propietarios', () 
       'workshops/:workshopId/reviews/:reviewId/reply',
     ]);
 
-    const adControllers = (Reflect.getMetadata(CONTROLLERS_METADATA, AdsModule) as Function[] | undefined) ?? [];
+    const adControllers = (Reflect.getMetadata(CONTROLLERS_METADATA, AdsModule) as ControllerType[] | undefined) ?? [];
     const adReviewRoutes = adControllers.flatMap((controller) => routesFor(controller)).filter((route) => /review/i.test(route.path));
     expect(adReviewRoutes).toHaveLength(0);
   });
