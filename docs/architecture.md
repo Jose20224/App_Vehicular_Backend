@@ -565,7 +565,7 @@ Los contactos comerciales (teléfono, WhatsApp, correo) se guardan cifrados con 
 
 El horario semanal es JSONB y se calcula en `America/Managua`; el filtro SQL `workshop_is_open_now` admite turnos nocturnos. Redis mantiene un caché temporal de búsqueda de 60 segundos con invalidación por versión; la API informa al móvil una política de caché offline limitada a 50 resultados y siete días (`fetched_at`, `cache_ttl_seconds`).
 
-La oferta comercial tiene un CHECK XOR en PostgreSQL para garantizar un dueño exacto (`workshop_id` o `assistance_provider_id`) y FKs compuestas con `user_id`. La moneda editable es USD, los precios se etiquetan como estimados y se señalan desactualizados después de 90 días. El campo `sponsored` es `false` en B6; B9 conectará campañas aprobadas y vigentes sin modificar rating orgánico.
+La oferta comercial tiene un CHECK XOR en PostgreSQL para garantizar un dueño exacto (`workshop_id` o `assistance_provider_id`) y FKs compuestas con `user_id`. La moneda editable es USD, los precios se etiquetan como estimados y se señalan desactualizados después de 90 días. B9 conecta campañas activas y pagadas con la búsqueda B6, manteniendo el orden orgánico relativo. El diseño y los endpoints se documentan en [B9](b9-advertising.md).
 
 
 ## Implementación B7 — Asistencia en carretera

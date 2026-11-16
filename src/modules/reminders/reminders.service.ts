@@ -53,7 +53,16 @@ export class RemindersService {
   async listNotifications(userId: string, limit = 50): Promise<Record<string, unknown>> {
     const take = Math.max(1, Math.min(limit, 100));
     const items = await this.prisma.notificationLog.findMany({ where: { userId }, orderBy: { createdAt: 'desc' }, take });
-    return { items: items.map((n) => ({ id: n.id, reminder_id: n.reminderId, channel: n.channel, status: n.status, read_at: n.readAt?.toISOString() ?? null, sent_at: n.sentAt?.toISOString() ?? null, created_at: n.createdAt.toISOString() })), count: items.length };
+    return { items: items.map((n) => ({
+      id: n.id, reminder_id: n.reminderId, channel: n.channel, status: n.status,
+      notification_type: n.errorCode,
+      ...(n.errorCode === 'AD_CAMPAIGN_EXPIRING_7_DAYS' ? {
+        title: 'Tu campaña publicitaria vence pronto',
+        body: 'A tu campaña le quedan siete días o menos. Revisa su fecha de finalización para renovarla.',
+        campaign_id: n.providerMessageId?.replace(/^ad-expiry:/, '') ?? null,
+      } : {}),
+      read_at: n.readAt?.toISOString() ?? null, sent_at: n.sentAt?.toISOString() ?? null, created_at: n.createdAt.toISOString(),
+    })), count: items.length };
   }
 
   async markRead(userId: string, notificationId: string): Promise<Record<string, unknown>> {

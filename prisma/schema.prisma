@@ -60,6 +60,35 @@ enum WorkshopContactEventType {
   @@map("workshop_contact_event_type")
 }
 
+enum AdCampaignStatus {
+  draft
+  pending_payment
+  active
+  paused
+  expired
+  cancelled
+
+  @@map("ad_campaign_status")
+}
+
+enum AdBillingPeriod {
+  monthly
+  quarterly
+  annual
+
+  @@map("ad_billing_period")
+}
+
+enum AdMetricEventType {
+  impression
+  click
+  call
+  whatsapp
+  route
+
+  @@map("ad_metric_event_type")
+}
+
 enum ReviewStatus {
   pending
   published
@@ -129,6 +158,9 @@ model User {
   workshopSpecialties WorkshopSpecialty[]
   workshopPhotos WorkshopPhoto[]
   serviceOfferings ServiceOffering[]
+  ownedAdCampaigns AdCampaign[] @relation("AdCampaignOwner")
+  approvedAdCampaigns AdCampaign[] @relation("AdCampaignApprover")
+  adMetrics AdMetric[]
 
   @@index([role, status], map: "idx_users_role_status")
   @@index([deletedAt], map: "idx_users_deleted_at")
@@ -341,6 +373,7 @@ model Municipality {
   assistanceRequests AssistanceRequest[]
   workshops Workshop[]
   assistanceProviders AssistanceProvider[]
+  adCampaigns AdCampaign[]
 
   @@unique([id, departmentId], map: "uq_municipalities_id_department")
   @@index([departmentId, isActive, sortOrder, name], map: "idx_municipalities_department_order")
@@ -843,6 +876,7 @@ model Workshop {
   specialties          WorkshopSpecialty[]
   photos               WorkshopPhoto[]
   serviceOfferings     ServiceOffering[]    @relation("ServiceOfferingWorkshop")
+  adCampaigns          AdCampaign[]
   contactEvents         WorkshopContactEvent[]
   reviews               Review[]
   reviewReplies         ReviewReply[]
@@ -900,6 +934,7 @@ model AssistanceProvider {
   municipality     Municipality?    @relation(fields: [municipalityId, departmentId], references: [id, departmentId], onDelete: Restrict)
   serviceOfferings ServiceOffering[] @relation("ServiceOfferingProvider")
   assistanceRequests AssistanceRequest[] @relation("AssistanceProviderRequests")
+  adCampaigns AdCampaign[]
 
   @@unique([id, userId], map: "uq_assistance_providers_id_user")
   @@index([userId, syncVersion], map: "idx_assistance_providers_user_sync_version")
@@ -1092,4 +1127,98 @@ model ReviewReport {
   @@index([status, createdAt], map: "idx_review_reports_status_created")
   @@index([reviewId, createdAt(sort: Desc)], map: "idx_review_reports_review_created")
   @@map("review_reports")
+}
+
+model AdPlan {
+  id                         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  code                       String   @unique @db.VarChar(40)
+  name                       String   @db.VarChar(100)
+  description                String?  @db.VarChar(500)
+  priceUsd                   Decimal  @map("price_usd") @db.Decimal(12, 2)
+  durationDays               Int      @default(30) @map("duration_days") @db.SmallInt
+  quarterlyDiscountPercent  Decimal  @default(0) @map("quarterly_discount_percent") @db.Decimal(5, 2)
+  annualDiscountPercent     Decimal  @default(0) @map("annual_discount_percent") @db.Decimal(5, 2)
+  nioPerUsd                  Decimal  @default(36.7) @map("nio_per_usd") @db.Decimal(14, 8)
+  features                   Json     @default("{}")
+  isActive                   Boolean  @default(true) @map("is_active")
+  createdAt                  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt                  DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  campaigns                  AdCampaign[]
+
+  @@index([isActive], map: "idx_ad_plans_active")
+  @@map("ad_plans")
+}
+
+model AdSlot {
+  id                       String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  code                     String   @unique @db.VarChar(40)
+  name                     String   @db.VarChar(100)
+  description              String?  @db.VarChar(300)
+  maxActiveCampaigns       Int      @default(20) @map("max_active_campaigns")
+  maxActivePerDepartment   Int      @default(3) @map("max_active_per_department")
+  isActive                 Boolean  @default(true) @map("is_active")
+  createdAt                DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt                DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  campaigns                AdCampaign[]
+
+  @@index([isActive], map: "idx_ad_slots_active")
+  @@map("ad_slots")
+}
+
+model AdCampaign {
+  id                       String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId                   String            @map("user_id") @db.Uuid
+  adPlanId                 String            @map("ad_plan_id") @db.Uuid
+  adSlotId                 String            @map("ad_slot_id") @db.Uuid
+  workshopId               String?           @map("workshop_id") @db.Uuid
+  assistanceProviderId     String?           @map("assistance_provider_id") @db.Uuid
+  departmentId             String            @map("department_id") @db.Uuid
+  municipalityId           String?           @map("municipality_id") @db.Uuid
+  campaignName             String            @map("campaign_name") @db.VarChar(120)
+  billingPeriod            AdBillingPeriod   @default(monthly) @map("billing_period")
+  priceUsd                 Decimal           @map("price_usd") @db.Decimal(12, 2)
+  priceNioReference        Decimal           @map("price_nio_reference") @db.Decimal(14, 2)
+  fxRateNioPerUsd          Decimal           @map("fx_rate_nio_per_usd") @db.Decimal(14, 8)
+  startsAt                 DateTime          @map("starts_at") @db.Timestamptz(6)
+  endsAt                   DateTime          @map("ends_at") @db.Timestamptz(6)
+  status                   AdCampaignStatus  @default(draft)
+  sponsored                Boolean           @default(false)
+  paymentConfirmedAt       DateTime?         @map("payment_confirmed_at") @db.Timestamptz(6)
+  paymentConfirmedByUserId String?           @map("payment_confirmed_by_user_id") @db.Uuid
+  paymentDueAt             DateTime?          @map("payment_due_at") @db.Timestamptz(6)
+  expiryWarningSentAt      DateTime?         @map("expiry_warning_sent_at") @db.Timestamptz(6)
+  lastServedAt             DateTime?         @map("last_served_at") @db.Timestamptz(6)
+  createdAt                DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt                DateTime          @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user                     User              @relation("AdCampaignOwner", fields: [userId], references: [id], onDelete: Restrict)
+  paymentConfirmer         User?             @relation("AdCampaignApprover", fields: [paymentConfirmedByUserId], references: [id], onDelete: Restrict)
+  municipality             Municipality?     @relation(fields: [municipalityId, departmentId], references: [id, departmentId], onDelete: Restrict)
+  plan                     AdPlan            @relation(fields: [adPlanId], references: [id], onDelete: Restrict)
+  slot                     AdSlot            @relation(fields: [adSlotId], references: [id], onDelete: Restrict)
+  workshop                 Workshop?         @relation(fields: [workshopId], references: [id], onDelete: Restrict)
+  assistanceProvider       AssistanceProvider? @relation(fields: [assistanceProviderId], references: [id], onDelete: Restrict)
+  metrics                  AdMetric[]
+
+  @@index([userId, status, createdAt(sort: Desc)], map: "idx_ad_campaigns_owner_status_created")
+  @@index([status, startsAt, endsAt], map: "idx_ad_campaigns_schedule")
+  @@index([adSlotId, departmentId, status], map: "idx_ad_campaigns_slot_department_status")
+  @@index([workshopId], map: "idx_ad_campaigns_workshop")
+  @@index([assistanceProviderId], map: "idx_ad_campaigns_provider")
+  @@map("ad_campaigns")
+}
+
+model AdMetric {
+  id             String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  adCampaignId   String            @map("ad_campaign_id") @db.Uuid
+  userId         String            @map("user_id") @db.Uuid
+  eventType      AdMetricEventType @map("event_type")
+  windowStart    DateTime          @map("window_start") @db.Timestamptz(6)
+  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+  campaign       AdCampaign        @relation(fields: [adCampaignId], references: [id], onDelete: Restrict)
+  user           User              @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@unique([adCampaignId, userId, eventType, windowStart], map: "uq_ad_metrics_dedupe_window")
+  @@index([adCampaignId, createdAt], map: "idx_ad_metrics_campaign_created")
+  @@index([userId, createdAt], map: "idx_ad_metrics_user_created")
+  @@map("ad_metrics")
 }

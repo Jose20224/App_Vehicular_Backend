@@ -41,7 +41,7 @@ B6 incorpora el directorio público de talleres, perfiles cifrados, especialidad
 - Gestión: crear/editar ficha, solicitud de verificación, activación por admin, especialidades y fotos. Solo talleres activos aparecen en el directorio.
 - `ServiceOffering` garantiza un único dueño desde un `CHECK` SQL y FKs compuestas; todas las respuestas públicas con precio incluyen el texto legal y `price_status` se actualiza por edad de más de 90 días.
 - 5 000 fichas sintéticas están aisladas en `NODE_ENV=test`; nunca se incluyen en seeds de desarrollo/producción.
-- El orden patrocinado queda como hook `false` para B9. La meta <300 ms a 5 km está preparada, pero no medida aún.
+- B9 integra planes y campañas publicitarias. La búsqueda conserva el orden orgánico relativo y antepone campañas activas con pago confirmado. La meta <300 ms a 5 km está preparada, pero no medida aún. Ver [docs/b9-advertising.md](docs/b9-advertising.md).
 
 No se ejecutaron instalaciones, tests, builds, migraciones, Docker ni pruebas de rendimiento en esta fase; esas comprobaciones se reservan para la validación integral posterior solicitada.
 

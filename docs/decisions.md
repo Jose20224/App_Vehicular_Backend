@@ -632,9 +632,9 @@ Este registro conserva decisiones explícitamente confirmadas y propuestas que r
 
 ### D-074 — Prioridad patrocinada reservada para B9
 
-- **Estado:** hook B6 incorporado; integración comercial pendiente de B9.
-- **Decisión:** búsqueda selecciona/ordena `sponsored` primero pero B6 devuelve `false` para todos los talleres. B9 conectará campañas activas, aprobadas y pagadas.
-- **Consecuencia:** no se inventa patrocinio ni se habilita publicidad antes de la fase correspondiente; rating y reseñas permanecen independientes.
+- **Estado:** implementada en B9.
+- **Decisión:** búsqueda selecciona y ordena primero los talleres con una campaña activa, pagada y válida para el espacio; los criterios orgánicos mantienen su orden relativo.
+- **Consecuencia:** todo resultado patrocinado se etiqueta y expone el identificador de campaña y su expiración de caché; rating y reseñas permanecen independientes.
 
 ### D-075 — Fixtures geoespaciales de 5 000 talleres solo en test
 

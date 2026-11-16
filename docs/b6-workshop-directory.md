@@ -79,7 +79,7 @@ El resultado de búsqueda no devuelve el teléfono descifrado. Devuelve `contact
 
 ### Patrocinados y B9
 
-B6 devuelve `sponsored: false` y reserva ese campo en la selección/ordenación. B9 debe sustituir el literal por una evaluación de campañas vigentes, aprobadas y pagadas. La publicidad se etiqueta siempre como patrocinada y nunca altera la calificación ni la ordenación orgánica fuera de la prioridad del espacio promocionado.
+B6 consulta las campañas activas con pago confirmado en los espacios `sponsored_result` y `premium_profile`. Los patrocinados se anteponen y el orden relativo orgánico se conserva. Cada resultado indica `sponsored`, `patrocinado`, `sponsored_campaign_id` y `expires_at`. El servidor de anuncios y sus estados se describen en [docs/b9-advertising.md](b9-advertising.md).
 
 ## 5. Precios
 

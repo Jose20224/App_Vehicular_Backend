@@ -36,6 +36,8 @@ interface WorkshopSearchRow {
   distance_meters: number | null;
   is_open_now: boolean;
   sponsored: boolean;
+  sponsored_campaign_id: string | null;
+  sponsored_expires_at: Date | null;
 }
 
 interface ContactCipherColumns {
@@ -391,8 +393,22 @@ export class WorkshopsService {
         CASE WHEN w.location IS NULL THEN NULL ELSE ST_X(w.location::geometry) END AS longitude,
         ${distanceSelect} AS distance_meters,
         public.workshop_is_open_now(w.weekly_schedule, clock_timestamp()) AS is_open_now,
-        FALSE AS sponsored
+        (ad.id IS NOT NULL) AS sponsored,
+        ad.id AS sponsored_campaign_id,
+        ad.ends_at AS sponsored_expires_at
       FROM public.workshops w
+      LEFT JOIN LATERAL (
+        SELECT c.id, c.ends_at
+        FROM public.ad_campaigns c
+        JOIN public.ad_slots slot ON slot.id = c.ad_slot_id AND slot.is_active
+        WHERE c.workshop_id = w.id AND c.department_id = w.department_id
+          AND (c.municipality_id IS NULL OR c.municipality_id = w.municipality_id)
+          AND slot.code IN ('sponsored_result', 'premium_profile')
+          AND c.status = 'active' AND c.sponsored AND c.payment_confirmed_at IS NOT NULL
+          AND c.starts_at <= clock_timestamp() AND c.ends_at > clock_timestamp()
+        ORDER BY c.last_served_at ASC NULLS FIRST, c.id ASC
+        LIMIT 1
+      ) ad ON TRUE
       WHERE ${Prisma.join(where, ' AND ')}
       ORDER BY sponsored DESC,
         distance_meters ASC NULLS LAST,
@@ -432,6 +448,11 @@ export class WorkshopsService {
         is_open_now: row.is_open_now,
         weekly_schedule: record.weeklySchedule,
         sponsored: row.sponsored,
+        patrocinado: row.sponsored,
+        sponsored_campaign_id: row.sponsored_campaign_id,
+        expires_at: row.sponsored_expires_at
+          ? new Date(Math.min(Date.now() + 24 * 60 * 60 * 1000, row.sponsored_expires_at.getTime())).toISOString()
+          : null,
         contact_available: { call: Boolean(record.phoneCiphertext), whatsapp: Boolean(record.whatsappCiphertext) },
         specialties: record.specialties.map((item) => item.specialty),
         photos: record.photos,
