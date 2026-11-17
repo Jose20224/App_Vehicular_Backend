@@ -66,7 +66,7 @@ export class ReminderProcessor extends WorkerHost {
       }
       const exhausted = job.attemptsMade + 1 >= Number(job.opts.attempts ?? 1);
       await this.prisma.reminder.updateMany({ where: { id: reminderId, status: 'processing' }, data: { status: exhausted ? 'failed' : 'scheduled' } });
-      this.logger.warn(`Falló el envío del recordatorio ${reminderId}; BullMQ aplicará reintento con backoff.`);
+      this.logger.warn('Falló el envío del recordatorio; BullMQ aplicará reintento con backoff.');
       throw error;
     }
   }

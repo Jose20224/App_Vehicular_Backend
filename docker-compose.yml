@@ -52,7 +52,9 @@ services:
       retries: 10
 
   migrate:
-    build: .
+    build:
+      context: .
+      target: build
     profiles: ["tools"]
     environment:
       DATABASE_MIGRATION_URL: postgresql://app_migrator:${APP_MIGRATOR_PASSWORD:-migrator_dev_only}@db:5432/${POSTGRES_DB:-vehicular_dev}?schema=public

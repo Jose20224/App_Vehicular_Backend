@@ -15,8 +15,8 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
       connectTimeout: 10_000,
       retryStrategy: (attempt) => (attempt > 3 ? null : Math.min(attempt * 250, 1000)),
     });
-    this.client.on('error', (error) => {
-      this.logger.error(`Redis reportó un error: ${error.message}`);
+    this.client.on('error', () => {
+      this.logger.error('Redis reportó un error de conexión.');
     });
   }
 

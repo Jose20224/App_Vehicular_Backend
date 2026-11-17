@@ -1,15 +1,17 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Header, HttpCode, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CurrentUser, type AuthenticatedUser } from '../../common/decorators/current-user.decorator';
 import { Public } from '../../common/decorators/public.decorator';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { AdsService } from './ads.service';
+import { AdvertiserBillingService } from './advertiser-billing.service';
 import { CreateAdCampaignDto, RecordAdMetricDto, ServeAdsQueryDto, UpsertAdPlanDto, UpsertAdSlotDto } from './dto/ads.dto';
+import { CompletePaymentProofDto, CreateProofUploadDto, PaymentListQueryDto, RejectPaymentDto } from './dto/payments.dto';
 
 @ApiTags('Publicidad')
 @Controller('ads')
 export class AdsController {
-  constructor(private readonly ads: AdsService) {}
+  constructor(private readonly ads: AdsService, private readonly billing: AdvertiserBillingService) {}
 
   @Public() @Get('plans')
   @ApiOperation({ summary: 'Consultar planes B2B disponibles en USD y su equivalente informativo en NIO.' })
@@ -36,8 +38,35 @@ export class AdsController {
   @Post('campaigns/:id/cancel') @Roles('workshop_owner', 'provider_owner') @ApiBearerAuth()
   cancel(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) { return this.ads.cancelCampaign(user.id, id); }
 
-  @Post('campaigns/:id/confirm-payment') @Roles('admin') @ApiBearerAuth()
-  confirmPayment(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) { return this.ads.confirmPayment(user.id, id); }
+  @Post('campaigns/:id/payment-orders') @Roles('workshop_owner', 'provider_owner') @HttpCode(HttpStatus.CREATED) @ApiBearerAuth()
+  createPaymentOrder(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) { return this.billing.createOrder(user.id, id); }
+
+  @Get('payments/mine') @Roles('workshop_owner', 'provider_owner') @ApiBearerAuth()
+  myPayments(@CurrentUser() user: AuthenticatedUser) { return this.billing.listMine(user.id); }
+
+  @Post('payments/:id/proof-upload-url') @Roles('workshop_owner', 'provider_owner') @HttpCode(HttpStatus.CREATED) @ApiBearerAuth()
+  proofUploadUrl(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string, @Body() dto: CreateProofUploadDto) { return this.billing.uploadUrl(user.id, id, dto); }
+
+  @Post('payments/:id/proofs/:proofId/complete') @Roles('workshop_owner', 'provider_owner') @ApiBearerAuth()
+  completeProof(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string, @Param('proofId') proofId: string, @Body() dto: CompletePaymentProofDto) { return this.billing.completeProof(user.id, id, proofId, dto); }
+
+  @Get('admin/payments') @Roles('admin') @ApiBearerAuth()
+  adminPayments(@Query() query: PaymentListQueryDto) { return this.billing.adminList(query.status); }
+
+  @Post('admin/payments/:id/approve') @Roles('admin') @ApiBearerAuth()
+  approvePayment(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) { return this.billing.approve(user.id, id); }
+
+  @Post('admin/payments/:id/reject') @Roles('admin') @ApiBearerAuth()
+  rejectPayment(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string, @Body() dto: RejectPaymentDto) { return this.billing.reject(user.id, id, dto); }
+
+  @Get('admin/payments/reconciliation') @Roles('admin') @ApiBearerAuth()
+  reconcilePayments() { return this.billing.reconcile(); }
+
+  @Get('admin/exports/payments.csv') @Header('Content-Type', 'text/csv; charset=utf-8') @Header('Content-Disposition', 'attachment; filename="ad-payments.csv"') @Roles('admin') @ApiBearerAuth()
+  async exportPayments() { return this.billing.exportCsv('payments'); }
+
+  @Get('admin/exports/invoices.csv') @Header('Content-Type', 'text/csv; charset=utf-8') @Header('Content-Disposition', 'attachment; filename="ad-invoices.csv"') @Roles('admin') @ApiBearerAuth()
+  async exportInvoices() { return this.billing.exportCsv('invoices'); }
 
   @Post('metrics') @Roles('user') @HttpCode(HttpStatus.ACCEPTED) @ApiBearerAuth()
   metric(@CurrentUser() user: AuthenticatedUser, @Body() dto: RecordAdMetricDto) { return this.ads.recordMetric(user.id, dto); }

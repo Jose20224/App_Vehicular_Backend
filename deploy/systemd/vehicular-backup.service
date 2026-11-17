@@ -1,0 +1,14 @@
+[Unit]
+Description=Backup PostgreSQL cifrado de Vehicular API
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=vehicular-backup
+EnvironmentFile=/etc/vehicular/backup.env
+ExecStart=/usr/bin/bash /opt/vehicular-api/scripts/backup-postgres.sh
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/tmp

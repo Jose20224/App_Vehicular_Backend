@@ -89,6 +89,16 @@ enum AdMetricEventType {
   @@map("ad_metric_event_type")
 }
 
+enum AdPaymentStatus {
+  pending
+  proof_received
+  approved
+  rejected
+  cancelled
+
+  @@map("ad_payment_status")
+}
+
 enum ReviewStatus {
   pending
   published
@@ -161,6 +171,14 @@ model User {
   ownedAdCampaigns AdCampaign[] @relation("AdCampaignOwner")
   approvedAdCampaigns AdCampaign[] @relation("AdCampaignApprover")
   adMetrics AdMetric[]
+  adPayments AdPayment[] @relation("AdPaymentOwner")
+  reviewedAdPayments AdPayment[] @relation("AdPaymentReviewer")
+  adPaymentProofs AdPaymentProof[]
+  issuedAdInvoices AdInvoice[]
+  adPaymentAuditLogs AdPaymentAuditLog[]
+  adminAuditLogs AdminAuditLog[]
+  businessClaims BusinessClaim[] @relation("BusinessClaimant")
+  reviewedBusinessClaims BusinessClaim[] @relation("BusinessClaimReviewer")
 
   @@index([role, status], map: "idx_users_role_status")
   @@index([deletedAt], map: "idx_users_deleted_at")
@@ -864,6 +882,7 @@ model Workshop {
   ratingAverage            Decimal        @default(0) @map("rating_average") @db.Decimal(3, 2)
   ratingCount              Int            @default(0) @map("rating_count")
   status                   WorkshopStatus @default(draft)
+  isPreloaded              Boolean        @default(false) @map("is_preloaded")
   verifiedAt               DateTime?      @map("verified_at") @db.Timestamptz(6)
   createdAt                DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt                DateTime       @default(now()) @map("updated_at") @db.Timestamptz(6)
@@ -877,6 +896,7 @@ model Workshop {
   photos               WorkshopPhoto[]
   serviceOfferings     ServiceOffering[]    @relation("ServiceOfferingWorkshop")
   adCampaigns          AdCampaign[]
+  claims                BusinessClaim[]
   contactEvents         WorkshopContactEvent[]
   reviews               Review[]
   reviewReplies         ReviewReply[]
@@ -922,6 +942,7 @@ model AssistanceProvider {
   is24Hours      Boolean        @default(false) @map("is_24_hours")
   availabilityStatus String     @default("available") @map("availability_status") @db.VarChar(20)
   status         WorkshopStatus @default(draft)
+  isPreloaded    Boolean        @default(false) @map("is_preloaded")
   verifiedAt     DateTime?      @map("verified_at") @db.Timestamptz(6)
   createdAt      DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt      DateTime       @default(now()) @map("updated_at") @db.Timestamptz(6)
@@ -935,6 +956,7 @@ model AssistanceProvider {
   serviceOfferings ServiceOffering[] @relation("ServiceOfferingProvider")
   assistanceRequests AssistanceRequest[] @relation("AssistanceProviderRequests")
   adCampaigns AdCampaign[]
+  claims      BusinessClaim[]
 
   @@unique([id, userId], map: "uq_assistance_providers_id_user")
   @@index([userId, syncVersion], map: "idx_assistance_providers_user_sync_version")
@@ -1198,6 +1220,7 @@ model AdCampaign {
   workshop                 Workshop?         @relation(fields: [workshopId], references: [id], onDelete: Restrict)
   assistanceProvider       AssistanceProvider? @relation(fields: [assistanceProviderId], references: [id], onDelete: Restrict)
   metrics                  AdMetric[]
+  payments                 AdPayment[]
 
   @@index([userId, status, createdAt(sort: Desc)], map: "idx_ad_campaigns_owner_status_created")
   @@index([status, startsAt, endsAt], map: "idx_ad_campaigns_schedule")
@@ -1221,4 +1244,119 @@ model AdMetric {
   @@index([adCampaignId, createdAt], map: "idx_ad_metrics_campaign_created")
   @@index([userId, createdAt], map: "idx_ad_metrics_user_created")
   @@map("ad_metrics")
+}
+
+model AdPayment {
+  id                    String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  campaignId            String          @map("campaign_id") @db.Uuid
+  userId                String          @map("user_id") @db.Uuid
+  amountUsd             Decimal         @map("amount_usd") @db.Decimal(12, 2)
+  amountNioReference    Decimal         @map("amount_nio_reference") @db.Decimal(14, 2)
+  currency              String          @default("USD") @db.VarChar(3)
+  gateway               String          @default("manual_transfer") @db.VarChar(40)
+  status                AdPaymentStatus @default(pending)
+  bankReference         String?         @map("bank_reference") @db.VarChar(120)
+  bankReferenceHash     String?         @unique(map: "uq_ad_payments_bank_reference_hash") @map("bank_reference_hash") @db.Char(64)
+  rejectionReason       String?         @map("rejection_reason") @db.VarChar(500)
+  reviewedByUserId      String?         @map("reviewed_by_user_id") @db.Uuid
+  reviewedAt            DateTime?       @map("reviewed_at") @db.Timestamptz(6)
+  lastReminderAt        DateTime?       @map("last_reminder_at") @db.Timestamptz(6)
+  lastOverdueReminderAt DateTime?       @map("last_overdue_reminder_at") @db.Timestamptz(6)
+  createdAt             DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt             DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  campaign              AdCampaign      @relation(fields: [campaignId], references: [id], onDelete: Restrict)
+  user                  User            @relation("AdPaymentOwner", fields: [userId], references: [id], onDelete: Restrict)
+  reviewer              User?           @relation("AdPaymentReviewer", fields: [reviewedByUserId], references: [id], onDelete: Restrict)
+  proofs                AdPaymentProof[]
+  invoice               AdInvoice?
+  auditLogs             AdPaymentAuditLog[]
+
+  @@index([userId, status, createdAt(sort: Desc)], map: "idx_ad_payments_owner_status_created")
+  @@index([status, createdAt], map: "idx_ad_payments_status_created")
+  @@map("ad_payments")
+}
+
+model AdPaymentProof {
+  id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  paymentId    String     @map("payment_id") @db.Uuid
+  userId       String     @map("user_id") @db.Uuid
+  objectKey    String     @unique @map("object_key") @db.VarChar(500)
+  contentType  String     @map("content_type") @db.VarChar(100)
+  sizeBytes    BigInt     @map("size_bytes")
+  status       String     @default("upload_pending") @db.VarChar(24)
+  uploadedAt   DateTime?  @map("uploaded_at") @db.Timestamptz(6)
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  payment      AdPayment @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  user         User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([paymentId, createdAt(sort: Desc)], map: "idx_ad_payment_proofs_payment_created")
+  @@map("ad_payment_proofs")
+}
+
+model AdInvoice {
+  id                  String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  paymentId           String     @unique @map("payment_id") @db.Uuid
+  userId              String     @map("user_id") @db.Uuid
+  invoiceNumber       String     @unique @map("invoice_number") @db.VarChar(40)
+  amountUsd           Decimal    @map("amount_usd") @db.Decimal(12, 2)
+  amountNioReference  Decimal    @map("amount_nio_reference") @db.Decimal(14, 2)
+  currency            String     @default("USD") @db.VarChar(3)
+  fiscalFormatStatus  String     @default("pending_dgi_confirmation") @map("fiscal_format_status") @db.VarChar(40)
+  issuedAt            DateTime   @default(now()) @map("issued_at") @db.Timestamptz(6)
+  payment             AdPayment @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  user                User       @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([userId, issuedAt(sort: Desc)], map: "idx_ad_invoices_owner_issued")
+  @@map("ad_invoices")
+}
+
+model AdPaymentAuditLog {
+  id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  paymentId  String     @map("payment_id") @db.Uuid
+  actorId    String     @map("actor_id") @db.Uuid
+  action     String     @db.VarChar(40)
+  metadata   Json       @default("{}")
+  createdAt  DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  payment    AdPayment @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  actor      User       @relation(fields: [actorId], references: [id], onDelete: Restrict)
+
+  @@index([paymentId, createdAt], map: "idx_ad_payment_audit_payment_created")
+  @@map("ad_payment_audit_logs")
+}
+
+model BusinessClaim {
+  id                   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId               String    @map("user_id") @db.Uuid
+  workshopId           String?   @unique @map("workshop_id") @db.Uuid
+  assistanceProviderId String?   @unique @map("assistance_provider_id") @db.Uuid
+  status               String    @default("pending") @db.VarChar(20)
+  evidence             String?   @db.VarChar(1000)
+  rejectionReason      String?   @map("rejection_reason") @db.VarChar(500)
+  reviewedByUserId      String?   @map("reviewed_by_user_id") @db.Uuid
+  reviewedAt            DateTime? @map("reviewed_at") @db.Timestamptz(6)
+  createdAt             DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt             DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user                  User      @relation("BusinessClaimant", fields: [userId], references: [id], onDelete: Restrict)
+  reviewer              User?     @relation("BusinessClaimReviewer", fields: [reviewedByUserId], references: [id], onDelete: Restrict)
+  workshop              Workshop? @relation(fields: [workshopId], references: [id], onDelete: Restrict)
+  assistanceProvider    AssistanceProvider? @relation(fields: [assistanceProviderId], references: [id], onDelete: Restrict)
+
+  @@index([status, createdAt], map: "idx_business_claims_status_created")
+  @@map("business_claims")
+}
+
+model AdminAuditLog {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  actorUserId  String   @map("actor_user_id") @db.Uuid
+  action       String   @db.VarChar(180)
+  resourceType String   @map("resource_type") @db.VarChar(80)
+  resourceId   String?  @map("resource_id") @db.VarChar(100)
+  beforeState  Json     @default("{}") @map("before_state")
+  afterState   Json     @default("{}") @map("after_state")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  actor        User     @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+
+  @@index([actorUserId, createdAt(sort: Desc)], map: "idx_admin_audit_actor_created")
+  @@index([resourceType, resourceId, createdAt(sort: Desc)], map: "idx_admin_audit_resource_created")
+  @@map("admin_audit_logs")
 }

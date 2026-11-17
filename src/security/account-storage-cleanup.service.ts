@@ -27,7 +27,7 @@ export class AccountStorageCleanupService {
       for (const prefix of prefixes) await this.deletePrefix(prefix);
       return 'deleted';
     } catch {
-      this.logger.error(JSON.stringify({ event: 'account_storage_cleanup_failed', user_id: userId }));
+      this.logger.error(JSON.stringify({ event: 'account_storage_cleanup_failed' }));
       throw new ServiceUnavailableException({
         code: 'ACCOUNT_DELETION_PENDING',
         message: 'La cuenta quedó protegida y la eliminación de archivos está pendiente. Repite la solicitud para completar el proceso.',

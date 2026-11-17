@@ -63,7 +63,10 @@ jobs:
           node-version: 22.16.0
 
       - name: Instalar dependencias
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
+
+      - name: Auditar vulnerabilidades altas y críticas
+        run: npm audit --audit-level=high
 
       - name: Generar Prisma Client
         run: npm run prisma:generate

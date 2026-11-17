@@ -1179,6 +1179,14 @@ No pertenece a los dominios de producto, no es propiedad de un usuario y no es s
 
 **Actualización B3 de `vehicles`:** `plate_aad_version` (integer, default 1) y `vin_aad_version` (integer nullable) permiten leer filas cifradas con AAD legacy v1 y nuevas escrituras vinculadas a propietario/registro con AAD v2. La migración asigna v1 a VIN preexistentes; el trigger de sincronización sigue asignando `sync_version`.
 
+## Addendum B9–B11 — Publicidad, facturación B2B y backoffice (2026-11-18)
+
+- `ad_plans`/`ad_slots` son catálogos B2B administrados; `ad_campaigns` guarda el objetivo, departamento/municipio, fechas, precio USD, equivalente informativo NIO y estado de reserva/publicación. `ad_metrics` deduplica eventos por campaña/usuario/tipo/ventana.
+- `ad_payments` conserva monto, estado de transferencia, referencia bancaria y hash único para evitar reutilizar referencias; `ad_payment_proofs` apunta al objeto privado S3. `ad_invoices` registra folio correlativo y etiqueta `pending_dgi_confirmation`; no constituye formato fiscal final. `ad_payment_audit_logs` registra revisión/aprobación/rechazo del pago.
+- `business_claims` registra la solicitud y revisión de negocios precargados. `workshops.is_preloaded` y `assistance_providers.is_preloaded` se limpian al transferir el propietario y requieren verificación posterior.
+- `admin_audit_logs` es append-only a nivel de API: actor, acción, recurso y snapshots anterior/posterior. No se incluye en la sincronización del conductor.
+- Los datos de B6–B11 son online-only; no formar parte del bootstrap/pull/push de usuarios móviles.
+
 ## Addendum B6 — Directorio de talleres (2026-11-13)
 
 Este addendum prevalece sobre los campos/estados de las secciones 8.1–8.4 anteriores cuando difieran:

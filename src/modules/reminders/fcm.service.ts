@@ -53,7 +53,7 @@ export class FcmService implements OnModuleInit {
       } catch (error) {
         const code = typeof error === 'object' && error !== null && 'code' in error ? String(error.code) : 'FCM_SEND_FAILED';
         if (['messaging/registration-token-not-registered', 'messaging/invalid-registration-token'].includes(code)) invalidTokenIds.push(token.id);
-        else { failedCount += 1; this.logger.warn(`FCM temporal failure (${code}) for device token ${token.id}.`); }
+        else { failedCount += 1; this.logger.warn(`FCM temporal failure (${code}).`); }
       }
     }
     if (invalidTokenIds.length) {

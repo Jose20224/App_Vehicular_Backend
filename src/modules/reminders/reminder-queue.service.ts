@@ -18,13 +18,13 @@ export class ReminderQueueService implements OnModuleInit {
     await this.dispatchDue();
   }
 
-  async dispatchDue(): Promise<number> {
+  async dispatchDue(batchSize = 500): Promise<number> {
     const now = new Date();
     const staleBefore = new Date(now.getTime() - 10 * 60 * 1000);
     await this.prisma.reminder.updateMany({ where: { status: 'processing', updatedAt: { lt: staleBefore }, deletedAt: null }, data: { status: 'scheduled' } });
     const due = await this.prisma.reminder.findMany({
       where: { status: 'scheduled', deletedAt: null, scheduledAt: { lte: now } },
-      select: { id: true }, orderBy: { scheduledAt: 'asc' }, take: 500,
+      select: { id: true }, orderBy: { scheduledAt: 'asc' }, take: Math.max(1, Math.min(batchSize, 500)),
     });
     for (const reminder of due) {
       await this.queue.add(REMINDER_SEND_JOB, { reminderId: reminder.id }, {
@@ -35,5 +35,10 @@ export class ReminderQueueService implements OnModuleInit {
     }
     if (due.length === 500) this.logger.warn('Se alcanzó el lote máximo de despacho; el siguiente ciclo continuará la cola.');
     return due.length;
+  }
+
+  async queueSnapshot(): Promise<Record<string, number>> {
+    const counts = await this.queue.getJobCounts('waiting', 'active', 'completed', 'failed', 'delayed', 'paused');
+    return counts;
   }
 }

@@ -21,12 +21,13 @@ import { AdminModule } from './modules/admin/admin.module';
 import { EmergencyModule } from './modules/emergency/emergency.module';
 import { SecurityModule } from './security/security.module';
 import { StorageModule } from './storage/storage.module';
+import { SentryModule } from '@sentry/nestjs/setup';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { RolesGuard } from './common/guards/roles.guard';
 import { ResourceOwnerGuard } from './common/guards/resource-owner.guard';
 
 @Module({
-  imports: [AppConfigModule, PrismaModule, RedisModule, SecurityModule, StorageModule, HealthModule, AuthModule, UsersModule,
+  imports: [SentryModule.forRoot(), AppConfigModule, PrismaModule, RedisModule, SecurityModule, StorageModule, HealthModule, AuthModule, UsersModule,
     VehiclesModule, DocumentsModule, RemindersModule, CatalogsModule, EmergencyModule, SyncModule,
     WorkshopsModule, ProvidersModule, ReviewsModule, AdsModule, BillingModule, AdminModule],
   providers: [

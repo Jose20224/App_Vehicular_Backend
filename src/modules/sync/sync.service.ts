@@ -161,7 +161,7 @@ export class SyncService {
         'department', 'municipality', 'vehicle_brand', 'vehicle_model', 'workshop', 'workshop_specialty',
         'workshop_photo', 'service_offering', 'assistance_provider', 'review', 'review_reply',
         'ad_plan', 'ad_slot', 'ad_campaign', 'ad_metric', 'payment', 'invoice', 'payment_proof',
-        'audit_log', 'refresh_token', 'device_token', 'sync_device', 'processed_mutation',
+        'audit_log', 'admin_audit_log', 'business_claim', 'refresh_token', 'device_token', 'sync_device', 'processed_mutation',
         'exchange_rate', 'consent_log',
       ],
     };

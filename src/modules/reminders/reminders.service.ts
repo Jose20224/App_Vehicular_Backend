@@ -61,6 +61,16 @@ export class RemindersService {
         body: 'A tu campaña le quedan siete días o menos. Revisa su fecha de finalización para renovarla.',
         campaign_id: n.providerMessageId?.replace(/^ad-expiry:/, '') ?? null,
       } : {}),
+      ...(n.errorCode === 'AD_PAYMENT_PENDING_REMINDER' ? {
+        title: 'Tienes un pago publicitario pendiente',
+        body: 'Completa la transferencia y adjunta el comprobante para activar tu campaña.',
+        payment_id: n.providerMessageId?.replace(/^ad-payment:/, '') ?? null,
+      } : {}),
+      ...(n.errorCode === 'AD_PAYMENT_OVERDUE_REMINDER' ? {
+        title: 'Tu pago publicitario está vencido',
+        body: 'La fecha límite de pago pasó. Revisa la orden con administración antes de continuar.',
+        payment_id: n.providerMessageId?.replace(/^ad-payment:/, '') ?? null,
+      } : {}),
       read_at: n.readAt?.toISOString() ?? null, sent_at: n.sentAt?.toISOString() ?? null, created_at: n.createdAt.toISOString(),
     })), count: items.length };
   }

@@ -1,0 +1,11 @@
+services:
+  api:
+    build: null
+    image: ${API_IMAGE:?Set API_IMAGE to the immutable GHCR image tag}
+    pull_policy: always
+    restart: unless-stopped
+
+  migrate:
+    build: null
+    image: ${MIGRATION_IMAGE:?Set MIGRATION_IMAGE to the immutable migration image tag}
+    profiles: [tools]

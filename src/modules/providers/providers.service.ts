@@ -218,6 +218,14 @@ export class ProvidersService {
     return { id: result.id, status: result.status, verified_at: result.verifiedAt };
   }
 
+  async ownerMetrics(userId: string, id: string): Promise<Record<string, unknown>> {
+    const provider = await this.prisma.assistanceProvider.findFirst({ where: { id, userId, deletedAt: null }, select: { id: true, name: true } });
+    if (!provider) throw this.providerNotFound();
+    const rows = await this.prisma.assistanceRequest.groupBy({ by: ['status'], where: { assistanceProviderId: id, requestedAt: { gte: new Date(Date.now() - 30 * 86400000) } }, _count: { _all: true } });
+    return { provider_id: id, provider_name: provider.name, period_days: 30,
+      assistance_requests: Object.fromEntries(rows.map((row) => [row.status, row._count._all])) };
+  }
+
   async getOwnedProviders(userId: string): Promise<Record<string, unknown>> {
     const records = await this.prisma.assistanceProvider.findMany({
       where: { userId, deletedAt: null }, orderBy: [{ updatedAt: 'desc' }, { id: 'asc' }],

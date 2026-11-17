@@ -33,6 +33,11 @@ export class WorkshopsController {
     return this.workshops.getOwnedWorkshop(user.id, id);
   }
 
+  @Get('mine/:id/metrics')
+  @Roles('workshop_owner')
+  @ApiBearerAuth()
+  ownerMetrics(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) { return this.workshops.ownerMetrics(user.id, id); }
+
   @Public()
   @Get('search')
   @ApiOperation({ summary: 'Buscar talleres activos por cercanía, especialidad, municipio, texto y horario.' })

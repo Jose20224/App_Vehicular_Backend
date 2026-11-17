@@ -27,6 +27,6 @@ import { FcmService } from './fcm.service';
   }), BullModule.registerQueue({ name: REMINDER_QUEUE })],
   controllers: [RemindersController],
   providers: [RemindersService, ReminderQueueService, ReminderProcessor, FcmService],
-  exports: [RemindersService],
+  exports: [RemindersService, ReminderQueueService],
 })
 export class RemindersModule {}

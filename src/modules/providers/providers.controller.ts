@@ -36,6 +36,10 @@ export class ProvidersController {
   @ApiOperation({ summary: 'Obtener un perfil propio, con teléfono descifrado solo para su titular.' })
   mineDetail(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) { return this.providers.getOwnedProvider(user.id, id); }
 
+  @Get('assistance-providers/mine/:id/metrics')
+  @Roles('provider_owner') @ApiBearerAuth()
+  ownerMetrics(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) { return this.providers.ownerMetrics(user.id, id); }
+
   @Post('assistance-providers')
   @Roles('provider_owner') @ApiBearerAuth() @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Crear un perfil de proveedor con contacto cifrado y cobertura GeoJSON.' })

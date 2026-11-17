@@ -7,7 +7,8 @@ import {
   Logger,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
-import type { RequestWithId } from '../middleware/request-id.middleware';
+import * as Sentry from '@sentry/nestjs';
+import { safeRequestPath, type RequestWithId } from '../middleware/request-id.middleware';
 
 interface ErrorPayload {
   code: string;
@@ -52,11 +53,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     };
 
     if (status >= 500) {
+      Sentry.withScope((scope) => {
+        scope.setTag('request_id', requestId);
+        scope.setTag('http.status_code', String(status));
+        Sentry.captureException(exception);
+      });
       this.logger.error(JSON.stringify({
         event: 'http_exception',
         request_id: requestId,
         status_code: status,
-        path: request.path,
+        path: safeRequestPath(request),
         method: request.method,
       }));
     }

@@ -14,7 +14,7 @@ export class AssistanceProcessor extends WorkerHost {
     try {
       return await this.providers.dispatchRequestNotification(job.data.requestId);
     } catch (error) {
-      this.logger.warn(`No se pudo despachar la solicitud ${job.data.requestId}; BullMQ aplicará reintento. ${error instanceof Error ? error.message : 'error desconocido'}`);
+      this.logger.warn('No se pudo despachar la solicitud; BullMQ aplicará reintento.');
       throw error;
     }
   }

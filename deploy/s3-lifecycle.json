@@ -1,0 +1,11 @@
+{
+  "Rules": [
+    {
+      "ID": "vehicular-db-backup-retention-90-days",
+      "Status": "Enabled",
+      "Filter": { "Prefix": "vehicular/postgres/" },
+      "Expiration": { "Days": 90 },
+      "NoncurrentVersionExpiration": { "NoncurrentDays": 30 }
+    }
+  ]
+}

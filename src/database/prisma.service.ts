@@ -49,7 +49,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     try {
       await this.$connect();
     } catch (error) {
-      this.logger.error('No fue posible conectar con PostgreSQL.', error instanceof Error ? error.stack : undefined);
+      this.logger.error('No fue posible conectar con PostgreSQL.');
       throw error;
     }
   }

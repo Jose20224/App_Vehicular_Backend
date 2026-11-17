@@ -1,7 +1,9 @@
 import 'dotenv/config';
+import './instrument';
 import { Logger } from '@nestjs/common';
 import { json, urlencoded } from 'express';
 import type { ErrorRequestHandler } from 'express';
+import helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { validateEnvironment } from './config/environment';
@@ -39,7 +41,15 @@ const bodyParserErrorHandler: ErrorRequestHandler = (error, request, response, n
 async function bootstrap(): Promise<void> {
   const environment = validateEnvironment(process.env);
   const app = await NestFactory.create(AppModule, { bufferLogs: true, bodyParser: false });
-  app.set('trust proxy', false);
+  app.getHttpAdapter().getInstance().set('trust proxy', false);
+  app.use(helmet({
+    contentSecurityPolicy: { directives: {
+      defaultSrc: ["'self'"], scriptSrc: ["'self'", "'unsafe-inline'"], styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", 'data:'], fontSrc: ["'self'", 'data:'], connectSrc: ["'self'"],
+      objectSrc: ["'none'"], baseUri: ["'self'"], frameAncestors: ["'none'"],
+    } },
+    referrerPolicy: { policy: 'no-referrer' },
+  }));
 
   // request_id debe existir también cuando el parser rechaza el body antes de Nest.
   app.use(requestIdMiddleware);
@@ -58,8 +68,8 @@ async function bootstrap(): Promise<void> {
   Logger.log(`Documentación Swagger: /docs`, 'Bootstrap');
 }
 
-void bootstrap().catch((error: unknown) => {
+void bootstrap().catch(() => {
   const logger = new Logger('Bootstrap');
-  logger.error(error instanceof Error ? error.message : 'Error desconocido al iniciar la API.');
+  logger.error('El proceso no pudo iniciar. Revisa la configuración y los registros protegidos de infraestructura.');
   process.exitCode = 1;
 });

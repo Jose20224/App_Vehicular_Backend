@@ -7,6 +7,12 @@ export interface RequestWithId extends Request {
   user?: AuthenticatedUser;
 }
 
+export function safeRequestPath(request: Request): string {
+  const routePath = (request as Request & { route?: { path?: string } }).route?.path;
+  if (typeof routePath === 'string') return `${request.baseUrl ?? ''}${routePath}`;
+  return request.path.replace(/(assistance-actions\/)[^/]+/g, '$1[redacted]');
+}
+
 export function requestIdMiddleware(request: Request, response: Response, next: NextFunction): void {
   const candidate = request.header('x-request-id');
   const requestId = candidate && /^[A-Za-z0-9._:-]{1,100}$/.test(candidate)

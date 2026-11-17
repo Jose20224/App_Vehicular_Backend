@@ -303,6 +303,18 @@ export class WorkshopsService {
     return updated;
   }
 
+  async ownerMetrics(userId: string, id: string): Promise<Record<string, unknown>> {
+    const workshop = await this.prisma.workshop.findFirst({ where: { id, userId, deletedAt: null }, select: { id: true, name: true } });
+    if (!workshop) throw this.workshopNotFound();
+    const [events, reviews] = await Promise.all([
+      this.prisma.workshopContactEvent.groupBy({ by: ['eventType'], where: { workshopId: id, createdAt: { gte: new Date(Date.now() - 30 * 86400000) } }, _count: { _all: true } }),
+      this.prisma.review.groupBy({ by: ['status'], where: { workshopId: id, createdAt: { gte: new Date(Date.now() - 30 * 86400000) } }, _count: { _all: true } }),
+    ]);
+    return { workshop_id: id, workshop_name: workshop.name, period_days: 30,
+      contact_events: Object.fromEntries(events.map((e) => [e.eventType, e._count._all])),
+      reviews: Object.fromEntries(reviews.map((r) => [r.status, r._count._all])) };
+  }
+
   async getPublicDetail(slug: string): Promise<Record<string, unknown>> {
     const record = await this.prisma.workshop.findFirst({
       where: { slug, status: 'active', deletedAt: null },
@@ -365,9 +377,9 @@ export class WorkshopsService {
       cacheKey = `directory:workshops:${cacheVersion}:${createHash('sha256').update(JSON.stringify(normalizedQuery)).digest('hex')}`;
       const cached = await this.redis.client.get(cacheKey);
       if (cached) return JSON.parse(cached) as Record<string, unknown>;
-    } catch (error) {
+    } catch {
       cacheKey = null;
-      this.logger.warn(`Cache de talleres no disponible; se consultará PostgreSQL. ${error instanceof Error ? error.message : ''}`);
+      this.logger.warn('Cache de talleres no disponible; se consultará PostgreSQL.');
     }
 
     const where: Prisma.Sql[] = [Prisma.sql`w.status = 'active'::public.workshop_status`, Prisma.sql`w.deleted_at IS NULL`];
@@ -474,8 +486,8 @@ export class WorkshopsService {
     if (cacheKey) {
       try {
         await this.redis.client.set(cacheKey, JSON.stringify(response), 'EX', DIRECTORY_CACHE_TTL_SECONDS);
-      } catch (error) {
-        this.logger.warn(`No se pudo guardar el caché de talleres. ${error instanceof Error ? error.message : ''}`);
+      } catch {
+        this.logger.warn('No se pudo guardar el caché de talleres.');
       }
     }
     return response;
@@ -807,8 +819,8 @@ export class WorkshopsService {
     try {
       // Cache versionado: invalidación O(1), sin Redis KEYS ni borrado de grandes conjuntos.
       await this.redis.client.incr('directory:workshops:version');
-    } catch (error) {
-      this.logger.warn(`No se pudo invalidar el caché de talleres. ${error instanceof Error ? error.message : ''}`);
+    } catch {
+      this.logger.warn('No se pudo invalidar el caché de talleres.');
     }
   }
 
