@@ -1,3 +1,4 @@
+import { prismaBytes } from "../../database/prisma-bytes";
 import {
   BadRequestException, ConflictException, Injectable, NotFoundException,
   PayloadTooLargeException, UnprocessableEntityException,
@@ -115,14 +116,14 @@ export class DocumentsService {
           if (replay.userId !== userId) throw this.idCollision();
           if (replay.deletedAt || replay.vehicleId !== vehicleId) throw new ConflictException({ code: 'IDEMPOTENCY_PAYLOAD_MISMATCH', message: 'El identificador de póliza ya fue utilizado para otro registro.', details: {} });
           const existingNumber = await this.crypto.decrypt({
-            ciphertext: replay.policyNumberCiphertext, nonce: replay.policyNumberNonce, tag: replay.policyNumberTag,
-            encryptedDek: replay.policyNumberEncryptedDek, keyVersion: replay.policyNumberKeyVersion,
+            ciphertext: Buffer.from(replay.policyNumberCiphertext), nonce: Buffer.from(replay.policyNumberNonce), tag: Buffer.from(replay.policyNumberTag),
+            encryptedDek: Buffer.from(replay.policyNumberEncryptedDek), keyVersion: replay.policyNumberKeyVersion,
             aadVersion: replay.policyNumberAadVersion,
           }, 'insurance_policies.policy_number', { userId, recordId: replay.id });
           const existingDocument = await tx.vehicleDocument.findUnique({ where: { insurancePolicyId: replay.id } });
           const existingPhone = replay.claimsPhoneCiphertext && replay.claimsPhoneNonce && replay.claimsPhoneTag && replay.claimsPhoneEncryptedDek && replay.claimsPhoneKeyVersion
-            ? await this.crypto.decrypt({ ciphertext: replay.claimsPhoneCiphertext, nonce: replay.claimsPhoneNonce,
-              tag: replay.claimsPhoneTag, encryptedDek: replay.claimsPhoneEncryptedDek,
+            ? await this.crypto.decrypt({ ciphertext: Buffer.from(replay.claimsPhoneCiphertext), nonce: Buffer.from(replay.claimsPhoneNonce),
+              tag: Buffer.from(replay.claimsPhoneTag), encryptedDek: Buffer.from(replay.claimsPhoneEncryptedDek),
               keyVersion: replay.claimsPhoneKeyVersion, aadVersion: replay.claimsPhoneAadVersion ?? 2 },
               'insurance_policies.claims_phone', { userId, recordId: replay.id }) : null;
           const same = existingNumber === dto.policy_number && existingPhone === (dto.claims_phone ?? null) && replay.insurerId === (dto.insurer_id ?? null) &&
@@ -146,13 +147,13 @@ export class DocumentsService {
         const policy = await tx.insurancePolicy.create({ data: {
           id: dto.id, userId, vehicleId, insurerId: dto.insurer_id ?? null,
           otherInsurerName: dto.other_insurer_name?.trim() ?? null,
-          policyNumberCiphertext: number.ciphertext, policyNumberNonce: number.nonce,
-          policyNumberTag: number.tag, policyNumberEncryptedDek: number.encryptedDek,
+          policyNumberCiphertext: prismaBytes(number.ciphertext), policyNumberNonce: prismaBytes(number.nonce),
+          policyNumberTag: prismaBytes(number.tag), policyNumberEncryptedDek: prismaBytes(number.encryptedDek),
           policyNumberKeyVersion: number.keyVersion, policyNumberAadVersion: number.aadVersion ?? 2,
           validFrom: this.toDate(dto.valid_from), validUntil: this.toDate(dto.valid_until),
           deductible: dto.deductible ?? null, premium: dto.premium ?? null, currency: dto.currency,
-          ...(phone ? { claimsPhoneCiphertext: phone.ciphertext, claimsPhoneNonce: phone.nonce,
-            claimsPhoneTag: phone.tag, claimsPhoneEncryptedDek: phone.encryptedDek, claimsPhoneKeyVersion: phone.keyVersion,
+          ...(phone ? { claimsPhoneCiphertext: prismaBytes(phone.ciphertext), claimsPhoneNonce: prismaBytes(phone.nonce),
+            claimsPhoneTag: prismaBytes(phone.tag), claimsPhoneEncryptedDek: prismaBytes(phone.encryptedDek), claimsPhoneKeyVersion: phone.keyVersion,
             claimsPhoneAadVersion: phone.aadVersion ?? 2 } : {}),
           previousPolicyId: previous?.id ?? null,
           document: { create: {
@@ -288,14 +289,14 @@ export class DocumentsService {
   }
   private async policyResponse(policy: PolicyRecord, replay = false): Promise<Record<string, unknown>> {
     const number = await this.crypto.decrypt({
-      ciphertext: policy.policyNumberCiphertext, nonce: policy.policyNumberNonce, tag: policy.policyNumberTag,
-      encryptedDek: policy.policyNumberEncryptedDek, keyVersion: policy.policyNumberKeyVersion,
+      ciphertext: Buffer.from(policy.policyNumberCiphertext), nonce: Buffer.from(policy.policyNumberNonce), tag: Buffer.from(policy.policyNumberTag),
+      encryptedDek: Buffer.from(policy.policyNumberEncryptedDek), keyVersion: policy.policyNumberKeyVersion,
       aadVersion: policy.policyNumberAadVersion,
     }, 'insurance_policies.policy_number', { userId: policy.userId, recordId: policy.id });
     const phone = policy.claimsPhoneCiphertext && policy.claimsPhoneNonce && policy.claimsPhoneTag &&
       policy.claimsPhoneEncryptedDek && policy.claimsPhoneKeyVersion
-      ? await this.crypto.decrypt({ ciphertext: policy.claimsPhoneCiphertext, nonce: policy.claimsPhoneNonce,
-        tag: policy.claimsPhoneTag, encryptedDek: policy.claimsPhoneEncryptedDek,
+      ? await this.crypto.decrypt({ ciphertext: Buffer.from(policy.claimsPhoneCiphertext), nonce: Buffer.from(policy.claimsPhoneNonce),
+        tag: Buffer.from(policy.claimsPhoneTag), encryptedDek: Buffer.from(policy.claimsPhoneEncryptedDek),
         keyVersion: policy.claimsPhoneKeyVersion, aadVersion: policy.claimsPhoneAadVersion ?? 2 },
         'insurance_policies.claims_phone', { userId: policy.userId, recordId: policy.id }) : null;
     const today = this.managuaToday();

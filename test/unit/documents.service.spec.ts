@@ -5,7 +5,7 @@ import type { ObjectStorageService } from '../../src/storage/object-storage.serv
 import type { AppConfigService } from '../../src/config/config.module';
 
 describe('DocumentsService — validación y ciclo de archivos', () => {
-  const config = { value: { nodeEnv: 'test', documentExpiringSoonDays: 30 } } as AppConfigService;
+  const config = { value: { nodeEnv: 'test', documentExpiringSoonDays: 30, awsS3PresignUploadTtlSeconds: 300 } } as AppConfigService;
 
   it('rechaza archivos superiores a 10 MB antes de pedir una URL firmada', async () => {
     const storage = { createUploadUrl: jest.fn() } as unknown as ObjectStorageService;

@@ -42,7 +42,8 @@ describe('GET /health (PostGIS + Redis mediante Testcontainers)', () => {
         POSTGRES_DB: 'vehicular_test',
       })
       .withExposedPorts(5432)
-      .withWaitStrategy(Wait.forLogMessage('database system is ready to accept connections'))
+      // The image first starts a temporary server for init scripts, then restarts.
+      .withWaitStrategy(Wait.forLogMessage('database system is ready to accept connections', 2))
       .start();
 
     redisContainer = await new GenericContainer('redis:7.4-alpine')

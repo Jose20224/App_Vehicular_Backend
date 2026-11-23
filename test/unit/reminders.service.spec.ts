@@ -30,7 +30,7 @@ describe('RemindersService', () => {
     const tx = {
       reminder: { updateMany: jest.fn().mockResolvedValue({ count: 2 }), createMany: jest.fn().mockResolvedValue({ count: 1 }) },
       vehicleDocument: { findFirst: jest.fn().mockResolvedValue({ id: 'doc-2', documentType: 'circulacion', title: 'Circulación', validUntil: new Date('2026-11-20T00:00:00.000Z'), insurancePolicy: null, vehicle: { nickname: null, brandLabel: 'Toyota', modelLabel: 'Yaris' } }) },
-      notificationPreference: { findFirst: jest.fn().mockResolvedValue({ enabledOffsets: [7], preferredTime: '09:00' }) },
+      notificationPreference: { findFirst: jest.fn().mockResolvedValue({ enabledOffsets: [7], preferredTime: '09:00', pushEnabled: true, localEnabled: true, inAppEnabled: true }) },
     };
     const service = new RemindersService({} as PrismaService);
 

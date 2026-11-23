@@ -1,3 +1,4 @@
+import { prismaBytes } from "../../database/prisma-bytes";
 import {
   BadRequestException, ConflictException, GoneException,
   Injectable, NotFoundException,
@@ -24,11 +25,6 @@ const OFFLINE_PACKAGE_TTL_SECONDS = 7 * 24 * 60 * 60;
 const OFFLINE_PACKAGE_MAX_BYTES = 99_999;
 const STALE_PRICE_AFTER_DAYS = 90;
 
-function prismaBytes(value: Uint8Array): Uint8Array<ArrayBuffer> {
-  const copy = new Uint8Array(value.byteLength);
-  copy.set(value);
-  return copy;
-}
 
 type ProviderSearchRow = {
   id: string; distance_meters: number; latitude: number | null; longitude: number | null;

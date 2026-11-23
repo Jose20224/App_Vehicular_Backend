@@ -1,3 +1,4 @@
+import { prismaBytes } from "../../database/prisma-bytes";
 import {
   BadRequestException,
   ConflictException,
@@ -45,11 +46,6 @@ type PolicyNumberFields = Partial<Pick<Prisma.InsurancePolicyUncheckedCreateInpu
 type PolicyClaimsPhoneFields = Partial<Pick<Prisma.InsurancePolicyUncheckedCreateInput, 'claimsPhoneCiphertext' | 'claimsPhoneNonce' | 'claimsPhoneTag' | 'claimsPhoneEncryptedDek' | 'claimsPhoneKeyVersion' | 'claimsPhoneAadVersion'>>;
 type EmergencyContactPhoneFields = Partial<Pick<Prisma.EmergencyContactUncheckedCreateInput, 'phoneCiphertext' | 'phoneNonce' | 'phoneTag' | 'phoneEncryptedDek' | 'phoneKeyVersion' | 'phoneAadVersion' | 'phoneHmac' | 'phoneHmacKeyVersion'>>;
 type AssistanceRequestPhoneFields = Partial<Pick<Prisma.AssistanceRequestUncheckedCreateInput, 'contactPhoneCiphertext' | 'contactPhoneNonce' | 'contactPhoneTag' | 'contactPhoneEncryptedDek' | 'contactPhoneKeyVersion' | 'contactPhoneAadVersion' | 'contactPhoneHmac' | 'contactPhoneHmacKeyVersion'>>;
-function prismaBytes(value: Uint8Array): Uint8Array<ArrayBuffer> {
-  const copy = new Uint8Array(value.byteLength);
-  copy.set(value);
-  return copy;
-}
 type MutationResult = {
   mutation_id: string; entity: string; id: string; status: 'applied' | 'conflict' | 'rejected';
   server_sync_version?: string | null; server_updated_at?: string | null;

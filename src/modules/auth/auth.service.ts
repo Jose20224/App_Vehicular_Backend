@@ -13,6 +13,7 @@ import { createHash } from 'node:crypto';
 import { Prisma } from '../../generated/prisma/client';
 import { AppConfigService } from '../../config/config.module';
 import { PrismaService } from '../../database/prisma.service';
+import { prismaBytes } from '../../database/prisma-bytes';
 import { RedisService } from '../../redis/redis.service';
 import { FieldCryptoService } from '../../security/field-crypto.service';
 import { generateUuidV7 } from '../../common/uuid-v7';
@@ -165,7 +166,7 @@ export class AuthService {
 
     const phoneIndex = await this.crypto.blindIndex(phone, 'users.phone');
     const existing = await this.prisma.user.findFirst({
-      where: { phoneHmac: phoneIndex.digest, deletedAt: null },
+      where: { phoneHmac: prismaBytes(phoneIndex.digest), deletedAt: null },
       select: { id: true, status: true },
     });
     const currentConsent = existing
@@ -221,7 +222,7 @@ export class AuthService {
     const encryptedUserAgent = userAgent ? await this.crypto.encrypt(userAgent, 'consent_logs.user_agent') : null;
 
     const result = await this.prisma.$transaction(async (tx) => {
-      let user = await tx.user.findFirst({ where: { phoneHmac: phoneIndex.digest, deletedAt: null } });
+      let user = await tx.user.findFirst({ where: { phoneHmac: prismaBytes(phoneIndex.digest), deletedAt: null } });
       let isNewUser = false;
       if (!user) {
         if (!encryptedPhone) throw new Error('No se preparó el cifrado del teléfono.');
@@ -229,12 +230,12 @@ export class AuthService {
           user = await tx.user.create({
             data: {
               id: generateUuidV7(),
-              phoneCiphertext: encryptedPhone.ciphertext,
-              phoneNonce: encryptedPhone.nonce,
-              phoneTag: encryptedPhone.tag,
-              phoneEncryptedDek: encryptedPhone.encryptedDek,
+              phoneCiphertext: prismaBytes(encryptedPhone.ciphertext),
+              phoneNonce: prismaBytes(encryptedPhone.nonce),
+              phoneTag: prismaBytes(encryptedPhone.tag),
+              phoneEncryptedDek: prismaBytes(encryptedPhone.encryptedDek),
               phoneKeyVersion: encryptedPhone.keyVersion,
-              phoneHmac: phoneIndex.digest,
+              phoneHmac: prismaBytes(phoneIndex.digest),
               phoneHmacKeyVersion: phoneIndex.keyVersion,
               displayName: dto.display_name?.trim() || 'Usuario',
               role: 'user',
@@ -316,15 +317,15 @@ export class AuthService {
             receivedAt: now,
             source: 'mobile',
             appVersion: dto.app_version,
-            ipCiphertext: encryptedIp?.ciphertext,
-            ipNonce: encryptedIp?.nonce,
-            ipTag: encryptedIp?.tag,
-            ipEncryptedDek: encryptedIp?.encryptedDek,
+            ipCiphertext: encryptedIp ? prismaBytes(encryptedIp.ciphertext) : undefined,
+            ipNonce: encryptedIp ? prismaBytes(encryptedIp.nonce) : undefined,
+            ipTag: encryptedIp ? prismaBytes(encryptedIp.tag) : undefined,
+            ipEncryptedDek: encryptedIp ? prismaBytes(encryptedIp.encryptedDek) : undefined,
             ipKeyVersion: encryptedIp?.keyVersion,
-            userAgentCiphertext: encryptedUserAgent?.ciphertext,
-            userAgentNonce: encryptedUserAgent?.nonce,
-            userAgentTag: encryptedUserAgent?.tag,
-            userAgentEncryptedDek: encryptedUserAgent?.encryptedDek,
+            userAgentCiphertext: encryptedUserAgent ? prismaBytes(encryptedUserAgent.ciphertext) : undefined,
+            userAgentNonce: encryptedUserAgent ? prismaBytes(encryptedUserAgent.nonce) : undefined,
+            userAgentTag: encryptedUserAgent ? prismaBytes(encryptedUserAgent.tag) : undefined,
+            userAgentEncryptedDek: encryptedUserAgent ? prismaBytes(encryptedUserAgent.encryptedDek) : undefined,
             userAgentKeyVersion: encryptedUserAgent?.keyVersion,
           },
         });
@@ -412,7 +413,7 @@ export class AuthService {
       if (!user || user.status === 'deleted' || user.status === 'deletion_pending') return { kind: 'purge' as const };
       const device = await tx.syncDevice.findFirst({
         where: { id: stored.device_id, userId: user.id },
-        select: { revokedAt: true, deletedAt: true },
+        select: { id: true, revokedAt: true, deletedAt: true },
       });
       if (!device || device.revokedAt || device.deletedAt) return { kind: 'purge' as const };
       if (new Date(stored.expires_at).getTime() <= Date.now() || jwtExpired) return { kind: 'invalid' as const };

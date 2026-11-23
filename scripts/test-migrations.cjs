@@ -32,7 +32,8 @@ async function main() {
         POSTGRES_DB: 'vehicular_test',
       })
       .withExposedPorts(5432)
-      .withWaitStrategy(Wait.forLogMessage('database system is ready to accept connections'))
+      // Ignore readiness from the temporary init server, which shuts down again.
+      .withWaitStrategy(Wait.forLogMessage('database system is ready to accept connections', 2))
       .start();
 
     const host = container.getHost();

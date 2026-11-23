@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { RequestMethod } from '@nestjs/common';
-import { CONTROLLERS_METADATA, METHOD_METADATA, PATH_METADATA } from '@nestjs/common/constants';
+import { MODULE_METADATA, METHOD_METADATA, PATH_METADATA } from '@nestjs/common/constants';
 import { REQUIRED_ROLES } from '../../src/common/decorators/roles.decorator';
 import { AdsModule } from '../../src/modules/ads/ads.module';
 import { ReviewsAdminController } from '../../src/modules/reviews/reviews-admin.controller';
@@ -44,7 +44,8 @@ describe('B8 · aislamiento de reseñas frente a publicidad y propietarios', () 
       'workshops/:workshopId/reviews/:reviewId/reply',
     ]);
 
-    const adControllers = (Reflect.getMetadata(CONTROLLERS_METADATA, AdsModule) as ControllerType[] | undefined) ?? [];
+    const adControllers = Reflect.getMetadata(MODULE_METADATA.CONTROLLERS, AdsModule) as ControllerType[];
+    expect(Array.isArray(adControllers)).toBe(true);
     const adReviewRoutes = adControllers.flatMap((controller) => routesFor(controller)).filter((route) => /review/i.test(route.path));
     expect(adReviewRoutes).toHaveLength(0);
   });

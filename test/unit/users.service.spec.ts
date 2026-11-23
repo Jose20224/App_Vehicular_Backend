@@ -78,6 +78,7 @@ describe('UsersService — perfil y eliminación B1', () => {
       deviceToken: { updateMany: jest.fn().mockResolvedValue({ count: 1 }) },
       syncDevice: { updateMany: jest.fn().mockResolvedValue({ count: 1 }) },
       consentLog: { updateMany: jest.fn().mockResolvedValue({ count: 1 }) },
+      emergencyContact: { updateMany: jest.fn().mockResolvedValue({ count: 1 }) },
       user: { update: jest.fn().mockResolvedValue({}) },
     };
     const prisma = {
@@ -100,6 +101,9 @@ describe('UsersService — perfil y eliminación B1', () => {
     expect(tx.deviceToken.updateMany).toHaveBeenCalled();
     expect(tx.syncDevice.updateMany).toHaveBeenCalled();
     expect(tx.consentLog.updateMany).toHaveBeenCalled();
+    expect(tx.emergencyContact.updateMany).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({ phoneCiphertext: null, phoneHmac: null, deletedAt: expect.any(Date) }),
+    }));
     expect(tx.user.update).toHaveBeenCalledWith(expect.objectContaining({
       where: { id: 'user-1' },
       data: expect.objectContaining({ status: 'deleted', phoneCiphertext: null, deletedAt: expect.any(Date) }),

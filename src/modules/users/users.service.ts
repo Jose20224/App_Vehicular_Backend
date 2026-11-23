@@ -8,18 +8,13 @@ import {
 } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client';
 import { PrismaService } from '../../database/prisma.service';
+import { prismaBytes } from '../../database/prisma-bytes';
 import { FieldCryptoService } from '../../security/field-crypto.service';
 import { AccountStorageCleanupService } from '../../security/account-storage-cleanup.service';
 import { generateUuidV7 } from '../../common/uuid-v7';
 import type { PatchMeDto } from './dto/patch-me.dto';
 import type { RegisterDeviceDto } from './dto/register-device.dto';
 import type { AuthenticatedUser } from '../../common/decorators/current-user.decorator';
-
-function prismaBytes(value: Uint8Array): Uint8Array<ArrayBuffer> {
-  const copy = new Uint8Array(value.byteLength);
-  copy.set(value);
-  return copy;
-}
 
 @Injectable()
 export class UsersService {
@@ -81,12 +76,12 @@ export class UsersService {
       const normalizedEmail = dto.email.trim().toLowerCase();
       const encrypted = await this.crypto.encrypt(normalizedEmail, 'users.email');
       const index = await this.crypto.blindIndex(normalizedEmail, 'users.email');
-      data.emailCiphertext = encrypted.ciphertext;
-      data.emailNonce = encrypted.nonce;
-      data.emailTag = encrypted.tag;
-      data.emailEncryptedDek = encrypted.encryptedDek;
+      data.emailCiphertext = prismaBytes(encrypted.ciphertext);
+      data.emailNonce = prismaBytes(encrypted.nonce);
+      data.emailTag = prismaBytes(encrypted.tag);
+      data.emailEncryptedDek = prismaBytes(encrypted.encryptedDek);
       data.emailKeyVersion = encrypted.keyVersion;
-      data.emailHmac = index.digest;
+      data.emailHmac = prismaBytes(index.digest);
       data.emailHmacKeyVersion = index.keyVersion;
     }
     data.updatedAt = new Date();

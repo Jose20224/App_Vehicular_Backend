@@ -4,3 +4,6 @@ coverage
 dist
 .env
 *.log
+*.tsbuildinfo
+.env.*
+!.env.example

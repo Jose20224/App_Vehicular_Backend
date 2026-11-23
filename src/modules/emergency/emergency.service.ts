@@ -1,6 +1,7 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client';
 import { PrismaService } from '../../database/prisma.service';
+import { prismaBytes } from '../../database/prisma-bytes';
 import { FieldCryptoService } from '../../security/field-crypto.service';
 import type { AuthenticatedUser } from '../../common/decorators/current-user.decorator';
 import type { CreateEmergencyContactDto } from './dto/create-emergency-contact.dto';
@@ -48,9 +49,9 @@ export class EmergencyService {
           data: {
             id: dto.id, userId, name: dto.name.trim(), relationshipLabel: dto.relationship_label?.trim() ?? null,
             isPrimary: dto.is_primary ?? false,
-            phoneCiphertext: encrypted.ciphertext, phoneNonce: encrypted.nonce, phoneTag: encrypted.tag,
-            phoneEncryptedDek: encrypted.encryptedDek, phoneKeyVersion: encrypted.keyVersion,
-            phoneAadVersion: encrypted.aadVersion ?? 2, phoneHmac: index.digest, phoneHmacKeyVersion: index.keyVersion,
+            phoneCiphertext: prismaBytes(encrypted.ciphertext), phoneNonce: prismaBytes(encrypted.nonce), phoneTag: prismaBytes(encrypted.tag),
+            phoneEncryptedDek: prismaBytes(encrypted.encryptedDek), phoneKeyVersion: encrypted.keyVersion,
+            phoneAadVersion: encrypted.aadVersion ?? 2, phoneHmac: prismaBytes(index.digest), phoneHmacKeyVersion: index.keyVersion,
           },
         });
       });
@@ -78,9 +79,9 @@ export class EmergencyService {
         this.crypto.blindIndex(phone, 'emergency_contacts.phone'),
       ]);
       Object.assign(data, {
-        phoneCiphertext: encrypted.ciphertext, phoneNonce: encrypted.nonce, phoneTag: encrypted.tag,
-        phoneEncryptedDek: encrypted.encryptedDek, phoneKeyVersion: encrypted.keyVersion,
-        phoneAadVersion: encrypted.aadVersion ?? 2, phoneHmac: index.digest, phoneHmacKeyVersion: index.keyVersion,
+        phoneCiphertext: prismaBytes(encrypted.ciphertext), phoneNonce: prismaBytes(encrypted.nonce), phoneTag: prismaBytes(encrypted.tag),
+        phoneEncryptedDek: prismaBytes(encrypted.encryptedDek), phoneKeyVersion: encrypted.keyVersion,
+        phoneAadVersion: encrypted.aadVersion ?? 2, phoneHmac: prismaBytes(index.digest), phoneHmacKeyVersion: index.keyVersion,
       });
     }
     if (Object.keys(data).length === 0) throw new BadRequestException({

@@ -1,3 +1,4 @@
+import { prismaBytes } from "../../database/prisma-bytes";
 import {
   BadRequestException,
   ConflictException,
@@ -41,22 +42,22 @@ interface WorkshopSearchRow {
 }
 
 interface ContactCipherColumns {
-  phoneCiphertext?: Buffer | null;
-  phoneNonce?: Buffer | null;
-  phoneTag?: Buffer | null;
-  phoneEncryptedDek?: Buffer | null;
+  phoneCiphertext?: Uint8Array<ArrayBuffer> | null;
+  phoneNonce?: Uint8Array<ArrayBuffer> | null;
+  phoneTag?: Uint8Array<ArrayBuffer> | null;
+  phoneEncryptedDek?: Uint8Array<ArrayBuffer> | null;
   phoneKeyVersion?: string | null;
   phoneAadVersion?: number | null;
-  whatsappCiphertext?: Buffer | null;
-  whatsappNonce?: Buffer | null;
-  whatsappTag?: Buffer | null;
-  whatsappEncryptedDek?: Buffer | null;
+  whatsappCiphertext?: Uint8Array<ArrayBuffer> | null;
+  whatsappNonce?: Uint8Array<ArrayBuffer> | null;
+  whatsappTag?: Uint8Array<ArrayBuffer> | null;
+  whatsappEncryptedDek?: Uint8Array<ArrayBuffer> | null;
   whatsappKeyVersion?: string | null;
   whatsappAadVersion?: number | null;
-  emailCiphertext?: Buffer | null;
-  emailNonce?: Buffer | null;
-  emailTag?: Buffer | null;
-  emailEncryptedDek?: Buffer | null;
+  emailCiphertext?: Uint8Array<ArrayBuffer> | null;
+  emailNonce?: Uint8Array<ArrayBuffer> | null;
+  emailTag?: Uint8Array<ArrayBuffer> | null;
+  emailEncryptedDek?: Uint8Array<ArrayBuffer> | null;
   emailKeyVersion?: string | null;
   emailAadVersion?: number | null;
 }
@@ -700,12 +701,12 @@ export class WorkshopsService {
     };
   }
 
-  private mapEncryptedContact(prefix: 'phone' | 'whatsapp' | 'email', encrypted: EncryptedField): Record<string, Buffer | string | number> {
+  private mapEncryptedContact(prefix: 'phone' | 'whatsapp' | 'email', encrypted: EncryptedField): Record<string, Uint8Array<ArrayBuffer> | string | number> {
     return {
-      [`${prefix}Ciphertext`]: encrypted.ciphertext,
-      [`${prefix}Nonce`]: encrypted.nonce,
-      [`${prefix}Tag`]: encrypted.tag,
-      [`${prefix}EncryptedDek`]: encrypted.encryptedDek,
+      [`${prefix}Ciphertext`]: prismaBytes(encrypted.ciphertext),
+      [`${prefix}Nonce`]: prismaBytes(encrypted.nonce),
+      [`${prefix}Tag`]: prismaBytes(encrypted.tag),
+      [`${prefix}EncryptedDek`]: prismaBytes(encrypted.encryptedDek),
       [`${prefix}KeyVersion`]: encrypted.keyVersion,
       [`${prefix}AadVersion`]: encrypted.aadVersion ?? 2,
     };

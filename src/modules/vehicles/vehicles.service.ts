@@ -9,6 +9,7 @@ import {
 import { randomUUID } from 'node:crypto';
 import { Prisma } from '../../generated/prisma/client';
 import { PrismaService } from '../../database/prisma.service';
+import { prismaBytes } from '../../database/prisma-bytes';
 import { FieldCryptoService } from '../../security/field-crypto.service';
 import { ObjectStorageService } from '../../storage/object-storage.service';
 import { AppConfigService } from '../../config/config.module';
@@ -17,7 +18,7 @@ import type { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import type { VehiclePhotoUploadDto } from './dto/vehicle-photo-upload.dto';
 import type { ListVehiclesQueryDto } from './dto/list-vehicles-query.dto';
 
-const VEHICLE_INCLUDE = { brand: true, model: true } as const;
+export const VEHICLE_INCLUDE = { brand: true, model: true } as const;
 type VehicleRecord = Prisma.VehicleGetPayload<{ include: typeof VEHICLE_INCLUDE }>;
 type VinEncryptedFields = Pick<Prisma.VehicleUncheckedCreateInput,
   'vinCiphertext' | 'vinNonce' | 'vinTag' | 'vinEncryptedDek' | 'vinKeyVersion' | 'vinAadVersion' | 'vinHmac' | 'vinHmacKeyVersion'>;
@@ -81,7 +82,7 @@ export class VehiclesService {
 
         const catalog = await this.resolveCatalog(tx, dto.brand_id ?? null, dto.model_id ?? null, dto.brand, dto.model);
         const duplicatePlate = await tx.vehicle.findFirst({
-          where: { userId, plateHmac: plateIndex.digest, deletedAt: null },
+          where: { userId, plateHmac: prismaBytes(plateIndex.digest), deletedAt: null },
           select: { id: true },
         });
         if (duplicatePlate) throw this.plateConflict();
@@ -99,13 +100,13 @@ export class VehiclesService {
           data: {
             id: dto.id,
             userId,
-            plateCiphertext: plateEncrypted.ciphertext,
-            plateNonce: plateEncrypted.nonce,
-            plateTag: plateEncrypted.tag,
-            plateEncryptedDek: plateEncrypted.encryptedDek,
+            plateCiphertext: prismaBytes(plateEncrypted.ciphertext),
+            plateNonce: prismaBytes(plateEncrypted.nonce),
+            plateTag: prismaBytes(plateEncrypted.tag),
+            plateEncryptedDek: prismaBytes(plateEncrypted.encryptedDek),
             plateKeyVersion: plateEncrypted.keyVersion,
             plateAadVersion: plateEncrypted.aadVersion ?? 2,
-            plateHmac: plateIndex.digest,
+            plateHmac: prismaBytes(plateIndex.digest),
             plateHmacKeyVersion: plateIndex.keyVersion,
             brandId: catalog.brandId,
             brandLabel: catalog.brandLabel,
@@ -195,24 +196,24 @@ export class VehiclesService {
     }
 
     const current = await this.findOwned(userId, id);
-    const data: Prisma.VehicleUpdateManyMutationInput = {};
+    const data: Prisma.VehicleUncheckedUpdateManyInput = {};
 
     if (dto.plate !== undefined) {
       const plate = this.normalizePlate(dto.plate);
       const encrypted = await this.crypto.encrypt(plate, 'vehicles.plate', { userId, recordId: id });
       const index = await this.crypto.blindIndex(plate, 'vehicles.plate');
       const duplicate = await this.prisma.vehicle.findFirst({
-        where: { userId, plateHmac: index.digest, deletedAt: null, id: { not: id } },
+        where: { userId, plateHmac: prismaBytes(index.digest), deletedAt: null, id: { not: id } },
         select: { id: true },
       });
       if (duplicate) throw this.plateConflict();
-      data.plateCiphertext = encrypted.ciphertext;
-      data.plateNonce = encrypted.nonce;
-      data.plateTag = encrypted.tag;
-      data.plateEncryptedDek = encrypted.encryptedDek;
+      data.plateCiphertext = prismaBytes(encrypted.ciphertext);
+      data.plateNonce = prismaBytes(encrypted.nonce);
+      data.plateTag = prismaBytes(encrypted.tag);
+      data.plateEncryptedDek = prismaBytes(encrypted.encryptedDek);
       data.plateKeyVersion = encrypted.keyVersion;
       data.plateAadVersion = encrypted.aadVersion ?? 2;
-      data.plateHmac = index.digest;
+      data.plateHmac = prismaBytes(index.digest);
       data.plateHmacKeyVersion = index.keyVersion;
     }
 
@@ -543,13 +544,13 @@ export class VehiclesService {
     const encrypted = await this.crypto.encrypt(vin, 'vehicles.vin', { userId, recordId });
     const index = await this.crypto.blindIndex(vin, 'vehicles.vin');
     return {
-      vinCiphertext: encrypted.ciphertext,
-      vinNonce: encrypted.nonce,
-      vinTag: encrypted.tag,
-      vinEncryptedDek: encrypted.encryptedDek,
+      vinCiphertext: prismaBytes(encrypted.ciphertext),
+      vinNonce: prismaBytes(encrypted.nonce),
+      vinTag: prismaBytes(encrypted.tag),
+      vinEncryptedDek: prismaBytes(encrypted.encryptedDek),
       vinKeyVersion: encrypted.keyVersion,
       vinAadVersion: encrypted.aadVersion ?? 2,
-      vinHmac: index.digest,
+      vinHmac: prismaBytes(index.digest),
       vinHmacKeyVersion: index.keyVersion,
     }; 
   }

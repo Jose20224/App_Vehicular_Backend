@@ -1,11 +1,11 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { Prisma } from '../../src/generated/prisma/client';
-import { VehiclesService } from '../../src/modules/vehicles/vehicles.service';
+import { VEHICLE_INCLUDE, VehiclesService } from '../../src/modules/vehicles/vehicles.service';
 import type { PrismaService } from '../../src/database/prisma.service';
 
 const USER_ID = '0192f2a0-7d2a-7c11-9d5a-123456789abc';
 const VEHICLE_ID = '018bcfe5-6800-7abc-8def-0123456789ab';
-type VehicleFixture = Prisma.VehicleGetPayload<{ include: typeof include }>;
+type VehicleFixture = Prisma.VehicleGetPayload<{ include: typeof VEHICLE_INCLUDE }>;
 
 function vehicleFixture(overrides: Partial<VehicleFixture> = {}): VehicleFixture {
   return {
