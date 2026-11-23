@@ -4,6 +4,10 @@
 
 Backend de la aplicación móvil gratuita de gestión vehicular y asistencia en carretera para Nicaragua.
 
+## Dependencias y auditoría
+
+Se mantiene Prisma 7. `package.json` aplica un override limitado a `@prisma/config` para instalar `effect@3.22.1`, que corrige [GHSA-7589-6fvf-x4pw](https://github.com/advisories/GHSA-7589-6fvf-x4pw). El lockfile conserva esa resolución para `npm ci`. Revisar y retirar el override cuando Prisma incluya una versión corregida directamente. El check `npm audit --audit-level=high` permanece activo; los avisos moderados de otras herramientas requieren una revisión separada antes de actualizar versiones mayores.
+
 ## Estado B8
 
 B8 implementa reseñas y calificaciones de talleres. Cada usuario puede reseñar el mismo taller una vez cada seis meses; el comentario admite hasta 500 caracteres, toda reseña pasa por moderación administrativa y el filtro básico prioriza expresiones ofensivas. El propietario solo puede responder una vez o reportar reseñas de su taller. Los reportes requieren motivo y se gestionan desde administración.
