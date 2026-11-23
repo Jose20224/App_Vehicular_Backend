@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro S.A. - Agregar Trámite o Documento</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#186a21",
+            "surface-container-high": "#e1e8fd",
+            "error-container": "#ffdad6",
+            "secondary": "#b51a1e",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed": "#ffdad6",
+            "on-background": "#141b2b",
+            "surface-tint": "#2151da",
+            "on-primary-fixed": "#001551",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed": "#dce1ff",
+            "on-primary-container": "#cad3ff",
+            "on-surface": "#141b2b",
+            "tertiary-fixed": "#a3f69c",
+            "on-tertiary-fixed-variant": "#005312",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "surface-dim": "#d3daef",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "primary": "#0037b0",
+            "primary-fixed-dim": "#b7c4ff",
+            "background": "#f9f9ff",
+            "tertiary-fixed-dim": "#88d982",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-surface": "#293040",
+            "surface-container-highest": "#dce2f7",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f1f3ff",
+            "on-tertiary-fixed": "#002204",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "outline": "#747686",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#ffb4ac",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#d93633",
+            "inverse-primary": "#b7c4ff",
+            "inverse-on-surface": "#edf0ff",
+            "surface": "#f9f9ff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#fffbff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "gutter-tablet": "1.5rem",
+            "gutter": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "caption": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen font-body antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP APP BAR (Shared Component Anchor) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center gap-2">
+<button aria-label="Volver" class="w-[56px] h-[56px] flex items-center justify-center rounded-lg text-primary hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<span class="font-title text-title text-primary font-bold tracking-tight">Agregar Trámite o Documento</span>
+<span class="text-[11px] font-caption text-on-surface-variant leading-none">Registro S.A. • Gestión Vehicular</span>
+</div>
+</div>
+<button aria-label="Ayuda" class="w-[56px] h-[56px] flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+</header>
+<!-- MAIN CANVAS -->
+<main class="pt-16 pb-28 px-4 max-w-md mx-auto flex flex-col gap-6">
+<!-- SELECTOR DE TRÁMITE (Bento Grid 2x2) -->
+<section>
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-caption-bold text-caption-bold text-on-surface-variant">TIPO DE TRÁMITE O OBLIGACIÓN</h2>
+<span class="font-caption text-caption text-primary font-semibold">Paso 1 de 3</span>
+</div>
+<div aria-label="Seleccione tipo de trámite" class="grid grid-cols-2 gap-3" role="radiogroup">
+<!-- Opción 1: Circulación -->
+<button class="doc-tab active-tab text-left p-3.5 rounded-xl border-2 border-primary bg-surface-container-low transition-all duration-150 flex flex-col justify-between min-h-[110px] shadow-sm" id="tab-circulacion" onclick="selectDocType('circulacion')" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-primary text-[28px]">receipt_long</span>
+<span class="material-symbols-outlined text-primary text-[20px] check-indicator">check_circle</span>
+</div>
+<div>
+<div class="font-caption-bold text-caption-bold text-on-surface leading-tight">Circulación / Rodamiento</div>
+<div class="font-caption text-[12px] text-on-surface-variant">Sticker municipal</div>
+</div>
+</button>
+<!-- Opción 2: Revisión Mecánica -->
+<button class="doc-tab text-left p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-all duration-150 flex flex-col justify-between min-h-[110px]" id="tab-mecanica" onclick="selectDocType('mecanica')" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-on-surface-variant text-[28px]">build_circle</span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] check-indicator opacity-0">check_circle</span>
+</div>
+<div>
+<div class="font-caption-bold text-caption-bold text-on-surface leading-tight">Revisión Mecánica &amp; Gases</div>
+<div class="font-caption text-[12px] text-on-surface-variant">Inspección técnica anual</div>
+</div>
+</button>
+<!-- Opción 3: Licencia -->
+<button class="doc-tab text-left p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-all duration-150 flex flex-col justify-between min-h-[110px]" id="tab-licencia" onclick="selectDocType('licencia')" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-on-surface-variant text-[28px]">badge</span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] check-indicator opacity-0">check_circle</span>
+</div>
+<div>
+<div class="font-caption-bold text-caption-bold text-on-surface leading-tight">Licencia de Conducir</div>
+<div class="font-caption text-[12px] text-on-surface-variant">Documento personal</div>
+</div>
+</button>
+<!-- Opción 4: Otro Documento -->
+<button class="doc-tab text-left p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-all duration-150 flex flex-col justify-between min-h-[110px]" id="tab-otro" onclick="selectDocType('otro')" type="button">
+<div class="flex items-center justify-between w-full">
+<span class="material-symbols-outlined text-on-surface-variant text-[28px]">folder_special</span>
+<span class="material-symbols-outlined text-outline-variant text-[20px] check-indicator opacity-0">check_circle</span>
+</div>
+<div>
+<div class="font-caption-bold text-caption-bold text-on-surface leading-tight">Otro Documento</div>
+<div class="font-caption text-[12px] text-on-surface-variant">Seguro, concesión, etc.</div>
+</div>
+</button>
+</div>
+</section>
+<!-- FORMULARIO DINÁMICO SEGÚN TIPO -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<h3 class="font-caption-bold text-caption-bold text-on-surface" id="form-section-title">Datos de Rodamiento Municipal</h3>
+<span class="bg-surface-container text-primary text-[12px] font-caption-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified_user</span> Oficial
+        </span>
+</div>
+<!-- CAMPOS: CIRCULACIÓN / RODAMIENTO -->
+<div class="space-y-4" id="fields-circulacion">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="num-registro">Número de Registro / Placa</label>
+<div class="relative">
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="num-registro" placeholder="Ej. M 123-456" type="text" value="M 342-901"/>
+<span class="material-symbols-outlined absolute right-4 top-4 text-on-surface-variant">directions_car</span>
+</div>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="alcaldia">Alcaldía Emisora</label>
+<div class="relative">
+<select class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none appearance-none" id="alcaldia">
+<option selected="" value="managua">ALMA - Managua</option>
+<option value="ciudad_sandino">Alcaldía de Ciudad Sandino</option>
+<option value="masaya">Alcaldía de Masaya</option>
+<option value="leon">Alcaldía de León</option>
+<option value="granada">Alcaldía de Granada</option>
+<option value="matagalpa">Alcaldía de Matagalpa</option>
+<option value="chinandega">Alcaldía de Chinandega</option>
+<option value="otra">Otra municipalidad...</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-4 text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="fecha-pago">Fecha de Pago</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-3 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="fecha-pago" type="date" value="2025-02-15"/>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="vigencia-anio">Año Vigente</label>
+<input class="w-full h-14 bg-surface-container-low border border-outline-variant rounded-xl px-4 font-body-medium text-body-medium text-on-surface text-center focus:outline-none" id="vigencia-anio" readonly="" type="text" value="2025"/>
+</div>
+</div>
+</div>
+<!-- CAMPOS: REVISIÓN MECÁNICA & GASES (Oculto por defecto) -->
+<div class="space-y-4 hidden" id="fields-mecanica">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="taller-autorizado">Taller o Estación Evaluadora</label>
+<div class="relative">
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="taller-autorizado" placeholder="Ej. Taller Autorizado El Mayoreo / Policial" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-4 text-on-surface-variant">home_repair_service</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="fecha-inspeccion">Fecha Inspección</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-3 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="fecha-inspeccion" type="date"/>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="fecha-renovacion">Fecha Límite</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-3 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="fecha-renovacion" type="date"/>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-on-surface-variant text-[13px] font-caption">
+<span class="material-symbols-outlined text-primary text-[20px]">info</span>
+<span>Vigencia estándar policial: 1 año calendario desde emisión.</span>
+</div>
+</div>
+<!-- CAMPOS: LICENCIA DE CONDUCIR (Oculto por defecto) -->
+<div class="space-y-4 hidden" id="fields-licencia">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="num-cedula">Cédula o N° de Licencia</label>
+<div class="relative">
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="num-cedula" placeholder="001-200485-0012A" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-4 text-on-surface-variant">badge</span>
+</div>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5">Categorías Autorizadas</label>
+<div class="grid grid-cols-4 gap-2">
+<label class="h-12 border border-outline-variant rounded-lg flex items-center justify-center gap-1 cursor-pointer bg-surface-container-lowest has-[:checked]:bg-primary-fixed has-[:checked]:border-primary">
+<input checked="" class="hidden" type="checkbox"/>
+<span class="font-caption-bold text-caption-bold">Cat 1</span>
+</label>
+<label class="h-12 border border-outline-variant rounded-lg flex items-center justify-center gap-1 cursor-pointer bg-surface-container-lowest has-[:checked]:bg-primary-fixed has-[:checked]:border-primary">
+<input checked="" class="hidden" type="checkbox"/>
+<span class="font-caption-bold text-caption-bold">Cat 2</span>
+</label>
+<label class="h-12 border border-outline-variant rounded-lg flex items-center justify-center gap-1 cursor-pointer bg-surface-container-lowest has-[:checked]:bg-primary-fixed has-[:checked]:border-primary">
+<input checked="" class="hidden" type="checkbox"/>
+<span class="font-caption-bold text-caption-bold">Cat 3</span>
+</label>
+<label class="h-12 border border-outline-variant rounded-lg flex items-center justify-center gap-1 cursor-pointer bg-surface-container-lowest has-[:checked]:bg-primary-fixed has-[:checked]:border-primary">
+<input class="hidden" type="checkbox"/>
+<span class="font-caption-bold text-caption-bold">Cat 4</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="vence-licencia">Fecha de Vencimiento Oficial</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="vence-licencia" type="date"/>
+</div>
+</div>
+<!-- CAMPOS: OTRO DOCUMENTO (Oculto por defecto) -->
+<div class="space-y-4 hidden" id="fields-otro">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="nombre-otro">Nombre del Documento o Seguro</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="nombre-otro" placeholder="Ej. Seguro Obligatorio de Daños a Terceros" type="text"/>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="aseguradora">Entidad Emisora / Empresa</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="aseguradora" placeholder="Ej. INISER / Seguros América / Mapfre" type="text"/>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="fecha-otro-vence">Fecha de Vencimiento</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface focus:border-2 focus:border-primary focus:outline-none" id="fecha-otro-vence" type="date"/>
+</div>
+</div>
+</section>
+<!-- FOTOGRAFÍA DEL STICKER O CARTÓN -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">photo_camera</span>
+          Fotografía de Respaldo
+        </h3>
+<span class="text-caption text-[12px] text-on-surface-variant">Recomendado</span>
+</div>
+<div class="border-2 border-dashed border-outline-variant hover:border-primary bg-surface-container-low rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2 cursor-pointer transition-colors min-h-[140px]">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">add_a_photo</span>
+</div>
+<div>
+<p class="font-caption-bold text-caption-bold text-on-surface">Capturar o Subir Imagen</p>
+<p class="font-caption text-[12px] text-on-surface-variant">Enfoque legible de sticker, sello o cartón oficial</p>
+</div>
+</div>
+</section>
+<!-- ALERTAS ANTICIPADAS (Switch/Chips) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-[20px]">notifications_active</span>
+<h3 class="font-caption-bold text-caption-bold text-on-surface">Alertas de Vencimiento Preventivas</h3>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mb-3">
+        Le notificaremos en horarios hábiles para prevenir multas en retenes de tránsito:
+      </p>
+<div class="space-y-2">
+<!-- 30 días -->
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-[20px]">calendar_month</span>
+<span class="font-body-medium text-body-medium text-on-surface">30 días antes del vencimiento</span>
+</div>
+<input checked="" class="w-5 h-5 rounded text-primary focus:ring-primary border-outline" type="checkbox"/>
+</label>
+<!-- 15 días -->
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">event_repeat</span>
+<span class="font-body-medium text-body-medium text-on-surface">15 días antes del vencimiento</span>
+</div>
+<input checked="" class="w-5 h-5 rounded text-primary focus:ring-primary border-outline" type="checkbox"/>
+</label>
+<!-- 3 días -->
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant bg-surface cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">alarm</span>
+<span class="font-body-medium text-body-medium text-on-surface">3 días antes (Alerta Urgente)</span>
+</div>
+<input checked="" class="w-5 h-5 rounded text-primary focus:ring-primary border-outline" type="checkbox"/>
+</label>
+</div>
+</section>
+<!-- RECORDATORIO / DESCARGO LEGAL MUNICIPAL -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-3.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[22px] flex-shrink-0 mt-0.5">policy</span>
+<div class="font-caption text-[12px] text-on-surface-variant leading-relaxed">
+<strong class="font-caption-bold text-on-surface block mb-0.5">Aviso Importante:</strong>
+        Registro S.A. es una herramienta de organización gratuita e independiente, no sustituye las obligaciones ante la Policía Nacional ni las Alcaldías Municipales de Nicaragua.
+      </div>
+</div>
+</main>
+<!-- BOTTOM STICKY BAR: PRIMARY ACTION (56dp Floor) -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest border-t border-outline-variant p-3 shadow-md max-w-md mx-auto">
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-body-medium text-body-medium flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[24px]">save</span>
+<span>Guardar Trámite</span>
+</button>
+</div>
+<script>
+    function selectDocType(type) {
+      // Remover clase activa de todos los tabs
+      document.querySelectorAll('.doc-tab').forEach(tab => {
+        tab.classList.remove('border-2', 'border-primary', 'bg-surface-container-low');
+        tab.classList.add('border', 'border-outline-variant', 'bg-surface-container-lowest');
+        const icon = tab.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.classList.remove('text-primary');
+          icon.classList.add('text-on-surface-variant');
+        }
+        const check = tab.querySelector('.check-indicator');
+        if (check) check.classList.add('opacity-0');
+      });
+
+      // Activar tab seleccionado
+      const selectedTab = document.getElementById('tab-' + type);
+      if (selectedTab) {
+        selectedTab.classList.remove('border-outline-variant', 'bg-surface-container-lowest');
+        selectedTab.classList.add('border-2', 'border-primary', 'bg-surface-container-low');
+        const icon = selectedTab.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.classList.remove('text-on-surface-variant');
+          icon.classList.add('text-primary');
+        }
+        const check = selectedTab.querySelector('.check-indicator');
+        if (check) check.classList.remove('opacity-0');
+      }
+
+      // Ocultar todas las secciones de campos
+      document.getElementById('fields-circulacion').classList.add('hidden');
+      document.getElementById('fields-mecanica').classList.add('hidden');
+      document.getElementById('fields-licencia').classList.add('hidden');
+      document.getElementById('fields-otro').classList.add('hidden');
+
+      // Actualizar título y mostrar campos correspondientes
+      const titleElem = document.getElementById('form-section-title');
+      if (type === 'circulacion') {
+        document.getElementById('fields-circulacion').classList.remove('hidden');
+        titleElem.textContent = 'Datos de Rodamiento Municipal';
+      } else if (type === 'mecanica') {
+        document.getElementById('fields-mecanica').classList.remove('hidden');
+        titleElem.textContent = 'Datos de Inspección Técnica Anual';
+      } else if (type === 'licencia') {
+        document.getElementById('fields-licencia').classList.remove('hidden');
+        titleElem.textContent = 'Datos de Licencia de Conducir';
+      } else {
+        document.getElementById('fields-otro').classList.remove('hidden');
+        titleElem.textContent = 'Detalles del Documento Vehicular';
+      }
+    }
+  </script>
+</body></html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Almacenamiento y Sincronización - Registro S.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#747686",
+            "on-secondary-fixed-variant": "#93000e",
+            "error-container": "#ffdad6",
+            "on-background": "#141b2b",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#ffdad6",
+            "on-surface-variant": "#434655",
+            "surface-variant": "#dce2f7",
+            "on-surface": "#141b2b",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#d3daef",
+            "tertiary-fixed-dim": "#88d982",
+            "primary-fixed": "#dce1ff",
+            "surface-bright": "#f9f9ff",
+            "background": "#f9f9ff",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed-dim": "#ffb4ac",
+            "outline-variant": "#c4c5d7",
+            "secondary": "#b51a1e",
+            "inverse-on-surface": "#edf0ff",
+            "on-primary-fixed": "#001551",
+            "surface-container-highest": "#dce2f7",
+            "primary-container": "#1d4ed8",
+            "tertiary-fixed": "#a3f69c",
+            "on-secondary-fixed": "#410003",
+            "tertiary": "#005011",
+            "secondary-container": "#d93633",
+            "primary": "#0037b0",
+            "on-primary-container": "#cad3ff",
+            "inverse-surface": "#293040",
+            "surface": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "tertiary-container": "#186a21",
+            "surface-container": "#e9edff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary-container": "#95e88f",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-error-container": "#93000a",
+            "on-secondary-container": "#fffbff",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "surface-tint": "#2151da",
+            "on-tertiary-fixed": "#002204",
+            "on-tertiary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter-tablet": "1.5rem",
+            "margin": "1rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Inter"],
+            "title": ["Inter"],
+            "body-medium": ["Inter"],
+            "caption-bold": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "display": ["Inter"]
+          },
+          "fontSize": {
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+    .material-symbols-outlined[data-weight="fill"] {
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+    @keyframes spin-sync {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-spin-custom {
+      animation: spin-sync 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-full bg-background text-on-surface antialiased flex flex-col font-body selection:bg-surface-variant">
+<!-- TopAppBar Component (from Shared Components JSON with semantic task-focused suppressions) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center gap-3">
+<button aria-label="Volver" class="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform text-primary dark:text-primary-fixed" onclick="history.back()">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-title text-title text-on-surface font-bold tracking-tight">Almacenamiento y Sincronización</h1>
+</div>
+<button aria-label="Ayuda" class="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</header>
+<!-- Main Content Canvas (Optimized for One-Thumb & Direct Sunlight) -->
+<main class="flex-1 w-full max-w-xl mx-auto pt-16 pb-24 px-4 space-y-5">
+<!-- Offline Reliability Notice (Utilitarian Roadside Banner) -->
+<section class="mt-3 bg-surface-container-low border border-outline-variant rounded-xl p-4 flex gap-3.5 items-start">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined" data-icon="cloud_sync">cloud_sync</span>
+</div>
+<div>
+<h2 class="font-caption-bold text-caption-bold text-on-surface">Disponibilidad en carretera nacional</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5 leading-snug">
+          Los datos guardados localmente te permiten presentar tu circulación, pólizas de seguro e inspecciones técnicas ante la Policía Nacional incluso en tramos sin señal celular (ej. Carretera Panamericana o Boaco).
+        </p>
+</div>
+</section>
+<!-- Sección 1: Estado de Sincronización en Tiempo Real -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-4">
+<div class="flex items-center justify-between border-b border-outline-variant pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="sync">sync</span>
+<span class="font-caption-bold text-caption-bold text-on-surface uppercase tracking-wider text-xs">Estado del Servidor Central</span>
+</div>
+<!-- Status Indicator Pill Dual-Coded -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-tertiary-container border border-emerald-200" id="syncBadge">
+<span class="material-symbols-outlined text-base" data-icon="check_circle" data-weight="fill">check_circle</span>
+<span class="font-caption-bold text-caption text-xs">Al día</span>
+</span>
+</div>
+<!-- Real-Time Sync Status Display -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">Última sincronización</span>
+<span class="font-caption text-caption text-on-surface-variant" id="syncTimestamp">hace 5 min (Hoy 10:35 a.m.)</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-caption text-caption text-on-surface-variant">Cambios pendientes en cola:</span>
+<span class="font-caption-bold text-caption-bold text-on-surface" id="pendingChanges">0 cambios pendientes</span>
+</div>
+</div>
+<!-- Quick Interactive Switch for Testing Changes Simulation -->
+<div class="bg-surface-container-low p-2.5 rounded-lg flex items-center justify-between text-xs font-caption text-on-surface-variant">
+<span>Simular cola local:</span>
+<div class="flex gap-1.5">
+<button class="px-2.5 py-1.5 rounded bg-surface-container-lowest border border-outline-variant text-primary font-caption-bold hover:bg-surface active:scale-95 transition-all" onclick="setSyncState(0)" type="button">0 pendientes</button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container-lowest border border-outline-variant text-on-surface font-caption-bold hover:bg-surface active:scale-95 transition-all" onclick="setSyncState(2)" type="button">2 pendientes</button>
+</div>
+</div>
+<!-- Primary Touch Target Button (56dp min height) -->
+<button class="w-full min-h-[56px] bg-primary-container hover:bg-primary text-on-primary font-title text-body-medium font-bold rounded-xl flex items-center justify-center gap-3 active:scale-[0.98] transition-all shadow-sm" id="syncNowBtn" onclick="handleManualSync()">
+<span class="material-symbols-outlined text-2xl" data-icon="sync" id="syncIcon">sync</span>
+<span id="syncBtnLabel">Sincronizar ahora</span>
+</button>
+<!-- Toggle: Sincronizar solo con Wi-Fi (Ahorro de paquetes de datos Claro/Tigo) -->
+<label class="flex items-center justify-between pt-2 cursor-pointer select-none">
+<div class="pr-3">
+<span class="font-body-medium text-body-medium text-on-surface block font-medium">Sincronizar solo con Wi-Fi</span>
+<span class="font-caption text-caption text-on-surface-variant block">Ahorra paquetes de datos móviles prepago en Nicaragua (LTE/3G).</span>
+</div>
+<div class="relative inline-flex items-center">
+<input checked="" class="sr-only peer" id="wifiToggle" type="checkbox"/>
+<div class="w-14 h-8 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</section>
+<!-- Sección 2: Uso de Almacenamiento Local -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-4">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="storage">storage</span>
+<h2 class="font-title text-body-medium font-bold text-on-surface">Uso de Almacenamiento local</h2>
+</div>
+<span class="font-caption-bold text-caption text-primary">24.8 MB</span>
+</div>
+<!-- Barra visual de almacenamiento consumido -->
+<div class="space-y-2">
+<div class="flex justify-between items-baseline">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">Total usado en dispositivo</span>
+<span class="font-caption-bold text-caption text-on-surface-variant">24.8 MB</span>
+</div>
+<!-- Segmented Storage Bar -->
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden flex" title="Distribución de memoria">
+<div class="bg-primary-container h-full" style="width: 73.4%;" title="Documentos: 18.2 MB"></div>
+<div class="bg-tertiary-container h-full" style="width: 18.1%;" title="Talleres: 4.5 MB"></div>
+<div class="bg-outline h-full" style="width: 8.5%;" title="Caché: 2.1 MB"></div>
+</div>
+<p class="font-caption text-caption text-on-surface-variant text-xs">
+          Ocupa el 0.08% de tus 32 GB de almacenamiento interno disponible.
+        </p>
+</div>
+<!-- Desglose Bento Items -->
+<div class="space-y-2.5 pt-1">
+<!-- Item 1: Documentos -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-outline-variant/60">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 border border-outline-variant/40">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</div>
+<div>
+<p class="font-body-medium text-caption-bold text-on-surface">Documentos y PDFs descargados</p>
+<p class="font-caption text-caption text-on-surface-variant text-xs">Circulaciones, stickers de rodamiento y seguros</p>
+</div>
+</div>
+<span class="font-caption-bold text-caption-bold text-on-surface shrink-0 ml-2">18.2 MB</span>
+</div>
+<!-- Item 2: Directorio de talleres offline -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-outline-variant/60">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-tertiary-container shrink-0 border border-outline-variant/40">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+</div>
+<div>
+<p class="font-body-medium text-caption-bold text-on-surface">Directorio de talleres offline</p>
+<p class="font-caption text-caption text-on-surface-variant text-xs">Contactos, grúas y talleres en Managua y departamentos</p>
+</div>
+</div>
+<span class="font-caption-bold text-caption-bold text-on-surface shrink-0 ml-2">4.5 MB</span>
+</div>
+<!-- Item 3: Caché temporal -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-outline-variant/60">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-outline shrink-0 border border-outline-variant/40">
+<span class="material-symbols-outlined" data-icon="cached">cached</span>
+</div>
+<div>
+<p class="font-body-medium text-caption-bold text-on-surface">Datos de perfil y caché</p>
+<p class="font-caption text-caption text-on-surface-variant text-xs">Miniaturas de placa e historial de consultas</p>
+</div>
+</div>
+<span class="font-caption-bold text-caption-bold text-on-surface shrink-0 ml-2" id="cacheSizeText">2.1 MB</span>
+</div>
+</div>
+<!-- Disclaimer Box (Brand Anchor Standard) -->
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mt-0.5" data-icon="info">info</span>
+<p class="font-caption text-caption text-on-surface-variant text-xs leading-snug">
+            Los documentos verificados se conservan protegidos de forma cifrada en la partición segura del teléfono para exhibición a oficiales de tránsito.
+          </p>
+</div>
+</div>
+<!-- Memory Management Action Button (56dp minimum touch surface) -->
+<button class="w-full min-h-[56px] bg-surface-container-lowest hover:bg-surface-container-low border-2 border-secondary text-secondary font-title text-body-medium font-bold rounded-xl flex items-center justify-center gap-2.5 active:scale-[0.98] transition-all" onclick="openClearDialog()" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="delete_sweep">delete_sweep</span>
+<span>Liberar espacio de almacenamiento</span>
+</button>
+</section>
+</main>
+<!-- Confirmation Modal Dialog (Backdrop & Centered Utility Window) -->
+<div class="fixed inset-0 z-50 bg-black/60 flex items-end sm:items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200" id="clearDialog">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-2xl border border-outline-variant p-6 space-y-4 shadow-xl transform transition-transform duration-200 scale-95" id="dialogCard">
+<div class="w-12 h-12 rounded-xl bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl" data-icon="warning">warning</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline text-title text-on-surface font-bold">¿Liberar espacio?</h3>
+<p class="font-body text-body-medium text-on-surface-variant leading-relaxed text-sm">
+          Se borrará la memoria caché temporal. Tus documentos oficiales y vehículos no se perderán y se volverán a descargar cuando los necesites.
+        </p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant text-xs font-caption text-on-surface-variant">
+        Liberación estimada inmediata: <span class="font-caption-bold text-on-surface">2.1 MB de caché</span>.
+      </div>
+<!-- Action Cluster with 56dp Touch Surface Minimums -->
+<div class="pt-2 flex flex-col gap-2.5">
+<button class="w-full min-h-[56px] bg-secondary hover:bg-secondary-container text-on-secondary font-title text-body-medium font-bold rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-all" onclick="confirmClean()" type="button">
+<span class="material-symbols-outlined" data-icon="cleaning_services">cleaning_services</span>
+<span>Confirmar y Limpiar</span>
+</button>
+<button class="w-full min-h-[56px] bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface font-title text-body-medium font-medium rounded-xl flex items-center justify-center active:scale-95 transition-all" onclick="closeClearDialog()" type="button">
+<span>Cancelar</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Microinteraction Feedback Snackbar -->
+<div class="fixed bottom-6 left-4 right-4 max-w-md mx-auto z-50 bg-inverse-surface text-inverse-on-surface px-4 py-3.5 rounded-xl shadow-lg flex items-center justify-between opacity-0 pointer-events-none transition-all duration-300 transform translate-y-3" id="toastNotification">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="check_circle" data-weight="fill">check_circle</span>
+<span class="font-caption text-caption text-inverse-on-surface" id="toastMsg">Caché limpiado correctamente.</span>
+</div>
+<button class="text-inverse-on-surface/80 hover:text-white p-1" onclick="hideToast()">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+<!-- Inline Script for Realistic Micro-Interactions -->
+<script>
+    function openClearDialog() {
+      const modal = document.getElementById('clearDialog');
+      const card = document.getElementById('dialogCard');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+
+    function closeClearDialog() {
+      const modal = document.getElementById('clearDialog');
+      const card = document.getElementById('dialogCard');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      const text = document.getElementById('toastMsg');
+      text.innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+      toast.classList.add('translate-y-0');
+      setTimeout(() => {
+        hideToast();
+      }, 3500);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toastNotification');
+      toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+      toast.classList.remove('translate-y-0');
+    }
+
+    function confirmClean() {
+      closeClearDialog();
+      const cacheEl = document.getElementById('cacheSizeText');
+      cacheEl.innerText = '0.0 MB';
+      showToast('Memoria caché temporal liberada exitosamente (2.1 MB).');
+    }
+
+    function setSyncState(count) {
+      const badge = document.getElementById('syncBadge');
+      const pendingText = document.getElementById('pendingChanges');
+      
+      if (count === 0) {
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-tertiary-container border border-emerald-200";
+        badge.innerHTML = `<span class="material-symbols-outlined text-base" data-icon="check_circle" data-weight="fill">check_circle</span><span class="font-caption-bold text-caption text-xs">Al día</span>`;
+        pendingText.innerText = "0 cambios pendientes";
+        pendingText.className = "font-caption-bold text-caption-bold text-on-surface";
+      } else {
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-300";
+        badge.innerHTML = `<span class="material-symbols-outlined text-base" data-icon="pending" data-weight="fill">pending</span><span class="font-caption-bold text-caption text-xs">Pendiente</span>`;
+        pendingText.innerText = "2 cambios pendientes";
+        pendingText.className = "font-caption-bold text-caption-bold text-amber-700";
+      }
+    }
+
+    function handleManualSync() {
+      const icon = document.getElementById('syncIcon');
+      const label = document.getElementById('syncBtnLabel');
+      const btn = document.getElementById('syncNowBtn');
+      const timestamp = document.getElementById('syncTimestamp');
+
+      btn.disabled = true;
+      icon.classList.add('animate-spin-custom');
+      label.innerText = 'Sincronizando registros...';
+
+      setTimeout(() => {
+        icon.classList.remove('animate-spin-custom');
+        label.innerText = 'Sincronizar ahora';
+        btn.disabled = false;
+        
+        const now = new Date();
+        const hours = now.getHours();
+        const mins = String(now.getMinutes()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'p.m.' : 'a.m.';
+        const formattedHours = hours % 12 || 12;
+        
+        timestamp.innerText = `hace un momento (Hoy ${formattedHours}:${mins} ${ampm})`;
+        setSyncState(0);
+        showToast('Sincronización con el servidor completada.');
+      }, 1400);
+    }
+  </script>
+</body></html>

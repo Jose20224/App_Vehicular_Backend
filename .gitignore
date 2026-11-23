@@ -1,11 +1,11 @@
 node_modules/
-src/generated/
+backend/src/generated/
 dist/
 coverage/
 *.tsbuildinfo
 .env
 .env.*
-!.env.example
+.env.example
 .DS_Store
 *.log
-prisma/*.db
+backend/prisma/*.db

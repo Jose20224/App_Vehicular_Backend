@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro S.A. - Calificar Taller</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#88d982",
+            "surface-tint": "#2151da",
+            "tertiary-container": "#186a21",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-surface": "#141b2b",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#dce2f7",
+            "secondary-container": "#d93633",
+            "on-tertiary-fixed": "#002204",
+            "secondary-fixed-dim": "#ffb4ac",
+            "inverse-surface": "#293040",
+            "on-background": "#141b2b",
+            "outline": "#747686",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-on-surface": "#edf0ff",
+            "on-error": "#ffffff",
+            "secondary": "#b51a1e",
+            "surface-variant": "#dce2f7",
+            "primary-fixed": "#dce1ff",
+            "primary": "#0037b0",
+            "surface": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#a3f69c",
+            "surface-container-low": "#f1f3ff",
+            "surface-dim": "#d3daef",
+            "on-secondary-container": "#fffbff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "on-primary-container": "#cad3ff",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed-dim": "#b7c4ff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary-container": "#1d4ed8",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed": "#001551",
+            "on-tertiary-container": "#95e88f",
+            "secondary-fixed": "#ffdad6",
+            "background": "#f9f9ff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "display": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "caption": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-12 selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top App Bar (Task-Focused: Suppresses Bottom Navigation per Semantic Shell Rules) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center gap-2">
+<button aria-label="Volver" class="w-12 h-12 flex items-center justify-center rounded-xl text-primary hover:bg-surface-container active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-headline text-headline text-primary font-bold tracking-tight text-title">Calificar Taller</h1>
+</div>
+<div class="flex items-center">
+<button aria-label="Cerrar formulario" class="w-12 h-12 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas (Mobile-First 56dp Touch Ergonomics) -->
+<main class="max-w-md mx-auto pt-16 px-4 space-y-4">
+<!-- Blocked / Error State Warning Demonstration -->
+<section class="bg-[#FFF4D6] border border-[#F59E0B]/30 rounded-xl p-4 flex gap-3 items-start" role="alert">
+<div class="w-10 h-10 min-w-[40px] rounded-lg bg-[#F59E0B]/15 flex items-center justify-center text-[#B45309]">
+<span class="material-symbols-outlined text-[24px]">lock</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-1.5">
+<span class="font-caption-bold text-caption-bold text-[#92400E]">Bloqueo Semestral Activo</span>
+<span class="bg-[#FDECEA] text-[#B71C1C] text-[11px] font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">error</span> 1 por vehículo
+          </span>
+</div>
+<p class="font-caption-bold text-caption-bold text-[#78350F] leading-snug">
+          Ya calificaste este taller. Podrás hacerlo de nuevo en 6 meses.
+        </p>
+<p class="font-caption text-caption text-[#92400E]/90 leading-tight pt-0.5">
+          Para evitar alteraciones de reputación, permitimos una reseña por vehículo cada semestre en talleres registrados.
+        </p>
+</div>
+</section>
+<!-- Header Card: Workshop Identity & Vehicle Context Selector -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div class="space-y-0.5">
+<span class="font-caption-bold text-caption-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">build</span> Taller Mecánico Certificado
+          </span>
+<h2 class="font-title text-title text-on-surface font-bold leading-tight">
+            Autocentro Los Robles Express
+          </h2>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Km 4.5 Carretera a Masaya, Managua
+          </p>
+</div>
+<span class="bg-surface-container text-primary font-caption-bold text-caption-bold px-2.5 py-1 rounded-full text-xs shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span> Verificado
+        </span>
+</div>
+<!-- Vehicle Selector Pill (Touch Surface Floor 56dp Compatible) -->
+<div class="border border-outline-variant/50 bg-surface-container-low rounded-xl p-3 flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">directions_car</span>
+</div>
+<div class="truncate">
+<p class="font-caption text-caption text-on-surface-variant text-xs">Vehículo atendido:</p>
+<p class="font-body-medium text-body-medium text-on-surface font-semibold truncate">
+              Toyota Hilux 2021 <span class="text-primary font-bold">(M 342-890)</span>
+</p>
+</div>
+</div>
+<button aria-label="Cambiar vehículo registrado" class="h-10 px-3 bg-surface-container-lowest border border-outline-variant rounded-lg font-caption-bold text-caption-bold text-primary flex items-center gap-1 shrink-0 active:scale-95 transition-transform duration-150" type="button">
+          Cambiar
+          <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+</section>
+<!-- Interactive Star Rating Card -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 space-y-3">
+<div class="space-y-1 text-center">
+<label class="font-body-medium text-body-medium text-on-surface font-bold block">
+          ¿Cómo calificarías el servicio recibido?
+        </label>
+<p class="font-caption text-caption text-on-surface-variant">
+          Toca las estrellas para calificar tu nivel de satisfacción general
+        </p>
+</div>
+<!-- 5-Star Touch Selector (48dp/56dp touch box each) -->
+<div aria-label="Calificación de servicio" class="flex justify-center items-center gap-1 pt-1" role="radiogroup">
+<button aria-checked="true" aria-label="1 estrella" class="w-12 h-14 flex items-center justify-center text-[#F59E0B] hover:scale-110 active:scale-95 transition-all" role="radio" type="button">
+<span class="material-symbols-outlined text-[42px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button aria-checked="true" aria-label="2 estrellas" class="w-12 h-14 flex items-center justify-center text-[#F59E0B] hover:scale-110 active:scale-95 transition-all" role="radio" type="button">
+<span class="material-symbols-outlined text-[42px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button aria-checked="true" aria-label="3 estrellas" class="w-12 h-14 flex items-center justify-center text-[#F59E0B] hover:scale-110 active:scale-95 transition-all" role="radio" type="button">
+<span class="material-symbols-outlined text-[42px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button aria-checked="true" aria-label="4 estrellas" class="w-12 h-14 flex items-center justify-center text-[#F59E0B] hover:scale-110 active:scale-95 transition-all" role="radio" type="button">
+<span class="material-symbols-outlined text-[42px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button aria-checked="false" aria-label="5 estrellas" class="w-12 h-14 flex items-center justify-center text-outline-variant hover:scale-110 active:scale-95 transition-all" role="radio" type="button">
+<span class="material-symbols-outlined text-[42px]">star</span>
+</button>
+</div>
+<!-- Feedback Rating Banner -->
+<div class="bg-[#E8F5E9] border border-[#2E7D32]/20 rounded-xl p-3 flex items-center justify-center gap-2 text-[#2E7D32]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="font-caption-bold text-caption-bold">
+          Muy bueno: Cumplieron con tiempo y calidad
+        </span>
+</div>
+</section>
+<!-- Comment Area -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 space-y-2">
+<div class="flex items-center justify-between">
+<label class="font-caption-bold text-caption-bold text-on-surface" for="comment-input">
+          Cuéntale a otros conductores tu experiencia (Opcional)
+        </label>
+</div>
+<div class="relative">
+<textarea class="w-full rounded-xl border border-outline-variant/80 bg-surface-container-lowest p-3 font-body text-body text-on-surface placeholder:text-outline focus:border-2 focus:border-primary-container focus:ring-0 focus:outline-none transition-all resize-none leading-relaxed" id="comment-input" maxlength="500" placeholder="Describe el trato, calidad del repuesto, cumplimiento del precio estimado..." rows="4">Excelente atención para el cambio de pastillas y rectificación. El presupuesto se cumplió conforme lo pactado y entregaron la camioneta en 3 horas.</textarea>
+</div>
+<div class="flex items-center justify-between text-xs pt-1">
+<span class="font-caption text-caption text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">info</span> Comentario público verificado
+        </span>
+<span class="font-caption-bold text-caption-bold text-primary">
+          142 / 500 caracteres
+        </span>
+</div>
+</section>
+<!-- Photo Upload Section -->
+<section class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 space-y-3">
+<div class="space-y-0.5">
+<h3 class="font-caption-bold text-caption-bold text-on-surface">
+          Adjuntar fotos de la factura o reparación (opcional)
+        </h3>
+<p class="font-caption text-caption text-on-surface-variant text-xs">
+          Aumenta la credibilidad de tu reseña mostrando la boleta oficial o el repuesto instalado.
+        </p>
+</div>
+<!-- Action Buttons 56dp Floor -->
+<div class="grid grid-cols-2 gap-3">
+<button class="min-h-[56px] px-3 bg-surface-container-low border border-outline-variant rounded-xl flex items-center justify-center gap-2 font-caption-bold text-caption-bold text-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]">photo_camera</span>
+          Tomar foto
+        </button>
+<button class="min-h-[56px] px-3 bg-surface-container-low border border-outline-variant rounded-xl flex items-center justify-center gap-2 font-caption-bold text-caption-bold text-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[22px]">photo_library</span>
+          De galería
+        </button>
+</div>
+<!-- Thumbnail Preview Slot -->
+<div class="flex items-center gap-2 pt-1">
+<div class="relative w-16 h-16 rounded-xl border border-outline-variant overflow-hidden bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-[28px]">receipt_long</span>
+<button aria-label="Eliminar foto" class="absolute top-1 right-1 w-5 h-5 bg-on-surface/80 rounded-full flex items-center justify-center text-on-error" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<div class="text-xs font-caption text-caption text-on-surface-variant">
+<p class="font-caption-bold text-caption-bold text-on-surface">Factura_0891.jpg</p>
+<p>Comprobante adjunto listo</p>
+</div>
+</div>
+</section>
+<!-- Community Rules Note -->
+<section class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-3.5 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">shield</span>
+<p class="font-caption text-caption text-on-surface-variant leading-snug">
+        Las reseñas son revisadas para garantizar opiniones auténticas de conductores. Cumplen con las normas viales de Registro S.A.
+      </p>
+</section>
+<!-- Submit Section (56dp Touch Surface Floor) -->
+<section class="pt-2 space-y-3 pb-6">
+<button class="w-full min-h-[56px] bg-primary-container hover:bg-primary text-on-primary font-headline text-body-medium rounded-xl flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all duration-150 font-bold" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">send</span>
+        Publicar reseña
+      </button>
+<div class="flex justify-center">
+<button class="min-h-[48px] px-6 text-on-surface-variant hover:text-on-surface font-caption-bold text-caption-bold flex items-center justify-center active:scale-95 transition-transform duration-150" type="button">
+          Cancelar
+        </button>
+</div>
+</section>
+</main>
+</body></html>

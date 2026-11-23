@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Ingreso de Teléfono - Registro S.A.</title>
+<!-- Inter Font Family -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#95e88f",
+            "on-primary-container": "#cad3ff",
+            "on-primary": "#ffffff",
+            "secondary-container": "#d93633",
+            "inverse-surface": "#293040",
+            "outline-variant": "#c4c5d7",
+            "surface-container": "#e9edff",
+            "surface-container-lowest": "#ffffff",
+            "surface-tint": "#2151da",
+            "tertiary-fixed": "#a3f69c",
+            "on-surface": "#141b2b",
+            "surface-container-high": "#e1e8fd",
+            "secondary-fixed": "#ffdad6",
+            "on-background": "#141b2b",
+            "surface-bright": "#f9f9ff",
+            "on-secondary": "#ffffff",
+            "background": "#f9f9ff",
+            "on-tertiary-fixed-variant": "#005312",
+            "tertiary-container": "#186a21",
+            "secondary": "#b51a1e",
+            "surface-container-highest": "#dce2f7",
+            "on-primary-fixed": "#001551",
+            "surface-dim": "#d3daef",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-error-container": "#93000a",
+            "primary": "#0037b0",
+            "outline": "#747686",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed": "#410003",
+            "tertiary-fixed-dim": "#88d982",
+            "primary-container": "#1d4ed8",
+            "on-tertiary": "#ffffff",
+            "on-surface-variant": "#434655",
+            "tertiary": "#005011",
+            "secondary-fixed-dim": "#ffb4ac",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#002204",
+            "primary-fixed": "#dce1ff",
+            "primary-fixed-dim": "#b7c4ff",
+            "inverse-on-surface": "#edf0ff",
+            "on-secondary-fixed-variant": "#93000e",
+            "surface": "#f9f9ff",
+            "inverse-primary": "#b7c4ff",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f1f3ff",
+            "surface-variant": "#dce2f7",
+            "on-secondary-container": "#fffbff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "margin-tablet": "1.5rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "body": ["Inter"],
+            "body-medium": ["Inter"],
+            "display": ["Inter"],
+            "title": ["Inter"],
+            "headline": ["Inter"],
+            "caption": ["Inter"],
+            "caption-bold": ["Inter"]
+          },
+          "fontSize": {
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 24px;
+      line-height: 1;
+      display: inline-block;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-full bg-surface text-on-surface antialiased flex justify-center selection:bg-surface-container selection:text-primary">
+<!-- Mobile Container Context (Max 480px) -->
+<div class="w-full max-w-md min-h-screen bg-surface flex flex-col justify-between relative shadow-sm">
+<!-- TopAppBar from Shared Components JSON (Task flow: suppressing bottom navigation shell) -->
+<header class="fixed top-0 left-0 right-0 w-full max-w-md mx-auto z-40 flex items-center justify-between px-4 h-14 bg-surface border-b border-outline-variant">
+<button aria-label="Regresar" class="min-w-[56px] min-h-[56px] -ml-2 flex items-center justify-center text-primary hover:bg-surface-container rounded-full active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<span class="font-headline text-headline text-primary font-bold tracking-tight select-none">
+        Registro S.A.
+      </span>
+<button aria-label="Ayuda" class="min-w-[56px] min-h-[56px] -mr-2 flex items-center justify-center text-on-surface-variant hover:bg-surface-container rounded-full active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</header>
+<!-- Main Content Canvas (Scrollable area, single-thumb ergonomic structure) -->
+<main class="flex-1 flex flex-col px-margin pt-20 pb-6 w-full">
+<!-- Stepper / Indicator Track -->
+<div class="mb-space-lg">
+<div class="flex items-center justify-between mb-2">
+<span class="font-caption-bold text-caption-bold text-primary-container">
+            Paso 1 de 3
+          </span>
+<span class="font-caption text-caption text-on-surface-variant">
+            Identificación
+          </span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="w-1/3 h-full bg-primary-container rounded-full transition-all duration-300"></div>
+</div>
+</div>
+<!-- Header Typography -->
+<div class="mb-space-lg">
+<h1 class="font-headline text-headline text-on-surface font-bold tracking-tight mb-space-sm text-balance">
+          Ingresa tu número de teléfono
+        </h1>
+<p class="font-body text-body text-on-surface-variant">
+          Te enviaremos un código de seguridad para verificar tu cuenta sin contraseñas.
+        </p>
+</div>
+<!-- Phone Entry Form -->
+<form class="space-y-space-lg flex-1 flex flex-col justify-between" id="phone-form" onsubmit="event.preventDefault();">
+<div class="space-y-space-md">
+<!-- Input Group -->
+<div class="flex flex-col space-y-2">
+<label class="font-body-medium text-body-medium text-on-surface font-semibold" for="phone-input">
+              Número de teléfono
+            </label>
+<!-- Composite High-Contrast Input Container -->
+<div class="w-full min-h-[56px] h-14 bg-surface-container-lowest border border-outline-variant rounded-xl flex items-center px-3 focus-within:border-2 focus-within:border-primary-container transition-all shadow-none">
+<!-- Fixed Nicaragua Prefix Badge/Chip -->
+<div class="flex items-center space-x-1.5 pr-3 select-none flex-shrink-0">
+<span aria-label="Bandera de Nicaragua" class="text-xl" role="img">🇳🇮</span>
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">
+                  +505
+                </span>
+<span class="h-6 w-[1.5px] bg-outline-variant ml-2 block"></span>
+</div>
+<!-- Main Numeric Phone Input -->
+<input autocomplete="tel-national" class="w-full h-full bg-transparent border-0 p-0 pl-1 font-body text-title text-on-surface placeholder:text-outline focus:ring-0 focus:outline-none tracking-wide" id="phone-input" inputmode="numeric" maxlength="9" placeholder="8888 1234" required="" type="tel"/>
+</div>
+<!-- Informative Channel Note -->
+<div class="flex items-center space-x-1.5 pt-1 px-1">
+<span class="material-symbols-outlined text-outline text-[18px]" data-icon="info">info</span>
+<p class="font-caption text-caption text-on-surface-variant">
+                Te enviaremos un código por SMS o WhatsApp
+              </p>
+</div>
+</div>
+<!-- Security Assurance Card (Civic Trust & Utility pattern) -->
+<div class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md flex items-start space-x-3.5">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center flex-shrink-0 text-primary-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="shield">shield</span>
+</div>
+<div class="flex-1">
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+                Tu número solo se utiliza para proteger tu información y conectar con talleres o asistencia vial autorizada.
+              </p>
+</div>
+</div>
+</div>
+<!-- Sticky Lower-Third Thumb Action Cluster -->
+<div class="pt-space-lg pb-space-sm space-y-space-md mt-auto">
+<!-- Primary CTA Button (56dp height, solid #1D4ED8 token) -->
+<button class="w-full min-h-[56px] h-14 bg-primary-container hover:bg-primary text-on-primary font-body-medium text-body font-semibold rounded-xl flex items-center justify-center space-x-2 active:scale-[0.98] transition-all shadow-none focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" type="submit">
+<span>Enviar código</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Help / Support Assistance Link -->
+<div class="text-center pt-1 pb-2">
+<a class="inline-flex items-center justify-center min-h-[44px] px-2 font-caption text-caption text-on-surface-variant hover:text-primary-container transition-colors focus:outline-none" href="#soporte">
+              ¿Tienes problemas con tu número? <span class="font-caption-bold text-caption-bold text-primary-container underline underline-offset-2">Contáctanos</span>
+</a>
+</div>
+</div>
+</form>
+</main>
+</div>
+<!-- Micro-interaction for phone formatting (NNNN NNNN) -->
+<script>
+    const phoneInput = document.getElementById('phone-input');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', (e) => {
+        let val = e.target.value.replace(/\D/g, '');
+        if (val.length > 8) val = val.substring(0, 8);
+        if (val.length > 4) {
+          e.target.value = val.substring(0, 4) + ' ' + val.substring(4);
+        } else {
+          e.target.value = val;
+        }
+      });
+    }
+  </script>
+</body></html>

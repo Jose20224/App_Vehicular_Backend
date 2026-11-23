@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solicitud de Auxilio Vial - Registro S.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#747686",
+            "tertiary-fixed-dim": "#88d982",
+            "on-tertiary": "#ffffff",
+            "surface": "#f9f9ff",
+            "on-primary-fixed-variant": "#0039b5",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#434655",
+            "surface-tint": "#2151da",
+            "surface-container-high": "#e1e8fd",
+            "inverse-surface": "#293040",
+            "on-secondary-container": "#fffbff",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#b7c4ff",
+            "surface-container-highest": "#dce2f7",
+            "on-secondary-fixed-variant": "#93000e",
+            "secondary-container": "#d93633",
+            "surface-dim": "#d3daef",
+            "on-surface": "#141b2b",
+            "background": "#f9f9ff",
+            "outline-variant": "#c4c5d7",
+            "secondary-fixed": "#ffdad6",
+            "on-tertiary-fixed": "#002204",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "secondary": "#b51a1e",
+            "inverse-primary": "#b7c4ff",
+            "surface-container": "#e9edff",
+            "on-primary-fixed": "#001551",
+            "on-error": "#ffffff",
+            "on-primary-container": "#cad3ff",
+            "tertiary-fixed": "#a3f69c",
+            "surface-bright": "#f9f9ff",
+            "on-background": "#141b2b",
+            "error-container": "#ffdad6",
+            "primary": "#0037b0",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#edf0ff",
+            "primary-fixed": "#dce1ff",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "secondary-fixed-dim": "#ffb4ac",
+            "on-secondary-fixed": "#410003",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#186a21",
+            "tertiary": "#005011",
+            "on-tertiary-fixed-variant": "#005312"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-tablet": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "body-medium": ["Inter"],
+            "title": ["Inter"],
+            "caption-bold": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"],
+            "caption": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen antialiased flex flex-col font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Shared TopAppBar -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center gap-3">
+<button aria-label="Regresar" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined text-primary text-[24px]">arrow_back</span>
+</button>
+<div>
+<h1 class="font-headline text-headline text-primary font-bold tracking-tight">Registro S.A.</h1>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined text-primary text-[24px]">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Focused Task Screen Canvas -->
+<main class="flex-1 w-full max-w-xl mx-auto pt-16 pb-12 px-4 flex flex-col gap-6">
+<!-- Stepper & Main Title Section -->
+<section class="mt-2">
+<div class="flex items-center justify-between gap-2 mb-1">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-caption-bold text-caption-bold">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+          Solicitud de Auxilio Vial
+        </span>
+<span class="font-caption-bold text-caption-bold text-primary bg-primary-fixed px-3 py-1 rounded-full">
+          Paso 1 de 2
+        </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-1">
+        Proporciona las coordenadas y señas locales exactas para el despacho del auxilio mecánico.
+      </p>
+</section>
+<!-- Map & Location Geolocation Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col">
+<div class="p-4 border-b border-outline-variant flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">location_on</span>
+<span class="font-caption-bold text-caption-bold text-on-surface">Ubicación de la Avería</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> GPS Activo
+        </span>
+</div>
+<!-- Interactive Map Simulation Box -->
+<div class="relative w-full h-56 bg-surface-container-highest overflow-hidden select-none" data-location="Managua" style="">
+<!-- Map Canvas Graphic / Stylized Grid of Pista Suburbana -->
+<svg class="absolute inset-0 w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="40" id="street-grid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="#747686" stroke-width="0.8"></path>
+</pattern>
+</defs>
+<rect fill="url(#street-grid)" height="100%" width="100%"></rect>
+<!-- Arterial Road Simulation (Pista Suburbana) -->
+<path d="M-20,130 Q160,110 320,140 T600,120" fill="none" stroke="#ffffff" stroke-width="26"></path>
+<path d="M-20,130 Q160,110 320,140 T600,120" fill="none" stroke="#dce2f7" stroke-dasharray="8,6" stroke-width="20"></path>
+<path d="M180,0 L200,240" fill="none" stroke="#ffffff" stroke-width="16"></path>
+</svg>
+<!-- Landmarks Mock Tags -->
+<div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur px-2.5 py-1 rounded border border-outline-variant text-[11px] font-semibold text-on-surface-variant shadow-sm pointer-events-none">
+          Rotonda Universitaria
+        </div>
+<div class="absolute top-10 right-4 bg-surface-container-lowest/90 backdrop-blur px-2.5 py-1 rounded border border-outline-variant text-[11px] font-semibold text-on-surface-variant shadow-sm pointer-events-none">
+          UNAN-Managua (Portón 2)
+        </div>
+<!-- Draggable Map Pin Target -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none pb-6">
+<div class="animate-bounce flex flex-col items-center">
+<div class="bg-secondary text-on-secondary px-2.5 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1 border border-surface-container-lowest">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span>Tu vehículo</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-lg border-2 border-white -mt-1">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+</div>
+<div class="w-2.5 h-1.5 bg-on-surface/40 rounded-full blur-[1px]"></div>
+</div>
+</div>
+<!-- Map Interaction Pill -->
+<div class="absolute top-3 left-1/2 -translate-x-1/2 bg-surface-container-lowest/95 backdrop-blur px-3 py-1.5 rounded-full border border-outline-variant shadow-sm flex items-center gap-1.5 pointer-events-none">
+<span class="material-symbols-outlined text-primary text-[16px]">touch_app</span>
+<span class="font-caption text-caption text-on-surface">Mueve el pin para fijar tu ubicación exacta</span>
+</div>
+<!-- Center on GPS Button (min 56dp hit target ergonomics) -->
+<button aria-label="Centrar en mi GPS actual" class="absolute bottom-3 right-3 min-w-[56px] min-h-[56px] px-4 bg-surface-container-lowest hover:bg-surface-container text-primary font-caption-bold text-caption-bold rounded-xl border border-outline-variant shadow-md flex items-center justify-center gap-2 active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-primary text-[24px]">my_location</span>
+<span class="text-xs">Centrar en mi GPS actual</span>
+</button>
+</div>
+<!-- Detected Address Bar -->
+<div class="p-3.5 bg-surface-container-low flex items-start gap-2.5 border-t border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">near_me</span>
+<div class="flex-1">
+<p class="font-caption-bold text-caption-bold text-on-surface">Dirección detectada</p>
+<p class="font-body text-body text-on-surface font-semibold">Pista Suburbana, frente a entrada UNAN-Managua</p>
+</div>
+</div>
+</section>
+<!-- Form Section -->
+<form class="flex flex-col gap-5" onsubmit="event.preventDefault();">
+<!-- MANDATORY FIELD: Nicaragua Reference Point (Resaltado Obligatorio) -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border-2 border-secondary/80 flex flex-col gap-2">
+<label class="font-title text-title text-on-surface flex items-center justify-between" for="nicaragua-reference">
+<span class="flex items-center gap-1.5 font-bold">
+<span class="material-symbols-outlined text-secondary text-[22px]">signpost</span>
+            Referencia (obligatoria) *
+          </span>
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-caption-bold text-[12px] uppercase">
+            Indispensable
+          </span>
+</label>
+<p class="font-caption text-caption text-on-surface-variant">
+          Escribe puntos notables (árboles, gasolineras, semáforos, colores de fachada o sentido al lago/arriba/abajo).
+        </p>
+<!-- Base Input with Nicaraguan Landmark Placeholder -->
+<div class="relative">
+<input aria-describedby="ref-error-message" aria-invalid="true" class="w-full min-h-[56px] px-3.5 py-3 rounded-xl border-2 border-error bg-surface-container-lowest text-on-surface font-body text-body focus:ring-0 focus:border-error focus:outline-none" id="nicaragua-reference" name="reference" placeholder="Ej: De la rotonda, 2 cuadras al lago, portón negro" type="text" value="Frente a la entrada principal, carril derecho"/>
+<div class="absolute right-3.5 top-1/2 -translate-y-1/2 text-error">
+<span class="material-symbols-outlined text-[24px]">error</span>
+</div>
+</div>
+<!-- Interactive Visible Validation Message in Red -->
+<div class="rounded-lg bg-error-container/60 border border-error p-3 flex items-start gap-2.5 text-on-error-container mt-1" id="ref-error-message">
+<span class="material-symbols-outlined text-error text-[20px] shrink-0 mt-0.5">warning</span>
+<p class="font-caption-bold text-caption-bold text-on-error-container text-xs leading-relaxed">
+            ⚠️ La referencia es obligatoria. En Nicaragua las direcciones se basan en puntos de referencia para que la grúa o asistencia pueda encontrarte.
+          </p>
+</div>
+</div>
+<!-- Vehicle Selector Dropdown -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant flex flex-col gap-2">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-2" for="vehicle-selector">
+<span class="material-symbols-outlined text-primary text-[20px]">directions_car</span>
+          Vehículo que necesita ayuda
+        </label>
+<div class="relative">
+<select class="w-full min-h-[56px] px-3.5 py-3 pr-10 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body-medium text-body-medium focus:border-primary focus:ring-0" id="vehicle-selector">
+<option selected="" value="toyota-hilux">Toyota Hilux 2021 (Placa M 342-890)</option>
+<option value="suzuki-jimny">Suzuki Jimny 2019 (Placa M 189-402)</option>
+<option value="otro">+ Registrar otro vehículo</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[24px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Problem Description -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant flex flex-col gap-2">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center justify-between" for="problem-description">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">car_repair</span>
+            Descripción del problema
+          </span>
+<span class="font-caption text-caption text-on-surface-variant text-xs">Detalla la avería</span>
+</label>
+<textarea class="w-full p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body text-body focus:border-primary focus:ring-0 resize-none" id="problem-description" rows="3">Se pinchó la llanta trasera derecha y la tuerca de seguridad está trabada.</textarea>
+<!-- Optional Photograph Attachment -->
+<div class="mt-2 pt-3 border-t border-outline-variant flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">photo_camera</span>
+<div>
+<p class="font-caption-bold text-caption-bold text-on-surface text-xs">Fotografía del desperfecto</p>
+<p class="font-caption text-caption text-on-surface-variant text-xs">Opcional para evaluación previa del mecánico</p>
+</div>
+</div>
+<button class="min-h-[56px] px-4 rounded-xl border border-primary text-primary bg-surface-container-lowest hover:bg-surface-container-low font-caption-bold text-caption-bold flex items-center justify-center gap-2 active:scale-95 transition-transform shrink-0" type="button">
+<span class="material-symbols-outlined text-[20px]">add_a_photo</span>
+<span>Adjuntar foto</span>
+</button>
+</div>
+</div>
+<!-- Mandatory Prominent Disclaimer Note -->
+<section class="bg-surface-container-high/60 rounded-xl p-4 border border-outline-variant flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[24px] shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">payments</span>
+<div>
+<h2 class="font-caption-bold text-caption-bold text-on-surface">Transparencia y Forma de Pago</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5 leading-normal">
+            No pagas nada en la app. El pago se acuerda con el proveedor directamente al recibir el auxilio.
+          </p>
+</div>
+</section>
+<!-- Primary & Roadside Direct Action Buttons (56dp target) -->
+<section class="flex flex-col gap-3 pt-2">
+<!-- Botón principal de 56dp -->
+<button class="w-full min-h-[56px] rounded-xl bg-primary-container text-on-primary hover:bg-primary active:scale-95 transition-transform duration-150 flex items-center justify-center gap-2.5 font-headline text-headline text-white shadow-sm" type="submit">
+<span class="material-symbols-outlined text-[24px]">send</span>
+<span>Enviar solicitud de asistencia</span>
+</button>
+<!-- Botón secundario de auxilio directo / llamada de emergencia -->
+<button class="w-full min-h-[56px] rounded-xl bg-surface-container-lowest border-2 border-secondary text-secondary hover:bg-secondary-fixed/30 active:scale-95 transition-transform duration-150 flex items-center justify-center gap-2.5 font-title text-title" type="button">
+<span class="material-symbols-outlined text-secondary text-[24px]" style="font-variation-settings: 'FILL' 1;">phone_in_talk</span>
+<span>Prefiero llamar por teléfono directo</span>
+</button>
+</section>
+</form>
+</main>
+</body></html>

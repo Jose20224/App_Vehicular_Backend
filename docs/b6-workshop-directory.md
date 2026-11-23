@@ -102,11 +102,11 @@ El servidor marca `price_status='desactualizado'` cuando `last_updated_at` tiene
 
 ## 7. Seeds de rendimiento
 
-`prisma/seeds/workshops-test.ts` crea 5 000 fichas sintéticas con coordenadas deterministas alrededor de Managua. `seedTesting()` lo invoca únicamente cuando `NODE_ENV=test`; los seeds de desarrollo/producción no llaman ese archivo. Los fixtures no generan teléfonos ni otros datos de contacto, y la ubicación de prueba no contiene datos de negocios reales.
+`backend/prisma/seeds/workshops-test.ts` crea 5 000 fichas sintéticas con coordenadas deterministas alrededor de Managua. `seedTesting()` lo invoca únicamente cuando `NODE_ENV=test`; los seeds de desarrollo/producción no llaman ese archivo. Los fixtures no generan teléfonos ni otros datos de contacto, y la ubicación de prueba no contiene datos de negocios reales.
 
-Se agregó `test/migrations/b6-service-offering-xor.sql` para comprobar en PostgreSQL que se aceptan ambas variantes válidas (taller único y proveedor único), mientras cero dueños y dos dueños producen `check_violation`. También comprueba el CHECK de activación sin referencia local. Este SQL queda preparado; no se ha ejecutado como parte de B6.
+Se agregó `backend/test/migrations/b6-service-offering-xor.sql` para comprobar en PostgreSQL que se aceptan ambas variantes válidas (taller único y proveedor único), mientras cero dueños y dos dueños producen `check_violation`. También comprueba el CHECK de activación sin referencia local. Este SQL queda preparado; no se ha ejecutado como parte de B6.
 
-`test/performance/b6-workshop-search.k6.js` es una sonda HTTP opcional para medir el endpoint completo contra un entorno aislado con los 5 000 registros sintéticos. Configura `API_BASE_URL`, `VUS` y `DURATION`; establece el umbral de latencia p95 inferior a 300 ms y comprueba que el resultado esté ordenado por distancia y lleve los metadatos de caché. No se ha ejecutado.
+`backend/test/performance/b6-workshop-search.k6.js` es una sonda HTTP opcional para medir el endpoint completo contra un entorno aislado con los 5 000 registros sintéticos. Configura `API_BASE_URL`, `VUS` y `DURATION`; establece el umbral de latencia p95 inferior a 300 ms y comprueba que el resultado esté ordenado por distancia y lleve los metadatos de caché. No se ha ejecutado.
 
 ## 8. Estado de aceptación
 

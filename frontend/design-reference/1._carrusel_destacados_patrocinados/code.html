@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Directorio de Talleres - Registro S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#cad3ff",
+            "on-surface-variant": "#434655",
+            "secondary-container": "#d93633",
+            "surface-container-low": "#f1f3ff",
+            "tertiary-fixed-dim": "#88d982",
+            "surface-container-highest": "#dce2f7",
+            "on-tertiary-fixed-variant": "#005312",
+            "background": "#f9f9ff",
+            "inverse-primary": "#b7c4ff",
+            "outline": "#747686",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed-variant": "#93000e",
+            "on-secondary-container": "#fffbff",
+            "on-background": "#141b2b",
+            "primary-fixed": "#dce1ff",
+            "tertiary": "#005011",
+            "on-primary": "#ffffff",
+            "surface-tint": "#2151da",
+            "inverse-surface": "#293040",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-secondary": "#ffffff",
+            "error-container": "#ffdad6",
+            "primary-container": "#1d4ed8",
+            "surface-bright": "#f9f9ff",
+            "on-primary-fixed": "#001551",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed-dim": "#b7c4ff",
+            "surface-container": "#e9edff",
+            "on-tertiary-container": "#95e88f",
+            "tertiary-container": "#186a21",
+            "surface-dim": "#d3daef",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed": "#002204",
+            "error": "#ba1a1a",
+            "secondary-fixed-dim": "#ffb4ac",
+            "inverse-on-surface": "#edf0ff",
+            "primary": "#0037b0",
+            "on-surface": "#141b2b",
+            "secondary-fixed": "#ffdad6",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#410003",
+            "secondary": "#b51a1e",
+            "surface-variant": "#dce2f7",
+            "surface": "#f9f9ff",
+            "tertiary-fixed": "#a3f69c"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-xs": "0.25rem",
+            "margin-tablet": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-md": "1rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "body": ["Inter"],
+            "caption": ["Inter"],
+            "title": ["Inter"],
+            "caption-bold": ["Inter"],
+            "headline": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body text-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP APP BAR -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center gap-2">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline text-title font-bold tracking-tight text-primary">Directorio de Talleres</h1>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Buscar talleres" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-1 w-full max-w-md mx-auto pt-16 pb-24 px-4 overflow-x-hidden">
+<!-- UBICACIÓN & FILTROS RÁPIDOS -->
+<section class="py-2">
+<div class="flex items-center justify-between bg-surface-container-lowest border border-outline-variant rounded-xl p-3 mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<div>
+<span class="text-caption text-on-surface-variant block leading-tight">Ubicación actual</span>
+<span class="font-caption-bold text-caption text-on-surface font-semibold">Distrito I, Managua</span>
+</div>
+</div>
+<button class="text-primary font-caption-bold text-caption hover:underline px-2 py-1" type="button">Cambiar</button>
+</div>
+<!-- Quick Category Chips -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+<button class="bg-primary text-on-primary px-3 py-2 rounded-lg font-caption text-caption whitespace-nowrap font-medium flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span> Todos
+        </button>
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface px-3 py-2 rounded-lg font-caption text-caption whitespace-nowrap font-medium hover:bg-surface-container" type="button">
+          Mecánica General
+        </button>
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface px-3 py-2 rounded-lg font-caption text-caption whitespace-nowrap font-medium hover:bg-surface-container" type="button">
+          Llanterías 24/7
+        </button>
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface px-3 py-2 rounded-lg font-caption text-caption whitespace-nowrap font-medium hover:bg-surface-container" type="button">
+          Electricidad &amp; AC
+        </button>
+</div>
+</section>
+<!-- SECCIÓN DESTACADA: TALLERES PATROCINADOS -->
+<section class="mt-4">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="verified_user">verified_user</span>
+<h2 class="font-title text-title font-bold text-on-surface">Talleres Destacados</h2>
+</div>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary font-caption text-caption py-1 px-1.5 rounded active:scale-95 transition-transform" title="Información sobre anuncios patrocinados" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="info">info</span>
+<span class="text-[13px] underline">¿Por qué veo esto?</span>
+</button>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mb-3">Red certificada con cobertura prioritaria y respuesta garantizada en Managua.</p>
+<!-- CARRUSEL HORIZONTAL -->
+<div class="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory -mx-4 px-4 pb-2 pt-1">
+<!-- CARD 1: Autocentro Los Robles Express -->
+<article class="snap-center shrink-0 w-[310px] bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col justify-between overflow-hidden shadow-sm">
+<div>
+<div class="relative h-40 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Modern automotive repair shop in Los Robles Managua filled with clean diagnostic hydraulic lifts, professional uniformed mechanics working on modern sedans and SUVs in bright morning natural light, orderly tool cabinets, high clarity civic trust automotive atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV6kqLS_TQJGxWJ3ut4sJc672GBm49JziCIGGL0HR0KBIRLEXQlL62krPVVxzLqIG13nxQ4umvYIvWYpDqDQdXQH0JyKlDj3r3yu4ACV5orFnLdea3zYrBBK5srm-Args895KtTgKplzXwRS8G6HGpn9YgNw-9vwwxIX8joIqC53VC3X5fMtWDs0VdnRSdByQ4qE8fpwH4CjXVtppKjR7q7ouT7dU0RmflY4NKY4qf"/>
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+<!-- PÍLDORA PATROCINADO -->
+<span class="bg-[#EEF0FF] text-[#3730A3] font-caption-bold text-caption px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                  Patrocinado
+                </span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="bg-[#E8F5E9] text-[#2E7D32] font-caption-bold text-caption px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm font-medium text-[13px]">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  Verificado
+                </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex items-start justify-between gap-1 mb-1">
+<h3 class="font-headline text-body-medium font-bold text-on-surface leading-snug">Autocentro Los Robles Express</h3>
+</div>
+<!-- Review score + Reseñas auténticas -->
+<div class="flex items-center gap-1.5 text-caption font-caption mb-2">
+<span class="flex items-center font-bold text-[#F59E0B]">
+                  4.8 <span class="material-symbols-outlined text-[16px] ml-0.5" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span class="text-on-surface-variant font-medium">(142 opiniones verificadas)</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-caption text-caption mb-3">
+<span class="material-symbols-outlined text-[16px]" data-icon="distance">distance</span>
+<span>A 1.4 km • Los Robles, Managua</span>
+</div>
+<!-- Especialidades -->
+<div class="flex flex-wrap gap-1.5 mb-4">
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Frenos y Suspensión</span>
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Diagnóstico Computarizado</span>
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Cambio de Aceite</span>
+</div>
+</div>
+</div>
+<!-- Botón de acción táctil de 56dp -->
+<div class="p-4 pt-0">
+<button class="w-full h-14 min-h-[56px] bg-primary hover:bg-primary-container text-on-primary rounded-xl font-body-medium font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 shadow-sm" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span>Ver taller</span>
+</button>
+</div>
+</article>
+<!-- CARD 2: Taller Especializado Bolonia -->
+<article class="snap-center shrink-0 w-[310px] bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col justify-between overflow-hidden shadow-sm">
+<div>
+<div class="relative h-40 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Professional mechanic bay in Bolonia Managua equipped with electrical diagnostic scan tablets, air conditioning recharge machines, organized tool racks, high tropical ambient daylight entering wide hangar garage doors with technician checking vehicle battery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGzXk-Kic3gZ4oXZfMKeOUUeQEp64yhyLYyHLDG26j94dWRA_PZxP6WUUUjunnfgY7pnxwoH1bzcHARCtWAJXvRSJqz24PaNyJA8lBazYMIxRDuWacTIrd5Vd9mZNk0tARDNxfkEbqIzl6UxdcN_7z5hB0VkCd2GYu3WANv0vf5nIWP9EF7fQxb5R7MeGoPU6u1rS_V3Uh6J8rSi-Q6I8UicpJp5CF1HS6VsxVppOD"/>
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+<!-- PÍLDORA PATROCINADO -->
+<span class="bg-[#EEF0FF] text-[#3730A3] font-caption-bold text-caption px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                  Patrocinado
+                </span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="bg-[#E8F5E9] text-[#2E7D32] font-caption-bold text-caption px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm font-medium text-[13px]">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  Verificado
+                </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex items-start justify-between gap-1 mb-1">
+<h3 class="font-headline text-body-medium font-bold text-on-surface leading-snug">Taller Especializado Bolonia</h3>
+</div>
+<!-- Review score + Reseñas auténticas -->
+<div class="flex items-center gap-1.5 text-caption font-caption mb-2">
+<span class="flex items-center font-bold text-[#F59E0B]">
+                  4.9 <span class="material-symbols-outlined text-[16px] ml-0.5" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span class="text-on-surface-variant font-medium">(218 opiniones verificadas)</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-caption text-caption mb-3">
+<span class="material-symbols-outlined text-[16px]" data-icon="distance">distance</span>
+<span>A 2.8 km • Bolonia, Managua</span>
+</div>
+<!-- Especialidades -->
+<div class="flex flex-wrap gap-1.5 mb-4">
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Aire Acondicionado</span>
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Inyección Electrónica</span>
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Motores Diésel / Gas</span>
+</div>
+</div>
+</div>
+<!-- Botón de acción táctil de 56dp -->
+<div class="p-4 pt-0">
+<button class="w-full h-14 min-h-[56px] bg-primary hover:bg-primary-container text-on-primary rounded-xl font-body-medium font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 shadow-sm" type="button">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+<span>Llamar al taller</span>
+</button>
+</div>
+</article>
+<!-- CARD 3: Llantería y Taller El Güegüense -->
+<article class="snap-center shrink-0 w-[310px] bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col justify-between overflow-hidden shadow-sm">
+<div>
+<div class="relative h-40 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Clean and vibrant tire and wheel balancing workshop near Plaza El Gueguense Managua, dynamic commercial garage with neatly stacked commercial brand tires, laser alignment rig, heavy duty compressor bay under clear tropical daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUO4vbdNQIfT0f3OzeFlG2FPtK5Q2gEA3AW5e37rZWolCFcKR4TCjzEoE9N7_Hrr9DGTdEa7s1NPJlgTdJZhNl0kfeW8t9K8ag1_P3PSOeeQvQv_3RsYgm_jDgCb7ZbbRLIW2wcmHRhQvnTpyWMPixfpz-4jmFNZmAj0ClBf1Y8Wz1U4ZwQDw0YHvJruzeieeqRjXJtrpDQQEAFm5Y3uLs4mx1K9gwvWarngLrlIV2"/>
+<div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+<!-- PÍLDORA PATROCINADO -->
+<span class="bg-[#EEF0FF] text-[#3730A3] font-caption-bold text-caption px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                  Patrocinado
+                </span>
+</div>
+<div class="absolute top-2.5 right-2.5">
+<span class="bg-[#E8F5E9] text-[#2E7D32] font-caption-bold text-caption px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm font-medium text-[13px]">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  Verificado
+                </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex items-start justify-between gap-1 mb-1">
+<h3 class="font-headline text-body-medium font-bold text-on-surface leading-snug">Llantería y Taller El Güegüense</h3>
+</div>
+<!-- Review score + Reseñas auténticas -->
+<div class="flex items-center gap-1.5 text-caption font-caption mb-2">
+<span class="flex items-center font-bold text-[#F59E0B]">
+                  4.7 <span class="material-symbols-outlined text-[16px] ml-0.5" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span class="text-on-surface-variant font-medium">(95 opiniones verificadas)</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-caption text-caption mb-3">
+<span class="material-symbols-outlined text-[16px]" data-icon="distance">distance</span>
+<span>A 3.1 km • Rotonda El Güegüense</span>
+</div>
+<!-- Especialidades -->
+<div class="flex flex-wrap gap-1.5 mb-4">
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Alineación &amp; Balanceo</span>
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Vulcanizadora 24 Horas</span>
+<span class="bg-surface-container-low text-on-surface-variant font-caption text-[13px] px-2 py-0.5 rounded">Tren Delantero</span>
+</div>
+</div>
+</div>
+<!-- Botón de acción táctil de 56dp -->
+<div class="p-4 pt-0">
+<button class="w-full h-14 min-h-[56px] bg-primary hover:bg-primary-container text-on-primary rounded-xl font-body-medium font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 shadow-sm" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span>Ver taller</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<!-- DIVISOR ESTRUCTURAL Y DESCARGO PATROCINADO -->
+<div class="my-6">
+<div class="h-px bg-outline-variant w-full mb-3"></div>
+<div class="bg-surface-container-low border border-outline-variant/60 rounded-lg p-2.5 flex items-center justify-between text-on-surface-variant font-caption text-[13px]">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="info">info</span>
+          Los anuncios destacados cumplen inspección vehicular y normativas Registro S.A.
+        </span>
+</div>
+</div>
+<!-- SECCIÓN ORGÁNICA: TALLERES POR CERCANÍA -->
+<section>
+<div class="flex items-center justify-between mb-3">
+<div>
+<h2 class="font-title text-title font-bold text-on-surface">Talleres orgánicos por cercanía</h2>
+<p class="font-caption text-caption text-on-surface-variant">Ordenados por proximidad a tu geolocalización actual</p>
+</div>
+<button class="text-primary font-caption-bold text-caption flex items-center gap-0.5 p-1" type="button">
+<span>Filtrar</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+<!-- LISTA DE RESULTADOS ORGÁNICOS -->
+<div class="space-y-3">
+<!-- Tarjeta Orgánica 1 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-start gap-3.5 shadow-sm">
+<div class="w-20 h-20 rounded-lg bg-surface-container shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up shot of an experienced automotive technician servicing brake calipers on a vehicle with wrench tool inside clean workshop environment with neutral warm daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkU9TTnLNT3gRfFFF34mHGtt2Dt_xKOKl8AZO3TarV8wnJOMbRW4RfqDzdUlMgaBMRDC2seMFfPGEHGwcV0fBqWDRrSStIMgS0D6G5LeNLLkDe_WTus9KYLK8hJBArk3g-xu-PLuxvkmtWqpii3qPgxk1mO_wRWvrMOmylOiU_L1nFKOWqSUMAOAduOAW-Z54Ol-F4Ei224CTm1_9pr7EBuB1UWaLOVfYmxoJM3Hx_"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h4 class="font-title text-body font-bold text-on-surface truncate">Auto Servicio Pista Suburbana</h4>
+<span class="font-caption text-caption font-semibold text-primary shrink-0">800 m</span>
+</div>
+<div class="flex items-center gap-1.5 text-caption font-caption text-on-surface-variant my-1">
+<span class="flex items-center font-bold text-[#F59E0B]">
+                4.6 <span class="material-symbols-outlined text-[14px] ml-0.5" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span>• 74 reseñas</span>
+<span class="text-xs px-1.5 py-0.2 bg-[#E8F5E9] text-[#2E7D32] rounded font-medium">Abierto</span>
+</div>
+<p class="font-caption text-[13px] text-on-surface-variant truncate">Frenos, Afinamiento, Suspensión hidráulica</p>
+</div>
+</article>
+<!-- Tarjeta Orgánica 2 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-start gap-3.5 shadow-sm">
+<div class="w-20 h-20 rounded-lg bg-surface-container shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Organized automotive electrical bay showing multiple car batteries on racks and diagnostic voltmeter devices with technician testing alternator under bright ambient lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa8swZ1jIbWigd-UUqVONYQEptnzs3EC64jV3ILKPR-R3jM5G2VJby4A9ZfbucExV-jmpp2NeiNZIyr3ZG7yNi8yqgrzUJ2mF5Rbqa0t5Rr_MxUqEDGQT81etfCEWtEZpBGXzf9iiZ3cd2qGifNVR-WaOpBX9c6gPXz-Kyg-qt6XKupApY0pNopK8rEtDNOLZV_KbKSDASZqdZ_Qm9QQ0kjjDy7KMUzMADgbSdEIHo"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h4 class="font-title text-body font-bold text-on-surface truncate">Electromecánica Montoya</h4>
+<span class="font-caption text-caption font-semibold text-primary shrink-0">1.2 km</span>
+</div>
+<div class="flex items-center gap-1.5 text-caption font-caption text-on-surface-variant my-1">
+<span class="flex items-center font-bold text-[#F59E0B]">
+                4.5 <span class="material-symbols-outlined text-[14px] ml-0.5" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span>• 52 reseñas</span>
+<span class="text-xs px-1.5 py-0.2 bg-[#E8F5E9] text-[#2E7D32] rounded font-medium">Abierto</span>
+</div>
+<p class="font-caption text-[13px] text-on-surface-variant truncate">Alternadores, Baterías, Arrancadores, Diagnóstico OBD2</p>
+</div>
+</article>
+<!-- Tarjeta Orgánica 3 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-start gap-3.5 shadow-sm">
+<div class="w-20 h-20 rounded-lg bg-surface-container shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Tire repair specialist checking tire pressure and tread depth on vehicle wheel using digital gauge in modern garage in Managua Nicaragua." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI_ieMU1HMkJdJab40mT9mM3lXQ-6DasvmDVtLsSKxWEi_lXWOjblVG27s2_xvkgVLwSGpTSEibUgcr41t2qP4t6tvAGj_VUOrbHUnCDkhDDZh-5jHGO9Us792vTCuNWb3VJS3pqSStOPEe9b7FU_8Tt4opb87LLegxCRi2AFevbqcHoLE2muCeQF4oCFvlifQmW2aay1oxlr3W0f_PUBPfztbajQicjG7c4cpJDh8"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h4 class="font-title text-body font-bold text-on-surface truncate">Multillantas Bello Horizonte</h4>
+<span class="font-caption text-caption font-semibold text-primary shrink-0">1.9 km</span>
+</div>
+<div class="flex items-center gap-1.5 text-caption font-caption text-on-surface-variant my-1">
+<span class="flex items-center font-bold text-[#F59E0B]">
+                4.8 <span class="material-symbols-outlined text-[14px] ml-0.5" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+<span>• 110 reseñas</span>
+<span class="text-xs px-1.5 py-0.2 bg-[#E8F5E9] text-[#2E7D32] rounded font-medium">Abierto</span>
+</div>
+<p class="font-caption text-[13px] text-on-surface-variant truncate">Montaje, Nitrógeno, Parches en frío, Válvulas</p>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- BOTTOM NAVIGATION BAR (Shared Component Exact Blueprint & Active Mapping to 'Talleres') -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest shadow-sm border-t border-outline-variant">
+<!-- Item 1: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-caption text-[12px]">Inicio</span>
+</a>
+<!-- Item 2: Talleres (ACTIVE TAB) -->
+<a class="flex flex-col items-center justify-center text-primary font-semibold min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="build" data-weight="fill" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="font-caption text-[12px] font-bold">Talleres</span>
+</a>
+<!-- Item 3: Emergencia (Central Prominent Red SOS Button) -->
+<div class="flex flex-col items-center justify-center min-w-[56px] min-h-[56px] -mt-5">
+<a aria-label="Emergencia SOS vial" class="w-14 h-14 min-w-[56px] min-h-[56px] rounded-full bg-[#C62828] text-white flex items-center justify-center shadow-md active:scale-95 transition-transform duration-150 border-2 border-surface-container-lowest" href="#">
+<span class="material-symbols-outlined text-[28px]" data-icon="emergency" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</a>
+<span class="font-caption text-[11px] font-bold text-[#C62828] mt-0.5">Emergencia</span>
+</div>
+<!-- Item 4: Alertas -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-caption text-[12px]">Alertas</span>
+</a>
+<!-- Item 5: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-caption text-[12px]">Perfil</span>
+</a>
+</nav>
+</body></html>

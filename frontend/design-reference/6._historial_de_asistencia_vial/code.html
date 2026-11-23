@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historial de Asistencia - Registro S.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#747686",
+            "tertiary-fixed-dim": "#88d982",
+            "on-tertiary": "#ffffff",
+            "surface": "#f9f9ff",
+            "on-primary-fixed-variant": "#0039b5",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#434655",
+            "surface-tint": "#2151da",
+            "surface-container-high": "#e1e8fd",
+            "inverse-surface": "#293040",
+            "on-secondary-container": "#fffbff",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#b7c4ff",
+            "surface-container-highest": "#dce2f7",
+            "on-secondary-fixed-variant": "#93000e",
+            "secondary-container": "#d93633",
+            "surface-dim": "#d3daef",
+            "on-surface": "#141b2b",
+            "background": "#f9f9ff",
+            "outline-variant": "#c4c5d7",
+            "secondary-fixed": "#ffdad6",
+            "on-tertiary-fixed": "#002204",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "secondary": "#b51a1e",
+            "inverse-primary": "#b7c4ff",
+            "surface-container": "#e9edff",
+            "on-primary-fixed": "#001551",
+            "on-error": "#ffffff",
+            "on-primary-container": "#cad3ff",
+            "tertiary-fixed": "#a3f69c",
+            "surface-bright": "#f9f9ff",
+            "on-background": "#141b2b",
+            "error-container": "#ffdad6",
+            "primary": "#0037b0",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#edf0ff",
+            "primary-fixed": "#dce1ff",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "secondary-fixed-dim": "#ffb4ac",
+            "on-secondary-fixed": "#410003",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#186a21",
+            "tertiary": "#005011",
+            "on-tertiary-fixed-variant": "#005312"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-tablet": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "body-medium": ["Inter"],
+            "title": ["Inter"],
+            "caption-bold": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"],
+            "caption": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body">
+<!-- Top App Bar (Shared Component) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center gap-3">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-title text-title text-on-surface font-semibold tracking-tight">Historial de Asistencia</h1>
+</div>
+<div class="flex items-center">
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Container -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-4 pt-20 pb-28 flex flex-col gap-6">
+<!-- Overview Banner / Stats Bento Unit -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">manage_history</span>
+<span class="font-caption-bold text-caption-bold text-on-surface uppercase tracking-wider">Bitácora de Eventos Viales</span>
+</div>
+<span class="bg-surface-container text-primary font-caption-bold text-caption px-2.5 py-0.5 rounded-full border border-outline-variant">Managua &amp; Rutas Nacionales</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+        Registro centralizado de soporte técnico, grúas y auxilio mecánico solicitados desde tu cuenta autorizada.
+      </p>
+</section>
+<!-- Interactive Filters Segment -->
+<nav aria-label="Filtros de solicitudes" class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+<button class="min-h-[48px] px-5 py-2.5 rounded-full bg-primary-container text-on-primary font-caption-bold text-caption flex items-center gap-2 shadow-sm transition-transform active:scale-95" type="button">
+<span>Todas</span>
+<span class="bg-on-primary text-primary px-2 py-0.2 rounded-full text-[12px] font-bold">3</span>
+</button>
+<button class="min-h-[48px] px-5 py-2.5 rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-container font-caption text-caption flex items-center gap-2 transition-transform active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span>
+<span>Completadas</span>
+</button>
+<button class="min-h-[48px] px-5 py-2.5 rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:bg-surface-container font-caption text-caption flex items-center gap-2 transition-transform active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">cancel</span>
+<span>Canceladas</span>
+</button>
+</nav>
+<!-- Service Records List -->
+<section aria-label="Lista de servicios" class="flex flex-col gap-5">
+<!-- Item 1: Llanta Móvil (Completada) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 flex flex-col gap-4 shadow-sm">
+<!-- Card Header: Date & Status Chip -->
+<div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-container pb-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-caption text-caption font-medium">18 de Octubre, 2024 • 8:40 p.m.</span>
+</div>
+<!-- Dual Coding Pill: Completada -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low text-tertiary border border-outline-variant font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Completada</span>
+</div>
+</div>
+<!-- Service Main Content -->
+<div class="flex flex-col gap-2">
+<div class="flex items-start justify-between gap-3">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">tire_repair</span>
+<h2 class="font-title text-title text-on-surface font-bold">Cambio de llanta</h2>
+</div>
+<p class="font-caption-bold text-caption-bold text-primary mt-1">Llantería Móvil El Güegüense</p>
+</div>
+<!-- Payment Block -->
+<div class="bg-surface-container-low border border-outline-variant px-3 py-2 rounded-lg text-right">
+<span class="font-caption text-[11px] block text-on-surface-variant font-medium">Pago en sitio</span>
+<span class="font-title text-title font-bold text-on-surface">C$ 350</span>
+<span class="font-caption text-[11px] block text-on-surface-variant">córdobas</span>
+</div>
+</div>
+<!-- Vehicle Detail Field -->
+<div class="flex items-center gap-2 bg-surface-container-low/60 rounded-lg p-3 border border-outline-variant/60 mt-1">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">directions_car</span>
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="font-caption text-caption text-on-surface-variant">Vehículo atendido:</span>
+<span class="font-caption-bold text-caption-bold text-on-surface">Toyota Hilux 2021</span>
+<span class="font-caption-bold text-[12px] bg-surface-container-highest px-2 py-0.5 rounded text-on-surface border border-outline-variant">M 342-890</span>
+</div>
+</div>
+</div>
+<!-- Action Triggers -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+<button class="min-h-[56px] px-4 py-3 rounded-xl border border-primary text-primary hover:bg-surface-container font-caption-bold text-caption flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+<span>Ver detalle de atención</span>
+</button>
+<button class="min-h-[56px] px-4 py-3 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-caption-bold text-caption flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Llamar de nuevo a este taller</span>
+</button>
+</div>
+</article>
+<!-- Item 2: Grúa (Completada) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 flex flex-col gap-4 shadow-sm">
+<!-- Card Header: Date & Status Chip -->
+<div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-container pb-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-caption text-caption font-medium">12 de Agosto, 2024 • 11:15 a.m.</span>
+</div>
+<!-- Dual Coding Pill: Completada -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low text-tertiary border border-outline-variant font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Completada</span>
+</div>
+</div>
+<!-- Service Main Content -->
+<div class="flex flex-col gap-2">
+<div class="flex items-start justify-between gap-3">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">rv_hookup</span>
+<h2 class="font-title text-title text-on-surface font-bold">Remolque con Grúa</h2>
+</div>
+<span class="inline-block mt-0.5 font-caption text-caption text-error font-medium">(Avería de motor)</span>
+<p class="font-caption-bold text-caption-bold text-primary mt-1">Remolques Central Nicaragua</p>
+</div>
+<!-- Cost Block -->
+<div class="bg-surface-container-low border border-outline-variant px-3 py-2 rounded-lg text-right">
+<span class="font-caption text-[11px] block text-on-surface-variant font-medium">Monto pactado</span>
+<span class="font-title text-title font-bold text-on-surface">C$ 1,100</span>
+<span class="font-caption text-[11px] block text-on-surface-variant">córdobas</span>
+</div>
+</div>
+<!-- Vehicle Detail Field -->
+<div class="flex items-center gap-2 bg-surface-container-low/60 rounded-lg p-3 border border-outline-variant/60 mt-1">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">directions_car</span>
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="font-caption text-caption text-on-surface-variant">Vehículo atendido:</span>
+<span class="font-caption-bold text-caption-bold text-on-surface">Hyundai Accent</span>
+<span class="font-caption-bold text-[12px] bg-surface-container-highest px-2 py-0.5 rounded text-on-surface border border-outline-variant">M 119-041</span>
+</div>
+</div>
+</div>
+<!-- Action Triggers -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+<button class="min-h-[56px] px-4 py-3 rounded-xl border border-primary text-primary hover:bg-surface-container font-caption-bold text-caption flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span>Ver reporte de ruta</span>
+</button>
+<button class="min-h-[56px] px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface hover:bg-surface-container font-caption-bold text-caption flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Contactar proveedor</span>
+</button>
+</div>
+</article>
+<!-- Item 3: Cerrajería Vial (Cancelada) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 flex flex-col gap-4 shadow-sm opacity-90">
+<!-- Card Header: Date & Status Chip -->
+<div class="flex flex-wrap items-center justify-between gap-2 border-b border-surface-container pb-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-caption text-caption font-medium">04 de Junio, 2024</span>
+</div>
+<!-- Dual Coding Pill: Cancelada por el usuario -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[16px] text-outline">close</span>
+<span>Cancelada por el usuario</span>
+</div>
+</div>
+<!-- Service Main Content -->
+<div class="flex flex-col gap-2">
+<div class="flex items-start justify-between gap-3">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[22px]">lock_open</span>
+<h2 class="font-title text-title text-on-surface font-bold">Cerrajería vial</h2>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-1">Servicio descartado antes del despacho de unidad móvil.</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant px-3 py-2 rounded-lg text-right">
+<span class="font-caption text-[11px] block text-on-surface-variant font-medium">Cargo aplicado</span>
+<span class="font-title text-title font-semibold text-outline">C$ 0</span>
+<span class="font-caption text-[11px] block text-on-surface-variant">sin costo</span>
+</div>
+</div>
+</div>
+<!-- Action Triggers -->
+<div class="pt-1">
+<button class="w-full min-h-[56px] px-4 py-3 rounded-xl border border-outline-variant text-on-surface-variant hover:bg-surface-container font-caption-bold text-caption flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[20px]">info</span>
+<span>Ver motivo de cancelación</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Estimate / Legal Disclaimer Box -->
+<aside class="bg-surface-container-low border border-outline-variant rounded-xl p-4 flex items-start gap-3 mt-2">
+<span class="material-symbols-outlined text-primary text-[22px] flex-shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col gap-1">
+<span class="font-caption-bold text-caption-bold text-on-surface">Transparencia y regulación de cobro</span>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+          Registro S.A. no realiza cobros por estos servicios. El historial refleja los montos pactados directamente entre tú y el proveedor particular.
+        </p>
+</div>
+</aside>
+</main>
+<!-- Bottom Navigation Bar (Shared Component with Emergency Element) -->
+<nav aria-label="Navegación principal" class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest shadow-sm">
+<!-- Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-caption text-[11px]">Inicio</span>
+</a>
+<!-- Talleres -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]">build</span>
+<span class="font-caption text-[11px]">Talleres</span>
+</a>
+<!-- Central Emergency Button Prominent -->
+<a aria-label="Emergencia Vial" class="relative -top-3 flex flex-col items-center justify-center min-w-[56px] min-h-[56px] group active:scale-95 transition-transform duration-150" href="#">
+<div class="w-14 h-14 rounded-full bg-secondary flex items-center justify-center shadow-md border-2 border-surface-container-lowest text-on-secondary">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-caption text-[11px] font-bold text-secondary mt-0.5">Emergencia</span>
+</a>
+<!-- Alertas (Active Intent Context for Road History / Records) -->
+<a class="flex flex-col items-center justify-center text-primary font-semibold min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-caption text-[11px]">Alertas</span>
+</a>
+<!-- Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-caption text-[11px]">Perfil</span>
+</a>
+</nav>
+</body></html>

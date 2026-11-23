@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Directorio de Talleres - Vista de Mapa | Registro S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#88d982",
+            "surface-tint": "#2151da",
+            "tertiary-container": "#186a21",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-surface": "#141b2b",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#dce2f7",
+            "secondary-container": "#d93633",
+            "on-tertiary-fixed": "#002204",
+            "secondary-fixed-dim": "#ffb4ac",
+            "inverse-surface": "#293040",
+            "on-background": "#141b2b",
+            "outline": "#747686",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-on-surface": "#edf0ff",
+            "on-error": "#ffffff",
+            "secondary": "#b51a1e",
+            "surface-variant": "#dce2f7",
+            "primary-fixed": "#dce1ff",
+            "primary": "#0037b0",
+            "surface": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#a3f69c",
+            "surface-container-low": "#f1f3ff",
+            "surface-dim": "#d3daef",
+            "on-secondary-container": "#fffbff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "on-primary-container": "#cad3ff",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed-dim": "#b7c4ff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary-container": "#1d4ed8",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed": "#001551",
+            "on-tertiary-container": "#95e88f",
+            "secondary-fixed": "#ffdad6",
+            "background": "#f9f9ff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "display": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "caption": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    @keyframes sonarWave {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .sonar-pulse {
+      animation: sonarWave 2.4s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface h-full w-full overflow-hidden select-none font-body text-body">
+<!-- TopAppBar Component (Exact anchor implementation from Shared JSON) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-primary" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="font-headline text-headline text-primary dark:text-primary-fixed font-bold tracking-tight text-center">
+      Registro S.A.
+    </div>
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</header>
+<!-- Main Map Canvas & Controls Viewport -->
+<main class="relative w-full h-[884px] pt-14 pb-20 overflow-hidden bg-[#e5e9ec]">
+<!-- Vector Map Representation (Urban Managua Grid) -->
+<div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+<svg class="w-full h-full" fill="none" preserveaspectratio="xMidYMid slice" viewbox="0 0 420 860" xmlns="http://www.w3.org/2000/svg">
+<!-- Managua Land Base -->
+<rect fill="#E9EDF2" height="100%" width="100%"></rect>
+<!-- Laguna Tiscapa Reservoir -->
+<path d="M290,140 C340,160 360,220 330,270 C300,320 250,300 230,260 C210,220 240,120 290,140 Z" fill="#BFD7ED" opacity="0.8"></path>
+<text fill="#295D8A" font-size="11" font-weight="600" letter-spacing="0.08em" text-anchor="middle" x="295" y="220">RESERVA TISCAPA</text>
+<!-- Urban Secondary Grid & Blocks -->
+<g opacity="0.6" stroke="#D1D9E2" stroke-linecap="round" stroke-width="12">
+<path d="M-20,240 L440,290"></path>
+<path d="M-20,410 L440,400"></path>
+<path d="M-20,530 L440,560"></path>
+<path d="M-20,680 L440,670"></path>
+<path d="M70,-20 L90,880"></path>
+<path d="M330,-20 L310,880"></path>
+<path d="M200,450 L380,720"></path>
+</g>
+<!-- Major Arterial Roads of Managua -->
+<!-- Pista Suburbana -->
+<path d="M-20,580 C110,570 230,590 440,640" stroke="#FFFFFF" stroke-linecap="round" stroke-width="22"></path>
+<path d="M-20,580 C110,570 230,590 440,640" stroke="#CBD5E1" stroke-linecap="round" stroke-width="16"></path>
+<text fill="#4B5563" font-size="10" font-weight="700" letter-spacing="0.06em" x="120" y="565">PISTA SUBURBANA</text>
+<!-- Pista Benjamín Zeledón -->
+<path d="M-20,310 C120,315 250,310 440,345" stroke="#FFFFFF" stroke-linecap="round" stroke-width="20"></path>
+<path d="M-20,310 C120,315 250,310 440,345" stroke="#CBD5E1" stroke-linecap="round" stroke-width="14"></path>
+<text fill="#4B5563" font-size="10" font-weight="700" letter-spacing="0.06em" x="80" y="298">PISTA BENJAMÍN ZELEDÓN</text>
+<!-- Carretera a Masaya -->
+<path d="M190,-20 C185,190 225,430 360,880" stroke="#FFFFFF" stroke-linecap="round" stroke-width="24"></path>
+<path d="M190,-20 C185,190 225,430 360,880" stroke="#FDE68A" stroke-linecap="round" stroke-width="18"></path>
+<text fill="#78350F" font-size="11" font-weight="700" letter-spacing="0.05em" transform="rotate(64, 280, 690)" x="280" y="690">CARRETERA A MASAYA (NIC-4)</text>
+<!-- Rotonda El Güegüense Intersection & Monument Landmark -->
+<circle cx="180" cy="312" fill="#E2E8F0" r="32" stroke="#FFFFFF" stroke-width="5"></circle>
+<circle cx="180" cy="312" fill="#1D4ED8" fill-opacity="0.1" r="16" stroke="#1D4ED8" stroke-width="2"></circle>
+<circle cx="180" cy="312" fill="#1D4ED8" r="6"></circle>
+<rect fill="#1E293B" height="20" opacity="0.85" rx="10" width="140" x="110" y="260"></rect>
+<text fill="#FFFFFF" font-size="10" font-weight="600" text-anchor="middle" x="180" y="274">Rotonda El Güegüense</text>
+<!-- Rotonda Rubén Darío -->
+<circle cx="218" cy="465" fill="#E2E8F0" r="28" stroke="#FFFFFF" stroke-width="4"></circle>
+<text fill="#334155" font-size="10" font-weight="700" text-anchor="middle" x="218" y="504">Metrocentro</text>
+<!-- Neighborhood Zoning Labels -->
+<text fill="#64748B" font-size="11" font-weight="700" letter-spacing="0.1em" x="80" y="440">BOLONIA</text>
+<text fill="#64748B" font-size="11" font-weight="700" letter-spacing="0.1em" x="270" y="380">LOS ROBLES</text>
+<text fill="#64748B" font-size="11" font-weight="700" letter-spacing="0.1em" x="290" y="520">VILLA FONTANA</text>
+</svg>
+</div>
+<!-- Floating Top Bar: Search and View Mode Switcher -->
+<div class="absolute top-16 left-0 right-0 z-30 px-4 flex flex-col gap-2 pointer-events-auto">
+<div class="flex items-center gap-2">
+<!-- Search Input Bar -->
+<div class="flex-1 flex items-center h-14 bg-surface-container-lowest rounded-xl border border-[#E5E7EB] px-3.5 shadow-sm">
+<span class="material-symbols-outlined text-outline mr-2" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none p-0 text-on-surface font-body text-body placeholder:text-outline focus:outline-none focus:ring-0" placeholder="Buscar por taller o servicio..." type="text" value="Autocentro Los Robles"/>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</button>
+</div>
+<!-- Mode Segment Toggle (Lista / Mapa) -->
+<div class="flex items-center h-14 bg-surface-container-lowest rounded-xl border border-[#E5E7EB] p-1 shadow-sm">
+<button class="px-3 h-full flex items-center gap-1 rounded-lg text-on-surface-variant font-caption text-caption hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="format_list_bulleted">format_list_bulleted</span>
+<span class="hidden sm:inline">Lista</span>
+</button>
+<button class="px-3 h-full flex items-center gap-1 rounded-lg bg-primary text-on-primary font-caption-bold text-caption-bold shadow-xs" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="map">map</span>
+<span>Mapa</span>
+</button>
+</div>
+</div>
+<!-- Quick Category Chips Scroll -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container text-on-primary font-caption-bold text-caption shadow-xs whitespace-nowrap" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+<span>Mecánica General</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface border border-outline-variant font-caption text-caption shadow-xs whitespace-nowrap" type="button">
+<span>Frenos y Suspensión</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface border border-outline-variant font-caption text-caption shadow-xs whitespace-nowrap" type="button">
+<span>Llantas / Alineación</span>
+</button>
+</div>
+<!-- Center Pill: Buscar en esta zona -->
+<div class="flex justify-center mt-1">
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface font-caption-bold text-caption shadow-md active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="refresh">refresh</span>
+<span>Buscar en esta zona</span>
+</button>
+</div>
+</div>
+<!-- Map Interactive Markers Layer -->
+<div class="absolute inset-0 z-20 pointer-events-none">
+<!-- User Current Location Pin (Pulse) -->
+<div class="absolute top-[52%] left-[34%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex items-center justify-center">
+<div class="absolute w-12 h-12 rounded-full bg-primary/20 sonar-pulse"></div>
+<div class="w-6 h-6 rounded-full bg-surface-container-lowest p-1 shadow-md flex items-center justify-center border border-primary">
+<div class="w-3.5 h-3.5 rounded-full bg-primary"></div>
+</div>
+</div>
+<!-- Marker 1: Standard Workshop (Bolonia) -->
+<div class="absolute top-[37%] left-[22%] pointer-events-auto flex flex-col items-center cursor-pointer active:scale-95 transition-transform">
+<div class="bg-primary text-on-primary px-2 py-1 rounded-xl shadow-md border-2 border-surface-container-lowest flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="build">build</span>
+<span class="font-caption-bold text-caption">4.6</span>
+<span class="material-symbols-outlined text-[14px] text-[#FBBF24]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="w-2.5 h-2.5 bg-primary rotate-45 -mt-1 border-r border-b border-surface-container-lowest"></div>
+<span class="mt-1 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 border border-outline-variant font-caption text-[11px] text-on-surface font-semibold shadow-xs">
+          Taller Montoya
+        </span>
+</div>
+<!-- Marker 2: Standard Workshop (Pista Suburbana) -->
+<div class="absolute top-[66%] left-[64%] pointer-events-auto flex flex-col items-center cursor-pointer active:scale-95 transition-transform">
+<div class="bg-primary text-on-primary px-2 py-1 rounded-xl shadow-md border-2 border-surface-container-lowest flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="build">build</span>
+<span class="font-caption-bold text-caption">4.4</span>
+<span class="material-symbols-outlined text-[14px] text-[#FBBF24]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="w-2.5 h-2.5 bg-primary rotate-45 -mt-1 border-r border-b border-surface-container-lowest"></div>
+<span class="mt-1 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 border border-outline-variant font-caption text-[11px] text-on-surface font-semibold shadow-xs">
+          Servicios Dania
+        </span>
+</div>
+<!-- Marker 3: SPONSORED PROMINENT MARKER (Autocentro Los Robles) - Active Selection -->
+<div class="absolute top-[41%] left-[60%] -translate-x-1/2 -translate-y-full pointer-events-auto flex flex-col items-center z-30 cursor-pointer scale-105 active:scale-100 transition-transform">
+<!-- Sponsored Floating Mini-Pill -->
+<div class="mb-1 flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EEF0FF] border border-[#C7D2FE] text-[#3730A3] shadow-sm">
+<span class="material-symbols-outlined text-[12px]" data-icon="stars" data-weight="fill" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-caption-bold text-[11px] tracking-wide">Patrocinado</span>
+</div>
+<!-- Distinct Golden-Ring High Elevation Marker -->
+<div class="relative bg-[#3730A3] text-surface-container-lowest px-3 py-2 rounded-2xl shadow-xl border-[3px] border-[#F59E0B] flex items-center gap-2 ring-4 ring-[#EEF0FF]/80">
+<div class="w-6 h-6 rounded-full bg-[#F59E0B] flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-white" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-title text-[14px] font-bold leading-tight text-white">Los Robles Express</span>
+<div class="flex items-center gap-1 text-[#FDE68A] text-[12px] font-semibold">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.8 (124)</span>
+</div>
+</div>
+</div>
+<!-- Marker Arrow Tip -->
+<div class="w-4 h-4 bg-[#3730A3] rotate-45 -mt-2 border-r-[3px] border-b-[3px] border-[#F59E0B]"></div>
+<div class="w-3 h-1.5 bg-on-surface/40 rounded-full blur-[1px] mt-0.5"></div>
+</div>
+</div>
+<!-- Floating Map Control: Mi ubicación GPS Target -->
+<div class="absolute right-4 bottom-[285px] z-30 pointer-events-auto">
+<button aria-label="Mi ubicación" class="w-14 h-14 rounded-full bg-surface-container-lowest border border-[#E5E7EB] text-primary flex items-center justify-center shadow-lg active:scale-95 transition-transform duration-150 hover:bg-surface-container-low" type="button">
+<span class="material-symbols-outlined text-[28px]" data-icon="my_location">my_location</span>
+</button>
+</div>
+<!-- Bottom Sheet Card Preview (Docked previewing selected workshop) -->
+<section class="absolute bottom-16 left-0 right-0 z-30 px-3 pb-2 pointer-events-auto">
+<div class="max-w-xl mx-auto bg-surface-container-lowest rounded-2xl border border-[#E5E7EB] p-4 shadow-xl">
+<!-- Sheet Handle -->
+<div class="w-10 h-1 bg-outline-variant rounded-full mx-auto mb-3"></div>
+<!-- Card Header & Dual Badges -->
+<div class="flex items-start justify-between gap-2 mb-2">
+<div>
+<div class="flex items-center gap-2 mb-1 flex-wrap">
+<!-- Sponsored Badge -->
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#EEF0FF] text-[#3730A3] font-caption-bold text-caption-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="grade" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grade</span>
+                Patrocinado
+              </span>
+<!-- Verified Badge -->
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E8F5E9] text-[#2E7D32] font-caption-bold text-caption-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+                Verificado
+              </span>
+</div>
+<!-- Workshop Name -->
+<h2 class="font-headline text-headline text-on-surface font-bold leading-tight">
+              Autocentro Los Robles Express
+            </h2>
+</div>
+<!-- Price Level & Distance -->
+<div class="text-right">
+<span class="font-title text-title text-primary font-bold">$$</span>
+<p class="font-caption text-caption text-on-surface-variant">A 1.2 km</p>
+</div>
+</div>
+<!-- Review & Status Row -->
+<div class="flex items-center gap-3 py-1 text-on-surface-variant font-caption text-caption border-b border-[#E5E7EB] pb-2 mb-3">
+<div class="flex items-center text-[#B45309] font-caption-bold text-caption-bold">
+<span class="material-symbols-outlined text-[18px] text-[#F59E0B] mr-0.5" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.8</span>
+<span class="text-on-surface-variant font-normal ml-1">(124 reseñas)</span>
+</div>
+<span>•</span>
+<div class="flex items-center gap-1 text-[#2E7D32] font-caption-bold text-caption-bold">
+<span class="w-2 h-2 rounded-full bg-[#2E7D32]"></span>
+<span>Abierto ahora</span>
+</div>
+<span class="text-outline">Cierra 6:00 PM</span>
+</div>
+<!-- Address & Urban Reference -->
+<div class="flex items-center gap-2 mb-3 text-on-surface font-body text-[14px]">
+<span class="material-symbols-outlined text-outline shrink-0" data-icon="location_on">location_on</span>
+<p class="truncate font-medium">Rotonda El Güegüense 2c. al sur, Managua</p>
+<a class="ml-auto text-primary font-caption-bold text-caption shrink-0 hover:underline" href="#perfil">
+            Ver perfil completo
+          </a>
+</div>
+<!-- Quick Actions Floor (Minimum 56px touch height) -->
+<div class="grid grid-cols-2 gap-3 pt-1">
+<!-- Call Button (Outlined/Primary style) -->
+<a class="h-14 rounded-xl border-[1.5px] border-primary bg-surface-container-lowest text-primary font-title text-[16px] font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150" href="tel:+50522700000">
+<span class="material-symbols-outlined text-[22px]" data-icon="call">call</span>
+<span>Llamar</span>
+</a>
+<!-- WhatsApp Action Button (Dual coded high-intent) -->
+<a class="h-14 rounded-xl bg-[#1E7E34] text-white font-title text-[16px] font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-transform duration-150 hover:bg-[#155d27]" href="https://wa.me/50588888888" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[22px]" data-icon="chat">chat</span>
+<span>WhatsApp</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Component (JSON Anchor Blueprint: Talleres is active tab) -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest dark:bg-surface border-t border-outline-variant dark:border-outline shadow-sm">
+<!-- Tab 0: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low dark:hover:bg-surface-container active:scale-95 transition-transform duration-150" href="#inicio">
+<span class="material-symbols-outlined text-[24px]" data-icon="home">home</span>
+<span class="font-caption text-caption text-xs mt-0.5">Inicio</span>
+</a>
+<!-- Tab 1: Talleres (ACTIVE TAB for Directory Module) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-semibold min-w-[56px] min-h-[56px] hover:bg-surface-container-low dark:hover:bg-surface-container active:scale-95 transition-transform duration-150" href="#talleres">
+<span class="material-symbols-outlined text-[24px]" data-icon="build" data-weight="fill" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="font-caption text-caption text-xs mt-0.5 font-bold">Talleres</span>
+</a>
+<!-- Tab 2: Emergencia (Central Elevated Roadside Trigger) -->
+<div class="relative -top-3 flex flex-col items-center justify-center min-w-[56px]">
+<a aria-label="Emergencia Vial" class="w-14 h-14 rounded-full bg-[#C62828] text-white flex items-center justify-center shadow-lg border-4 border-surface-container-lowest active:scale-90 transition-transform duration-150" href="#emergencia">
+<span class="material-symbols-outlined text-[28px]" data-icon="emergency" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</a>
+<span class="font-caption-bold text-[11px] text-[#C62828] mt-0.5 font-bold tracking-tight">Emergencia</span>
+</div>
+<!-- Tab 3: Alertas -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low dark:hover:bg-surface-container active:scale-95 transition-transform duration-150" href="#alertas">
+<span class="material-symbols-outlined text-[24px]" data-icon="notifications">notifications</span>
+<span class="font-caption text-caption text-xs mt-0.5">Alertas</span>
+</a>
+<!-- Tab 4: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low dark:hover:bg-surface-container active:scale-95 transition-transform duration-150" href="#perfil">
+<span class="material-symbols-outlined text-[24px]" data-icon="person">person</span>
+<span class="font-caption text-caption text-xs mt-0.5">Perfil</span>
+</a>
+</nav>
+</body></html>

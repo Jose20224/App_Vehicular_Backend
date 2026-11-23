@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Confirmación de Eliminación de Cuenta - Registro S.A.</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#747686",
+            "on-secondary-fixed-variant": "#93000e",
+            "error-container": "#ffdad6",
+            "on-background": "#141b2b",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#ffdad6",
+            "on-surface-variant": "#434655",
+            "surface-variant": "#dce2f7",
+            "on-surface": "#141b2b",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#d3daef",
+            "tertiary-fixed-dim": "#88d982",
+            "primary-fixed": "#dce1ff",
+            "surface-bright": "#f9f9ff",
+            "background": "#f9f9ff",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed-dim": "#ffb4ac",
+            "outline-variant": "#c4c5d7",
+            "secondary": "#b51a1e",
+            "inverse-on-surface": "#edf0ff",
+            "on-primary-fixed": "#001551",
+            "surface-container-highest": "#dce2f7",
+            "primary-container": "#1d4ed8",
+            "tertiary-fixed": "#a3f69c",
+            "on-secondary-fixed": "#410003",
+            "tertiary": "#005011",
+            "secondary-container": "#d93633",
+            "primary": "#0037b0",
+            "on-primary-container": "#cad3ff",
+            "inverse-surface": "#293040",
+            "surface": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "tertiary-container": "#186a21",
+            "surface-container": "#e9edff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary-container": "#95e88f",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-error-container": "#93000a",
+            "on-secondary-container": "#fffbff",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "surface-tint": "#2151da",
+            "on-tertiary-fixed": "#002204",
+            "on-tertiary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter-tablet": "1.5rem",
+            "margin": "1rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Inter"],
+            "title": ["Inter"],
+            "body-medium": ["Inter"],
+            "caption-bold": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "display": ["Inter"]
+          },
+          "fontSize": {
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-full bg-surface text-on-surface antialiased flex flex-col font-body">
+<!-- Top App Bar (Task-Focused / Linear: BottomNavBar suppressed per Semantic Shell rules) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<button aria-label="Volver" class="flex items-center justify-center w-10 h-10 -ml-1 text-primary active:scale-95 transition-transform duration-150 rounded-lg hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-title text-title text-on-surface font-bold tracking-tight text-center flex-1 pr-1 truncate">
+      Eliminar Cuenta
+    </h1>
+<button aria-label="Ayuda" class="flex items-center justify-center w-10 h-10 -mr-1 text-primary active:scale-95 transition-transform duration-150 rounded-lg hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="flex-1 w-full max-w-lg mx-auto pt-16 pb-12 px-4 flex flex-col gap-5">
+<!-- Critical Warning Banner (Dual-Coded Red/Dark Amber Accent) -->
+<section class="bg-error-container/40 border border-error/30 rounded-xl p-4 flex items-start gap-3.5">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-on-secondary mt-0.5">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-caption-bold text-caption-bold text-secondary uppercase tracking-wide">
+          Atención Crítica
+        </span>
+<p class="font-body-medium text-body-medium text-on-surface font-bold">
+          Esta acción es definitiva y no se puede deshacer.
+        </p>
+<p class="font-caption text-caption text-on-surface-variant">
+          Tu expediente vehicular oficial en la plataforma se eliminará de inmediato y cesarán las alertas automáticas.
+        </p>
+</div>
+</section>
+<!-- Transparent Deprecation Inventory (Bento/Structured Container) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">delete_forever</span>
+<h2 class="font-title text-[17px] text-on-surface font-semibold">Lo que se borrará de inmediato:</h2>
+</div>
+<span class="bg-secondary-fixed text-on-secondary-fixed font-caption-bold text-[12px] px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock_reset</span> Irreversible
+        </span>
+</div>
+<ul class="flex flex-col divide-y divide-outline-variant/40">
+<!-- Item 1 -->
+<li class="py-2.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5 text-[20px]">person_cancel</span>
+<div class="flex-1">
+<p class="font-body-medium text-body-medium text-on-surface font-semibold">Perfil de conductor</p>
+<p class="font-caption text-caption text-on-surface-variant">Datos personales vinculados a tu número celular (+505 8823-XXXX).</p>
+</div>
+</li>
+<!-- Item 2 -->
+<li class="py-2.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5 text-[20px]">directions_car</span>
+<div class="flex-1">
+<p class="font-body-medium text-body-medium text-on-surface font-semibold">2 vehículos registrados</p>
+<div class="flex flex-wrap gap-1.5 mt-1">
+<span class="font-caption-bold text-[13px] bg-surface-container px-2 py-0.5 rounded text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">badge</span> Toyota Hilux (M 319-402)
+              </span>
+<span class="font-caption-bold text-[13px] bg-surface-container px-2 py-0.5 rounded text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">badge</span> Hyundai Accent (M 194-209)
+              </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-1">Fichas técnicas, número de chasis y registros de placas.</p>
+</div>
+</li>
+<!-- Item 3 -->
+<li class="py-2.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5 text-[20px]">folder_off</span>
+<div class="flex-1">
+<p class="font-body-medium text-body-medium text-on-surface font-semibold">Documentos digitales almacenados</p>
+<p class="font-caption text-caption text-on-surface-variant">Pólizas de seguro SOAPV vigentes, certificados de emisión de gases y pagos de rodamientos municipales.</p>
+</div>
+</li>
+<!-- Item 4 -->
+<li class="py-2.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5 text-[20px]">car_crash</span>
+<div class="flex-1">
+<p class="font-body-medium text-body-medium text-on-surface font-semibold">Historial de asistencia vial</p>
+<p class="font-caption text-caption text-on-surface-variant">Registro completo de servicios de grúas, mecánicos en ruta y asistencias de emergencia recibidas.</p>
+</div>
+</li>
+<!-- Item 5 -->
+<li class="py-2.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5 text-[20px]">cloud_off</span>
+<div class="flex-1">
+<p class="font-body-medium text-body-medium text-on-surface font-semibold">Copias locales fuera de línea</p>
+<p class="font-caption text-caption text-on-surface-variant">Todas las copias en caché guardadas para inspección offline en carretera serán purgadas del dispositivo.</p>
+</div>
+</li>
+</ul>
+</section>
+<!-- Legal Disclaimer Notice Box -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-3.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[22px] flex-shrink-0 mt-0.5">policy</span>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+<strong class="font-caption-bold text-on-surface">Aviso de transparencia:</strong> Las reseñas públicas de talleres permanecerán anónimas para proteger la transparencia del directorio automotriz de Nicaragua.
+      </p>
+</div>
+<!-- Mandatory Verification & Consent Group -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-4">
+<div class="flex items-center gap-2 pb-1 border-b border-outline-variant/60">
+<span class="material-symbols-outlined text-secondary text-[22px]">security</span>
+<h3 class="font-title text-[17px] text-on-surface font-semibold">Verificación de seguridad requerida</h3>
+</div>
+<!-- Typed Verification -->
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface" for="deleteConfirmationInput">
+          Para confirmar la eliminación permanente, escribe la palabra <span class="text-secondary font-headline text-[15px] font-bold">BORRAR</span> en la casilla a continuación:
+        </label>
+<div class="relative flex items-center">
+<input autocomplete="off" class="w-full h-14 min-h-[56px] px-4 font-body-medium text-body-medium text-on-surface bg-surface-container-lowest border-2 border-primary rounded-xl focus:border-primary focus:ring-0 tracking-wider font-semibold placeholder:text-outline" id="deleteConfirmationInput" placeholder="Escribe BORRAR" spellcheck="false" type="text" value="BORRAR"/>
+<div class="absolute right-4 flex items-center gap-1.5 text-tertiary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-caption-bold text-[12px]">Validado</span>
+</div>
+</div>
+</div>
+<!-- Checkbox Confirmation -->
+<label class="flex items-start gap-3 cursor-pointer pt-1 group">
+<div class="flex items-center h-6 min-w-[24px]">
+<input checked="" class="w-6 h-6 rounded-md border-2 border-primary text-primary focus:ring-0 cursor-pointer" id="confirmCheckbox" type="checkbox"/>
+</div>
+<span class="font-body text-[15px] leading-snug text-on-surface select-none">
+          Entiendo que perderé acceso inmediato a mis pólizas y recordatorios municipales.
+        </span>
+</label>
+</section>
+<!-- Destructive & Safe Actions (56dp touch target floors) -->
+<div class="flex flex-col gap-3 pt-2">
+<!-- Destructive Action -->
+<button class="w-full h-14 min-h-[56px] px-4 rounded-xl bg-secondary text-on-secondary font-body-medium text-body-medium font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 shadow-sm" id="btnDeleteAccount" type="button">
+<span class="material-symbols-outlined text-[22px]">delete_forever</span>
+<span>Eliminar mi cuenta definitivamente</span>
+</button>
+<!-- Escape / Safe Action -->
+<button class="w-full h-14 min-h-[56px] px-4 rounded-xl bg-surface-container-lowest border-2 border-primary text-primary font-body-medium text-body-medium font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 hover:bg-surface-container-low" type="button">
+<span class="material-symbols-outlined text-[22px]">shield</span>
+<span>Cancelar y conservar mi cuenta</span>
+</button>
+</div>
+<!-- Support Help Anchor -->
+<div class="text-center pt-2">
+<a class="inline-flex items-center gap-1 font-caption text-caption text-primary hover:underline" href="#">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+        ¿Tienes dudas o problemas con tu registro? Contáctanos
+      </a>
+</div>
+</main>
+<!-- Interactive Validation Script for Dynamic Feedback -->
+<script>
+    const input = document.getElementById('deleteConfirmationInput');
+    const checkbox = document.getElementById('confirmCheckbox');
+    const deleteBtn = document.getElementById('btnDeleteAccount');
+
+    function updateDeleteState() {
+      const isWordValid = input.value.trim() === 'BORRAR';
+      const isChecked = checkbox.checked;
+
+      if (isWordValid && isChecked) {
+        deleteBtn.disabled = false;
+        deleteBtn.classList.remove('opacity-50', 'pointer-events-none', 'bg-outline');
+        deleteBtn.classList.add('bg-secondary', 'text-on-secondary');
+      } else {
+        deleteBtn.disabled = true;
+        deleteBtn.classList.add('opacity-50', 'pointer-events-none');
+      }
+    }
+
+    input.addEventListener('input', updateDeleteState);
+    checkbox.addEventListener('change', updateDeleteState);
+    updateDeleteState();
+  </script>
+</body></html>

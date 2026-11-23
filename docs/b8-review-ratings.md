@@ -3,7 +3,7 @@
 **Estado:** implementación incorporada; validación integral pendiente.  
 **Dependencia:** B6 (directorio de talleres).  
 **Stack:** NestJS, Prisma y PostgreSQL.  
-**Migración:** `prisma/migrations/20261113150000_b8_reviews_ratings/`.
+**Migración:** `backend/prisma/migrations/20261113150000_b8_reviews_ratings/`.
 
 ## 1. Alcance y reglas
 
@@ -51,7 +51,7 @@ La media se calcula con dos decimales y el total cuenta solo reseñas publicadas
 
 ## 6. Seguridad y pruebas
 
-- `test/unit/reviews.authorization.spec.ts` comprueba el escenario de un taller con campaña activa: el rol `workshop_owner` solo tiene `POST` de respuesta y reporte; la moderación/resolución corresponde exclusivamente a `admin`.
+- `backend/test/unit/reviews.authorization.spec.ts` comprueba el escenario de un taller con campaña activa: el rol `workshop_owner` solo tiene `POST` de respuesta y reporte; la moderación/resolución corresponde exclusivamente a `admin`.
 - La migración protege la inmutabilidad de reseñas, exige actor admin para moderación y protege los agregados de reputación contra escrituras directas de otros flujos.
 - `rollback.sql` revierte objetos B8.
 

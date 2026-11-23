@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Filtrar Talleres - Registro S.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#88d982",
+            "surface-tint": "#2151da",
+            "tertiary-container": "#186a21",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-surface": "#141b2b",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#dce2f7",
+            "secondary-container": "#d93633",
+            "on-tertiary-fixed": "#002204",
+            "secondary-fixed-dim": "#ffb4ac",
+            "inverse-surface": "#293040",
+            "on-background": "#141b2b",
+            "outline": "#747686",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-on-surface": "#edf0ff",
+            "on-error": "#ffffff",
+            "secondary": "#b51a1e",
+            "surface-variant": "#dce2f7",
+            "primary-fixed": "#dce1ff",
+            "primary": "#0037b0",
+            "surface": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#a3f69c",
+            "surface-container-low": "#f1f3ff",
+            "surface-dim": "#d3daef",
+            "on-secondary-container": "#fffbff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "on-primary-container": "#cad3ff",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed-dim": "#b7c4ff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary-container": "#1d4ed8",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed": "#001551",
+            "on-tertiary-container": "#95e88f",
+            "secondary-fixed": "#ffdad6",
+            "background": "#f9f9ff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "display": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "caption": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body antialiased min-h-screen relative flex flex-col justify-end overflow-hidden selection:bg-primary selection:text-on-primary">
+<!-- Underlying Directory Background (Simulating Parent Context behind scrim) -->
+<div class="absolute inset-0 z-0 flex flex-col pointer-events-none select-none filter blur-[2px] opacity-40">
+<header class="h-14 px-4 flex items-center justify-between bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+<span class="font-headline text-headline text-primary font-bold">Registro S.A.</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</header>
+<div class="p-4 space-y-4">
+<div class="h-14 bg-surface-container-lowest rounded-xl border border-outline-variant"></div>
+<div class="h-32 bg-surface-container-lowest rounded-xl border border-outline-variant p-4">
+<div class="h-4 w-1/3 bg-outline-variant rounded mb-2"></div>
+<div class="h-3 w-1/2 bg-outline-variant rounded"></div>
+</div>
+<div class="h-32 bg-surface-container-lowest rounded-xl border border-outline-variant p-4">
+<div class="h-4 w-1/3 bg-outline-variant rounded mb-2"></div>
+<div class="h-3 w-1/2 bg-outline-variant rounded"></div>
+</div>
+<div class="h-32 bg-surface-container-lowest rounded-xl border border-outline-variant p-4"></div>
+</div>
+</div>
+<!-- Darkened Scrim Overlay -->
+<div aria-hidden="true" class="absolute inset-0 bg-inverse-surface/60 backdrop-blur-[2px] z-10 transition-opacity duration-300"></div>
+<!-- Filters Bottom Sheet Modal -->
+<main aria-labelledby="modal-title" aria-modal="true" class="relative z-20 w-full max-w-lg mx-auto bg-surface-container-lowest rounded-t-[28px] border-t border-x border-outline-variant shadow-2xl flex flex-col max-h-[813px] transition-transform duration-300 transform translate-y-0" role="dialog">
+<!-- Grab Handle & Header -->
+<header class="pt-3 pb-4 px-4 border-b border-outline-variant flex-shrink-0">
+<div aria-hidden="true" class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mb-3"></div>
+<div class="flex items-center justify-between">
+<h1 class="font-title text-title text-on-surface font-bold tracking-tight" id="modal-title">Filtrar Talleres</h1>
+<button class="h-10 px-3 flex items-center justify-center font-caption-bold text-caption-bold text-primary hover:bg-surface-container-low rounded-lg transition-colors active:scale-95 duration-150" onclick="resetFilters()" type="button">
+          Limpiar filtros
+        </button>
+</div>
+</header>
+<!-- Scrollable Content Body -->
+<div class="overflow-y-auto px-4 py-5 space-y-6 flex-1 overscroll-contain">
+<!-- Section 1: Especialidades mecánicas -->
+<section aria-labelledby="heading-especialidades">
+<div class="flex items-center justify-between mb-3">
+<h2 class="font-title text-title text-on-surface font-semibold text-[18px]" id="heading-especialidades">Especialidades mecánicas</h2>
+<span class="font-caption text-caption text-on-surface-variant">Selección múltiple</span>
+</div>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Item 1: Frenos (Selected) -->
+<label class="relative flex items-center gap-3 p-3 min-h-[56px] rounded-xl border-2 border-primary bg-surface-container-low text-on-surface cursor-pointer select-none transition-all active:scale-[0.98]">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="car_repair" style="font-variation-settings: 'FILL' 1;">car_repair</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-caption-bold text-caption-bold text-on-surface truncate">Frenos</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[22px] flex-shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</label>
+<!-- Item 2: Electricidad (Selected) -->
+<label class="relative flex items-center gap-3 p-3 min-h-[56px] rounded-xl border-2 border-primary bg-surface-container-low text-on-surface cursor-pointer select-none transition-all active:scale-[0.98]">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-caption-bold text-caption-bold text-on-surface truncate">Electricidad</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[22px] flex-shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</label>
+<!-- Item 3: Enderezado y pintura -->
+<label class="relative flex items-center gap-3 p-3 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface cursor-pointer select-none hover:bg-surface-container-low transition-all active:scale-[0.98]">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-8 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="format_paint">format_paint</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-caption-bold text-caption-bold text-on-surface truncate">Enderezado y pintura</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[22px] flex-shrink-0">radio_button_unchecked</span>
+</label>
+<!-- Item 4: Llantas y alineación -->
+<label class="relative flex items-center gap-3 p-3 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface cursor-pointer select-none hover:bg-surface-container-low transition-all active:scale-[0.98]">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-8 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="tire_repair">tire_repair</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-caption-bold text-caption-bold text-on-surface truncate">Llantas y alineación</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[22px] flex-shrink-0">radio_button_unchecked</span>
+</label>
+<!-- Item 5: Motor y transmisión -->
+<label class="relative flex items-center gap-3 p-3 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface cursor-pointer select-none hover:bg-surface-container-low transition-all active:scale-[0.98]">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-8 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-caption-bold text-caption-bold text-on-surface truncate">Motor y transmisión</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[22px] flex-shrink-0">radio_button_unchecked</span>
+</label>
+<!-- Item 6: Aire acondicionado -->
+<label class="relative flex items-center gap-3 p-3 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface cursor-pointer select-none hover:bg-surface-container-low transition-all active:scale-[0.98]">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-8 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="ac_unit">ac_unit</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-caption-bold text-caption-bold text-on-surface truncate">Aire acondicionado</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[22px] flex-shrink-0">radio_button_unchecked</span>
+</label>
+</div>
+</section>
+<hr class="border-outline-variant"/>
+<!-- Section 2: Radio de búsqueda -->
+<section aria-labelledby="heading-radio">
+<h2 class="font-title text-title text-on-surface font-semibold text-[18px] mb-1" id="heading-radio">Radio de búsqueda</h2>
+<div class="flex items-center gap-1.5 text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="my_location">my_location</span>
+<p class="font-caption text-caption">Calculado desde tu ubicación GPS actual</p>
+</div>
+<!-- Touch Segmented Range -->
+<div class="grid grid-cols-4 gap-2 bg-surface-container-low p-1.5 rounded-xl border border-outline-variant">
+<button class="min-h-[56px] flex flex-col items-center justify-center rounded-lg font-caption-bold text-caption-bold text-on-surface-variant hover:bg-surface-container transition-all active:scale-95" type="button">
+            1 km
+          </button>
+<button class="min-h-[56px] flex flex-col items-center justify-center rounded-lg bg-primary text-on-primary font-caption-bold text-caption-bold shadow-sm transition-all active:scale-95" type="button">
+<span>5 km</span>
+<span class="text-[10px] font-caption tracking-wider uppercase opacity-90">Activo</span>
+</button>
+<button class="min-h-[56px] flex flex-col items-center justify-center rounded-lg font-caption-bold text-caption-bold text-on-surface-variant hover:bg-surface-container transition-all active:scale-95" type="button">
+            10 km
+          </button>
+<button class="min-h-[56px] flex flex-col items-center justify-center rounded-lg font-caption-bold text-caption-bold text-on-surface-variant hover:bg-surface-container transition-all active:scale-95" type="button">
+            20 km
+          </button>
+</div>
+</section>
+<hr class="border-outline-variant"/>
+<!-- Section 3: Disponibilidad -->
+<section aria-labelledby="heading-disponibilidad">
+<label class="flex items-center justify-between p-4 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="pr-3">
+<div class="flex items-center gap-2 mb-0.5">
+<span class="material-symbols-outlined text-tertiary-container text-[20px]" data-icon="schedule" style="font-variation-settings: 'FILL' 1;">schedule</span>
+<span class="font-caption-bold text-caption-bold text-on-surface text-[16px]" id="heading-disponibilidad">Abierto ahora</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Mostrar únicamente talleres atendiendo en este momento</p>
+</div>
+<!-- Native-like Accessible Toggle -->
+<div class="relative inline-flex items-center flex-shrink-0 cursor-pointer">
+<input checked="" class="sr-only peer" id="toggle-abierto" type="checkbox"/>
+<div class="w-14 h-8 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:border-outline-variant after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</section>
+<hr class="border-outline-variant"/>
+<!-- Section 4: Tipo de taller -->
+<section aria-labelledby="heading-tipo">
+<h2 class="font-title text-title text-on-surface font-semibold text-[18px] mb-3" id="heading-tipo">Tipo de taller</h2>
+<div class="space-y-2.5">
+<!-- Checkbox 1: Solo verificados -->
+<label class="flex items-center gap-3.5 p-3.5 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-colors active:scale-[0.99]">
+<input checked="" class="w-6 h-6 rounded-lg text-primary border-outline focus:ring-0 focus:ring-offset-0 cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<div class="flex items-center gap-1.5">
+<span class="font-caption-bold text-caption-bold text-on-surface">Solo verificados</span>
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Certificación técnica y legal por Registro S.A.</p>
+</div>
+</label>
+<!-- Checkbox 2: Servicio a domicilio / rescate -->
+<label class="flex items-center gap-3.5 p-3.5 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low cursor-pointer transition-colors active:scale-[0.99]">
+<input class="w-6 h-6 rounded-lg text-primary border-outline focus:ring-0 focus:ring-offset-0 cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<div class="flex items-center gap-1.5">
+<span class="font-caption-bold text-caption-bold text-on-surface">Talleres con servicio a domicilio / rescate</span>
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="home_repair_service">home_repair_service</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Mecánica en ruta o traslado directo</p>
+</div>
+</label>
+</div>
+</section>
+<!-- Estimate / Location Disclaimer -->
+<div class="p-3.5 rounded-xl bg-surface-container-low border border-outline-variant flex items-start gap-2.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-primary flex-shrink-0" data-icon="info">info</span>
+<p class="font-caption text-caption text-[13px] leading-relaxed">
+          Los resultados se ordenan automáticamente por cercanía territorial dentro de la red vial nacional de Nicaragua.
+        </p>
+</div>
+</div>
+<!-- Persistent Bottom Footer Actions (56dp target execution) -->
+<footer class="p-4 border-t border-outline-variant bg-surface-container-lowest flex flex-col sm:flex-row gap-3 flex-shrink-0 pb-6 sm:pb-4 shadow-lg">
+<button class="w-full sm:w-1/3 min-h-[56px] h-14 px-4 rounded-xl border-[1.5px] border-primary text-primary font-caption-bold text-caption-bold text-[16px] hover:bg-surface-container-low flex items-center justify-center transition-all active:scale-95 duration-150" type="button">
+        Cancelar / Cerrar
+      </button>
+<button class="w-full sm:w-2/3 min-h-[56px] h-14 px-4 rounded-xl bg-primary text-on-primary font-caption-bold text-caption-bold text-[16px] flex items-center justify-center gap-2 hover:bg-primary-container transition-all active:scale-95 duration-150 shadow-md" type="button">
+<span class="material-symbols-outlined text-[22px]" data-icon="filter_alt">filter_alt</span>
+<span>Aplicar filtros (18 talleres encontrados)</span>
+</button>
+</footer>
+</main>
+<script>
+    function resetFilters() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(cb => cb.checked = false);
+    }
+  </script>
+</body></html>

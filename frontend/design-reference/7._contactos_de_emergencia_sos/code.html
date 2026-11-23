@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contactos de Emergencia - Registro S.A.</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "outline": "#747686",
+          "tertiary-fixed-dim": "#88d982",
+          "on-tertiary": "#ffffff",
+          "surface": "#f9f9ff",
+          "on-primary-fixed-variant": "#0039b5",
+          "error": "#ba1a1a",
+          "on-surface-variant": "#434655",
+          "surface-tint": "#2151da",
+          "surface-container-high": "#e1e8fd",
+          "inverse-surface": "#293040",
+          "on-secondary-container": "#fffbff",
+          "on-error-container": "#93000a",
+          "primary-fixed-dim": "#b7c4ff",
+          "surface-container-highest": "#dce2f7",
+          "on-secondary-fixed-variant": "#93000e",
+          "secondary-container": "#d93633",
+          "surface-dim": "#d3daef",
+          "on-surface": "#141b2b",
+          "background": "#f9f9ff",
+          "outline-variant": "#c4c5d7",
+          "secondary-fixed": "#ffdad6",
+          "on-tertiary-fixed": "#002204",
+          "on-primary": "#ffffff",
+          "surface-container-low": "#f1f3ff",
+          "secondary": "#b51a1e",
+          "inverse-primary": "#b7c4ff",
+          "surface-container": "#e9edff",
+          "on-primary-fixed": "#001551",
+          "on-error": "#ffffff",
+          "on-primary-container": "#cad3ff",
+          "tertiary-fixed": "#a3f69c",
+          "surface-bright": "#f9f9ff",
+          "on-background": "#141b2b",
+          "error-container": "#ffdad6",
+          "primary": "#0037b0",
+          "surface-container-lowest": "#ffffff",
+          "inverse-on-surface": "#edf0ff",
+          "primary-fixed": "#dce1ff",
+          "primary-container": "#1d4ed8",
+          "surface-variant": "#dce2f7",
+          "secondary-fixed-dim": "#ffb4ac",
+          "on-secondary-fixed": "#410003",
+          "on-tertiary-container": "#95e88f",
+          "on-secondary": "#ffffff",
+          "tertiary-container": "#186a21",
+          "tertiary": "#005011",
+          "on-tertiary-fixed-variant": "#005312"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-md": "1rem",
+          "margin": "1rem",
+          "space-xs": "0.25rem",
+          "gutter-tablet": "1.5rem",
+          "space-sm": "0.5rem",
+          "gutter": "1rem",
+          "margin-tablet": "1.5rem",
+          "space-lg": "1.5rem",
+          "space-xl": "2rem"
+        },
+        "fontFamily": {
+          "display": [
+            "Inter"
+          ],
+          "body-medium": [
+            "Inter"
+          ],
+          "title": [
+            "Inter"
+          ],
+          "caption-bold": [
+            "Inter"
+          ],
+          "body": [
+            "Inter"
+          ],
+          "headline": [
+            "Inter"
+          ],
+          "caption": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "display": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-medium": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "500"
+            }
+          ],
+          "title": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "caption-bold": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "body": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            }
+          ],
+          "caption": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "500"
+            }
+          ]
+        }
+      },
+    },
+  }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-full flex flex-col font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top App Bar (From Shared Components JSON) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface dark:bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<button aria-label="Volver" class="min-w-[56px] min-h-[56px] flex items-center justify-center rounded-xl text-primary active:scale-95 transition-transform hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div>
+<h1 class="font-headline text-headline text-primary font-bold tracking-tight">Contactos de Emergencia</h1>
+<p class="font-caption text-caption text-on-surface-variant leading-none">Red de Asistencia Vial</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 bg-surface-container rounded-full font-caption-bold text-caption-bold text-primary flex items-center gap-1 border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span id="contact-counter-badge">3 de 5</span>
+</span>
+<button aria-label="Ayuda" class="min-w-[56px] min-h-[56px] flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas Container -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-4 pt-20 pb-28 space-y-6">
+<!-- High-Visibility Roadside Emergency Banner & Fast Action Trigger (56dp minimum touch target) -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-sm space-y-4">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-xl bg-error-container text-secondary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="emergency_share" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emergency_share</span>
+</div>
+<div>
+<h2 class="font-title text-title text-on-surface font-semibold">Alerta Satelital Inmediata</h2>
+<p class="font-caption text-caption text-on-surface-variant">Envío dual por SMS y WhatsApp con coordenadas GPS</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-xs font-caption-bold text-on-tertiary-fixed bg-tertiary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="gps_fixed">gps_fixed</span>
+          GPS Activo
+        </span>
+</div>
+<!-- Quick Action SOS Button (56dp min height, high saturation) -->
+<button class="w-full min-h-[56px] px-4 py-3 bg-secondary text-on-secondary rounded-xl font-body-medium text-body-medium font-bold flex items-center justify-center gap-3 active:scale-95 transition-all shadow hover:bg-secondary-container" id="broadcast-sos-btn" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="sensors">sensors</span>
+<span>Compartir mi ubicación con mis contactos</span>
+</button>
+<!-- Status Toast / Feedback info -->
+<div class="hidden p-3 rounded-lg bg-tertiary-container text-on-tertiary font-caption text-caption flex items-center gap-2" id="sos-toast">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span>Alerta y ubicación enviadas exitosamente a los 3 contactos activos.</span>
+</div>
+</section>
+<!-- Bento Grid Section: Saved Contacts Status & Quick Action Controls -->
+<section class="space-y-3">
+<div class="flex items-center justify-between px-1">
+<div>
+<h2 class="font-title text-title text-on-surface font-bold">Contactos Registrados</h2>
+<p class="font-caption text-caption text-on-surface-variant">Prioritarios para notificación de accidentes o averías</p>
+</div>
+<span class="font-caption-bold text-caption-bold text-primary px-3 py-1 bg-surface-container rounded-lg border border-outline-variant">
+          3 / 5 Espacios
+        </span>
+</div>
+<!-- Contact 1: Principal -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-3 relative overflow-hidden transition-all hover:border-primary">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-title font-bold text-lg flex-shrink-0">
+              ML
+            </div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h3 class="font-body-medium text-body-medium font-bold text-on-surface">María López (Esposa)</h3>
+<!-- Dual-coded Status Pill: Principal -->
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-caption-bold text-caption">
+<span class="material-symbols-outlined text-sm" data-icon="stars" data-weight="fill" style="font-variation-settings: 'FILL' 1;">stars</span>
+                  Contacto principal
+                </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="smartphone">smartphone</span>
+                +505 8888-1234
+              </p>
+</div>
+</div>
+<!-- Menu contextual trigger (56x56dp) -->
+<button aria-label="Opciones de contacto" class="min-w-[56px] min-h-[56px] flex items-center justify-center rounded-xl text-outline hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="pt-2 border-t border-outline-variant/50 grid grid-cols-2 gap-2">
+<!-- Botón Llamar -->
+<a class="min-h-[56px] flex items-center justify-center gap-2 rounded-xl border border-primary text-primary font-caption-bold text-caption bg-surface-container-lowest hover:bg-surface-container active:scale-95 transition-transform" href="tel:+50588881234">
+<span class="material-symbols-outlined text-xl" data-icon="call">call</span>
+            Llamar
+          </a>
+<!-- Botón WhatsApp -->
+<a class="min-h-[56px] flex items-center justify-center gap-2 rounded-xl bg-tertiary-container text-on-tertiary font-caption-bold text-caption active:scale-95 transition-transform hover:opacity-95" href="https://wa.me/50588881234" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-xl" data-icon="chat">chat</span>
+            WhatsApp
+          </a>
+</div>
+</article>
+<!-- Contact 2: Hermano -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-3 relative overflow-hidden transition-all hover:border-primary">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center font-title font-bold text-lg flex-shrink-0">
+              CM
+            </div>
+<div>
+<h3 class="font-body-medium text-body-medium font-bold text-on-surface">Carlos Mendoza (Hermano)</h3>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="smartphone">smartphone</span>
+                +505 8765-4321
+              </p>
+</div>
+</div>
+<button aria-label="Opciones de contacto" class="min-w-[56px] min-h-[56px] flex items-center justify-center rounded-xl text-outline hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="pt-2 border-t border-outline-variant/50 grid grid-cols-2 gap-2">
+<a class="min-h-[56px] flex items-center justify-center gap-2 rounded-xl border border-primary text-primary font-caption-bold text-caption bg-surface-container-lowest hover:bg-surface-container active:scale-95 transition-transform" href="tel:+50587654321">
+<span class="material-symbols-outlined text-xl" data-icon="call">call</span>
+            Llamar
+          </a>
+<a class="min-h-[56px] flex items-center justify-center gap-2 rounded-xl bg-tertiary-container text-on-tertiary font-caption-bold text-caption active:scale-95 transition-transform hover:opacity-95" href="https://wa.me/50587654321" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-xl" data-icon="chat">chat</span>
+            WhatsApp
+          </a>
+</div>
+</article>
+<!-- Contact 3: Taller de Confianza -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-3 relative overflow-hidden transition-all hover:border-primary">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest text-primary flex items-center justify-center font-title font-bold text-lg flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="car_repair">car_repair</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-body-medium text-body-medium font-bold text-on-surface">Taller de Confianza Don Pedro</h3>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="call">call</span>
+                +505 2270-1122
+              </p>
+</div>
+</div>
+<button aria-label="Opciones de contacto" class="min-w-[56px] min-h-[56px] flex items-center justify-center rounded-xl text-outline hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="pt-2 border-t border-outline-variant/50 grid grid-cols-2 gap-2">
+<a class="min-h-[56px] flex items-center justify-center gap-2 rounded-xl border border-primary text-primary font-caption-bold text-caption bg-surface-container-lowest hover:bg-surface-container active:scale-95 transition-transform" href="tel:+50522701122">
+<span class="material-symbols-outlined text-xl" data-icon="call">call</span>
+            Llamar
+          </a>
+<a class="min-h-[56px] flex items-center justify-center gap-2 rounded-xl bg-tertiary-container text-on-tertiary font-caption-bold text-caption active:scale-95 transition-transform hover:opacity-95" href="https://wa.me/50522701122" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-xl" data-icon="chat">chat</span>
+            WhatsApp
+          </a>
+</div>
+</article>
+</section>
+<!-- Accordion / Dropdown Form: Agregar nuevo contacto (Paso a 5 contactos) -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="person_add">person_add</span>
+<h2 class="font-title text-title text-on-surface font-semibold">Agregar nuevo contacto</h2>
+</div>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-caption">
+          Quedan 2 disponibles
+        </span>
+</div>
+<form class="space-y-4" id="add-contact-form" onsubmit="event.preventDefault(); handleAddContact();">
+<!-- Campo: Nombre y parentesco -->
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="contact-name">
+            Nombre y parentesco
+          </label>
+<div class="relative">
+<input class="w-full min-h-[56px] px-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface font-body text-body placeholder:text-outline focus:border-primary focus:ring-0 focus:outline-none transition-colors" id="contact-name" name="contact-name" placeholder="Ej: Papá, Esposa, Amigo" required="" type="text"/>
+</div>
+</div>
+<!-- Campo: Número celular (+505) -->
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="contact-phone">
+            Número celular (+505)
+          </label>
+<div class="flex rounded-xl border border-outline-variant bg-surface-container-lowest overflow-hidden focus-within:border-primary">
+<div class="min-h-[56px] px-3.5 bg-surface-container flex items-center text-on-surface font-caption-bold border-r border-outline-variant">
+              🇳🇮 +505
+            </div>
+<input class="w-full min-h-[56px] px-4 bg-transparent text-on-surface font-body text-body placeholder:text-outline focus:ring-0 focus:outline-none border-0" id="contact-phone" name="contact-phone" pattern="[0-9]{4}-[0-9]{4}|[0-9]{8}" placeholder="8888-9999" required="" type="tel"/>
+</div>
+<span class="text-xs text-on-surface-variant font-caption mt-1 block">Formato nacional de 8 dígitos para envío de SMS</span>
+</div>
+<!-- Checkbox: Contacto prioritario -->
+<label class="flex items-center gap-3 p-3 rounded-xl border border-outline-variant/60 bg-surface-container-low cursor-pointer hover:bg-surface-container min-h-[56px]">
+<input class="w-6 h-6 rounded border-outline text-primary focus:ring-0 cursor-pointer" id="priority-check" type="checkbox"/>
+<div class="text-left">
+<span class="block font-caption-bold text-caption-bold text-on-surface">Marcar como contacto prioritario</span>
+<span class="block text-xs text-on-surface-variant">Recibirá llamada de voz automatizada en caso de colisión severa</span>
+</div>
+</label>
+<!-- Botón Guardar contacto -->
+<div class="space-y-2">
+<button class="w-full min-h-[56px] px-4 py-3 bg-primary text-on-primary rounded-xl font-body-medium text-body-medium font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow hover:bg-primary-container disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-outline disabled:text-surface" id="btn-save-contact" type="submit">
+<span class="material-symbols-outlined" data-icon="save">save</span>
+            Guardar contacto
+          </button>
+<p class="hidden text-center font-caption-bold text-caption-bold text-secondary bg-error-container p-2.5 rounded-xl border border-secondary/20" id="limit-message">
+<span class="material-symbols-outlined text-sm align-middle mr-1" data-icon="warning">warning</span>
+            Límite de 5 contactos alcanzado
+          </p>
+</div>
+</form>
+</section>
+<!-- Empty State Demonstrativo (Educativo para nuevos usuarios) -->
+<section class="bg-surface-container-low rounded-xl border border-outline-variant p-5 space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="lightbulb" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<h3 class="font-caption-bold text-caption-bold text-primary">Vista de Demostración para Nuevos Usuarios</h3>
+</div>
+<!-- Educational Empty State Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 text-center space-y-3">
+<div class="w-16 h-16 rounded-full bg-surface-container mx-auto flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="contact_emergency">contact_emergency</span>
+</div>
+<div class="max-w-md mx-auto space-y-1">
+<h4 class="font-title text-title text-on-surface font-semibold">¿Por qué registrar contactos?</h4>
+<p class="font-body text-body text-on-surface-variant">
+            Aún no has agregado contactos de confianza. Guarda hasta 5 personas para avisarles con un solo toque si tienes un percance vial.
+          </p>
+</div>
+<div class="pt-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-xs font-caption-bold text-primary border border-outline-variant">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+            Transmisión cifrada según ley de telecomunicaciones TELCOR
+          </span>
+</div>
+</div>
+</section>
+<!-- Estimate Disclaimer Box from Design Guidance -->
+<div class="p-3.5 rounded-xl bg-surface-container border border-outline-variant text-on-surface-variant font-caption text-caption flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary flex-shrink-0 text-lg mt-0.5" data-icon="info">info</span>
+<p>
+        Los mensajes de emergencia satelital y SMS utilizan la red celular nacional de Nicaragua (+505). Asegúrese de mantener números activos con código de área válido.
+      </p>
+</div>
+</main>
+<!-- Bottom Navigation Bar (From Shared Components JSON) -->
+<nav aria-label="Navegación principal" class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest dark:bg-surface border-t border-outline-variant dark:border-outline shadow-sm">
+<!-- Tab 1: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="font-caption text-caption">Inicio</span>
+</a>
+<!-- Tab 2: Talleres -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="build">build</span>
+<span class="font-caption text-caption">Talleres</span>
+</a>
+<!-- Tab 3: Emergencia (ACTIVE NAVIGATION DESTINATION AS SPECIFIED) -->
+<a aria-current="page" class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed font-semibold min-w-[56px] min-h-[56px] relative -top-2 hover:bg-surface-container-low active:scale-95 transition-transform" href="#">
+<div class="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-lg border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-2xl" data-icon="emergency" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-caption-bold text-caption text-secondary mt-0.5">Emergencia</span>
+</a>
+<!-- Tab 4: Alertas -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="notifications">notifications</span>
+<span class="font-caption text-caption">Alertas</span>
+</a>
+<!-- Tab 5: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="font-caption text-caption">Perfil</span>
+</a>
+</nav>
+<!-- Interaction Script for Simulation -->
+<script>
+    let currentContactsCount = 3;
+    const maxContacts = 5;
+
+    const sosButton = document.getElementById('broadcast-sos-btn');
+    const sosToast = document.getElementById('sos-toast');
+    const counterBadge = document.getElementById('contact-counter-badge');
+    const saveButton = document.getElementById('btn-save-contact');
+    const limitMessage = document.getElementById('limit-message');
+
+    // SOS broadcast trigger
+    sosButton.addEventListener('click', () => {
+      sosButton.classList.add('opacity-75');
+      sosButton.innerHTML = `
+        <span class="material-symbols-outlined animate-spin text-2xl" data-icon="sync">sync</span>
+        <span>Transmitiendo coordenadas GPS...</span>
+      `;
+      setTimeout(() => {
+        sosButton.classList.remove('opacity-75');
+        sosButton.innerHTML = `
+          <span class="material-symbols-outlined text-2xl" data-icon="sensors">sensors</span>
+          <span>Compartir mi ubicación con mis contactos</span>
+        `;
+        sosToast.classList.remove('hidden');
+        setTimeout(() => {
+          sosToast.classList.add('hidden');
+        }, 6000);
+      }, 1200);
+    });
+
+    // Handle adding contact & 5 contacts limit simulation
+    function handleAddContact() {
+      const nameInput = document.getElementById('contact-name');
+      const phoneInput = document.getElementById('contact-phone');
+
+      if (!nameInput.value || !phoneInput.value) return;
+
+      if (currentContactsCount < maxContacts) {
+        currentContactsCount++;
+        counterBadge.textContent = `${currentContactsCount} de 5`;
+        
+        // Reset form
+        nameInput.value = '';
+        phoneInput.value = '';
+        document.getElementById('priority-check').checked = false;
+
+        alert(`Contacto guardado correctamente (${currentContactsCount} de 5).`);
+
+        if (currentContactsCount >= maxContacts) {
+          saveButton.disabled = true;
+          limitMessage.classList.remove('hidden');
+        }
+      }
+    }
+  </script>
+</body></html>

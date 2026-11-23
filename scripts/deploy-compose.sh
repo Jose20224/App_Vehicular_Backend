@@ -3,7 +3,9 @@ set -Eeuo pipefail
 
 : "${API_IMAGE:?Set API_IMAGE to an immutable image tag}"
 : "${MIGRATION_IMAGE:?Set MIGRATION_IMAGE to an immutable migration image tag}"
-compose=(docker compose -f docker-compose.yml -f docker-compose.prod.yml)
+project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$project_root"
+compose=(docker compose --env-file backend/.env -f docker-compose.yml -f docker-compose.prod.yml)
 "${compose[@]}" pull api migrate
 "${compose[@]}" --profile tools run --rm migrate
 "${compose[@]}" up -d --no-build --remove-orphans

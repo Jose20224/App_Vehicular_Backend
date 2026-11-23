@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registrar Póliza de Seguro - Registro S.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#186a21",
+            "surface-container-high": "#e1e8fd",
+            "error-container": "#ffdad6",
+            "secondary": "#b51a1e",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed": "#ffdad6",
+            "on-background": "#141b2b",
+            "surface-tint": "#2151da",
+            "on-primary-fixed": "#001551",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed": "#dce1ff",
+            "on-primary-container": "#cad3ff",
+            "on-surface": "#141b2b",
+            "tertiary-fixed": "#a3f69c",
+            "on-tertiary-fixed-variant": "#005312",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "surface-dim": "#d3daef",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "primary": "#0037b0",
+            "primary-fixed-dim": "#b7c4ff",
+            "background": "#f9f9ff",
+            "tertiary-fixed-dim": "#88d982",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-surface": "#293040",
+            "surface-container-highest": "#dce2f7",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f1f3ff",
+            "on-tertiary-fixed": "#002204",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "outline": "#747686",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#ffb4ac",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#d93633",
+            "inverse-primary": "#b7c4ff",
+            "inverse-on-surface": "#edf0ff",
+            "surface": "#f9f9ff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#fffbff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "gutter-tablet": "1.5rem",
+            "gutter": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "caption": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen antialiased flex justify-center selection:bg-primary-fixed selection:text-primary">
+<!-- Mobile Constraints Canvas Wrapper -->
+<div class="w-full max-w-md bg-surface min-h-screen relative flex flex-col pb-12 shadow-sm">
+<!-- Top Navigation Header (Shared Component Anchored: small variant) -->
+<header class="fixed top-0 left-0 right-0 w-full max-w-md mx-auto z-40 flex items-center justify-between px-4 h-14 bg-surface border-b border-outline-variant">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-lg text-primary active:scale-95 transition-transform duration-150 hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-title text-title text-primary font-bold tracking-tight">Registrar Póliza de Seguro</h1>
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant active:scale-95 transition-transform duration-150 hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+</header>
+<!-- Main Content Form Body -->
+<main class="mt-14 px-4 pt-5 pb-8 flex-1 flex flex-col gap-6">
+<!-- Header Overview Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<span class="font-caption-bold text-caption-bold text-primary block">Vehículo Asegurado: Placa M 342-890</span>
+<p class="font-body text-body text-on-surface-variant text-sm">Respaldo legal y asistencia vial 24/7 en territorio nacional.</p>
+</div>
+</section>
+<!-- Form Section -->
+<form class="flex flex-col gap-5" id="insurance-form" onsubmit="event.preventDefault();">
+<!-- Aseguradora Dropdown -->
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-1.5" for="aseguradora">
+            Aseguradora autorizada
+            <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 pr-10 font-body text-body text-on-surface focus:border-primary-container focus:ring-0 appearance-none cursor-pointer" id="aseguradora" name="aseguradora">
+<option disabled="" selected="" value="">Selecciona una entidad aseguradora</option>
+<option value="iniser">INISER (Instituto Nicaragüense de Seguros)</option>
+<option value="america">Seguros América</option>
+<option value="lafise">Seguros LAFISE</option>
+<option value="mapfre">Mapfre Nicaragua</option>
+<option value="assa">ASSA Compañía de Seguros</option>
+<option value="otra">Otra aseguradora</option>
+</select>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[24px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Número de Póliza -->
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-1.5" for="poliza-numero">
+            Número de póliza
+            <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 font-body text-body text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-0" id="poliza-numero" placeholder="Ej. POL-AUTO-2024-88492" type="text"/>
+</div>
+<!-- Ayuda contextual sobre carné -->
+<div class="flex items-start gap-2 bg-surface-container-low p-2.5 rounded-lg border border-outline-variant/60">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">info</span>
+<p class="font-caption text-caption text-on-surface-variant leading-tight">
+              Encuéntralo en la esquina superior derecha de tu carné físico de asegurado o en el contrato impreso bajo <span class="font-caption-bold text-caption-bold text-on-surface">"No. de Certificado / Póliza"</span>.
+            </p>
+</div>
+</div>
+<!-- Selector de Vigencia: Grid 2 Columnas -->
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface" for="fecha-inicio">Inicio vigencia</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-3 font-body text-body text-on-surface focus:border-primary-container focus:ring-0 text-sm" id="fecha-inicio" type="date" value="2024-03-01"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface" for="fecha-fin">Fin vigencia</label>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl px-3 font-body text-body text-on-surface focus:border-primary-container focus:ring-0 text-sm" id="fecha-fin" type="date" value="2025-03-01"/>
+</div>
+</div>
+<!-- Alerta Visual Automática de Días Restantes (Dual-coded badge) -->
+<div class="bg-surface-container-high/60 border border-outline-variant rounded-xl p-3.5 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-tertiary-container text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-caption-bold text-caption-bold text-on-surface">Estado de Cobertura Calculado</p>
+<p class="font-caption text-caption text-on-surface-variant">Vigencia calculada a la fecha</p>
+</div>
+</div>
+<!-- Vigente dual-coded pill -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant text-tertiary-container font-caption-bold text-caption-bold shadow-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+            328 días restantes
+          </span>
+</div>
+<!-- Deducible y Prima con selector de Moneda -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="font-caption-bold text-caption-bold text-on-surface">Costos &amp; Cobertura</span>
+<!-- Selector de Moneda (C$ / US$) -->
+<div class="inline-flex bg-surface-container p-1 rounded-lg border border-outline-variant">
+<button class="px-2.5 py-1 text-xs font-caption-bold text-on-primary bg-primary rounded shadow-xs" type="button">US$ Dólar</button>
+<button class="px-2.5 py-1 text-xs font-caption-bold text-on-surface-variant hover:text-on-surface" type="button">C$ Córdobas</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1.5">
+<label class="font-caption text-caption text-on-surface-variant" for="deducible">Deducible pactado</label>
+<div class="relative">
+<span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-caption-bold text-caption-bold text-on-surface-variant">$</span>
+<input class="w-full h-14 bg-surface border border-outline-variant rounded-xl pl-8 pr-3 font-body text-body text-on-surface focus:border-primary-container focus:ring-0" id="deducible" placeholder="150.00" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-caption text-caption text-on-surface-variant" for="prima">Prima anual total</label>
+<div class="relative">
+<span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-caption-bold text-caption-bold text-on-surface-variant">$</span>
+<input class="w-full h-14 bg-surface border border-outline-variant rounded-xl pl-8 pr-3 font-body text-body text-on-surface focus:border-primary-container focus:ring-0" id="prima" placeholder="420.00" type="number"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Contacto Directo: Teléfono de cabina de siniestros / emergencias -->
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center justify-between" for="telefono-emergencia">
+<span>Teléfono de cabina de siniestros / emergencias</span>
+<span class="text-xs font-caption text-primary">Llamada rápida</span>
+</label>
+<div class="relative flex items-center">
+<div class="absolute left-3.5 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<input class="w-full h-14 bg-surface-container-lowest border border-outline-variant rounded-xl pl-11 pr-24 font-body-medium text-body-medium text-on-surface focus:border-primary-container focus:ring-0" id="telefono-emergencia" type="tel" value="+505 2276-8888"/>
+<a class="absolute right-2 h-10 px-3 bg-secondary text-on-secondary rounded-lg font-caption-bold text-caption flex items-center gap-1 active:scale-95 transition-transform duration-150 shadow-xs" href="tel:+50522768888">
+<span class="material-symbols-outlined text-[18px]">call</span>
+              Probar
+            </a>
+</div>
+<span class="text-xs font-caption text-on-surface-variant px-1">Número registrado para asistencia inmediata en caso de colisión o remolque.</span>
+</div>
+<!-- Adjuntar Archivo o Fotografía -->
+<div class="flex flex-col gap-3 pt-2">
+<div>
+<h3 class="font-caption-bold text-caption-bold text-on-surface">Adjuntar archivo o fotografía del seguro</h3>
+<p class="font-caption text-caption text-on-surface-variant">Sube una copia digital legible de tu certificado o carné.</p>
+</div>
+<!-- Opciones de Carga: Cámara, Galería, PDF -->
+<div class="grid grid-cols-3 gap-2.5">
+<button class="h-16 flex flex-col items-center justify-center gap-1 bg-surface-container-lowest border border-outline-variant rounded-xl text-primary active:scale-95 transition-transform duration-150 hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[24px]">photo_camera</span>
+<span class="font-caption text-xs font-semibold">Cámara</span>
+</button>
+<button class="h-16 flex flex-col items-center justify-center gap-1 bg-surface-container-lowest border border-outline-variant rounded-xl text-primary active:scale-95 transition-transform duration-150 hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[24px]">image</span>
+<span class="font-caption text-xs font-semibold">Galería</span>
+</button>
+<button class="h-16 flex flex-col items-center justify-center gap-1 bg-surface-container-lowest border border-outline-variant rounded-xl text-primary active:scale-95 transition-transform duration-150 hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[24px]">picture_as_pdf</span>
+<span class="font-caption text-xs font-semibold">Archivo PDF</span>
+</button>
+</div>
+<!-- Componente que ilustra los 3 ESTADOS DE CARGA requeridos en el brief -->
+<div class="mt-2 flex flex-col gap-2.5">
+<span class="text-xs font-caption-bold text-on-surface-variant tracking-wider">ESTADOS DE VERIFICACIÓN DE ARCHIVOS:</span>
+<!-- Estado 1: Pendiente de subir -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[22px]">cloud_off</span>
+</div>
+<div>
+<p class="font-caption-bold text-caption-bold text-on-surface">Reverso_Carne_Fisico.jpg</p>
+<p class="font-caption text-xs text-on-surface-variant">1.4 MB · Pendiente de subir</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-outline hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">upload</span>
+</button>
+</div>
+<!-- Estado 2: Subiendo archivo (60%) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary animate-pulse">
+<span class="material-symbols-outlined text-[22px]">cloud_upload</span>
+</div>
+<div>
+<p class="font-caption-bold text-caption-bold text-on-surface">Poliza_Completa_2024.pdf</p>
+<p class="font-caption text-xs text-primary font-medium">Subiendo archivo (60%)...</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-error hover:bg-error-container/20" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Barra de progreso azul animada -->
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary-container h-2 rounded-full w-3/5 transition-all duration-300"></div>
+</div>
+</div>
+<!-- Estado 3: Guardado y verificado -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-caption-bold text-caption-bold text-on-surface">Carne_Digital_Frente.png</p>
+<p class="font-caption text-xs text-tertiary-container font-medium">Guardado y verificado</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-error" type="button">
+<span class="material-symbols-outlined text-[20px]">delete_outline</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Botón Principal de 56dp -->
+<div class="pt-4">
+<button class="w-full h-14 bg-primary-container text-on-primary rounded-xl font-body-medium text-body-medium font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 shadow-sm hover:opacity-95" type="submit">
+<span class="material-symbols-outlined text-[22px]">save</span>
+            Guardar Póliza
+          </button>
+</div>
+<!-- Nota Legal Requerida -->
+<div class="bg-surface-container-low/70 border border-outline-variant/60 rounded-xl p-3.5 text-center">
+<p class="font-caption text-xs text-on-surface-variant leading-relaxed">
+            La app no gestiona cobros ni renovaciones monetarias directamente. Todos los pagos se realizan con tu aseguradora.
+          </p>
+</div>
+</form>
+</main>
+</div>
+</body></html>

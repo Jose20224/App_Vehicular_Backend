@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Registro S.A. - Directorio de Talleres</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#88d982",
+            "surface-tint": "#2151da",
+            "tertiary-container": "#186a21",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-surface": "#141b2b",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#dce2f7",
+            "secondary-container": "#d93633",
+            "on-tertiary-fixed": "#002204",
+            "secondary-fixed-dim": "#ffb4ac",
+            "inverse-surface": "#293040",
+            "on-background": "#141b2b",
+            "outline": "#747686",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-on-surface": "#edf0ff",
+            "on-error": "#ffffff",
+            "secondary": "#b51a1e",
+            "surface-variant": "#dce2f7",
+            "primary-fixed": "#dce1ff",
+            "primary": "#0037b0",
+            "surface": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#a3f69c",
+            "surface-container-low": "#f1f3ff",
+            "surface-dim": "#d3daef",
+            "on-secondary-container": "#fffbff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "on-primary-container": "#cad3ff",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed-dim": "#b7c4ff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary-container": "#1d4ed8",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed": "#001551",
+            "on-tertiary-container": "#95e88f",
+            "secondary-fixed": "#ffdad6",
+            "background": "#f9f9ff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "display": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "caption": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24 antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- ================= TOP APP BAR (Shared Component Anchor) ================= -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center space-x-3">
+<button aria-label="Volver" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div>
+<h1 class="font-title text-title text-primary font-bold tracking-tight">Talleres Mecánicos</h1>
+<div class="flex items-center space-x-1 text-on-surface-variant font-caption text-caption -mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span>Managua, Nicaragua</span>
+</div>
+</div>
+</div>
+<div class="flex items-center">
+<button aria-label="Ayuda" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+</div>
+</header>
+<!-- ================= MAIN CONTENT WRAPPER ================= -->
+<main class="pt-16 max-w-md mx-auto px-margin space-y-space-md">
+<!-- SEGMENTED TOGGLE SWITCH (Lista / Mapa) -->
+<div class="mt-2 bg-surface-container-high p-1 rounded-xl flex items-center h-12 shadow-sm border border-outline-variant">
+<button class="flex-1 h-full rounded-lg bg-surface-container-lowest text-primary font-caption-bold text-caption-bold flex items-center justify-center space-x-2 shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">view_list</span>
+<span>Lista</span>
+</button>
+<button class="flex-1 h-full rounded-lg text-on-surface-variant font-caption text-caption flex items-center justify-center space-x-2 hover:text-on-surface transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">map</span>
+<span>Mapa</span>
+</button>
+</div>
+<!-- SEARCH BAR COMPONENT -->
+<section class="space-y-space-sm">
+<div class="relative flex items-center">
+<div class="absolute left-4 pointer-events-none text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl pl-12 pr-24 h-14 font-body text-body text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Buscar por taller o servicio..." type="text" value="Frenos y suspensión"/>
+<div class="absolute right-2 flex items-center space-x-1">
+<button aria-label="Limpiar búsqueda" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-on-surface rounded-full hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<div class="w-px h-6 bg-outline-variant"></div>
+<button aria-label="Búsqueda por voz" class="w-10 h-10 flex items-center justify-center text-primary hover:text-primary-container rounded-full hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[22px]">mic</span>
+</button>
+</div>
+</div>
+<!-- FILTER CHIPS (Horizontal Scroll) -->
+<div class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-1 -mx-margin px-margin">
+<!-- Active Chip -->
+<button class="flex items-center space-x-1.5 bg-primary-container text-on-primary font-caption-bold text-caption-bold px-3.5 h-10 rounded-full whitespace-nowrap shadow-sm active:scale-95 transition-transform flex-shrink-0" type="button">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">near_me</span>
+<span>Cerca de mí</span>
+</button>
+<!-- Filter: Especialidad -->
+<button class="flex items-center space-x-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface font-caption text-caption px-3.5 h-10 rounded-full whitespace-nowrap active:scale-95 transition-transform flex-shrink-0 hover:bg-surface-container-low" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">build</span>
+<span>Especialidad</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span>
+</button>
+<!-- Filter: Abierto ahora -->
+<button class="flex items-center space-x-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface font-caption text-caption px-3.5 h-10 rounded-full whitespace-nowrap active:scale-95 transition-transform flex-shrink-0 hover:bg-surface-container-low" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">schedule</span>
+<span>Abierto ahora</span>
+</button>
+<!-- Filter: Municipio -->
+<button class="flex items-center space-x-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface font-caption text-caption px-3.5 h-10 rounded-full whitespace-nowrap active:scale-95 transition-transform flex-shrink-0 hover:bg-surface-container-low" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">location_city</span>
+<span>Municipio (Managua)</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_drop_down</span>
+</button>
+</div>
+</section>
+<!-- ================= SPONSORED WORKSHOP SECTION ================= -->
+<section class="space-y-space-sm pt-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">stars</span>
+<h2 class="font-caption-bold text-caption-bold text-on-surface">Talleres Patrocinados</h2>
+</div>
+<div class="flex items-center space-x-1 text-on-surface-variant font-caption text-caption cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="text-xs">Información</span>
+</div>
+</div>
+<!-- CARD 1: Autocentro Los Robles Express (Sponsored) -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-3 shadow-sm hover:border-primary-container transition-all">
+<!-- Header: Badges & Title -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between gap-2">
+<!-- Sponsor Pill (Design Guideline: #EEF0FF / #3730A3) -->
+<span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#EEF0FF] text-[#3730A3] border border-[#C7D2FE]">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>Patrocinado</span>
+</span>
+<!-- Dual-coded Verified Pill -->
+<span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-fixed text-on-tertiary-fixed border border-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Verificado</span>
+</span>
+</div>
+<div class="flex items-start justify-between pt-1">
+<div>
+<h3 class="font-headline text-headline text-on-surface font-bold leading-tight">Autocentro Los Robles Express</h3>
+<p class="font-caption text-caption text-on-surface-variant flex items-center space-x-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-outline">navigation</span>
+<span>De Plaza Cuba 2c al lago, Los Robles, Managua</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Rating & Distance/Status Bar -->
+<div class="flex flex-wrap items-center gap-y-1 text-caption font-caption">
+<!-- Rating -->
+<div class="flex items-center space-x-1 pr-3 border-r border-outline-variant">
+<span class="font-caption-bold text-caption-bold text-on-surface">4.8</span>
+<span class="material-symbols-outlined text-[18px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-on-surface-variant">(124 reseñas)</span>
+</div>
+<!-- Distance -->
+<div class="flex items-center space-x-1 px-3 border-r border-outline-variant text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">distance</span>
+<span>A 1.2 km</span>
+</div>
+<!-- Open Status -->
+<div class="flex items-center space-x-1 pl-3 text-tertiary font-caption-bold">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">schedule</span>
+<span>Abierto hasta las 5:30 p.m.</span>
+</div>
+</div>
+<!-- Specialty Chips -->
+<div class="flex flex-wrap gap-1.5 pt-0.5">
+<span class="px-2.5 py-1 bg-surface-container text-on-surface-variant font-caption text-caption rounded-lg border border-outline-variant">Frenos</span>
+<span class="px-2.5 py-1 bg-surface-container text-on-surface-variant font-caption text-caption rounded-lg border border-outline-variant">Mantenimiento preventivo</span>
+<span class="px-2.5 py-1 bg-surface-container text-on-surface-variant font-caption text-caption rounded-lg border border-outline-variant">Aire Acondicionado</span>
+</div>
+<!-- Price Estimate Highlight Box -->
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-on-surface-variant">Diagnóstico computarizado sugerido:</span>
+<span class="font-title text-title text-primary font-bold">C$ 450</span>
+</div>
+<!-- Mandatory Legal Notice -->
+<p class="font-caption text-xs text-on-surface-variant leading-relaxed pt-1 border-t border-outline-variant">
+            * Precio estimado. El pago se realiza directamente al taller o al proveedor cuando se presta el servicio.
+          </p>
+</div>
+<!-- CTA Action Buttons (Strict min 56dp ergonomic height) -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<a class="h-14 min-h-[56px] rounded-xl border-2 border-primary-container text-primary-container font-caption-bold text-caption-bold flex items-center justify-center space-x-2 bg-surface-container-lowest hover:bg-surface-container active:scale-95 transition-transform" href="tel:+50522700000">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Llamar</span>
+</a>
+<a class="h-14 min-h-[56px] rounded-xl bg-tertiary-container text-on-tertiary font-caption-bold text-caption-bold flex items-center justify-center space-x-2 hover:bg-tertiary active:scale-95 transition-transform shadow-sm" href="https://wa.me/50588888888" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span>WhatsApp</span>
+</a>
+</div>
+</article>
+</section>
+<!-- ================= ORGANIC RESULTS SECTION ================= -->
+<section class="space-y-space-sm pt-2">
+<div class="flex items-center justify-between">
+<h2 class="font-caption-bold text-caption-bold text-on-surface">Talleres en tu zona (Ordenados por cercanía)</h2>
+<span class="font-caption text-caption text-on-surface-variant">8 resultados</span>
+</div>
+<!-- CARD 2: Taller Electromecánico El Chontaleño -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-3 shadow-sm hover:border-primary-container transition-all">
+<div class="space-y-1">
+<div class="flex items-start justify-between">
+<h3 class="font-title text-title text-on-surface font-bold">Taller Electromecánico El Chontaleño</h3>
+<!-- Verificado Dual-coded Badge -->
+<span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-fixed text-on-tertiary-fixed border border-tertiary-fixed-dim shrink-0 ml-2">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Verificado</span>
+</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center space-x-1">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span>Pista Solidaridad, frente a Gasolinera Puma, Managua</span>
+</p>
+</div>
+<!-- Metrics Row -->
+<div class="flex flex-wrap items-center gap-y-1 text-caption font-caption">
+<div class="flex items-center space-x-1 pr-3 border-r border-outline-variant">
+<span class="font-caption-bold text-caption-bold text-on-surface">4.6</span>
+<span class="material-symbols-outlined text-[18px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-on-surface-variant">(89 reseñas)</span>
+</div>
+<div class="flex items-center space-x-1 px-3 border-r border-outline-variant text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">near_me</span>
+<span>A 1.8 km</span>
+</div>
+<div class="flex items-center space-x-1 pl-3 text-tertiary font-caption-bold">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Abierto ahora</span>
+</div>
+</div>
+<!-- Specialties -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-1 bg-surface-container text-on-surface-variant font-caption text-caption rounded-lg border border-outline-variant">Electricidad automotriz</span>
+<span class="px-2.5 py-1 bg-surface-container text-on-surface-variant font-caption text-caption rounded-lg border border-outline-variant">Baterías y alternadores</span>
+</div>
+<!-- Ergonomic Quick Action -->
+<div class="pt-1">
+<button class="w-full h-14 min-h-[56px] rounded-xl border border-outline text-primary font-caption-bold text-caption-bold flex items-center justify-center space-x-2 bg-surface-container-lowest hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px]">store</span>
+<span>Ver detalles y servicios</span>
+</button>
+</div>
+</article>
+<!-- CARD 3: Llantería y Alineación Las Colinas -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 space-y-3 shadow-sm hover:border-primary-container transition-all">
+<div class="space-y-1">
+<div class="flex items-start justify-between">
+<h3 class="font-title text-title text-on-surface font-bold">Llantería y Alineación Las Colinas</h3>
+<!-- Closed Badge Dual-coded -->
+<span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-secondary-fixed text-on-secondary-fixed shrink-0 ml-2">
+<span class="material-symbols-outlined text-[14px]">block</span>
+<span>Cerrado</span>
+</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center space-x-1">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+<span>Km 8.5 Carretera a Masaya, Entrada Las Colinas</span>
+</p>
+</div>
+<!-- Metrics Row -->
+<div class="flex flex-wrap items-center gap-y-1 text-caption font-caption">
+<div class="flex items-center space-x-1 pr-3 border-r border-outline-variant">
+<span class="font-caption-bold text-caption-bold text-on-surface">4.4</span>
+<span class="material-symbols-outlined text-[18px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-on-surface-variant">(45 reseñas)</span>
+</div>
+<div class="flex items-center space-x-1 px-3 border-r border-outline-variant text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">near_me</span>
+<span>A 2.5 km</span>
+</div>
+<div class="flex items-center space-x-1 pl-3 text-secondary font-caption-bold">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Abre a las 7:00 a.m.</span>
+</div>
+</div>
+<!-- Specialties -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-1 bg-surface-container text-on-surface-variant font-caption text-caption rounded-lg border border-outline-variant">Alineación y balanceo</span>
+<span class="px-2.5 py-1 bg-surface-container text-on-surface-variant font-caption text-caption rounded-lg border border-outline-variant">Llantas nuevas y usadas</span>
+</div>
+<!-- Ergonomic Quick Action -->
+<div class="pt-1">
+<button class="w-full h-14 min-h-[56px] rounded-xl border border-outline-variant text-on-surface-variant font-caption-bold text-caption-bold flex items-center justify-center space-x-2 bg-surface-container-low hover:bg-surface-container active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span>Programar cita para mañana</span>
+</button>
+</div>
+</article>
+</section>
+<!-- ROADSIDE TIP BANNER -->
+<div class="p-3.5 bg-surface-container-high rounded-xl border border-outline-variant flex items-start space-x-3 my-4">
+<span class="material-symbols-outlined text-[24px] text-primary shrink-0">car_crash</span>
+<div class="space-y-0.5">
+<p class="font-caption-bold text-caption-bold text-on-surface">¿Varado en la vía pública?</p>
+<p class="font-caption text-caption text-on-surface-variant leading-tight">
+          Presiona el botón rojo de <strong class="text-secondary">Emergencia</strong> en la barra inferior para enlace telefónico inmediato con grúas y la Policía Nacional (118).
+        </p>
+</div>
+</div>
+</main>
+<!-- ================= BOTTOM NAVIGATION BAR (Shared Component Anchor) ================= -->
+<!-- 
+    Execution of Shared Components JSON:
+    - Dest: Inicio, Talleres (ACTIVE), Emergencia (Center priority), Alertas, Perfil
+    - Height: 64px docked full-width, shadow-sm, no border-t rule (tonal separation)
+  -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest shadow-md">
+<!-- Item 1: Inicio (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-caption text-xs">Inicio</span>
+</a>
+<!-- Item 2: Talleres (ACTIVE per Page Intent) -->
+<a class="flex flex-col items-center justify-center text-primary font-semibold min-w-[56px] min-h-[56px] active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="font-caption-bold text-xs">Talleres</span>
+</a>
+<!-- Item 3: Emergencia (Central Roadside Priority Anchor - Ergonomic 56dp Hit Area) -->
+<a class="relative -top-3.5 flex flex-col items-center justify-center group active:scale-95 transition-transform duration-150" href="#">
+<div class="w-14 h-14 min-w-[56px] min-h-[56px] rounded-full bg-secondary flex items-center justify-center text-on-secondary shadow-lg shadow-secondary/30 ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-caption-bold text-[11px] text-secondary mt-0.5 font-bold tracking-tight">Emergencia</span>
+</a>
+<!-- Item 4: Alertas (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<div class="relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute 0 top-0 right-0 w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+<span class="font-caption text-xs">Alertas</span>
+</a>
+<!-- Item 5: Perfil (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-caption text-xs">Perfil</span>
+</a>
+</nav>
+</body></html>

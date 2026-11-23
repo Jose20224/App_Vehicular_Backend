@@ -1,6 +1,6 @@
 # Plantilla de tablas sync-ready
 
-Esta guía complementa `src/database/sync-ready.ts` y `prisma/templates/sync-ready-trigger.sql`. No es una migración ejecutable ni autoriza crear tablas fuera de la fase correspondiente.
+Esta guía complementa `backend/src/database/sync-ready.ts` y `backend/prisma/templates/sync-ready-trigger.sql`. No es una migración ejecutable ni autoriza crear tablas fuera de la fase correspondiente.
 
 Toda entidad editable offline propiedad de una cuenta debe declarar:
 

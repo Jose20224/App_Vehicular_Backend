@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Seguimiento de Asistencia - Registro S.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#747686",
+            "tertiary-fixed-dim": "#88d982",
+            "on-tertiary": "#ffffff",
+            "surface": "#f9f9ff",
+            "on-primary-fixed-variant": "#0039b5",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#434655",
+            "surface-tint": "#2151da",
+            "surface-container-high": "#e1e8fd",
+            "inverse-surface": "#293040",
+            "on-secondary-container": "#fffbff",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#b7c4ff",
+            "surface-container-highest": "#dce2f7",
+            "on-secondary-fixed-variant": "#93000e",
+            "secondary-container": "#d93633",
+            "surface-dim": "#d3daef",
+            "on-surface": "#141b2b",
+            "background": "#f9f9ff",
+            "outline-variant": "#c4c5d7",
+            "secondary-fixed": "#ffdad6",
+            "on-tertiary-fixed": "#002204",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "secondary": "#b51a1e",
+            "inverse-primary": "#b7c4ff",
+            "surface-container": "#e9edff",
+            "on-primary-fixed": "#001551",
+            "on-error": "#ffffff",
+            "on-primary-container": "#cad3ff",
+            "tertiary-fixed": "#a3f69c",
+            "surface-bright": "#f9f9ff",
+            "on-background": "#141b2b",
+            "error-container": "#ffdad6",
+            "primary": "#0037b0",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#edf0ff",
+            "primary-fixed": "#dce1ff",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "secondary-fixed-dim": "#ffb4ac",
+            "on-secondary-fixed": "#410003",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#186a21",
+            "tertiary": "#005011",
+            "on-tertiary-fixed-variant": "#005312"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-tablet": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "body-medium": ["Inter"],
+            "title": ["Inter"],
+            "caption-bold": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"],
+            "caption": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline shadow-none">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform duration-150 text-primary" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="font-headline text-headline text-primary dark:text-primary-fixed font-bold tracking-tight">Estado de Asistencia</span>
+<span class="font-caption text-caption text-on-surface-variant font-medium text-xs">Registro S.A. Auxilio Vial</span>
+</div>
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-xl mx-auto pt-16 pb-24 px-4 flex flex-col gap-5">
+<!-- Offline Alert Toggle (Simulation Banner) -->
+<div class="mt-2 bg-[#FFF4D6] border border-[#F59E0B] rounded-xl p-4 flex items-start gap-3 transition-all duration-200">
+<span class="material-symbols-outlined text-[#B45309] shrink-0 text-2xl" data-icon="cloud_off">cloud_off</span>
+<div class="flex-1 flex flex-col gap-2">
+<div>
+<h2 class="font-caption-bold text-caption-bold text-[#78350F]">Pendiente de envío (sin conexión a internet)</h2>
+<p class="font-caption text-caption text-[#92400E] mt-0.5 leading-snug">
+            Tu solicitud se enviará en cuanto se restablezca la señal de red celular. No salgas del vehículo en zonas de alta velocidad.
+          </p>
+</div>
+<!-- Immediate Redial & SMS Action for Low-Connectivity -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+<a class="min-h-[56px] px-3 bg-secondary text-on-secondary rounded-xl font-body-medium text-body-medium flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 text-center font-bold" href="tel:18009900">
+<span class="material-symbols-outlined text-xl" data-icon="call">call</span>
+<span>Llamar al proveedor</span>
+</a>
+<a class="min-h-[56px] px-3 bg-surface-container-lowest border-2 border-[#15803D] text-[#15803D] rounded-xl font-body-medium text-body-medium flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150 text-center font-bold" href="https://wa.me/50588889999?text=Emergencia%20Placa%20M%20189-940%20Km%2011.5%20Carretera%20a%20Masaya">
+<span class="material-symbols-outlined text-xl" data-icon="chat">chat</span>
+<span>Enviar por WhatsApp</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Active Service Live Tracker Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-5 shadow-sm flex flex-col gap-4">
+<!-- Card Header -->
+<div class="flex items-start justify-between gap-3 border-b border-outline-variant/50 pb-3">
+<div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-semibold mb-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="local_shipping">local_shipping</span>
+<span>En Progreso</span>
+</div>
+<h1 class="font-title text-title text-on-surface">Servicio de Grúa Urbana</h1>
+<p class="font-caption-bold text-caption-bold text-primary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="verified">verified</span>
+            Remolques &amp; Grúas Los Robles
+          </p>
+</div>
+<div class="text-right">
+<span class="block font-caption text-caption text-on-surface-variant">Identificador</span>
+<span class="font-title text-title text-on-surface font-mono tracking-tight text-base">#NIC-8821</span>
+</div>
+</div>
+<!-- ETA High Visibility Banner -->
+<div class="bg-surface-container-high border-2 border-primary-container/30 rounded-xl p-4 flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="relative flex items-center justify-center w-12 h-12 rounded-full bg-primary text-on-primary">
+<span class="material-symbols-outlined text-2xl animate-pulse" data-icon="near_me">near_me</span>
+<span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-secondary"></span>
+</span>
+</div>
+<div>
+<div class="font-caption text-caption text-on-surface-variant uppercase tracking-wider font-semibold text-xs">Tiempo Estimado</div>
+<div class="font-headline text-headline text-primary font-bold">Llega en aprox. 12 minutos</div>
+</div>
+</div>
+<div class="hidden sm:block text-right">
+<span class="text-xs font-semibold px-2.5 py-1 rounded bg-[#E8F5E9] text-[#2E7D32]">Ruta óptima</span>
+</div>
+</div>
+<!-- 5-Step Visual Stepper -->
+<div class="pt-2">
+<h3 class="font-caption-bold text-caption-bold text-on-surface mb-4">Progreso del auxilio vial</h3>
+<div class="space-y-0 relative pl-2">
+<!-- Step 1: Creada -->
+<div class="flex items-start gap-3 relative pb-6">
+<div class="absolute left-4 top-8 -bottom-1 w-0.5 bg-[#2E7D32]"></div>
+<div class="w-8 h-8 rounded-full bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center shrink-0 z-10 border-2 border-[#2E7D32]">
+<span class="material-symbols-outlined text-lg font-bold" data-icon="check">check</span>
+</div>
+<div class="flex-1 pt-1 flex items-baseline justify-between">
+<div>
+<span class="font-body-medium text-body-medium font-semibold text-on-surface">1. Creada</span>
+<p class="font-caption text-caption text-on-surface-variant">Reporte inicial de pana registrado</p>
+</div>
+<span class="font-caption text-caption text-on-surface-variant text-xs font-mono">14:10</span>
+</div>
+</div>
+<!-- Step 2: Enviada -->
+<div class="flex items-start gap-3 relative pb-6">
+<div class="absolute left-4 top-8 -bottom-1 w-0.5 bg-[#2E7D32]"></div>
+<div class="w-8 h-8 rounded-full bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center shrink-0 z-10 border-2 border-[#2E7D32]">
+<span class="material-symbols-outlined text-lg font-bold" data-icon="check">check</span>
+</div>
+<div class="flex-1 pt-1 flex items-baseline justify-between">
+<div>
+<span class="font-body-medium text-body-medium font-semibold text-on-surface">2. Enviada</span>
+<p class="font-caption text-caption text-on-surface-variant">Transmitido al centro de despacho</p>
+</div>
+<span class="font-caption text-caption text-on-surface-variant text-xs font-mono">14:12</span>
+</div>
+</div>
+<!-- Step 3: Aceptada -->
+<div class="flex items-start gap-3 relative pb-6">
+<div class="absolute left-4 top-8 -bottom-1 w-0.5 bg-primary-container"></div>
+<div class="w-8 h-8 rounded-full bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center shrink-0 z-10 border-2 border-[#2E7D32]">
+<span class="material-symbols-outlined text-lg font-bold" data-icon="check">check</span>
+</div>
+<div class="flex-1 pt-1 flex items-baseline justify-between">
+<div>
+<span class="font-body-medium text-body-medium font-semibold text-on-surface">3. Aceptada</span>
+<p class="font-caption text-caption text-on-surface-variant">Taller y grúa asignados inmediatamente</p>
+</div>
+<span class="font-caption text-caption text-on-surface-variant text-xs font-mono">14:15</span>
+</div>
+</div>
+<!-- Step 4: En camino (Paso Activo) -->
+<div class="flex items-start gap-3 relative pb-6">
+<div class="absolute left-4 top-8 -bottom-1 w-0.5 bg-outline-variant"></div>
+<div class="relative w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 z-10 ring-4 ring-primary-fixed">
+<span class="material-symbols-outlined text-lg animate-pulse" data-icon="directions_car">directions_car</span>
+</div>
+<div class="flex-1 pt-0.5 bg-surface-container-low p-3 rounded-xl border border-primary/20">
+<div class="flex items-center justify-between">
+<span class="font-title text-title text-primary font-bold">4. En camino</span>
+<span class="px-2 py-0.5 bg-primary text-on-primary text-xs font-bold rounded-full">Activo</span>
+</div>
+<p class="font-caption text-caption text-on-surface mt-1">
+                La unidad de auxilio se desplaza sobre Pista Juan Pablo II rumbo a tu ubicación.
+              </p>
+</div>
+</div>
+<!-- Step 5: Completada (Pendiente) -->
+<div class="flex items-start gap-3 relative">
+<div class="w-8 h-8 rounded-full bg-surface-container text-outline flex items-center justify-center shrink-0 z-10 border-2 border-outline-variant">
+<span class="material-symbols-outlined text-lg" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</div>
+<div class="flex-1 pt-1 flex items-baseline justify-between">
+<div>
+<span class="font-body-medium text-body-medium text-outline font-medium">5. Completada</span>
+<p class="font-caption text-caption text-outline">Enganche y remolque seguro concluido</p>
+</div>
+<span class="font-caption text-caption text-outline text-xs">Pendiente</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Assigned Operator & Vehicle Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-5 shadow-sm">
+<h3 class="font-caption-bold text-caption-bold text-on-surface-variant uppercase tracking-wider text-xs mb-3">Conductor y Vehículo Asignado</h3>
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-3xl" data-icon="person">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-title text-title text-on-surface font-bold truncate">Carlos Mendoza V.</h4>
+<p class="font-caption text-caption text-on-surface-variant">Isuzu Forward Plataforma (Grúa Pesada)</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="inline-block px-2.5 py-0.5 rounded font-mono font-bold text-xs bg-surface-container-high text-on-surface border border-outline-variant">
+              PLACA: M 189-940
+            </span>
+<span class="flex items-center text-xs font-semibold text-[#2E7D32]">
+<span class="material-symbols-outlined text-sm mr-0.5" data-icon="star">star</span> 4.9 (140 viajes)
+            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Critical roadside action buttons -->
+<section class="flex flex-col gap-3 pt-2">
+<!-- 1. Llamar al proveedor (Primary Action 56dp) -->
+<a class="min-h-[56px] w-full bg-primary-container text-on-primary rounded-xl font-body-medium text-body-medium flex items-center justify-center gap-3 px-6 shadow-sm active:scale-95 transition-transform duration-150 font-bold" href="tel:+50522709900">
+<span class="material-symbols-outlined text-2xl" data-icon="call">call</span>
+<span>Llamar al proveedor</span>
+</a>
+<!-- 2. Cancelar solicitud (Secondary Outlined 56dp with modal trigger) -->
+<button class="min-h-[56px] w-full bg-surface-container-lowest border-2 border-outline text-on-surface-variant hover:border-secondary hover:text-secondary rounded-xl font-body-medium text-body-medium flex items-center justify-center gap-3 px-6 active:scale-95 transition-transform duration-150 font-semibold" onclick="document.getElementById('cancel-dialog').classList.remove('hidden')" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="cancel">cancel</span>
+<span>Cancelar solicitud</span>
+</button>
+<!-- Municipal Disclaimer Box -->
+<div class="bg-surface border border-outline-variant rounded-xl p-3.5 text-center mt-1">
+<p class="font-caption text-caption text-on-surface-variant text-xs leading-relaxed">
+          Monto de arrastre regulado por normativa de transporte urbano. Ante un siniestro de gravedad vial, contacte a la Policía Nacional (118) o Cruz Blanca (128).
+        </p>
+</div>
+</section>
+</main>
+<!-- Cancellation Confirmation Dialog (Modal) -->
+<div class="hidden fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" id="cancel-dialog">
+<div class="bg-surface-container-lowest max-w-sm w-full rounded-2xl p-6 border border-outline-variant shadow-lg flex flex-col gap-4">
+<div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-2xl" data-icon="warning">warning</span>
+</div>
+<div class="text-center">
+<h3 class="font-title text-title text-on-surface font-bold">¿Deseas cancelar la grúa?</h3>
+<p class="font-caption text-caption text-on-surface-variant mt-2 leading-relaxed">
+          La unidad ya se encuentra en camino. Si cancelas ahora, podrías incurrir en un arancel mínimo de movilización de C$ 250.
+        </p>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<button class="min-h-[56px] w-full bg-surface-container-low text-on-surface font-body-medium text-body-medium font-bold rounded-xl active:scale-95 transition-transform duration-150" onclick="document.getElementById('cancel-dialog').classList.add('hidden')" type="button">
+          No, mantener asistencia
+        </button>
+<button class="min-h-[56px] w-full bg-secondary text-on-secondary font-body-medium text-body-medium font-bold rounded-xl active:scale-95 transition-transform duration-150" onclick="alert('Solicitud cancelada'); document.getElementById('cancel-dialog').classList.add('hidden');" type="button">
+          Confirmar cancelación
+        </button>
+</div>
+</div>
+</div>
+<!-- Shared BottomNavBar (Destination Shell) -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest dark:bg-surface border-t border-outline-variant dark:border-outline shadow-sm">
+<!-- Tab: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low dark:hover:bg-surface-container active:scale-95 transition-transform duration-150 rounded-lg" href="#inicio">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="font-caption text-caption text-xs mt-0.5">Inicio</span>
+</a>
+<!-- Tab: Talleres -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low dark:hover:bg-surface-container active:scale-95 transition-transform duration-150 rounded-lg" href="#talleres">
+<span class="material-symbols-outlined text-2xl" data-icon="build">build</span>
+<span class="font-caption text-caption text-xs mt-0.5">Talleres</span>
+</a>
+<!-- Tab: Emergencia (Central Action Highlight) -->
+<a class="flex flex-col items-center justify-center min-w-[56px] min-h-[56px] active:scale-95 transition-transform duration-150 relative -top-3" href="#emergencia">
+<div class="w-14 h-14 rounded-full bg-[#C62828] text-white flex items-center justify-center shadow-md border-4 border-surface-container-lowest">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="emergency">emergency</span>
+</div>
+<span class="font-caption-bold text-caption-bold text-xs text-secondary font-bold mt-1">Emergencia</span>
+</a>
+<!-- Tab: Alertas (Active Service State Intent) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-semibold min-w-[56px] min-h-[56px] hover:bg-surface-container-low dark:hover:bg-surface-container active:scale-95 transition-transform duration-150 rounded-lg" href="#alertas">
+<span class="material-symbols-outlined text-2xl" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-caption text-caption text-xs mt-0.5">Alertas</span>
+</a>
+<!-- Tab: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low dark:hover:bg-surface-container active:scale-95 transition-transform duration-150 rounded-lg" href="#perfil">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="font-caption text-caption text-xs mt-0.5">Perfil</span>
+</a>
+</nav>
+</body></html>

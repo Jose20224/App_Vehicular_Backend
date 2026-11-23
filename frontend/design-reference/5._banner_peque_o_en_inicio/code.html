@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro S.A. - Inicio</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Font: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#cad3ff",
+            "on-surface-variant": "#434655",
+            "secondary-container": "#d93633",
+            "surface-container-low": "#f1f3ff",
+            "tertiary-fixed-dim": "#88d982",
+            "surface-container-highest": "#dce2f7",
+            "on-tertiary-fixed-variant": "#005312",
+            "background": "#f9f9ff",
+            "inverse-primary": "#b7c4ff",
+            "outline": "#747686",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed-variant": "#93000e",
+            "on-secondary-container": "#fffbff",
+            "on-background": "#141b2b",
+            "primary-fixed": "#dce1ff",
+            "tertiary": "#005011",
+            "on-primary": "#ffffff",
+            "surface-tint": "#2151da",
+            "inverse-surface": "#293040",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-secondary": "#ffffff",
+            "error-container": "#ffdad6",
+            "primary-container": "#1d4ed8",
+            "surface-bright": "#f9f9ff",
+            "on-primary-fixed": "#001551",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed-dim": "#b7c4ff",
+            "surface-container": "#e9edff",
+            "on-tertiary-container": "#95e88f",
+            "tertiary-container": "#186a21",
+            "surface-dim": "#d3daef",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed": "#002204",
+            "error": "#ba1a1a",
+            "secondary-fixed-dim": "#ffb4ac",
+            "inverse-on-surface": "#edf0ff",
+            "primary": "#0037b0",
+            "on-surface": "#141b2b",
+            "secondary-fixed": "#ffdad6",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#410003",
+            "secondary": "#b51a1e",
+            "surface-variant": "#dce2f7",
+            "surface": "#f9f9ff",
+            "tertiary-fixed": "#a3f69c"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-xs": "0.25rem",
+            "margin-tablet": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-md": "1rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "body": ["Inter"],
+            "caption": ["Inter"],
+            "title": ["Inter"],
+            "caption-bold": ["Inter"],
+            "headline": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "display": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "700"
+              }
+            ],
+            "body": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "400"
+              }
+            ],
+            "caption": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "500"
+              }
+            ],
+            "title": [
+              "20px",
+              {
+                "lineHeight": "28px",
+                "fontWeight": "600"
+              }
+            ],
+            "caption-bold": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "600"
+              }
+            ],
+            "headline": [
+              "24px",
+              {
+                "lineHeight": "32px",
+                "letterSpacing": "-0.01em",
+                "fontWeight": "700"
+              }
+            ],
+            "body-medium": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "500"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-28">
+<!-- Top Navigation Shell (Shared Component) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center gap-2">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform duration-150 text-primary">
+<span class="material-symbols-outlined text-primary text-[24px]">arrow_back</span>
+</button>
+<span class="font-headline text-headline text-primary font-bold tracking-tight">Registro S.A.</span>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden flex items-center justify-center bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A close portrait of a friendly professional Latino male driver in his late thirties wearing a casual collared navy shirt, set against a bright, clean and modern interior studio with crisp natural daylighting and calm professional composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTMb7KA1U4SAUhHOb2ZPvYwgptQHRzv_Pm-IbdnG6Mg8LuAAFe5PWmVVZkwnPm6vod4VUM723KhJN7uxbRMVcJEWdPxqeV64baF1U3QTEBt9gHUFi3bPARD21N6ITKqJIX0rSnRps_2oEcDunk9-iL6EJVh9ZdoZzWmcawCA5cAZTxb9rQuaYOySyaPtCzf-HZDhKmmymz2smlWADF3lG0dhTRB1_9LhTu7RexBIgm"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas Container -->
+<main class="max-w-md mx-auto pt-16 px-4 flex flex-col gap-5">
+<!-- User Header Saludo & Status Bar -->
+<section class="pt-2 flex items-center justify-between">
+<div>
+<h1 class="font-display text-display text-on-surface tracking-tight">¡Hola, Carlos!</h1>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+          Conductor registrado • Managua, NI
+        </p>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Notificaciones del conductor" class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[22px] text-primary">notifications_active</span>
+</button>
+</div>
+</section>
+<!-- Urgent Alert Card: Expiración Crítica -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-error-container text-error flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container text-error font-caption-bold text-caption mb-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span>Por Vencer</span>
+</div>
+<h2 class="font-title text-title text-on-surface font-semibold leading-tight">Seguro de Hilux vence en 7 días</h2>
+<p class="font-caption text-caption text-on-surface-variant mt-1">Póliza Obligatoria RC • Placa M 342-890</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant flex items-center justify-between gap-2">
+<span class="font-caption text-caption text-error font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">event_busy</span>
+          Expira: 24 Marzo 2025
+        </span>
+<button class="h-10 px-4 rounded-xl bg-primary-container text-on-secondary-container font-caption-bold text-caption flex items-center gap-1 active:scale-95 transition-transform shadow-sm">
+<span>Renovar Ahora</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Horizontal Vehicle Selector -->
+<section class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<h3 class="font-title text-title text-on-surface font-semibold">Mis Vehículos</h3>
+<button class="font-caption-bold text-caption text-primary hover:underline flex items-center gap-0.5">
+<span>Gestionar</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto pb-1 -mx-4 px-4 scrollbar-none snap-x">
+<!-- Vehicle 1: Active Selection -->
+<article class="snap-start shrink-0 w-64 bg-surface-container-lowest border-2 border-primary rounded-xl p-3 shadow-sm relative">
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-primary font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[14px]">directions_car</span>
+              Principal
+            </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container text-secondary font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[12px]">priority_high</span>
+              1 Alerta
+            </span>
+</div>
+<h4 class="font-title text-title text-on-surface font-bold">Toyota Hilux 2022</h4>
+<p class="font-caption text-caption text-on-surface-variant font-medium mt-0.5">Placa: M 342-890 • Diésel</p>
+<div class="mt-2 pt-2 border-t border-outline-variant flex items-center justify-between text-caption font-caption">
+<span class="text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+              Inspección OK
+            </span>
+<span class="text-primary font-semibold">Ver ficha</span>
+</div>
+</article>
+<!-- Vehicle 2: Secondary Selection -->
+<article class="snap-start shrink-0 w-64 bg-surface-container-lowest border border-outline-variant rounded-xl p-3 shadow-sm opacity-90 hover:opacity-100 transition-opacity">
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption">
+<span class="material-symbols-outlined text-[14px]">two_wheeler</span>
+              Secundario
+            </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#E8F5E9] text-[#2E7D32] font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[12px]">check</span>
+              Al día
+            </span>
+</div>
+<h4 class="font-title text-title text-on-surface font-bold">Suzuki GN 125</h4>
+<p class="font-caption text-caption text-on-surface-variant font-medium mt-0.5">Placa: M 118-204 • Moto</p>
+<div class="mt-2 pt-2 border-t border-outline-variant flex items-center justify-between text-caption font-caption">
+<span class="text-on-surface-variant">Sticker vence Oct 25</span>
+<span class="text-primary font-semibold">Seleccionar</span>
+</div>
+</article>
+<!-- Vehicle 3: Add new vehicle slot -->
+<button class="snap-start shrink-0 w-28 bg-surface-container-low border border-dashed border-outline rounded-xl p-3 flex flex-col items-center justify-center gap-1 text-primary hover:bg-surface-container active:scale-95 transition-all">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-xs">
+<span class="material-symbols-outlined text-[24px]">add</span>
+</div>
+<span class="font-caption-bold text-caption text-center leading-tight">Agregar Vehículo</span>
+</button>
+</div>
+</section>
+<!-- Quick Access Row (Accesos Rápidos) -->
+<section>
+<div class="grid grid-cols-3 gap-2.5">
+<!-- Quick Action 1 -->
+<button class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3 min-h-[56px] flex flex-col items-center justify-center text-center gap-1.5 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm">
+<div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">note_add</span>
+</div>
+<span class="font-caption-bold text-caption text-on-surface leading-tight">Agregar documento</span>
+</button>
+<!-- Quick Action 2 -->
+<button class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3 min-h-[56px] flex flex-col items-center justify-center text-center gap-1.5 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm">
+<div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">build_circle</span>
+</div>
+<span class="font-caption-bold text-caption text-on-surface leading-tight">Buscar taller</span>
+</button>
+<!-- Quick Action 3 -->
+<button class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3 min-h-[56px] flex flex-col items-center justify-center text-center gap-1.5 hover:bg-surface-container-low active:scale-95 transition-all shadow-sm">
+<div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">policy</span>
+</div>
+<span class="font-caption-bold text-caption text-on-surface leading-tight">Ver multas</span>
+</button>
+</div>
+</section>
+<!-- BANNER PUBLICITARIO PEQUEÑO Y DISCRETO (Small Home Banner) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 shadow-sm relative overflow-hidden">
+<!-- Top meta pill row -->
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EEF0FF] text-[#3730A3] font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[14px]">info</span>
+          Patrocinado
+        </span>
+<span class="font-caption text-caption text-outline">Managua • Taller Aliado</span>
+</div>
+<!-- Banner Main Content Body -->
+<div class="flex items-center justify-between gap-3">
+<div class="flex-1 pr-1">
+<p class="font-caption-bold text-caption text-primary">Autocentro Los Robles</p>
+<h5 class="font-body-medium text-body-medium text-on-surface font-semibold leading-snug mt-0.5">
+            15% desc. en chequeo de frenos y suspensión preventiva para vehículos Hilux
+          </h5>
+<div class="mt-2.5">
+<button class="h-9 px-3.5 rounded-lg bg-primary-container text-on-secondary-container font-caption-bold text-caption inline-flex items-center gap-1.5 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]">local_offer</span>
+<span>Canjear</span>
+</button>
+</div>
+</div>
+<!-- Thumbnail Image Small right -->
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 border border-outline-variant relative bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A clean, brightly illuminated modern vehicle mechanical workshop bay in Managua Nicaragua showing professional mechanics performing brake and hydraulic suspension inspection on an SUV, high resolution clean lighting with precision blue tone accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiQbeq1s35X-mcwXu0YEJ60XplOWUc9EPX7kWc1fq5TaX_FaZwDO4IJ0g6i3pzNWPHZycVGUbYdz_FABUagxMEPDtkuKGVU5Aqb9kqcaOUC2gABfysUBpFNCy_ZVBvvpGZTWpxIZ0yOwXH1pvMWmSAA9_Aq8QERW3Sk4KFo8IjV0eiS-eiRyQJ7ftbTJql7hEApV7DlNjb0hlCYVO3CPJ4jx8kdDUWzEo9-qDw48V5"/>
+</div>
+</div>
+<!-- Legal disclaimer footer at the base -->
+<div class="mt-3 pt-2 border-t border-outline-variant/60">
+<p class="font-caption text-caption text-outline text-[12px] leading-tight">
+          Publicidad de tercero. Las promociones se coordinan y pagan directamente en el establecimiento.
+        </p>
+</div>
+</section>
+<!-- Normal Document List: Driver Documents -->
+<section class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h3 class="font-title text-title text-on-surface font-semibold">Documentos del Conductor</h3>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-caption-bold text-caption text-on-surface-variant">4</span>
+</div>
+<button class="font-caption-bold text-caption text-primary hover:underline">Ver todos</button>
+</div>
+<!-- Doc 1: Licencia de Conducir -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-center justify-between min-h-[56px] shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">badge</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-medium text-body-medium text-on-surface font-semibold">Licencia de Conducir</h4>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.2 rounded bg-[#E8F5E9] text-[#2E7D32] font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                Vigente
+              </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Cat. 1, 2, 3 • Vence: 12 Nov 2027</p>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform text-outline">
+<span class="material-symbols-outlined text-[22px]">chevron_right</span>
+</button>
+</article>
+<!-- Doc 2: Circulación Vehicular -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-center justify-between min-h-[56px] shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">description</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-medium text-body-medium text-on-surface font-semibold">Circulación Hilux</h4>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.2 rounded bg-[#E8F5E9] text-[#2E7D32] font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                Vigente
+              </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">M 342-890 • Registro Nacional</p>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform text-outline">
+<span class="material-symbols-outlined text-[22px]">chevron_right</span>
+</button>
+</article>
+<!-- Doc 3: Emisión de Gases e Inspección Mecánica -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-center justify-between min-h-[56px] shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-medium text-body-medium text-on-surface font-semibold">Inspección Mecánica</h4>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.2 rounded bg-[#FFF4D6] text-[#F59E0B] font-caption-bold text-caption">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+                30 días
+              </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Taller Autorizado Managua • Vence Abr 25</p>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container active:scale-95 transition-transform text-outline">
+<span class="material-symbols-outlined text-[22px]">chevron_right</span>
+</button>
+</article>
+</section>
+<!-- Estimate Disclaimer Box -->
+<aside class="p-3 bg-surface-container-low border border-outline-variant rounded-xl text-outline flex items-start gap-2.5 mb-4">
+<span class="material-symbols-outlined text-[18px] shrink-0 mt-0.5">info</span>
+<p class="font-caption text-caption leading-tight">
+        Monto estimado de aranceles y reposición sujeto a normativas oficiales de la Alcaldía de Managua y Policía Nacional de Tránsito.
+      </p>
+</aside>
+</main>
+<!-- Bottom Navigation Bar with Central Emergency Action -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest border-t border-outline-variant shadow-sm">
+<!-- Tab 1: Inicio (Active) -->
+<a class="flex flex-col items-center justify-center text-primary font-semibold min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-caption text-caption">Inicio</span>
+</a>
+<!-- Tab 2: Talleres -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]">build</span>
+<span class="font-caption text-caption">Talleres</span>
+</a>
+<!-- Tab 3: Emergencia (Central Elevated Button) -->
+<div class="relative -top-3 flex flex-col items-center">
+<button aria-label="Llamar Asistencia Vial de Emergencia" class="w-14 h-14 rounded-full bg-[#C62828] text-white flex items-center justify-center shadow-md active:scale-90 transition-transform duration-150 border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-[28px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</button>
+<span class="font-caption text-caption text-[#C62828] font-bold mt-0.5">Emergencia</span>
+</div>
+<!-- Tab 4: Alertas -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<div class="relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="w-2 h-2 rounded-full bg-secondary absolute top-0 right-0"></span>
+</div>
+<span class="font-caption text-caption">Alertas</span>
+</a>
+<!-- Tab 5: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-caption text-caption">Perfil</span>
+</a>
+</nav>
+</body></html>

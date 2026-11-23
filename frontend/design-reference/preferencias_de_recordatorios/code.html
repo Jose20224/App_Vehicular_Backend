@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configurar Recordatorios - Registro S.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#dce1ff",
+            "secondary-fixed-dim": "#ffb4ac",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed": "#a3f69c",
+            "surface": "#f9f9ff",
+            "surface-variant": "#dce2f7",
+            "on-secondary-fixed": "#410003",
+            "outline": "#747686",
+            "secondary-container": "#d93633",
+            "background": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "primary": "#0037b0",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-primary-fixed": "#001551",
+            "on-surface": "#141b2b",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#88d982",
+            "surface-container-highest": "#dce2f7",
+            "surface-dim": "#d3daef",
+            "on-secondary-container": "#fffbff",
+            "on-secondary-fixed-variant": "#93000e",
+            "on-tertiary-fixed": "#002204",
+            "tertiary-container": "#186a21",
+            "surface-bright": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "primary-container": "#1d4ed8",
+            "inverse-on-surface": "#edf0ff",
+            "surface-container-low": "#f1f3ff",
+            "on-error-container": "#93000a",
+            "tertiary": "#005011",
+            "outline-variant": "#c4c5d7",
+            "on-tertiary-fixed-variant": "#005312",
+            "on-error": "#ffffff",
+            "inverse-surface": "#293040",
+            "surface-tint": "#2151da",
+            "secondary": "#b51a1e",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#ffdad6",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-tertiary-container": "#95e88f",
+            "inverse-primary": "#b7c4ff",
+            "on-surface-variant": "#434655",
+            "on-background": "#141b2b",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#cad3ff",
+            "on-secondary": "#ffffff",
+            "surface-container": "#e9edff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-tablet": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "gutter": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "body-medium": ["Inter"],
+            "caption": ["Inter"],
+            "display": ["Inter"],
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"]
+          },
+          "fontSize": {
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body pb-24 selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar Component directly using Style Rules from Shared JSON -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:bg-surface-container active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline text-headline text-primary font-bold tracking-tight">Registro S.A.</h1>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-4 pt-20 pb-8 flex flex-col gap-6">
+<!-- Header Section -->
+<section class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="bg-primary-fixed text-primary px-2.5 py-0.5 rounded-full font-caption-bold text-caption text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="tune">tune</span>
+          Ajustes de Alertas
+        </span>
+</div>
+<h2 class="font-headline text-headline text-on-surface font-bold">Configurar Recordatorios</h2>
+<p class="font-body text-body text-on-surface-variant">
+        Personaliza con cuánta anticipación deseas recibir avisos para renovar tus documentos vehiculares y evitar multas.
+      </p>
+</section>
+<!-- Banner Informativo Offline / Zonas sin Señal -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex gap-4 items-start shadow-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="cell_tower">cell_tower</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<h3 class="font-body-medium text-body-medium text-on-surface font-bold">Modo Ruta Protegida</h3>
+<span class="bg-surface-container-high text-primary px-2 py-0.5 rounded text-xs font-caption-bold">Nicaragua Offline</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+          Los avisos también se programan en tu teléfono para llegar sin internet. Recibirás las alertas locales incluso en carreteras departamentales o zonas sin señal.
+        </p>
+</div>
+</section>
+<!-- Sección 1: Frecuencia de avisos -->
+<section class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<h3 class="font-title text-title text-on-surface">Frecuencia de avisos</h3>
+<span class="font-caption text-caption text-on-surface-variant">5 programados</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl divide-y divide-outline-variant overflow-hidden">
+<!-- Item 1: 30 días -->
+<label class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low min-h-[56px] transition-colors">
+<div class="flex flex-col pr-4">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">30 días antes del vencimiento</span>
+<span class="font-caption text-caption text-on-surface-variant">Primer aviso para preparar trámites y presupuesto</span>
+</div>
+<input checked="" class="w-7 h-7 text-primary-container rounded border-outline-variant focus:ring-primary-container focus:ring-2 accent-primary-container flex-shrink-0 cursor-pointer" type="checkbox"/>
+</label>
+<!-- Item 2: 15 días -->
+<label class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low min-h-[56px] transition-colors">
+<div class="flex flex-col pr-4">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">15 días antes del vencimiento</span>
+<span class="font-caption text-caption text-on-surface-variant">Recordatorio intermedio con talleres sugeridos</span>
+</div>
+<input checked="" class="w-7 h-7 text-primary-container rounded border-outline-variant focus:ring-primary-container focus:ring-2 accent-primary-container flex-shrink-0 cursor-pointer" type="checkbox"/>
+</label>
+<!-- Item 3: 7 días -->
+<label class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low min-h-[56px] transition-colors">
+<div class="flex flex-col pr-4">
+<div class="flex items-center gap-2">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">7 días antes del vencimiento</span>
+<span class="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded font-caption-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs" data-icon="warning">warning</span>
+                Prioridad
+              </span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Aviso prioritario para evitar retrasos</span>
+</div>
+<input checked="" class="w-7 h-7 text-primary-container rounded border-outline-variant focus:ring-primary-container focus:ring-2 accent-primary-container flex-shrink-0 cursor-pointer" type="checkbox"/>
+</label>
+<!-- Item 4: 1 día -->
+<label class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low min-h-[56px] transition-colors">
+<div class="flex flex-col pr-4">
+<div class="flex items-center gap-2">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">1 día antes del vencimiento</span>
+<span class="bg-red-100 text-secondary text-xs px-2 py-0.5 rounded font-caption-bold">Urgente</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Alerta urgente de última oportunidad</span>
+</div>
+<input checked="" class="w-7 h-7 text-primary-container rounded border-outline-variant focus:ring-primary-container focus:ring-2 accent-primary-container flex-shrink-0 cursor-pointer" type="checkbox"/>
+</label>
+<!-- Item 5: El día -->
+<label class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low min-h-[56px] transition-colors">
+<div class="flex flex-col pr-4">
+<div class="flex items-center gap-2">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">El día del vencimiento</span>
+<span class="bg-secondary text-on-secondary text-xs px-2 py-0.5 rounded font-caption-bold">Crítico</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Notificación crítica de documento expirando hoy</span>
+</div>
+<input checked="" class="w-7 h-7 text-primary-container rounded border-outline-variant focus:ring-primary-container focus:ring-2 accent-primary-container flex-shrink-0 cursor-pointer" type="checkbox"/>
+</label>
+</div>
+</section>
+<!-- Sección 2: Hora programada del aviso -->
+<section class="flex flex-col gap-3">
+<h3 class="font-title text-title text-on-surface">Hora programada del aviso</h3>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-3">
+<label class="font-body-medium text-body-medium text-on-surface font-semibold flex items-center justify-between" for="time-picker">
+<span>Hora del aviso</span>
+<span class="text-xs font-caption text-on-surface-variant font-normal">Recomendado: 09:00 a. m.</span>
+</label>
+<div class="flex items-center justify-between border border-outline-variant rounded-xl px-4 min-h-[56px] bg-surface hover:border-primary-container transition-colors focus-within:ring-2 focus-within:ring-primary-container">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="schedule">schedule</span>
+<div>
+<span class="font-title text-title text-on-surface font-bold tracking-wide">09:00 a. m.</span>
+<p class="font-caption text-caption text-on-surface-variant text-xs">Horario diurno recomendado para no interrumpir tu descanso</p>
+</div>
+</div>
+<button class="px-4 py-2 border border-primary-container text-primary-container rounded-lg font-caption-bold text-caption hover:bg-surface-container-high transition-colors active:scale-95" type="button">
+            Editar
+          </button>
+</div>
+</div>
+</section>
+<!-- Sección 3: Canales de Notificación -->
+<section class="flex flex-col gap-3">
+<h3 class="font-title text-title text-on-surface">Canales de Notificación</h3>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl divide-y divide-outline-variant overflow-hidden">
+<!-- Push Notifications -->
+<label class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low min-h-[56px]">
+<div class="flex items-center gap-3 pr-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">Notificaciones Push en el celular</span>
+<span class="font-caption text-caption text-on-surface-variant">Alertas emergentes directas en la pantalla de bloqueo</span>
+</div>
+</div>
+<input checked="" class="w-7 h-7 text-primary-container rounded border-outline-variant focus:ring-primary-container focus:ring-2 accent-primary-container flex-shrink-0 cursor-pointer" type="checkbox"/>
+</label>
+<!-- WhatsApp -->
+<label class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low min-h-[56px]">
+<div class="flex items-center gap-3 pr-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">Avisos directos por WhatsApp</span>
+<span class="bg-surface-container text-on-surface-variant text-xs px-2 py-0.5 rounded font-caption">+505 8888 1234</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Envío de resumen con enlace rápido para gestionar citas</span>
+</div>
+</div>
+<input checked="" class="w-7 h-7 text-primary-container rounded border-outline-variant focus:ring-primary-container focus:ring-2 accent-primary-container flex-shrink-0 cursor-pointer" type="checkbox"/>
+</label>
+<!-- SMS Offline -->
+<label class="flex items-center justify-between p-4 cursor-pointer hover:bg-surface-container-low min-h-[56px]">
+<div class="flex items-center gap-3 pr-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="sms">sms</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-body-medium text-body-medium text-on-surface font-semibold">Mensaje de texto SMS (Offline)</span>
+<span class="bg-blue-100 text-primary text-xs px-2 py-0.5 rounded font-caption-bold">Esencial</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Mensajería celular básica sin costo de consumo de datos</span>
+</div>
+</div>
+<input checked="" class="w-7 h-7 text-primary-container rounded border-outline-variant focus:ring-primary-container focus:ring-2 accent-primary-container flex-shrink-0 cursor-pointer" type="checkbox"/>
+</label>
+</div>
+</section>
+<!-- Botón Primario Guardar Preferencias (56dp) -->
+<div class="pt-2">
+<button class="w-full h-14 bg-primary-container text-on-primary font-body-medium text-body-medium rounded-xl flex items-center justify-center gap-2 font-bold shadow-sm hover:opacity-95 active:scale-[0.99] transition-transform" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="save">save</span>
+        Guardar Preferencias
+      </button>
+</div>
+</main>
+<!-- BottomNavBar Component derived from Shared Components JSON -->
+<!-- "Alertas" is strictly the active destination mapping the notification/reminder context -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest border-t border-outline-variant shadow-sm">
+<!-- Inicio -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-95 transition-transform duration-150 min-w-[56px] min-h-[56px]" type="button">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-caption text-caption text-xs">Inicio</span>
+</button>
+<!-- Talleres -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-95 transition-transform duration-150 min-w-[56px] min-h-[56px]" type="button">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+<span class="font-caption text-caption text-xs">Talleres</span>
+</button>
+<!-- Emergencia (Elevated Style Rule) -->
+<button aria-label="Emergencia" class="flex flex-col items-center justify-center -mt-5 min-w-[56px] min-h-[56px] active:scale-95 transition-transform duration-150" type="button">
+<div class="w-14 h-14 rounded-full bg-secondary flex items-center justify-center text-on-secondary shadow-md border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-2xl" data-icon="emergency">emergency</span>
+</div>
+<span class="font-caption text-caption text-xs text-secondary font-bold mt-0.5">Emergencia</span>
+</button>
+<!-- Alertas (Active State) -->
+<button class="flex flex-col items-center justify-center text-primary font-semibold min-w-[56px] min-h-[56px] active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-caption text-caption text-xs">Alertas</span>
+</button>
+<!-- Perfil -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-95 transition-transform duration-150 min-w-[56px] min-h-[56px]" type="button">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-caption text-caption text-xs">Perfil</span>
+</button>
+</nav>
+</body></html>

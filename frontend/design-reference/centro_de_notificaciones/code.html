@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Centro de Alertas | Registro S.A.</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#dce1ff",
+            "secondary-fixed-dim": "#ffb4ac",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed": "#a3f69c",
+            "surface": "#f9f9ff",
+            "surface-variant": "#dce2f7",
+            "on-secondary-fixed": "#410003",
+            "outline": "#747686",
+            "secondary-container": "#d93633",
+            "background": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "primary": "#0037b0",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-primary-fixed": "#001551",
+            "on-surface": "#141b2b",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#88d982",
+            "surface-container-highest": "#dce2f7",
+            "surface-dim": "#d3daef",
+            "on-secondary-container": "#fffbff",
+            "on-secondary-fixed-variant": "#93000e",
+            "on-tertiary-fixed": "#002204",
+            "tertiary-container": "#186a21",
+            "surface-bright": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "primary-container": "#1d4ed8",
+            "inverse-on-surface": "#edf0ff",
+            "surface-container-low": "#f1f3ff",
+            "on-error-container": "#93000a",
+            "tertiary": "#005011",
+            "outline-variant": "#c4c5d7",
+            "on-tertiary-fixed-variant": "#005312",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#cad3ff",
+            "on-secondary": "#ffffff",
+            "surface-container": "#e9edff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-tablet": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "gutter": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "body-medium": ["Inter"],
+            "caption": ["Inter"],
+            "display": ["Inter"],
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"]
+          },
+          "fontSize": {
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-full flex flex-col font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP APP BAR (Shared Component Source of Truth) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-2">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<span class="font-headline text-headline text-primary dark:text-primary-fixed font-bold tracking-tight text-[18px] leading-5">Alertas</span>
+<span class="font-caption text-caption text-on-surface-variant text-[11px] leading-3">Registro S.A. Nicaragua</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Marcar todo como leído" class="px-2.5 py-1.5 rounded-lg text-primary hover:bg-surface-container active:scale-95 transition-all text-xs font-semibold flex items-center gap-1" id="btn-mark-all" title="Marcar todo como leído" type="button">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span class="hidden sm:inline">Leído</span>
+</button>
+<button aria-label="Configuración de avisos" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined text-[22px]">tune</span>
+</button>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-4 pt-16 pb-24 flex flex-col">
+<!-- CONTEXT & VEHICLE IDENTIFIER PILL -->
+<div class="mt-3 mb-2 flex items-center justify-between bg-surface-container-lowest border border-outline-variant rounded-xl p-3 shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">directions_car</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title text-[15px] font-bold text-on-surface">Toyota Hilux D/C</span>
+<span class="px-1.5 py-0.5 text-[11px] font-bold tracking-wider bg-surface-container-high text-on-surface rounded border border-outline-variant font-mono">M 342-890</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant text-[12px]">Managua · Uso Particular</p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-semibold">
+<span class="material-symbols-outlined text-[16px] text-secondary">warning</span>
+<span>2 alertas</span>
+</div>
+</div>
+<!-- VIEW SELECTOR TABS -->
+<section aria-label="Selector de estado de notificaciones" class="my-3">
+<div class="grid grid-cols-2 p-1 bg-surface-container-low rounded-xl border border-outline-variant">
+<button class="py-2.5 px-3 rounded-lg text-center font-caption-bold text-caption-bold transition-all text-on-primary bg-primary shadow-sm flex items-center justify-center gap-2" id="tab-all" onclick="switchView('all')" type="button">
+<span>Todas</span>
+<span class="px-2 py-0.5 rounded-full text-xs bg-primary-container text-white" id="badge-all-count">3</span>
+</button>
+<button class="py-2.5 px-3 rounded-lg text-center font-caption-bold text-caption-bold text-on-surface-variant hover:text-on-surface transition-all flex items-center justify-center gap-2" id="tab-empty" onclick="switchView('empty')" type="button">
+<span>Sin alertas</span>
+<span class="px-1.5 py-0.5 rounded-full text-[11px] bg-surface-container-high text-on-surface-variant">Demo</span>
+</button>
+</div>
+</section>
+<!-- CONTAINER A: LIST VIEW (Chronological Sections) -->
+<div class="space-y-6 transition-opacity duration-200" id="view-active-alerts">
+<!-- SECCIÓN 1: HOY -->
+<section aria-labelledby="section-today-title" class="space-y-3">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<h2 class="font-title text-[15px] font-bold text-on-surface tracking-tight uppercase" id="section-today-title">Hoy</h2>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant text-[12px]">Prioridad alta</span>
+</div>
+<!-- Tarjeta Alerta Urgente: Seguro Obligatorio -->
+<article class="bg-surface-container-lowest rounded-xl border-2 border-secondary/30 p-4 relative shadow-none hover:border-secondary transition-colors">
+<!-- Unread indicator dot -->
+<span class="absolute top-4 right-4 w-2.5 h-2.5 rounded-full bg-primary-container ring-4 ring-primary-fixed" title="No leído"></span>
+<div class="flex items-start gap-3.5 pr-4">
+<!-- Icono Dual: Ambar / Warning Reloj -->
+<div class="w-12 h-12 rounded-xl bg-[#FFF4D6] border border-[#F59E0B]/30 flex-shrink-0 flex items-center justify-center text-[#B45309]">
+<span class="material-symbols-outlined text-[26px]">schedule</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1 flex-wrap">
+<!-- Dual Coded Chip: Por Vencer -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-[#FFF4D6] text-[#B45309] border border-[#F59E0B]/40">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                  Por vencer
+                </span>
+<span class="font-caption text-caption text-on-surface-variant text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">history</span>
+                  Hace 2 horas
+                </span>
+</div>
+<h3 class="font-title text-[16px] leading-snug font-bold text-on-surface text-balance">
+                Tu seguro del Toyota Hilux vence en 7 días
+              </h3>
+<p class="mt-1 font-body text-body text-[14px] leading-relaxed text-on-surface-variant">
+                Póliza SOAPV No. 892-2023. Renueva a tiempo para evitar sanciones de tránsito en carretera.
+              </p>
+<!-- Botón Acción Rápida (min 56px ergonomía móvil o contenedor espacioso) -->
+<div class="mt-4 pt-3 border-t border-outline-variant/60 flex items-center justify-between gap-3">
+<button class="w-full sm:w-auto h-12 px-5 bg-primary-container hover:bg-primary text-on-primary rounded-xl font-caption-bold text-caption-bold flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span>Ver póliza</span>
+</button>
+<button aria-label="Descartar notificación" class="w-12 h-12 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-95 transition-all border border-outline-variant flex-shrink-0" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- SECCIÓN 2: ESTA SEMANA -->
+<section aria-labelledby="section-week-title" class="space-y-3">
+<div class="flex items-center justify-between px-1">
+<h2 class="font-title text-[15px] font-bold text-on-surface tracking-tight uppercase" id="section-week-title">Esta semana</h2>
+<span class="font-caption text-caption text-on-surface-variant text-[12px]">2 avisos</span>
+</div>
+<!-- Tarjeta: Emisión de Gases -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 relative shadow-none">
+<!-- Unread indicator dot -->
+<span class="absolute top-4 right-4 w-2.5 h-2.5 rounded-full bg-primary-container ring-4 ring-primary-fixed" title="No leído"></span>
+<div class="flex items-start gap-3.5 pr-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant flex-shrink-0 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">minor_crash</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1 flex-wrap">
+<!-- Dual Coded Chip: Por Vencer -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-[#FFF4D6] text-[#B45309] border border-[#F59E0B]/40">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                  Por vencer
+                </span>
+<span class="font-caption text-caption text-on-surface-variant text-xs">Hace 3 días</span>
+</div>
+<h3 class="font-title text-[16px] leading-snug font-bold text-on-surface">
+                Emisión de Gases: vence en 5 días
+              </h3>
+<p class="mt-1 font-body text-body text-[14px] leading-relaxed text-on-surface-variant">
+                Toyota Hilux (Placa M 342-890). Programa tu inspección física con tiempo en cualquier taller autorizado del país.
+              </p>
+<div class="mt-3.5 flex items-center gap-3">
+<a class="text-primary hover:underline font-caption-bold text-[13px] flex items-center gap-1" href="#talleres">
+<span>Ver talleres cercanos</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Tarjeta Informativa/Consejo: Escudo Verde Copia Digital -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-none">
+<div class="flex items-start gap-3.5">
+<div class="w-12 h-12 rounded-xl bg-[#E8F5E9] border border-[#2E7D32]/30 flex-shrink-0 flex items-center justify-center text-[#2E7D32]">
+<span class="material-symbols-outlined text-[26px]">verified_user</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1 flex-wrap">
+<!-- Dual Coded Chip: Vigente -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-[#E8F5E9] text-[#2E7D32] border border-[#2E7D32]/30">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                  Vigente
+                </span>
+<span class="font-caption text-caption text-on-surface-variant text-xs">Hace 5 días</span>
+</div>
+<h3 class="font-title text-[16px] leading-snug font-bold text-on-surface">
+                Copia digital disponible sin conexión
+              </h3>
+<p class="mt-1 font-body text-body text-[14px] leading-relaxed text-on-surface-variant">
+                Tus documentos de rodamiento 2025 están descargados y listos en la memoria local para inspección policial en ruta.
+              </p>
+<div class="mt-3 pt-2.5 border-t border-outline-variant/40 flex items-center justify-between text-xs text-on-surface-variant">
+<span class="flex items-center gap-1 text-[#2E7D32] font-semibold">
+<span class="material-symbols-outlined text-[15px]">cloud_done</span>
+                  Sincronizado
+                </span>
+<span>Almacenado seguro</span>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- SECCIÓN 3: ANTERIORES -->
+<section aria-labelledby="section-previous-title" class="space-y-3">
+<div class="flex items-center justify-between px-1">
+<h2 class="font-title text-[15px] font-bold text-on-surface tracking-tight uppercase" id="section-previous-title">Anteriores</h2>
+<span class="font-caption text-caption text-on-surface-variant text-[12px]">Historial de enero</span>
+</div>
+<!-- Tarjeta: Sticker Rodamiento completado -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-none opacity-90">
+<div class="flex items-start gap-3.5">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex-shrink-0 flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[26px]">task_alt</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1 flex-wrap">
+<!-- Dual Coded Chip: Completado -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">check</span>
+                  Completado
+                </span>
+<span class="font-caption text-caption text-on-surface-variant text-xs">14 de Ene</span>
+</div>
+<h3 class="font-title text-[15px] leading-snug font-bold text-on-surface">
+                Sticker de Rodamiento registrado con éxito
+              </h3>
+<p class="mt-1 font-body text-body text-[13px] leading-relaxed text-on-surface-variant">
+                Alcaldía de Managua confirmó tu pago anual para el vehículo Placa M 342-890. El comprobante está archivado en tu perfil.
+              </p>
+</div>
+</div>
+</article>
+</section>
+<!-- DISCLAIMER DE ARANCELES / ESTADO REGULATORIO -->
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant flex items-start gap-3 mt-4">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">info</span>
+<p class="font-caption text-caption text-on-surface-variant text-[13px] leading-normal">
+<strong class="font-semibold text-on-surface">Aviso municipal:</strong> Las fechas límites son calculadas con base en el calendario oficial de Tránsito Nacional y la Alcaldía de Managua. Mantén tus documentos al día para circular sin contratiempos.
+        </p>
+</div>
+</div>
+<!-- CONTAINER B: DEMOSTRACIÓN DE ESTADO VACÍO (Empty State) -->
+<div class="hidden flex-col items-center justify-center text-center py-10 px-4 my-auto" id="view-empty-state">
+<div class="w-24 h-24 rounded-full bg-surface-container-low border border-outline-variant flex items-center justify-center text-outline mb-4">
+<span class="material-symbols-outlined text-[44px]">notifications_off</span>
+</div>
+<h3 class="font-headline text-headline text-[20px] font-bold text-on-surface mb-2">
+        No tienes alertas por ahora
+      </h3>
+<p class="font-body text-body text-on-surface-variant text-[15px] max-w-sm mb-6 leading-relaxed">
+        Te avisaremos con suficiente tiempo antes de que venza cualquier póliza, sticker o inspección mecánica de tu Toyota Hilux.
+      </p>
+<div class="flex flex-col w-full max-w-xs gap-3">
+<button class="w-full h-14 bg-primary text-on-primary rounded-xl font-caption-bold text-caption-bold flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-none" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications_active</span>
+<span>Configurar avisos</span>
+</button>
+<button class="w-full h-12 bg-surface-container-lowest border border-outline-variant text-primary rounded-xl font-caption-bold text-caption-bold flex items-center justify-center gap-1 active:scale-95 transition-transform" onclick="switchView('all')" type="button">
+<span>Volver al listado completo</span>
+</button>
+</div>
+<div class="mt-8 p-3 rounded-lg bg-surface-container-low border border-outline-variant/70 text-xs text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary">verified</span>
+<span>Sistema de monitoreo vial activo 24/7</span>
+</div>
+</div>
+</main>
+<!-- BOTTOM NAVIGATION BAR (Shared Components Exact Blueprint + Emergency Hub) -->
+<nav aria-label="Navegación principal" class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest dark:bg-surface border-t border-outline-variant dark:border-outline shadow-sm">
+<!-- Destino 1: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low transition-colors active:scale-95" href="#inicio">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-caption text-caption text-[11px] leading-tight">Inicio</span>
+</a>
+<!-- Destino 2: Talleres -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low transition-colors active:scale-95" href="#talleres">
+<span class="material-symbols-outlined text-[24px]">build</span>
+<span class="font-caption text-caption text-[11px] leading-tight">Talleres</span>
+</a>
+<!-- Destino 3: Emergencia (Central Prominent Red Trigger) -->
+<div class="relative -top-3 flex flex-col items-center">
+<button aria-label="Llamar Asistencia de Emergencia" class="w-14 h-14 rounded-full bg-[#C62828] text-white flex items-center justify-center shadow-lg active:scale-90 transition-transform focus:outline-none border-2 border-white ring-2 ring-[#C62828]/20" type="button">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</button>
+<span class="text-[11px] font-caption-bold font-bold text-[#C62828] mt-0.5 tracking-tight">Emergencia</span>
+</div>
+<!-- Destino 4: Alertas (ACTIVE STATE MAPPING: Center of this screen intent) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-semibold min-w-[56px] min-h-[56px] relative active:scale-95" href="#alertas">
+<!-- Active dot counter badge -->
+<span class="absolute top-2 right-4 w-2 h-2 rounded-full bg-secondary"></span>
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-caption text-caption text-[11px] leading-tight font-bold">Alertas</span>
+</a>
+<!-- Destino 5: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low transition-colors active:scale-95" href="#perfil">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-caption text-caption text-[11px] leading-tight">Perfil</span>
+</a>
+</nav>
+<!-- MICRO-INTERACTIONS SCRIPT -->
+<script>
+    function switchView(viewName) {
+      const activeContainer = document.getElementById('view-active-alerts');
+      const emptyContainer = document.getElementById('view-empty-state');
+      const tabAll = document.getElementById('tab-all');
+      const tabEmpty = document.getElementById('tab-empty');
+
+      if (viewName === 'all') {
+        activeContainer.classList.remove('hidden');
+        emptyContainer.classList.add('hidden');
+
+        // Style Tab All
+        tabAll.className = 'py-2.5 px-3 rounded-lg text-center font-caption-bold text-caption-bold transition-all text-on-primary bg-primary shadow-sm flex items-center justify-center gap-2';
+        // Style Tab Empty
+        tabEmpty.className = 'py-2.5 px-3 rounded-lg text-center font-caption-bold text-caption-bold text-on-surface-variant hover:text-on-surface transition-all flex items-center justify-center gap-2';
+      } else {
+        activeContainer.classList.add('hidden');
+        emptyContainer.classList.remove('hidden');
+
+        // Style Tab Empty
+        tabEmpty.className = 'py-2.5 px-3 rounded-lg text-center font-caption-bold text-caption-bold transition-all text-on-primary bg-primary shadow-sm flex items-center justify-center gap-2';
+        // Style Tab All
+        tabAll.className = 'py-2.5 px-3 rounded-lg text-center font-caption-bold text-caption-bold text-on-surface-variant hover:text-on-surface transition-all flex items-center justify-center gap-2';
+      }
+    }
+
+    // Quick trigger to simulate marking all as read
+    document.getElementById('btn-mark-all').addEventListener('click', function() {
+      const dots = document.querySelectorAll('span[title="No leído"]');
+      dots.forEach(dot => dot.remove());
+      const badgeCount = document.getElementById('badge-all-count');
+      if (badgeCount) {
+        badgeCount.textContent = '0';
+        badgeCount.classList.replace('bg-primary-container', 'bg-outline-variant');
+      }
+      this.innerHTML = '<span class="material-symbols-outlined text-[18px]">done</span> <span class="hidden sm:inline">Listo</span>';
+      this.classList.add('text-tertiary');
+    });
+  </script>
+</body></html>

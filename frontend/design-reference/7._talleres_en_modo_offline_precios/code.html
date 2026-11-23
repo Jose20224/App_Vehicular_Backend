@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro S.A. - Directorio de Talleres (Offline)</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter Google Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config verbatim matching Design System tokens -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#88d982",
+            "surface-tint": "#2151da",
+            "tertiary-container": "#186a21",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-surface": "#141b2b",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#dce2f7",
+            "secondary-container": "#d93633",
+            "on-tertiary-fixed": "#002204",
+            "secondary-fixed-dim": "#ffb4ac",
+            "inverse-surface": "#293040",
+            "on-background": "#141b2b",
+            "outline": "#747686",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-on-surface": "#edf0ff",
+            "on-error": "#ffffff",
+            "secondary": "#b51a1e",
+            "surface-variant": "#dce2f7",
+            "primary-fixed": "#dce1ff",
+            "primary": "#0037b0",
+            "surface": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#a3f69c",
+            "surface-container-low": "#f1f3ff",
+            "surface-dim": "#d3daef",
+            "on-secondary-container": "#fffbff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "on-primary-container": "#cad3ff",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed-dim": "#b7c4ff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary-container": "#1d4ed8",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed": "#001551",
+            "on-tertiary-container": "#95e88f",
+            "secondary-fixed": "#ffdad6",
+            "background": "#f9f9ff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "display": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "caption": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "caption-bold": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "600"
+              }
+            ],
+            "title": [
+              "20px",
+              {
+                "lineHeight": "28px",
+                "fontWeight": "600"
+              }
+            ],
+            "display": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "700"
+              }
+            ],
+            "headline": [
+              "24px",
+              {
+                "lineHeight": "32px",
+                "letterSpacing": "-0.01em",
+                "fontWeight": "700"
+              }
+            ],
+            "body": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "400"
+              }
+            ],
+            "caption": [
+              "14px",
+              {
+                "lineHeight": "20px",
+                "fontWeight": "500"
+              }
+            ],
+            "body-medium": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "500"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP APP BAR (Shared Component Anchor) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center space-x-3">
+<button aria-label="Volver" class="min-w-[56px] min-h-[56px] flex items-center justify-center text-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<div class="flex items-center space-x-1.5">
+<span class="font-title text-title text-primary font-bold tracking-tight">Directorio de Talleres</span>
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="cloud_off" title="Modo fuera de línea">cloud_off</span>
+</div>
+<span class="font-caption text-caption text-secondary font-semibold -mt-1">(Modo Fuera de Línea)</span>
+</div>
+</div>
+<button aria-label="Ayuda" class="min-w-[56px] min-h-[56px] flex items-center justify-center text-primary active:scale-95 transition-transform duration-150 hover:bg-surface-container rounded-full" type="button">
+<span class="material-symbols-outlined text-primary" data-icon="help_outline">help_outline</span>
+</button>
+</header>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="flex-1 w-full max-w-md mx-auto pt-16 pb-28 px-margin flex flex-col gap-space-md">
+<!-- PERSISTENT OFFLINE STATUS BANNER -->
+<section class="w-full bg-inverse-surface text-inverse-on-surface rounded-xl p-space-md shadow-sm border border-outline/30 mt-2">
+<div class="flex items-start gap-space-sm">
+<div class="min-w-[40px] h-10 rounded-lg bg-secondary flex items-center justify-center text-on-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]" data-icon="signal_cellular_connected_no_internet_0_bar">signal_cellular_connected_no_internet_0_bar</span>
+</div>
+<div class="flex-1">
+<h1 class="font-title text-title text-white text-[18px] leading-6 font-bold">Resultados guardados el 24 de Octubre de 2024</h1>
+<p class="font-caption text-caption text-surface-container-highest mt-1">
+            Estás navegando con la copia local guardada en tu teléfono. La información de contacto telefónico y ubicación GPS funciona sin conexión a internet ni consumo de saldo.
+          </p>
+</div>
+</div>
+<!-- Action Inside Banner: 56dp Touch Target Floor -->
+<div class="mt-space-md pt-space-xs">
+<button class="w-full min-h-[56px] bg-primary text-on-primary rounded-xl flex items-center justify-center space-x-2 font-caption-bold text-caption-bold active:scale-95 transition-transform border border-primary-fixed/20 shadow" type="button">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+<span>Reintentar conexión</span>
+</button>
+</div>
+</section>
+<!-- SEARCH & FILTER UTILITY ROW (Disabled Stale State Notice) -->
+<section class="bg-surface-container-low rounded-xl p-space-sm border border-outline-variant/60 flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-2 py-1">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="filter_list_off">filter_list_off</span>
+<span class="font-caption text-caption font-semibold">Filtros desactivados</span>
+</div>
+<span class="font-caption text-caption bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded-full font-bold">Offline</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant px-2 pb-1">
+        Filtros avanzados requieren conexión de datos activa
+      </p>
+</section>
+<!-- WORKSHOP LISTING 1: AUTOCENTRO LOS ROBLES EXPRESS -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 overflow-hidden p-space-md flex flex-col gap-space-sm">
+<!-- Badges Cluster -->
+<div class="flex flex-wrap items-center gap-1.5">
+<!-- Guardado offline -->
+<span class="inline-flex items-center gap-1 bg-surface-container text-on-surface font-caption text-caption px-2.5 py-1 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="save">save</span>
+          Guardado offline
+        </span>
+<!-- Patrocinado -->
+<span class="inline-flex items-center gap-1 bg-[#EEF0FF] text-[#3730A3] font-caption-bold text-caption-bold px-2.5 py-1 rounded-full border border-[#C7D2FE]">
+<span class="material-symbols-outlined text-[16px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+          Patrocinado
+        </span>
+<!-- Verificado -->
+<span class="inline-flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed font-caption-bold text-caption-bold px-2.5 py-1 rounded-full border border-tertiary-container/30">
+<span class="material-symbols-outlined text-[16px]" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+          Verificado
+        </span>
+</div>
+<!-- Workshop Header & Distance -->
+<div class="mt-1">
+<h2 class="font-headline text-headline text-on-surface text-[20px] leading-7 font-bold">Autocentro Los Robles Express</h2>
+<div class="flex items-center text-on-surface-variant font-caption text-caption mt-0.5 space-x-1">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="near_me">near_me</span>
+<span>A 1.2 km • Rotonda El Güegüense</span>
+</div>
+</div>
+<!-- Stale Price Highlight Badge & Box -->
+<div class="bg-surface-container-low rounded-xl p-space-sm border border-outline-variant/60 flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-caption-bold text-caption-bold text-on-surface">Diagnóstico: C$ 450 <span class="font-caption text-caption text-on-surface-variant font-normal">(Ref. Oct 2024)</span></span>
+<span class="inline-flex items-center gap-1 bg-[#FFF4D6] text-[#B45309] border border-[#FCD34D] font-caption-bold text-[12px] leading-4 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span>
+            Precio desactualizado
+          </span>
+</div>
+<p class="font-caption text-caption text-secondary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="info">info</span>
+          Llama al taller para confirmar tarifa vigente.
+        </p>
+</div>
+<!-- Call Actions: 56dp Floor Touch Targets for Roadside Execution -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm mt-1">
+<!-- Big 56dp WhatsApp button -->
+<a class="min-h-[56px] bg-[#128C7E] text-white rounded-xl flex items-center justify-center space-x-2 font-body-medium text-body-medium active:scale-95 transition-transform duration-150 shadow-sm border border-[#075E54]" href="tel:+50588880001">
+<span class="material-symbols-outlined text-[24px]" data-icon="chat">chat</span>
+<span class="font-caption-bold text-caption-bold">WhatsApp Taller</span>
+</a>
+<!-- Big 56dp Blue Direct Call button -->
+<a class="min-h-[56px] bg-primary-container text-on-primary rounded-xl flex items-center justify-center space-x-2 font-body-medium text-body-medium active:scale-95 transition-transform duration-150 shadow-sm border border-primary" href="tel:+50522700000">
+<span class="material-symbols-outlined text-[24px]" data-icon="call">call</span>
+<span class="font-caption-bold text-caption-bold">Llamar directamente</span>
+</a>
+</div>
+<div class="flex items-center justify-center gap-1 text-on-surface-variant font-caption text-[12px] pt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="phonelink_ring">phonelink_ring</span>
+<span>Teléfono celular/fijo disponible sin internet</span>
+</div>
+</article>
+<!-- WORKSHOP LISTING 2: TALLER ELECTROMECÁNICO EL CHONTALEÑO -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/70 overflow-hidden p-space-md flex flex-col gap-space-sm">
+<!-- Status Badges -->
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="inline-flex items-center gap-1 bg-surface-container text-on-surface font-caption text-caption px-2.5 py-1 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="save">save</span>
+          Guardado offline
+        </span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface-variant font-caption text-caption px-2 py-0.5 rounded-full">
+          Mecánica General
+        </span>
+</div>
+<!-- Workshop Header & Distance -->
+<div class="mt-1">
+<h2 class="font-headline text-headline text-on-surface text-[20px] leading-7 font-bold">Taller Electromecánico El Chontaleño</h2>
+<div class="flex items-center text-on-surface-variant font-caption text-caption mt-0.5 space-x-1">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="near_me">near_me</span>
+<span>A 2.8 km • Semáforos El Mayoreo 2c. al Lago</span>
+</div>
+</div>
+<!-- Stale Price Highlight Badge & Service Description -->
+<div class="bg-surface-container-low rounded-xl p-space-sm border border-outline-variant/60 flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-caption-bold text-caption-bold text-on-surface">Revisión de alternador: C$ 600</span>
+<span class="inline-flex items-center gap-1 bg-[#FFF4D6] text-[#B45309] border border-[#FCD34D] font-caption-bold text-[12px] leading-4 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span>
+            Precio desactualizado
+          </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+          Datos de contacto validados el 24/10/2024 en almacén local.
+        </p>
+</div>
+<!-- Direct Call Action 56dp -->
+<div class="mt-1">
+<a class="w-full min-h-[56px] bg-primary-container text-on-primary rounded-xl flex items-center justify-center space-x-2 font-caption-bold text-caption-bold active:scale-95 transition-transform duration-150 shadow border border-primary" href="tel:+50522490000">
+<span class="material-symbols-outlined text-[24px]" data-icon="call">call</span>
+<span>Llamar directamente (Vía Red Móvil)</span>
+</a>
+</div>
+</article>
+<!-- REQUIRED LEGAL NOTE BLOCK / ESTIMATE DISCLAIMER BOX -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md border border-outline-variant/70 shadow-sm">
+<div class="flex items-start space-x-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[22px] shrink-0 mt-0.5" data-icon="gavel">gavel</span>
+<div class="flex flex-col gap-1">
+<span class="font-caption-bold text-caption-bold text-on-surface">Aviso Legal y Transparencia Tarifaria</span>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+            Precio estimado. El pago se realiza directamente al taller o al proveedor cuando se presta el servicio. Registro S.A. no intermedia cobros ni se responsabiliza por ajustes de precios realizados por los talleres tras la desconexión.
+          </p>
+</div>
+</div>
+</section>
+</main>
+<!-- BOTTOM NAVIGATION BAR (Shared Component Anchor) -->
+<!-- Contextual State: "Talleres" tab active, "Emergencia" center button prominent in red -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest shadow-sm">
+<!-- Tab 1: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-caption text-caption text-[11px]">Inicio</span>
+</a>
+<!-- Tab 2: Talleres (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary font-semibold min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="build" data-weight="fill" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="font-caption text-caption text-[11px]">Talleres</span>
+</a>
+<!-- Tab 3: Emergencia (Center Elevated Red Action) -->
+<a aria-label="Emergencia" class="relative -top-3 flex flex-col items-center justify-center min-w-[56px] min-h-[56px] active:scale-95 transition-transform duration-150 focus:outline-none" href="#">
+<div class="w-14 h-14 rounded-full bg-secondary flex items-center justify-center text-on-secondary shadow-md border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-[28px]" data-icon="emergency" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-caption text-caption text-[11px] text-secondary font-bold mt-0.5">Emergencia</span>
+</a>
+<!-- Tab 4: Alertas -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-caption text-caption text-[11px]">Alertas</span>
+</a>
+<!-- Tab 5: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-caption text-caption text-[11px]">Perfil</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Emergencia y Auxilio Vial - Registro S.A.</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#747686",
+            "tertiary-fixed-dim": "#88d982",
+            "on-tertiary": "#ffffff",
+            "surface": "#f9f9ff",
+            "on-primary-fixed-variant": "#0039b5",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#434655",
+            "surface-tint": "#2151da",
+            "surface-container-high": "#e1e8fd",
+            "inverse-surface": "#293040",
+            "on-secondary-container": "#fffbff",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#b7c4ff",
+            "surface-container-highest": "#dce2f7",
+            "on-secondary-fixed-variant": "#93000e",
+            "secondary-container": "#d93633",
+            "surface-dim": "#d3daef",
+            "on-surface": "#141b2b",
+            "background": "#f9f9ff",
+            "outline-variant": "#c4c5d7",
+            "secondary-fixed": "#ffdad6",
+            "on-tertiary-fixed": "#002204",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "secondary": "#b51a1e",
+            "inverse-primary": "#b7c4ff",
+            "surface-container": "#e9edff",
+            "on-primary-fixed": "#001551",
+            "on-error": "#ffffff",
+            "on-primary-container": "#cad3ff",
+            "tertiary-fixed": "#a3f69c",
+            "surface-bright": "#f9f9ff",
+            "on-background": "#141b2b",
+            "error-container": "#ffdad6",
+            "primary": "#0037b0",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#edf0ff",
+            "primary-fixed": "#dce1ff",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "secondary-fixed-dim": "#ffb4ac",
+            "on-secondary-fixed": "#410003",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#186a21",
+            "tertiary": "#005011",
+            "on-tertiary-fixed-variant": "#005312"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-tablet": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "display": ["Inter", "sans-serif"],
+            "body-medium": ["Inter", "sans-serif"],
+            "title": ["Inter", "sans-serif"],
+            "caption-bold": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "headline": ["Inter", "sans-serif"],
+            "caption": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body selection:bg-primary-fixed selection:text-primary pb-28">
+<!-- TopAppBar: Derived from Shared Components JSON and Style Guidance (Semantic Shell) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-title text-title text-on-surface font-semibold tracking-tight">Emergencia y Auxilio Vial</h1>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Ayuda e información" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas (Optimized for One-Hand Stress Execution) -->
+<main class="w-full max-w-lg mx-auto px-4 pt-20 flex-1 flex flex-col gap-6">
+<!-- Active Incident Telemetry Bar (GPS Status Pill) -->
+<div class="flex items-center justify-between bg-surface-container px-4 py-3 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
+</span>
+<div class="flex flex-col">
+<span class="font-caption-bold text-caption-bold text-on-surface">GPS Activo en Tiempo Real</span>
+<span class="font-caption text-caption text-on-surface-variant truncate max-w-[210px]">Km 12.5 Carretera a Masaya, Managua</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 font-caption-bold text-caption-bold px-2.5 py-1 bg-surface-container-lowest text-tertiary rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+        Precisión alta
+      </span>
+</div>
+<!-- Title Section -->
+<section class="space-y-1">
+<h2 class="font-display text-display text-on-surface tracking-tight">¿Necesitas ayuda?</h2>
+<p class="font-body text-body text-on-surface-variant">
+        Selecciona el tipo de auxilio o comunícate directamente con servicios de socorro.
+      </p>
+</section>
+<!-- 2x2 Grid of Large Roadside Assistance Tiles (Minimum 56dp Touch Surface) -->
+<section aria-label="Servicios de asistencia mecánica inmediata">
+<div class="grid grid-cols-2 gap-3.5">
+<!-- Tile 1: Grúa -->
+<button class="group relative flex flex-col items-start p-4 min-h-[128px] bg-surface-container-lowest border-2 border-outline-variant hover:border-primary active:scale-[0.98] transition-all rounded-xl shadow-sm text-left focus:outline-none focus:border-primary" type="button">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="rv_hookup" style="font-variation-settings: 'FILL' 1;">rv_hookup</span>
+</div>
+<span class="font-title text-title text-on-surface font-bold leading-tight">Grúa</span>
+<span class="font-caption text-caption text-on-surface-variant mt-0.5">Remolque plataforma</span>
+<div class="absolute top-3 right-3 text-outline group-hover:text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</button>
+<!-- Tile 2: Cerrajería vial -->
+<button class="group relative flex flex-col items-start p-4 min-h-[128px] bg-surface-container-lowest border-2 border-outline-variant hover:border-primary active:scale-[0.98] transition-all rounded-xl shadow-sm text-left focus:outline-none focus:border-primary" type="button">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="key" style="font-variation-settings: 'FILL' 1;">key</span>
+</div>
+<span class="font-title text-title text-on-surface font-bold leading-tight">Cerrajería vial</span>
+<span class="font-caption text-caption text-on-surface-variant mt-0.5">Apertura de chapa</span>
+<div class="absolute top-3 right-3 text-outline group-hover:text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</button>
+<!-- Tile 3: Cambio de llanta -->
+<button class="group relative flex flex-col items-start p-4 min-h-[128px] bg-surface-container-lowest border-2 border-outline-variant hover:border-primary active:scale-[0.98] transition-all rounded-xl shadow-sm text-left focus:outline-none focus:border-primary" type="button">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high text-primary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="tire_repair" style="font-variation-settings: 'FILL' 1;">tire_repair</span>
+</div>
+<span class="font-title text-title text-on-surface font-bold leading-tight">Cambio de llanta</span>
+<span class="font-caption text-caption text-on-surface-variant mt-0.5">Auxilio de repuesto</span>
+<div class="absolute top-3 right-3 text-outline group-hover:text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</button>
+<!-- Tile 4: Asistencia médica básica -->
+<button class="group relative flex flex-col items-start p-4 min-h-[128px] bg-surface-container-lowest border-2 border-outline-variant hover:border-secondary active:scale-[0.98] transition-all rounded-xl shadow-sm text-left focus:outline-none focus:border-secondary" type="button">
+<div class="w-12 h-12 rounded-lg bg-error-container text-secondary flex items-center justify-center mb-3 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="medical_services" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<span class="font-title text-title text-on-surface font-bold leading-tight">Asistencia médica</span>
+<span class="font-caption text-caption text-on-surface-variant mt-0.5">Atención primaria</span>
+<div class="absolute top-3 right-3 text-outline group-hover:text-secondary">
+<span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</button>
+</div>
+</section>
+<!-- Fila Inferior Secundaria (2 Botones de acceso rápido) -->
+<section aria-label="Servicios auxiliares complementarios" class="grid grid-cols-2 gap-3.5">
+<!-- Combustible -->
+<button class="flex items-center gap-3 p-3.5 min-h-[56px] bg-surface-container-lowest border border-outline-variant rounded-xl hover:bg-surface-container active:scale-95 transition-all text-left" type="button">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="local_gas_station">local_gas_station</span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="font-caption-bold text-caption-bold text-on-surface truncate">Combustible</span>
+<span class="font-caption text-xs text-on-surface-variant truncate">Suministro de diesel o gasolina</span>
+</div>
+</button>
+<!-- Otro servicio -->
+<button class="flex items-center gap-3 p-3.5 min-h-[56px] bg-surface-container-lowest border border-outline-variant rounded-xl hover:bg-surface-container active:scale-95 transition-all text-left" type="button">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-on-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="build">build</span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="font-caption-bold text-caption-bold text-on-surface truncate">Otro servicio</span>
+<span class="font-caption text-xs text-on-surface-variant truncate">Paso de corriente y soporte</span>
+</div>
+</button>
+</section>
+<!-- Botón Prominente WhatsApp (56dp) -->
+<section aria-label="Acción de rescate inmediato">
+<a class="w-full min-h-[56px] px-5 py-3.5 bg-tertiary hover:bg-tertiary-container active:scale-[0.98] transition-all rounded-xl flex items-center justify-between text-on-tertiary shadow-md focus:outline-none" href="https://wa.me/?text=Emergencia%20en%20ruta.%20Necesito%20asistencia%20vial%20inmediata.%20Mi%20posici%C3%B3n%20actual%20es:%20Carretera%20a%20Masaya%20Km%2012.5" rel="noopener noreferrer" target="_blank">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="share_location" style="font-variation-settings: 'FILL' 1;">share_location</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-caption-bold text-caption-bold leading-tight uppercase tracking-wider text-tertiary-fixed">Auxilio Inmediato</span>
+<span class="font-title text-title font-bold leading-tight">Compartir mi ubicación por WhatsApp</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-2xl" data-icon="send">send</span>
+</a>
+<p class="mt-2 text-center font-caption text-caption text-on-surface-variant">
+        Envía tus coordenadas geográficas exactas a tu contacto de confianza o central de monitoreo.
+      </p>
+</section>
+<!-- Sección 'Números de Emergencia' Oficiales de Nicaragua -->
+<section aria-label="Números oficiales de emergencia en Nicaragua" class="space-y-3 pb-6">
+<div class="flex items-center justify-between">
+<h3 class="font-title text-title text-on-surface font-bold">Números de emergencia</h3>
+<span class="inline-flex items-center gap-1 font-caption-bold text-caption-bold text-secondary">
+<span class="material-symbols-outlined text-base" data-icon="phone_in_talk">phone_in_talk</span>
+          Líneas gratuitas
+        </span>
+</div>
+<div class="space-y-2.5">
+<!-- 1. Policía Nacional -->
+<article class="flex items-center justify-between p-3.5 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="local_police">local_police</span>
+</div>
+<div>
+<h4 class="font-body-medium text-body-medium text-on-surface font-bold leading-tight">Policía Nacional</h4>
+<p class="font-caption text-caption text-on-surface-variant">Tránsito y Auxilio Urbano • Marcación 118</p>
+</div>
+</div>
+<a aria-label="Llamar a Policía Nacional al 118" class="min-h-[48px] px-4 py-2 bg-primary text-on-primary font-caption-bold text-caption-bold rounded-lg flex items-center gap-1.5 active:scale-95 transition-transform hover:bg-primary-container shadow-sm" href="tel:118">
+<span class="material-symbols-outlined text-lg" data-icon="call" style="font-variation-settings: 'FILL' 1;">call</span>
+            Llamar
+          </a>
+</article>
+<!-- 2. Benemérito Cuerpo de Bomberos -->
+<article class="flex items-center justify-between p-3.5 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-lg bg-error-container flex items-center justify-center text-secondary font-bold shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="fire_truck">fire_truck</span>
+</div>
+<div>
+<h4 class="font-body-medium text-body-medium text-on-surface font-bold leading-tight">Cuerpo de Bomberos</h4>
+<p class="font-caption text-caption text-on-surface-variant">Rescate y Accidentes • Marcación 115</p>
+</div>
+</div>
+<a aria-label="Llamar a Bomberos al 115" class="min-h-[48px] px-4 py-2 bg-secondary text-on-secondary font-caption-bold text-caption-bold rounded-lg flex items-center gap-1.5 active:scale-95 transition-transform hover:bg-secondary-container shadow-sm" href="tel:115">
+<span class="material-symbols-outlined text-lg" data-icon="call" style="font-variation-settings: 'FILL' 1;">call</span>
+            Llamar
+          </a>
+</article>
+<!-- 3. Cruz Roja / Cruz Blanca Nicaragüense -->
+<article class="flex items-center justify-between p-3.5 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-lg bg-error-container flex items-center justify-center text-secondary font-bold shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="ambulance">ambulance</span>
+</div>
+<div>
+<h4 class="font-body-medium text-body-medium text-on-surface font-bold leading-tight">Cruz Blanca Nicaragüense</h4>
+<p class="font-caption text-caption text-on-surface-variant">Ambulancia y Paramédicos • Marcación 128</p>
+</div>
+</div>
+<a aria-label="Llamar a Cruz Blanca al 128" class="min-h-[48px] px-4 py-2 bg-secondary text-on-secondary font-caption-bold text-caption-bold rounded-lg flex items-center gap-1.5 active:scale-95 transition-transform hover:bg-secondary-container shadow-sm" href="tel:128">
+<span class="material-symbols-outlined text-lg" data-icon="call" style="font-variation-settings: 'FILL' 1;">call</span>
+            Llamar
+          </a>
+</article>
+</div>
+<!-- Legal & Coverage Disclaimer Card -->
+<div class="p-3.5 rounded-xl bg-surface-container border border-outline-variant flex items-start gap-2.5 mt-4">
+<span class="material-symbols-outlined text-on-surface-variant text-xl shrink-0 mt-0.5" data-icon="info">info</span>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+          En carreteras interurbanas de Nicaragua, ubica los mojones de kilometraje más cercanos para facilitar tu localización exacta a las patrullas y grúas de asistencia.
+        </p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar: Exact specifications from Shared Components JSON & Style Guidance -->
+<!-- Center tab 'Emergencia' is the active destination with dedicated prominence -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest border-t border-outline-variant shadow-sm">
+<!-- Item 1: Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="font-caption text-caption">Inicio</span>
+</a>
+<!-- Item 2: Talleres -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="build">build</span>
+<span class="font-caption text-caption">Talleres</span>
+</a>
+<!-- Item 3 (ACTIVE & CENTER): Emergencia -->
+<a class="relative -top-2 flex flex-col items-center justify-center min-w-[56px] min-h-[56px] active:scale-95 transition-transform duration-150 focus:outline-none" href="#">
+<div class="w-13 h-13 p-3 bg-secondary text-on-secondary rounded-full shadow-lg flex items-center justify-center border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-2xl" data-icon="emergency" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-caption text-caption text-secondary font-semibold mt-0.5">Emergencia</span>
+</a>
+<!-- Item 4: Alertas -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="notifications">notifications</span>
+<span class="font-caption text-caption">Alertas</span>
+</a>
+<!-- Item 5: Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="font-caption text-caption">Perfil</span>
+</a>
+</nav>
+</body></html>

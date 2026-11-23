@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Editar Cuenta - Registro S.A.</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#747686",
+            "on-secondary-fixed-variant": "#93000e",
+            "error-container": "#ffdad6",
+            "on-background": "#141b2b",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#ffdad6",
+            "on-surface-variant": "#434655",
+            "surface-variant": "#dce2f7",
+            "on-surface": "#141b2b",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#d3daef",
+            "tertiary-fixed-dim": "#88d982",
+            "primary-fixed": "#dce1ff",
+            "surface-bright": "#f9f9ff",
+            "background": "#f9f9ff",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed-dim": "#ffb4ac",
+            "outline-variant": "#c4c5d7",
+            "secondary": "#b51a1e",
+            "inverse-on-surface": "#edf0ff",
+            "on-primary-fixed": "#001551",
+            "surface-container-highest": "#dce2f7",
+            "primary-container": "#1d4ed8",
+            "tertiary-fixed": "#a3f69c",
+            "on-secondary-fixed": "#410003",
+            "tertiary": "#005011",
+            "secondary-container": "#d93633",
+            "primary": "#0037b0",
+            "on-primary-container": "#cad3ff",
+            "inverse-surface": "#293040",
+            "surface": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "tertiary-container": "#186a21",
+            "surface-container": "#e9edff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary-container": "#95e88f",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-error-container": "#93000a",
+            "on-secondary-container": "#fffbff",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "surface-tint": "#2151da",
+            "on-tertiary-fixed": "#002204",
+            "on-tertiary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter-tablet": "1.5rem",
+            "margin": "1rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Inter"],
+            "title": ["Inter"],
+            "body-medium": ["Inter"],
+            "caption-bold": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "display": ["Inter"]
+          },
+          "fontSize": {
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    input:focus, select:focus {
+      outline: 2px solid #0037b0 !important;
+      outline-offset: -1px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-full bg-background text-on-surface antialiased flex flex-col font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation App Bar (Docked, Semantic Sub-page with Back Navigation) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface shadow-sm">
+<div class="flex items-center space-x-2">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform duration-150 focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-headline text-headline text-primary font-bold tracking-tight">Editar Cuenta</h1>
+</div>
+<div class="flex items-center">
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform duration-150 focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="flex-1 w-full max-w-lg mx-auto pt-20 pb-12 px-4 flex flex-col gap-6">
+<!-- Avatar Management Cluster -->
+<section class="flex flex-col items-center justify-center pt-2 pb-1">
+<div class="relative">
+<div class="w-28 h-28 rounded-full border-4 border-surface-container-lowest shadow-md overflow-hidden bg-surface-container-high flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A clean, natural photographic portrait of Carlos Mendoza, a modern Nicaraguan professional man in his mid-thirties with a friendly expression. Soft daylight illumination shines through an office window, creating authentic skin tones against an uncluttered, modern background. Pristine high-contrast light-mode aesthetic emphasizing civic trustworthiness and high resolution clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO8ulHPXpL1jbNZLGo799FICPkLWObiOUZv7WgWYKKBYG7uKbBwSSzYMMIKfhlwnsbV3hQ2YNl1FC6N9XhJbqYUXpK6A25GqnEHRid0vgRCCSsPHXmD56cyNsAnNAvfZh9wV-pVuwebvuict45z9_knywxjg8zii3YSPRiwwQuUTxCxroIdHdGX6iaiLpoIRVh_A9lOiH34ngxX__IdAsaGHwv9VDeJx9ZvBnAw-UE"/>
+</div>
+<!-- Ergonomic Floating Action Trigger (Camera/Gallery) -->
+<button aria-label="Cambiar foto de perfil" class="absolute bottom-0 right-0 w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-md border-2 border-surface-container-lowest hover:bg-primary-container active:scale-95 transition-transform duration-150 focus:outline-none" id="btn-avatar" type="button">
+<span class="material-symbols-outlined text-[22px]">photo_camera</span>
+</button>
+</div>
+<div class="mt-3 text-center">
+<p class="font-title text-title text-on-surface">Carlos Mendoza Silva</p>
+<p class="font-caption text-caption text-on-surface-variant">Conductor Particular • Managua</p>
+</div>
+</section>
+<!-- Account Details Form -->
+<form class="flex flex-col gap-5" onsubmit="event.preventDefault();">
+<!-- Field: Nombre completo -->
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-1.5" for="full-name">
+<span class="material-symbols-outlined text-outline text-[18px]">badge</span>
+          Nombre completo
+        </label>
+<div class="relative">
+<input class="w-full min-h-[56px] px-4 rounded-xl bg-surface-container-lowest border border-outline-variant text-on-surface font-body-medium text-body-medium placeholder-outline focus:bg-surface-container-lowest transition-all" id="full-name" name="fullname" required="" type="text" value="Carlos Mendoza Silva"/>
+</div>
+</div>
+<!-- Field: Número celular (Nicaragua) con estado verificado -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-1.5" for="phone-number">
+<span class="material-symbols-outlined text-outline text-[18px]">smartphone</span>
+            Número celular (Nicaragua)
+          </label>
+<!-- Dual-coded Status Pill: Vigente / Verificado -->
+<div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E8F5E9] text-[#2E7D32]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-caption-bold text-[12px] leading-tight">Verificado ante SMS</span>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="relative flex-1">
+<input class="w-full min-h-[56px] px-4 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface font-body-medium text-body-medium select-none cursor-not-allowed" id="phone-number" name="phone" readonly="" type="tel" value="+505 8888-1234"/>
+</div>
+<button class="min-h-[56px] px-4 rounded-xl bg-surface-container-lowest border border-primary text-primary font-caption-bold text-caption-bold hover:bg-surface-container active:scale-95 transition-transform duration-150 flex items-center justify-center whitespace-nowrap" type="button">
+            Cambiar número
+          </button>
+</div>
+</div>
+<!-- Field: Correo electrónico (opcional) -->
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-1.5" for="email-address">
+<span class="material-symbols-outlined text-outline text-[18px]">mail</span>
+          Correo electrónico <span class="font-caption text-caption text-outline font-normal">(opcional)</span>
+</label>
+<div class="relative">
+<input class="w-full min-h-[56px] px-4 rounded-xl bg-surface-container-lowest border border-outline-variant text-on-surface font-body-medium text-body-medium placeholder-outline focus:bg-surface-container-lowest transition-all" id="email-address" name="email" type="email" value="carlos.mendoza@gmail.com"/>
+</div>
+</div>
+<!-- Field: Departamento / Municipio -->
+<div class="flex flex-col gap-1.5">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-1.5" for="location">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span>
+          Departamento / Municipio
+        </label>
+<div class="relative">
+<select class="w-full min-h-[56px] pl-4 pr-10 rounded-xl bg-surface-container-lowest border border-outline-variant text-on-surface font-body-medium text-body-medium focus:bg-surface-container-lowest appearance-none transition-all cursor-pointer" id="location" name="location">
+<option selected="" value="managua">Managua, Managua</option>
+<option value="leon">León, León</option>
+<option value="chinandega">Chinandega, Chinandega</option>
+<option value="matagalpa">Matagalpa, Matagalpa</option>
+<option value="esteli">Estelí, Estelí</option>
+<option value="masaya">Masaya, Masaya</option>
+<option value="granada">Granada, Granada</option>
+<option value="rivas">Rivas, Rivas</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[24px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Field: Cédula de Identidad (opcional para trámites) -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-caption-bold text-caption-bold text-on-surface flex items-center gap-1.5" for="dni">
+<span class="material-symbols-outlined text-outline text-[18px]">contact_emergency</span>
+            Cédula de Identidad <span class="font-caption text-caption text-outline font-normal">(opcional para trámites)</span>
+</label>
+</div>
+<div class="relative flex items-center">
+<input class="w-full min-h-[56px] pl-4 pr-12 rounded-xl bg-surface-container-lowest border border-outline-variant text-on-surface font-body-medium text-body-medium uppercase tracking-wide focus:bg-surface-container-lowest transition-all" id="dni" name="dni" type="text" value="001-150488-0023K"/>
+<div class="absolute right-3.5 flex items-center text-outline" title="Documento validado y cifrado">
+<span class="material-symbols-outlined text-[22px] text-tertiary">lock</span>
+</div>
+</div>
+<p class="text-xs text-outline px-1">Requerido únicamente para agilizar el pago de sticker de rodamiento e inspección mecánica.</p>
+</div>
+<!-- Tarjeta Informativa de Seguridad & Privacidad -->
+<div class="rounded-xl border border-outline-variant bg-surface-container-low p-4 flex items-start gap-3 mt-1">
+<div class="p-2 rounded-lg bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<p class="font-caption-bold text-caption-bold text-on-surface">Protección de Datos Garantizada</p>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+            Tus datos personales están protegidos conforme a normativas de telecomunicaciones y resguardo de identidad vehicular de Nicaragua.
+          </p>
+</div>
+</div>
+<!-- Action Buttons Cluster (Ergonomic 56dp Touch Surface) -->
+<div class="flex flex-col gap-3 pt-4">
+<!-- Botón Principal: Guardar Cambios -->
+<button class="w-full min-h-[56px] rounded-xl bg-primary text-on-primary font-headline text-body-medium font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container active:scale-95 transition-transform duration-150 focus:outline-none" type="submit">
+<span class="material-symbols-outlined text-[22px]">save</span>
+<span>Guardar Cambios</span>
+</button>
+<!-- Botón Secundario: Cancelar -->
+<button class="w-full min-h-[56px] rounded-xl bg-surface-container-lowest border border-outline-variant text-on-surface font-body-medium text-body-medium hover:bg-surface-container-low active:scale-95 transition-transform duration-150 flex items-center justify-center focus:outline-none" type="button">
+          Cancelar
+        </button>
+</div>
+</form>
+</main>
+<script>
+    // Micro-interaction for changing profile photo trigger
+    const avatarBtn = document.getElementById('btn-avatar');
+    if (avatarBtn) {
+      avatarBtn.addEventListener('click', () => {
+        const action = confirm('¿Deseas abrir la cámara o seleccionar de tu galería?');
+      });
+    }
+  </script>
+</body></html>

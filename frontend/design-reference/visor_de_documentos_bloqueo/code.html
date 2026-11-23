@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Visor de Documentos - Registro S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#186a21",
+            "surface-container-high": "#e1e8fd",
+            "error-container": "#ffdad6",
+            "secondary": "#b51a1e",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed": "#ffdad6",
+            "on-background": "#141b2b",
+            "surface-tint": "#2151da",
+            "on-primary-fixed": "#001551",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed": "#dce1ff",
+            "on-primary-container": "#cad3ff",
+            "on-surface": "#141b2b",
+            "tertiary-fixed": "#a3f69c",
+            "on-tertiary-fixed-variant": "#005312",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "surface-dim": "#d3daef",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "primary": "#0037b0",
+            "primary-fixed-dim": "#b7c4ff",
+            "background": "#f9f9ff",
+            "tertiary-fixed-dim": "#88d982",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-surface": "#293040",
+            "surface-container-highest": "#dce2f7",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f1f3ff",
+            "on-tertiary-fixed": "#002204",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "outline": "#747686",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#ffb4ac",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#d93633",
+            "inverse-primary": "#b7c4ff",
+            "inverse-on-surface": "#edf0ff",
+            "surface": "#f9f9ff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#fffbff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "gutter-tablet": "1.5rem",
+            "gutter": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "caption": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "caption-bold": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "title": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "caption": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+            "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-body text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP BAR CONFORME A SHARED COMPONENT: TopAppBar / Task View -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<button aria-label="Atrás" class="w-14 h-14 -ml-4 flex items-center justify-center text-primary active:scale-95 transition-transform duration-150 hover:bg-surface-container rounded-full" type="button">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-title text-title text-on-surface text-base md:text-title font-bold tracking-tight truncate max-w-[200px] sm:max-w-xs">
+          Póliza_Hilux_2024.pdf
+        </h1>
+<span class="font-caption text-caption text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+          Vigente hasta 14/Nov/2025
+        </span>
+</div>
+</div>
+<div class="flex items-center">
+<button aria-label="Compartir archivo" class="w-14 h-14 flex items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform duration-150 rounded-full" type="button">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+<button aria-label="Más opciones" class="w-14 h-14 flex items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform duration-150 rounded-full" type="button">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- CONTENIDO PRINCIPAL: VISOR DEL DOCUMENTO CON CONTROLES -->
+<main class="relative flex-1 mt-14 mb-24 px-4 py-4 flex flex-col items-center justify-start max-w-2xl mx-auto w-full">
+<!-- BARRA FLOTANTE DE PÁGINAS Y METADATOS SUPERIOR -->
+<div class="w-full flex items-center justify-between bg-surface-container-low px-4 py-2 rounded-xl border border-outline-variant mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="description">description</span>
+<span class="font-caption-bold text-caption-bold text-on-surface">Página 1 de 3</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2.5 py-1 rounded-full border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span class="font-caption text-caption text-tertiary-container font-semibold">Oficial Tránsito Nacional</span>
+</div>
+</div>
+<!-- CANVAS DEL DOCUMENTO (SIMULACIÓN DE ALTA RESOLUCIÓN CON EFECTO BLUR/PROTECCIÓN) -->
+<div class="relative w-full bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col items-center">
+<!-- CONTROLES FLOTANTES DE ZOOM (+ / - / RESET) -->
+<div class="absolute top-4 right-4 z-20 flex flex-col gap-1 bg-surface-container-lowest/95 backdrop-blur-sm p-1 rounded-xl border border-outline-variant shadow-sm">
+<button aria-label="Acercar documento" class="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container rounded-lg active:scale-95 transition-transform" id="zoom-in" type="button">
+<span class="material-symbols-outlined" data-icon="zoom_in">zoom_in</span>
+</button>
+<button aria-label="Alejar documento" class="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container rounded-lg active:scale-95 transition-transform" id="zoom-out" type="button">
+<span class="material-symbols-outlined" data-icon="zoom_out">zoom_out</span>
+</button>
+<div class="w-full h-px bg-outline-variant my-0.5"></div>
+<button aria-label="Restablecer vista" class="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container rounded-lg active:scale-95 transition-transform" id="zoom-reset" type="button">
+<span class="material-symbols-outlined" data-icon="restart_alt">restart_alt</span>
+</button>
+</div>
+<!-- CARÁTULA DOCUMENTAL RENDERIZADA -->
+<div class="w-full p-6 transition-transform duration-200 origin-top" id="document-canvas">
+<!-- ENCABEZADO INSTITUCIONAL DE LA PÓLIZA -->
+<div class="border-b-2 border-primary pb-4 mb-4 flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="shield">shield</span>
+</div>
+<div>
+<p class="font-caption-bold text-caption-bold text-primary uppercase tracking-wider">Instituto de Seguros Automotriz</p>
+<h2 class="font-headline text-headline text-on-surface">PÓLIZA DE SEGURO OBLIGATORIO</h2>
+<p class="font-caption text-caption text-on-surface-variant">Conforme a la Ley 431 para el Régimen de Circulación Vehicular de Nicaragua</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-3xl text-outline-variant" data-icon="qr_code_2">qr_code_2</span>
+</div>
+<!-- BENTO-GRID DE ESPECIFICACIONES (DATOS VEHICULARES) -->
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="font-caption text-caption text-on-surface-variant block">Vehículo / Modelo</span>
+<span class="font-body-medium text-body-medium text-on-surface font-bold">Toyota Hilux 4x4 SRV</span>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="font-caption text-caption text-on-surface-variant block">Número de Placa</span>
+<span class="font-body-medium text-body-medium text-on-surface font-bold">M 342-901 (Managua)</span>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="font-caption text-caption text-on-surface-variant block">Chasis / VIN</span>
+<span class="font-body-medium text-body-medium text-on-surface">8AJHA8CD4N2198031</span>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="font-caption text-caption text-on-surface-variant block">Motor</span>
+<span class="font-body-medium text-body-medium text-on-surface">1GD-FTV 2.8L D-4D</span>
+</div>
+</div>
+<!-- SECCIÓN DE COBERTURA Y TITULAR CON DATOS OFUSCADOS -->
+<div class="p-4 bg-surface-container-lowest rounded-lg border border-outline-variant mb-4">
+<div class="flex justify-between items-center mb-2">
+<span class="font-caption-bold text-caption-bold text-on-surface">Cobertura Civil Obligatoria</span>
+<span class="bg-tertiary-container/10 text-tertiary-container px-2 py-0.5 rounded text-xs font-semibold">C$ 150,000.00 CORDOBAS</span>
+</div>
+<div class="space-y-2 filter blur-sm select-none opacity-60">
+<div class="h-4 bg-outline-variant/50 rounded w-5/6"></div>
+<div class="h-4 bg-outline-variant/40 rounded w-full"></div>
+<div class="h-4 bg-outline-variant/60 rounded w-4/6"></div>
+</div>
+</div>
+<!-- PIE DE VALIDACIÓN OFICIAL -->
+<div class="flex items-center justify-between text-xs text-on-surface-variant pt-2 border-t border-outline-variant">
+<span class="font-caption text-caption">Sello Digital: 9D4E-A29F-REG-NIC-2024</span>
+<span class="font-caption text-caption">Emisión: Managua, 15/Nov/2024</span>
+</div>
+</div>
+<!-- OVERLAY DE SEGURIDAD BIOMÉTRICA (MODAL INTEGRADO SOBRE EL DOCUMENTO) -->
+<div class="absolute inset-0 z-30 bg-on-background/80 backdrop-blur-md flex flex-col justify-end sm:justify-center p-4" id="biometric-modal">
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant shadow-lg flex flex-col items-center text-center animate-fade-in">
+<!-- HUELLA TÁCTIL / BIOMÉTRICO AZUL -->
+<div class="relative mb-4 group cursor-pointer active:scale-95 transition-transform" id="bio-touch-target">
+<div class="w-20 h-20 rounded-full bg-primary-container/15 flex items-center justify-center text-primary-container ring-8 ring-primary-container/10">
+<span class="material-symbols-outlined text-5xl" data-icon="fingerprint">fingerprint</span>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-on-primary rounded-full p-1 border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+</div>
+</div>
+<!-- TÍTULOS E INSTRUCCIÓN -->
+<h3 class="font-headline text-headline text-on-surface font-bold mb-1">Documento Protegido</h3>
+<p class="font-body text-body text-on-surface-variant max-w-sm mb-5 text-sm sm:text-base">
+            Desbloquea con huella o PIN para ver datos personales y de circulación
+          </p>
+<!-- SIMULADOR DE TECLADO / PUNTOS DE PIN -->
+<div class="flex justify-center gap-3 mb-6">
+<span class="w-3.5 h-3.5 rounded-full bg-primary ring-2 ring-primary-fixed"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-primary ring-2 ring-primary-fixed"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-outline-variant/60"></span>
+<span class="w-3.5 h-3.5 rounded-full bg-outline-variant/60"></span>
+</div>
+<!-- BOTONES DE ACCIÓN DEL MODAL -->
+<div class="w-full flex flex-col sm:flex-row gap-3">
+<button class="w-full min-h-[56px] px-6 rounded-xl bg-primary-container text-on-primary font-headline text-body-medium font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform" id="btn-unlock-biometric" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="fingerprint">fingerprint</span>
+<span>Usar datos biométricos</span>
+</button>
+<button class="w-full sm:w-auto min-h-[56px] px-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:text-on-surface font-caption-bold text-caption-bold active:scale-95 transition-transform flex items-center justify-center" id="btn-cancel-modal" type="button">
+              Cancelar
+            </button>
+</div>
+<!-- BANNER CIFRADO BANCARIO -->
+<div class="mt-4 pt-4 border-t border-outline-variant flex items-center justify-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-tertiary-container" data-icon="security">security</span>
+<p class="font-caption text-caption text-xs">
+              Tus documentos se guardan con cifrado de grado bancario en el almacenamiento interno de tu celular.
+            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- TARJETA INFORMATIVA ADICIONAL DE SEGURIDAD LEGAL (NICARAGUA) -->
+<div class="w-full mt-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container text-2xl mt-0.5" data-icon="policy">policy</span>
+<div class="flex-1">
+<h4 class="font-caption-bold text-caption-bold text-on-surface">Validez Nacional Ante Agentes de Tránsito</h4>
+<p class="font-caption text-caption text-on-surface-variant text-xs mt-0.5">
+          Este visor emite una copia legalmente vinculante con código QR estático válido sin necesidad de conexión móvil a internet en carretera.
+        </p>
+</div>
+</div>
+</main>
+<!-- BARRA DE ACCIÓN RÁPIDA INFERIOR (STICKY/PERSISTENTE PARA CARRETERA) -->
+<aside class="fixed bottom-0 left-0 right-0 w-full z-40 bg-surface-container-lowest border-t border-outline-variant p-3 md:px-6 shadow-sm">
+<div class="max-w-2xl mx-auto flex items-center gap-3">
+<!-- BOTÓN PRINCIPAL COMPARTIR CON AGENTES O ASISTENCIA -->
+<button class="flex-1 min-h-[56px] bg-primary-container text-on-primary font-caption-bold text-body-medium rounded-xl flex items-center justify-center gap-2 shadow-sm hover:opacity-95 active:scale-95 transition-all" id="btn-share-trigger" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="send">send</span>
+<span>Compartir documento</span>
+</button>
+<!-- BOTONES ACCESO DIRECTO RÁPIDO (WHATSAPP & EMAIL) -->
+<button aria-label="Enviar por WhatsApp" class="w-14 h-14 rounded-xl border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-tertiary-container hover:bg-surface-container active:scale-95 transition-transform" title="Enviar vía WhatsApp a Tránsito" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="chat">chat</span>
+</button>
+<button aria-label="Enviar por correo" class="w-14 h-14 rounded-xl border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-primary active:scale-95 transition-transform hover:bg-surface-container" title="Enviar copia PDF por Correo" type="button">
+<span class="material-symbols-outlined text-2xl" data-icon="mail">mail</span>
+</button>
+</div>
+</aside>
+<!-- DIÁLOGO COMPARTIR NATIVO / COMPARTIR RÁPIDO (OCULTO INICIALMENTE) -->
+<div class="fixed inset-0 z-50 bg-on-background/40 backdrop-blur-sm hidden flex-col justify-end" id="share-sheet">
+<div class="bg-surface-container-lowest rounded-t-2xl p-6 border-t border-outline-variant max-w-xl mx-auto w-full">
+<div class="w-12 h-1 bg-outline-variant rounded-full mx-auto mb-4"></div>
+<h3 class="font-headline text-headline text-on-surface font-bold text-lg mb-1">Compartir con Autoridades o Terceros</h3>
+<p class="font-caption text-caption text-on-surface-variant mb-4">Selecciona el canal para transferir la copia verificada de la póliza:</p>
+<div class="grid grid-cols-2 gap-3 mb-6">
+<button class="p-4 rounded-xl border border-outline-variant bg-surface-container-low flex flex-col items-center gap-2 hover:bg-surface-container active:scale-95" type="button">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/15 flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</div>
+<span class="font-caption-bold text-caption-bold text-on-surface">WhatsApp Oficial</span>
+<span class="text-xs text-on-surface-variant font-caption">Envío de PDF instantáneo</span>
+</button>
+<button class="p-4 rounded-xl border border-outline-variant bg-surface-container-low flex flex-col items-center gap-2 hover:bg-surface-container active:scale-95" type="button">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="outgoing_mail">outgoing_mail</span>
+</div>
+<span class="font-caption-bold text-caption-bold text-on-surface">Correo Electrónico</span>
+<span class="text-xs text-on-surface-variant font-caption">Con copia certificada</span>
+</button>
+</div>
+<button class="w-full min-h-[56px] rounded-xl bg-surface-container text-on-surface font-caption-bold text-body-medium" id="close-share-sheet" type="button">
+        Cerrar
+      </button>
+</div>
+</div>
+<script>
+    // LÓGICA DE CONTROL DE ZOOM
+    let currentZoom = 1;
+    const docCanvas = document.getElementById('document-canvas');
+    const zoomInBtn = document.getElementById('zoom-in');
+    const zoomOutBtn = document.getElementById('zoom-out');
+    const zoomResetBtn = document.getElementById('zoom-reset');
+
+    zoomInBtn.addEventListener('click', () => {
+      if (currentZoom < 1.4) {
+        currentZoom += 0.15;
+        docCanvas.style.transform = `scale(${currentZoom})`;
+      }
+    });
+
+    zoomOutBtn.addEventListener('click', () => {
+      if (currentZoom > 0.8) {
+        currentZoom -= 0.15;
+        docCanvas.style.transform = `scale(${currentZoom})`;
+      }
+    });
+
+    zoomResetBtn.addEventListener('click', () => {
+      currentZoom = 1;
+      docCanvas.style.transform = `scale(1)`;
+    });
+
+    // LÓGICA DEL OVERLAY BIOMÉTRICO (DESBLOQUEO DEMO)
+    const biometricModal = document.getElementById('biometric-modal');
+    const btnUnlockBiometric = document.getElementById('btn-unlock-biometric');
+    const bioTouchTarget = document.getElementById('bio-touch-target');
+    const btnCancelModal = document.getElementById('btn-cancel-modal');
+
+    function simulateUnlock() {
+      // Animación de éxito y remoción del velo blur
+      biometricModal.classList.add('transition-opacity', 'duration-300', 'opacity-0');
+      setTimeout(() => {
+        biometricModal.classList.add('hidden');
+        document.querySelectorAll('.filter.blur-sm').forEach(el => el.classList.remove('blur-sm', 'filter'));
+      }, 300);
+    }
+
+    btnUnlockBiometric.addEventListener('click', simulateUnlock);
+    bioTouchTarget.addEventListener('click', simulateUnlock);
+
+    btnCancelModal.addEventListener('click', () => {
+      alert('Se mantendrán ocultos los datos sensibles hasta que proporciones tu huella o PIN.');
+    });
+
+    // LÓGICA DE COMPARTIR
+    const shareTrigger = document.getElementById('btn-share-trigger');
+    const shareSheet = document.getElementById('share-sheet');
+    const closeShareSheet = document.getElementById('close-share-sheet');
+
+    shareTrigger.addEventListener('click', () => {
+      shareSheet.classList.remove('hidden');
+      shareSheet.classList.add('flex');
+    });
+
+    closeShareSheet.addEventListener('click', () => {
+      shareSheet.classList.add('hidden');
+      shareSheet.classList.remove('flex');
+    });
+  </script>
+</body></html>

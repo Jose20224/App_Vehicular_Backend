@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registrar Vehículo - Registro S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#186a21",
+            "surface-container-high": "#e1e8fd",
+            "error-container": "#ffdad6",
+            "secondary": "#b51a1e",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed": "#ffdad6",
+            "on-background": "#141b2b",
+            "surface-tint": "#2151da",
+            "on-primary-fixed": "#001551",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed": "#dce1ff",
+            "on-primary-container": "#cad3ff",
+            "on-surface": "#141b2b",
+            "tertiary-fixed": "#a3f69c",
+            "on-tertiary-fixed-variant": "#005312",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "surface-dim": "#d3daef",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "primary": "#0037b0",
+            "primary-fixed-dim": "#b7c4ff",
+            "background": "#f9f9ff",
+            "tertiary-fixed-dim": "#88d982",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-surface": "#293040",
+            "surface-container-highest": "#dce2f7",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f1f3ff",
+            "on-tertiary-fixed": "#002204",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "outline": "#747686",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#ffb4ac",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#d93633",
+            "inverse-primary": "#b7c4ff",
+            "inverse-on-surface": "#edf0ff",
+            "surface": "#f9f9ff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#fffbff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "gutter-tablet": "1.5rem",
+            "gutter": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "caption": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-full flex flex-col font-body antialiased pb-28 selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top App Bar (Task-focused: includes back button and direct action header) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface border-b border-outline-variant/50">
+<div class="flex items-center gap-3">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-title text-title text-on-surface font-bold tracking-tight">Registrar Vehículo</h1>
+</div>
+<button aria-label="Ayuda del Registro" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+</header>
+<!-- Main Content Layout -->
+<main class="flex-1 w-full max-w-xl mx-auto px-4 pt-20">
+<!-- Free Utility Disclaimer Notice -->
+<div class="mb-5 p-3.5 bg-surface-container-low rounded-xl border border-outline-variant/60 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[22px] mt-0.5" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div class="flex-1">
+<p class="font-caption-bold text-caption-bold text-primary">Servicio 100% Gratuito</p>
+<p class="font-caption text-caption text-on-surface-variant">No se cobra ningún pago ni comisión dentro de la app. Los trámites oficiales se gestionan directamente ante las instituciones correspondientes.</p>
+</div>
+</div>
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<!-- Photo Upload Surface (Tactile Card) -->
+<section class="space-y-1.5">
+<label class="block font-caption-bold text-caption-bold text-on-surface">Fotografía del vehículo</label>
+<div class="relative w-full h-44 rounded-xl border-2 border-dashed border-outline-variant bg-surface-container-lowest flex flex-col items-center justify-center text-center p-4 cursor-pointer hover:bg-surface-container-low transition-colors duration-150 group">
+<input accept="image/*" aria-label="Subir foto del vehículo" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" type="file"/>
+<div class="w-14 h-14 rounded-full bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-105 transition-transform duration-150 mb-2">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">add_a_photo</span>
+</div>
+<span class="font-body-medium text-body-medium text-primary">Tomar foto o subir de galería</span>
+<span class="font-caption text-caption text-on-surface-variant mt-0.5">JPG o PNG de hasta 10 MB</span>
+</div>
+</section>
+<!-- Placa Section (Dual Input: Segment + Placa Number) -->
+<section class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="font-caption-bold text-caption-bold text-on-surface" for="placa-number">Número de Placa (Nicaragua)</label>
+<span class="font-caption text-caption text-outline">Obligatorio</span>
+</div>
+<div class="grid grid-cols-12 gap-2">
+<!-- Placa Type Select -->
+<div class="col-span-5 relative">
+<select class="w-full h-14 pl-3.5 pr-8 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-medium text-body-medium text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none appearance-none" id="placa-type">
+<option selected="" value="M">Particular (M)</option>
+<option value="LE">León (LE)</option>
+<option value="GR">Granada (GR)</option>
+<option value="MY">Masaya (MY)</option>
+<option value="CZ">Carazo (CZ)</option>
+<option value="CH">Chinandega (CH)</option>
+<option value="ES">Estelí (ES)</option>
+<option value="MT">Matagalpa (MT)</option>
+<option value="CT">Chontales (CT)</option>
+<option value="CD">Comercial (CD)</option>
+<option value="MI">Mercantil (MI)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">expand_more</span>
+</div>
+<!-- Placa Number Input -->
+<div class="col-span-7 relative">
+<input class="w-full h-14 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-title text-title text-on-surface uppercase tracking-wider focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none placeholder:text-outline-variant font-bold" id="placa-number" placeholder="M 342-890" type="text" value="M 342-890"/>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-tertiary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1.5 pt-0.5">
+<span class="material-symbols-outlined text-[16px] text-outline">info</span>
+          Formato oficial del registro de tránsito de la Policía Nacional.
+        </p>
+</section>
+<!-- Brand and Model with Autocomplete Suggestions -->
+<section class="space-y-4">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="marca-input">Marca del Vehículo</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-medium text-body-medium text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" id="marca-input" placeholder="Ej. Toyota, Nissan, Hyundai" type="text" value="Toyota"/>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">directions_car</span>
+</div>
+<!-- Quick Brand Chips -->
+<div class="flex items-center gap-1.5 mt-2 overflow-x-auto pb-1 scrollbar-none">
+<span class="font-caption text-caption text-outline mr-1">Frecuentes:</span>
+<button class="px-2.5 py-1 bg-surface-container rounded-lg font-caption text-caption text-primary hover:bg-primary-fixed transition-colors" type="button">Toyota</button>
+<button class="px-2.5 py-1 bg-surface-container rounded-lg font-caption text-caption text-on-surface-variant hover:bg-surface-container-highest transition-colors" type="button">Nissan</button>
+<button class="px-2.5 py-1 bg-surface-container rounded-lg font-caption text-caption text-on-surface-variant hover:bg-surface-container-highest transition-colors" type="button">Hyundai</button>
+<button class="px-2.5 py-1 bg-surface-container rounded-lg font-caption text-caption text-on-surface-variant hover:bg-surface-container-highest transition-colors" type="button">Suzuki</button>
+</div>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="modelo-input">Modelo</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-medium text-body-medium text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" id="modelo-input" placeholder="Ej. Hilux, Corolla, Yaris" type="text" value="Hilux"/>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-tertiary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+</section>
+<!-- Row: Year and Color -->
+<section class="grid grid-cols-2 gap-3">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="anio-input">Año</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-medium text-body-medium text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" id="anio-input" max="2026" min="1950" type="number" value="2021"/>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">calendar_today</span>
+</div>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="color-input">Color</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-medium text-body-medium text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" id="color-input" placeholder="Ej. Blanco, Negro" type="text" value="Gris Metálico"/>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">palette</span>
+</div>
+</div>
+</section>
+<!-- Vehicle Classification Chips -->
+<section class="space-y-2">
+<label class="block font-caption-bold text-caption-bold text-on-surface">Tipo de Vehículo</label>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+<!-- Chip: Sedán -->
+<label class="flex items-center gap-2 p-3 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="vehicle_type" type="radio" value="sedan"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">directions_car</span>
+<span class="font-body-medium text-body-medium text-on-surface">Sedán</span>
+</label>
+<!-- Chip: Camioneta / Pick-up (Selected) -->
+<label class="flex items-center gap-2 p-3 min-h-[56px] rounded-xl border-2 border-primary bg-primary-fixed/20 cursor-pointer shadow-sm">
+<input checked="" class="w-4 h-4 text-primary focus:ring-primary" name="vehicle_type" type="radio" value="pickup"/>
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">front_loader</span>
+<span class="font-body-medium text-body-medium text-primary font-bold">Pick-up</span>
+</label>
+<!-- Chip: SUV -->
+<label class="flex items-center gap-2 p-3 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="vehicle_type" type="radio" value="suv"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">airport_shuttle</span>
+<span class="font-body-medium text-body-medium text-on-surface">SUV</span>
+</label>
+<!-- Chip: Motocicleta -->
+<label class="flex items-center gap-2 p-3 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="vehicle_type" type="radio" value="moto"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">two_wheeler</span>
+<span class="font-body-medium text-body-medium text-on-surface">Motocicleta</span>
+</label>
+<!-- Chip: Camión -->
+<label class="flex items-center gap-2 p-3 min-h-[56px] rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low transition-colors sm:col-span-2">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="vehicle_type" type="radio" value="camion"/>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">local_shipping</span>
+<span class="font-body-medium text-body-medium text-on-surface">Camión de Carga</span>
+</label>
+</div>
+</section>
+<!-- Alias & Mileage -->
+<section class="space-y-4">
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="alias-input">Alias del Vehículo (Opcional)</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-medium text-body-medium text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" id="alias-input" placeholder="Ej. La consentida o Vehículo de trabajo" type="text" value="Vehículo de trabajo"/>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">badge</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant mt-1 block">Un nombre familiar para identificarlo rápidamente en tu panel.</span>
+</div>
+<div>
+<label class="block font-caption-bold text-caption-bold text-on-surface mb-1.5" for="km-input">Kilometraje Actual</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-medium text-body-medium text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none" id="km-input" placeholder="0 km" type="text" value="85,000 km"/>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">speed</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant mt-1 block">Te ayudará a recibir alertas puntuales sobre cambios de aceite y mantenimiento preventivo.</span>
+</div>
+</section>
+<!-- VIN or Chassis Number -->
+<section class="space-y-1.5">
+<label class="block font-caption-bold text-caption-bold text-on-surface" for="vin-input">Número de Chasis o VIN (Opcional)</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-medium text-body-medium text-on-surface uppercase tracking-wider focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none placeholder:normal-case" id="vin-input" maxlength="17" placeholder="17 caracteres alfanuméricos" type="text"/>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">fingerprint</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant flex items-start gap-1.5 pt-1">
+<span class="material-symbols-outlined text-[16px] text-outline mt-0.5">info</span>
+<span>Lo encuentras en la Circulación del vehículo o grabado en el cortafuego del motor. Se utiliza para verificar el historial registral.</span>
+</p>
+</section>
+<!-- Trust & Privacy Card -->
+<div class="p-4 bg-surface-container rounded-xl border border-outline-variant/70 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[24px]">lock</span>
+<div class="flex-1">
+<p class="font-caption-bold text-caption-bold text-on-surface">Tus datos están protegidos</p>
+<p class="font-caption text-caption text-on-surface-variant">La información se almacena localmente y se sincroniza únicamente para tus recordatorios de circulación y seguro.</p>
+</div>
+</div>
+</form>
+</main>
+<!-- Fixed Bottom Submission Area (56dp Action Button Floor) -->
+<footer class="fixed bottom-0 left-0 right-0 w-full z-40 bg-surface-container-lowest border-t border-outline-variant/60 p-4 shadow-lg">
+<div class="max-w-xl mx-auto flex items-center gap-3">
+<button class="w-full h-14 bg-primary text-on-primary font-body-medium text-body-medium font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-[0.98] transition-all duration-150 shadow-md" type="button">
+<span class="material-symbols-outlined text-[22px]">save</span>
+<span>Guardar Vehículo</span>
+</button>
+</div>
+</footer>
+</body></html>

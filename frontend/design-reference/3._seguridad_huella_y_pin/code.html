@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Seguridad y Protección de Documentos - Registro S.A.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#747686",
+            "on-secondary-fixed-variant": "#93000e",
+            "error-container": "#ffdad6",
+            "on-background": "#141b2b",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#ffdad6",
+            "on-surface-variant": "#434655",
+            "surface-variant": "#dce2f7",
+            "on-surface": "#141b2b",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#d3daef",
+            "tertiary-fixed-dim": "#88d982",
+            "primary-fixed": "#dce1ff",
+            "surface-bright": "#f9f9ff",
+            "background": "#f9f9ff",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed-dim": "#ffb4ac",
+            "outline-variant": "#c4c5d7",
+            "secondary": "#b51a1e",
+            "inverse-on-surface": "#edf0ff",
+            "on-primary-fixed": "#001551",
+            "surface-container-highest": "#dce2f7",
+            "primary-container": "#1d4ed8",
+            "tertiary-fixed": "#a3f69c",
+            "on-secondary-fixed": "#410003",
+            "tertiary": "#005011",
+            "secondary-container": "#d93633",
+            "primary": "#0037b0",
+            "on-primary-container": "#cad3ff",
+            "inverse-surface": "#293040",
+            "surface": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "on-tertiary-fixed-variant": "#005312",
+            "tertiary-container": "#186a21",
+            "surface-container": "#e9edff",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#b7c4ff",
+            "on-tertiary-container": "#95e88f",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-error-container": "#93000a",
+            "on-secondary-container": "#fffbff",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f1f3ff",
+            "surface-tint": "#2151da",
+            "on-tertiary-fixed": "#002204",
+            "on-tertiary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter-tablet": "1.5rem",
+            "margin": "1rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Inter"],
+            "title": ["Inter"],
+            "body-medium": ["Inter"],
+            "caption-bold": ["Inter"],
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "display": ["Inter"]
+          },
+          "fontSize": {
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body antialiased min-h-full flex flex-col justify-between selection:bg-surface-variant selection:text-primary">
+<!-- Top App Bar (Task Sub-Screen: Back + Contextual Help) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<button aria-label="Volver" class="min-w-[56px] min-h-[56px] -ml-2 flex items-center justify-center text-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="font-title text-title text-primary tracking-tight">Seguridad</h1>
+</div>
+<button aria-label="Ayuda" class="min-w-[56px] min-h-[56px] -mr-2 flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-2xl">help_outline</span>
+</button>
+</header>
+<!-- Main Canvas Content -->
+<main class="flex-1 w-full max-w-md mx-auto pt-16 pb-28 px-4 flex flex-col gap-4">
+<!-- Informative Security Banner -->
+<section class="bg-surface-container-low border border-outline-variant rounded-xl p-4 flex gap-3 items-start">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<div class="flex-1">
+<h2 class="font-caption-bold text-caption-bold text-on-surface mb-0.5">Protección de documentos oficiales</h2>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+          Protege la privacidad de tus documentos cuando prestes tu teléfono o ante inspecciones no deseadas. Tu matrícula, póliza y licencia requieren autorización previa.
+        </p>
+</div>
+</section>
+<!-- Master Switch: Biometrics & PIN Lock -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center justify-between min-h-[56px]">
+<div class="flex items-center gap-3 pr-2">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl">fingerprint</span>
+</div>
+<div>
+<span class="font-body-medium text-body-medium text-on-surface block">Pedir huella o PIN para abrir mis documentos</span>
+<span class="font-caption text-caption text-tertiary flex items-center gap-1 mt-0.5" id="masterToggleStatus">
+<span class="material-symbols-outlined text-base">check_circle</span> Actualmente Activado
+          </span>
+</div>
+</div>
+<!-- Toggle Switch Control with 56dp bounding target -->
+<label class="relative inline-flex items-center justify-center min-w-[56px] min-h-[56px] cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="masterLockToggle" type="checkbox"/>
+<div class="w-12 h-7 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[17px] after:left-[11px] after:bg-surface-container-lowest after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</section>
+<!-- PIN Configuration Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl">pin</span>
+</div>
+<div>
+<h3 class="font-body-medium text-body-medium text-on-surface">PIN de seguridad de 4 dígitos</h3>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+              Estado: <span class="font-caption-bold text-caption-bold tracking-widest text-on-surface text-base">••••</span> (Configurado)
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-lg">lock</span>
+</div>
+</div>
+<!-- Action Button (56dp min height) -->
+<button class="w-full min-h-[56px] bg-surface-container-lowest border-2 border-primary text-primary font-body-medium text-body-medium rounded-xl flex items-center justify-center gap-2 hover:bg-surface-container active:scale-95 transition-transform duration-150" id="btnOpenPinModal" type="button">
+<span class="material-symbols-outlined text-xl">edit</span>
+<span>Cambiar PIN de Acceso</span>
+</button>
+</section>
+<!-- Biometric Authentication Switch -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center justify-between min-h-[56px]">
+<div class="flex items-center gap-3 pr-2">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl">lock_open</span>
+</div>
+<div>
+<span class="font-body-medium text-body-medium text-on-surface block">Bloqueo biométrico automático</span>
+<span class="font-caption text-caption text-on-surface-variant">Huella dactilar o Face Unlock del dispositivo Android</span>
+</div>
+</div>
+<label class="relative inline-flex items-center justify-center min-w-[56px] min-h-[56px] cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-7 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[17px] after:left-[11px] after:bg-surface-container-lowest after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</section>
+<!-- Inactivity Lock Selector -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">timer</span>
+<label class="font-body-medium text-body-medium text-on-surface">Tiempo de bloqueo por inactividad</label>
+</div>
+<!-- 3-Way Segmented Touch Target -->
+<div class="grid grid-cols-3 gap-2 bg-surface-container p-1 rounded-xl">
+<button class="timeout-btn min-h-[56px] px-2 rounded-lg font-caption-bold text-caption-bold text-center flex flex-col items-center justify-center bg-surface-container-lowest text-primary border border-outline-variant" data-time="immediate" type="button">
+<span>Inmediato</span>
+<span class="text-[11px] font-normal opacity-80">Al salir</span>
+</button>
+<button class="timeout-btn min-h-[56px] px-2 rounded-lg font-caption text-caption text-on-surface-variant hover:text-on-surface flex flex-col items-center justify-center" data-time="1m" type="button">
+<span>1 minuto</span>
+<span class="text-[11px] font-normal opacity-70">Espera breve</span>
+</button>
+<button class="timeout-btn min-h-[56px] px-2 rounded-lg font-caption text-caption text-on-surface-variant hover:text-on-surface flex flex-col items-center justify-center" data-time="5m" type="button">
+<span>5 minutos</span>
+<span class="text-[11px] font-normal opacity-70">En tránsito</span>
+</button>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+        Recomendado: <strong class="text-on-surface font-caption-bold">Inmediato</strong> para evitar accesos indebidos si dejas el móvil desbloqueado en el vehículo.
+      </p>
+</section>
+<!-- Security & Privacy Guarantee Disclaimer Card -->
+<section class="bg-surface-container-low border border-outline-variant rounded-xl p-4 flex gap-3 items-start">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-tertiary">
+<span class="material-symbols-outlined text-2xl">shield</span>
+</div>
+<div class="flex-1">
+<h4 class="font-caption-bold text-caption-bold text-on-surface mb-1 flex items-center gap-1.5">
+          Garantía de Almacén Seguro
+          <span class="bg-surface-variant text-on-primary-fixed-variant px-1.5 py-0.5 rounded text-[11px] font-semibold">Keystore OS</span>
+</h4>
+<p class="font-caption text-caption text-on-surface-variant leading-relaxed">
+          El PIN y la biometría se procesan en el almacén seguro (Keystore) de tu dispositivo. Registro S.A. no almacena tus claves en servidores externos.
+        </p>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Confirmation Action (Level 2 Elevation) -->
+<footer class="fixed bottom-0 left-0 right-0 w-full z-30 bg-surface-container-lowest border-t border-outline-variant p-4 flex justify-center shadow-[0_4px_12px_rgba(17,24,39,0.08)]">
+<div class="w-full max-w-md">
+<button class="w-full min-h-[56px] bg-primary-container text-on-primary font-body-medium text-body-medium rounded-xl flex items-center justify-center gap-2 hover:bg-primary active:scale-95 transition-all duration-150" id="btnSaveSecurity" type="button">
+<span class="material-symbols-outlined text-2xl">check</span>
+<span>Guardar ajustes de seguridad</span>
+</button>
+</div>
+</footer>
+<!-- Modal: PIN Management & Keypad Simulation -->
+<div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex-col justify-end sm:justify-center items-center p-0 sm:p-4 transition-opacity duration-200" id="pinModal">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-t-2xl sm:rounded-2xl border border-outline-variant p-6 flex flex-col gap-5 max-h-[813px] overflow-y-auto">
+<!-- Modal Header -->
+<div class="flex items-center justify-between border-b border-outline-variant pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">lock_reset</span>
+<h2 class="font-title text-title text-on-surface">Establecer nuevo PIN</h2>
+</div>
+<button aria-label="Cerrar modal" class="min-w-[56px] min-h-[56px] -mr-3 flex items-center justify-center text-on-surface-variant hover:text-on-surface" id="btnClosePinModal" type="button">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<!-- PIN Digits Preview Display -->
+<div class="flex flex-col items-center justify-center py-2">
+<p class="font-caption text-caption text-on-surface-variant mb-4 text-center">Introduce tu nueva clave de 4 dígitos para autorizar inspecciones</p>
+<div class="flex items-center justify-center gap-4" id="pinDisplayContainer">
+<div class="w-12 h-14 rounded-xl border-2 border-outline-variant bg-surface-container flex items-center justify-center text-2xl font-bold pin-digit" data-index="0"></div>
+<div class="w-12 h-14 rounded-xl border-2 border-outline-variant bg-surface-container flex items-center justify-center text-2xl font-bold pin-digit" data-index="1"></div>
+<div class="w-12 h-14 rounded-xl border-2 border-outline-variant bg-surface-container flex items-center justify-center text-2xl font-bold pin-digit" data-index="2"></div>
+<div class="w-12 h-14 rounded-xl border-2 border-outline-variant bg-surface-container flex items-center justify-center text-2xl font-bold pin-digit" data-index="3"></div>
+</div>
+</div>
+<!-- Numeric Keypad Grid (56dp target execution) -->
+<div class="grid grid-cols-3 gap-2 w-full pt-1">
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="1" type="button">1</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="2" type="button">2</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="3" type="button">3</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="4" type="button">4</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="5" type="button">5</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="6" type="button">6</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="7" type="button">7</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="8" type="button">8</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="9" type="button">9</button>
+<button class="min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-caption-bold text-caption-bold text-on-surface-variant" id="btnKeypadClear" type="button">C</button>
+<button class="keypad-btn min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center font-title text-title text-on-surface" data-val="0" type="button">0</button>
+<button class="min-h-[56px] rounded-xl border border-outline-variant bg-surface-container hover:bg-surface-container-high active:scale-95 transition-transform flex items-center justify-center text-on-surface" id="btnKeypadBackspace" type="button">
+<span class="material-symbols-outlined text-2xl">backspace</span>
+</button>
+</div>
+<!-- Confirm PIN CTA in Modal -->
+<button class="w-full min-h-[56px] bg-primary text-on-primary font-body-medium text-body-medium rounded-xl flex items-center justify-center gap-2 opacity-50 cursor-not-allowed transition-all duration-150" disabled="" id="btnConfirmPin" type="button">
+<span>Actualizar PIN</span>
+</button>
+</div>
+</div>
+<!-- Micro-Interactions Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Elements
+      const pinModal = document.getElementById('pinModal');
+      const btnOpenPinModal = document.getElementById('btnOpenPinModal');
+      const btnClosePinModal = document.getElementById('btnClosePinModal');
+      const keypadBtns = document.querySelectorAll('.keypad-btn');
+      const btnKeypadClear = document.getElementById('btnKeypadClear');
+      const btnKeypadBackspace = document.getElementById('btnKeypadBackspace');
+      const pinDigits = document.querySelectorAll('.pin-digit');
+      const btnConfirmPin = document.getElementById('btnConfirmPin');
+      const masterToggle = document.getElementById('masterLockToggle');
+      const masterToggleStatus = document.getElementById('masterToggleStatus');
+      const timeoutBtns = document.querySelectorAll('.timeout-btn');
+      const btnSaveSecurity = document.getElementById('btnSaveSecurity');
+
+      let enteredPin = '';
+
+      // Modal Controls
+      btnOpenPinModal.addEventListener('click', () => {
+        enteredPin = '';
+        updatePinDisplay();
+        pinModal.classList.remove('hidden');
+        pinModal.classList.add('flex');
+      });
+
+      const closeModal = () => {
+        pinModal.classList.add('hidden');
+        pinModal.classList.remove('flex');
+      };
+
+      btnClosePinModal.addEventListener('click', closeModal);
+      pinModal.addEventListener('click', (e) => {
+        if (e.target === pinModal) closeModal();
+      });
+
+      // Keypad Logic
+      const updatePinDisplay = () => {
+        pinDigits.forEach((el, index) => {
+          if (index < enteredPin.length) {
+            el.textContent = '•';
+            el.classList.add('border-primary', 'bg-surface-container-lowest', 'text-primary');
+            el.classList.remove('border-outline-variant', 'bg-surface-container');
+          } else {
+            el.textContent = '';
+            el.classList.remove('border-primary', 'bg-surface-container-lowest', 'text-primary');
+            el.classList.add('border-outline-variant', 'bg-surface-container');
+          }
+        });
+
+        if (enteredPin.length === 4) {
+          btnConfirmPin.disabled = false;
+          btnConfirmPin.classList.remove('opacity-50', 'cursor-not-allowed');
+          btnConfirmPin.classList.add('hover:bg-primary-container', 'active:scale-95');
+        } else {
+          btnConfirmPin.disabled = true;
+          btnConfirmPin.classList.add('opacity-50', 'cursor-not-allowed');
+          btnConfirmPin.classList.remove('hover:bg-primary-container', 'active:scale-95');
+        }
+      };
+
+      keypadBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (enteredPin.length < 4) {
+            enteredPin += btn.dataset.val;
+            updatePinDisplay();
+          }
+        });
+      });
+
+      btnKeypadBackspace.addEventListener('click', () => {
+        if (enteredPin.length > 0) {
+          enteredPin = enteredPin.slice(0, -1);
+          updatePinDisplay();
+        }
+      });
+
+      btnKeypadClear.addEventListener('click', () => {
+        enteredPin = '';
+        updatePinDisplay();
+      });
+
+      btnConfirmPin.addEventListener('click', () => {
+        if (enteredPin.length === 4) {
+          closeModal();
+          alert('PIN de seguridad actualizado y guardado en Keystore.');
+        }
+      });
+
+      // Master Toggle Interaction
+      masterToggle.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          masterToggleStatus.innerHTML = '<span class="material-symbols-outlined text-base">check_circle</span> Actualmente Activado';
+          masterToggleStatus.className = 'font-caption text-caption text-tertiary flex items-center gap-1 mt-0.5';
+        } else {
+          masterToggleStatus.innerHTML = '<span class="material-symbols-outlined text-base">warning</span> Desactivado (Riesgo)';
+          masterToggleStatus.className = 'font-caption text-caption text-error flex items-center gap-1 mt-0.5';
+        }
+      });
+
+      // Inactivity timeout buttons selector
+      timeoutBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          timeoutBtns.forEach(b => {
+            b.classList.remove('bg-surface-container-lowest', 'text-primary', 'border', 'border-outline-variant', 'font-caption-bold');
+            b.classList.add('text-on-surface-variant', 'font-caption');
+          });
+          btn.classList.add('bg-surface-container-lowest', 'text-primary', 'border', 'border-outline-variant', 'font-caption-bold');
+          btn.classList.remove('text-on-surface-variant', 'font-caption');
+        });
+      });
+
+      // Save adjustments trigger
+      btnSaveSecurity.addEventListener('click', () => {
+        btnSaveSecurity.innerHTML = '<span class="material-symbols-outlined text-2xl">check_circle</span> Ajustes Guardados con Éxito';
+        btnSaveSecurity.classList.remove('bg-primary-container');
+        btnSaveSecurity.classList.add('bg-tertiary-container', 'text-on-tertiary');
+        setTimeout(() => {
+          btnSaveSecurity.innerHTML = '<span class="material-symbols-outlined text-2xl">check</span> <span>Guardar ajustes de seguridad</span>';
+          btnSaveSecurity.classList.add('bg-primary-container');
+          btnSaveSecurity.classList.remove('bg-tertiary-container', 'text-on-tertiary');
+        }, 2200);
+      });
+    });
+  </script>
+</body></html>

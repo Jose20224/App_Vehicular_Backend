@@ -1087,7 +1087,7 @@ El paquete offline vence a los 7 días. Si está vencido, la app no debe afirmar
 
 ---
 
-**Fin del contrato.** La implementación NestJS B5S se encuentra en `src/modules/sync/`; la app Flutter/SQLite no está incluida en este repositorio backend. Cualquier cambio de comportamiento debe actualizar este documento y `decisions.md` antes de implementarse.
+**Fin del contrato.** La implementación NestJS B5S se encuentra en `backend/src/modules/sync/`; la app Flutter/SQLite no está incluida en este repositorio backend. Cualquier cambio de comportamiento debe actualizar este documento y `decisions.md` antes de implementarse.
 
 ## Extensión B3 — Documentos y pólizas
 

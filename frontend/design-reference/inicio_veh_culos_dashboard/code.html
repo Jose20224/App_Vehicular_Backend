@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Registro S.A. - Inicio</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter Google Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#186a21",
+            "surface-container-high": "#e1e8fd",
+            "error-container": "#ffdad6",
+            "secondary": "#b51a1e",
+            "on-tertiary-container": "#95e88f",
+            "on-secondary-fixed": "#410003",
+            "on-primary-fixed-variant": "#0039b5",
+            "secondary-fixed": "#ffdad6",
+            "on-background": "#141b2b",
+            "surface-tint": "#2151da",
+            "on-primary-fixed": "#001551",
+            "outline-variant": "#c4c5d7",
+            "primary-fixed": "#dce1ff",
+            "on-primary-container": "#cad3ff",
+            "on-surface": "#141b2b",
+            "tertiary-fixed": "#a3f69c",
+            "on-tertiary-fixed-variant": "#005312",
+            "surface-bright": "#f9f9ff",
+            "tertiary": "#005011",
+            "surface-dim": "#d3daef",
+            "primary-container": "#1d4ed8",
+            "surface-variant": "#dce2f7",
+            "primary": "#0037b0",
+            "primary-fixed-dim": "#b7c4ff",
+            "background": "#f9f9ff",
+            "tertiary-fixed-dim": "#88d982",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#93000e",
+            "inverse-surface": "#293040",
+            "surface-container-highest": "#dce2f7",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f1f3ff",
+            "on-tertiary-fixed": "#002204",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "outline": "#747686",
+            "on-primary": "#ffffff",
+            "surface-container": "#e9edff",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#ffb4ac",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#d93633",
+            "inverse-primary": "#b7c4ff",
+            "inverse-on-surface": "#edf0ff",
+            "surface": "#f9f9ff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#fffbff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-md": "1rem",
+            "gutter-tablet": "1.5rem",
+            "gutter": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "display": ["Inter"],
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "caption": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"],
+            "body-medium": ["Inter"]
+          },
+          "fontSize": {
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9ff;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-primary pb-28">
+<!-- TOP APP BAR (Shared Component Anchor) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface dark:bg-surface border-b border-outline-variant shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant text-primary font-bold">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div>
+<span class="font-caption text-caption text-on-surface-variant block leading-none">¡Hola, Carlos!</span>
+<h1 class="font-headline text-headline text-primary dark:text-primary-fixed font-bold tracking-tight text-title leading-tight">Registro S.A.</h1>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="w-full max-w-md mx-auto pt-16 px-4 space-y-4 flex-1">
+<!-- OFFLINE STATUS BANNER (Persistente conmutable) -->
+<section class="w-full bg-surface-container-highest border border-outline-variant rounded-xl p-3 flex items-start gap-3 transition-all duration-200" id="offline-banner">
+<span class="material-symbols-outlined text-outline mt-0.5" data-icon="cloud_off">cloud_off</span>
+<div class="flex-1">
+<p class="font-caption text-caption text-on-surface font-semibold">Sin conexión</p>
+<p class="font-caption text-caption text-on-surface-variant text-xs">Mostrando datos guardados el 24 de Octubre.</p>
+</div>
+<button aria-label="Cerrar aviso" class="text-on-surface-variant p-1 active:scale-95 hover:bg-surface-container rounded" onclick="document.getElementById('offline-banner').style.display='none'">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</section>
+<!-- CRITICAL EXPIRATION ALERT (Alerta Ámbar/Naranja 7 días) -->
+<section class="w-full bg-surface-container-lowest rounded-xl border-2 border-[#F59E0B] p-4 shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between gap-3 mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#F59E0B]" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-caption-bold text-caption-bold text-on-surface">Vencimiento Próximo</span>
+</div>
+<!-- Dual Coding Badge: Por Vencer -->
+<span class="inline-flex items-center gap-1 bg-[#FFF4D6] text-[#B45309] px-2.5 py-1 rounded-full font-caption-bold text-caption text-xs">
+<span class="material-symbols-outlined text-xs leading-none" data-icon="schedule">schedule</span>
+          Por vencer
+        </span>
+</div>
+<h2 class="font-title text-title text-on-surface mb-1 font-bold">Seguro de Toyota Hilux vence en 7 días</h2>
+<p class="font-caption text-caption text-on-surface-variant mb-4">Póliza SOAPV No. 892-2023. Renueva a tiempo para evitar sanciones de tránsito.</p>
+<button class="w-full min-h-[56px] bg-primary-container hover:bg-primary text-on-primary rounded-xl font-body-medium text-body-medium flex items-center justify-center gap-2 active:scale-95 transition-transform font-bold">
+<span>Ver póliza</span>
+<span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</section>
+<!-- HORIZONTAL VEHICLE SELECTOR CHIPS -->
+<section class="w-full py-1">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-caption-bold text-caption-bold text-on-surface">Mis Vehículos</h3>
+<span class="font-caption text-caption text-primary cursor-pointer font-semibold">Gestionar</span>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar scroll-smooth">
+<!-- Chip 1: Active -->
+<button class="min-h-[56px] px-4 py-2 bg-primary text-on-primary rounded-xl flex items-center gap-2.5 shrink-0 border border-primary active:scale-95 transition-transform font-body-medium text-body-medium shadow-sm">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<div class="text-left">
+<span class="block font-caption-bold text-caption-bold leading-tight">Toyota Hilux 2021</span>
+<span class="block text-xs opacity-90 leading-tight">M 342-998</span>
+</div>
+</button>
+<!-- Chip 2: Inactive -->
+<button class="min-h-[56px] px-4 py-2 bg-surface-container-lowest text-on-surface rounded-xl flex items-center gap-2.5 shrink-0 border border-outline-variant active:scale-95 transition-transform font-body-medium text-body-medium">
+<span class="material-symbols-outlined text-outline" data-icon="directions_car">directions_car</span>
+<div class="text-left">
+<span class="block font-caption-bold text-caption-bold leading-tight">Hyundai Accent 2018</span>
+<span class="block text-xs text-on-surface-variant leading-tight">M 119-041</span>
+</div>
+</button>
+<!-- Chip 3: Add Vehicle Action -->
+<button class="min-h-[56px] px-4 py-2 bg-surface-container-low text-primary rounded-xl flex items-center gap-1.5 shrink-0 border border-dashed border-outline-variant active:scale-95 transition-transform font-caption-bold text-caption-bold">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>+ Agregar vehículo</span>
+</button>
+</div>
+</section>
+<!-- QUICK ACTIONS BENTO (Botones 56dp / Tarjetas táctiles) -->
+<section class="grid grid-cols-3 gap-2 w-full pt-1">
+<button class="min-h-[56px] p-3 bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col items-center justify-center gap-1.5 text-center active:scale-95 transition-transform hover:bg-surface-container-low">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="note_add">note_add</span>
+</div>
+<span class="font-caption text-caption text-xs font-semibold leading-tight text-on-surface">Agregar documento</span>
+</button>
+<button class="min-h-[56px] p-3 bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col items-center justify-center gap-1.5 text-center active:scale-95 transition-transform hover:bg-surface-container-low">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="search">search</span>
+</div>
+<span class="font-caption text-caption text-xs font-semibold leading-tight text-on-surface">Buscar taller</span>
+</button>
+<button class="min-h-[56px] p-3 bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col items-center justify-center gap-1.5 text-center active:scale-95 transition-transform hover:bg-surface-container-low">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="receipt_long">receipt_long</span>
+</div>
+<span class="font-caption text-caption text-xs font-semibold leading-tight text-on-surface">Ver multas</span>
+</button>
+</section>
+<!-- ACTIVE VEHICLE DOCUMENTS LIST (Dual-coding: Icono + Texto) -->
+<section class="space-y-2.5 pt-2">
+<div class="flex items-center justify-between">
+<h3 class="font-caption-bold text-caption-bold text-on-surface">Documentos: Toyota Hilux</h3>
+<span class="font-caption text-caption text-xs text-on-surface-variant">3 Registrados</span>
+</div>
+<!-- Document 1: Póliza SOAPV (Por vencer) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-center justify-between gap-3 shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined" data-icon="policy">policy</span>
+</div>
+<div>
+<h4 class="font-body-medium text-body-medium text-on-surface font-semibold text-sm">Póliza SOAPV</h4>
+<span class="font-caption text-caption text-xs text-on-surface-variant">Vence: 31 Octubre 2024</span>
+</div>
+</div>
+<div class="flex items-center">
+<span class="inline-flex items-center gap-1 bg-[#FFF4D6] text-[#B45309] px-2.5 py-1 rounded-full font-caption-bold text-caption text-xs">
+<span class="material-symbols-outlined text-xs leading-none" data-icon="warning">warning</span>
+            Por vencer
+          </span>
+</div>
+</article>
+<!-- Document 2: Emisión de gases (Vigente) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-center justify-between gap-3 shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined" data-icon="eco">eco</span>
+</div>
+<div>
+<h4 class="font-body-medium text-body-medium text-on-surface font-semibold text-sm">Emisión de gases</h4>
+<span class="font-caption text-caption text-xs text-on-surface-variant">Vence: 15 Mayo 2025</span>
+</div>
+</div>
+<div class="flex items-center">
+<span class="inline-flex items-center gap-1 bg-[#E8F5E9] text-[#2E7D32] px-2.5 py-1 rounded-full font-caption-bold text-caption text-xs">
+<span class="material-symbols-outlined text-xs leading-none" data-icon="check_circle">check_circle</span>
+            Vigente
+          </span>
+</div>
+</article>
+<!-- Document 3: Matrícula / Rodamiento (Vigente) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-3.5 flex items-center justify-between gap-3 shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+</div>
+<div>
+<h4 class="font-body-medium text-body-medium text-on-surface font-semibold text-sm">Matrícula / Rodamiento</h4>
+<span class="font-caption text-caption text-xs text-on-surface-variant">Alcaldía de Managua (2024)</span>
+</div>
+</div>
+<div class="flex items-center">
+<span class="inline-flex items-center gap-1 bg-[#E8F5E9] text-[#2E7D32] px-2.5 py-1 rounded-full font-caption-bold text-caption text-xs">
+<span class="material-symbols-outlined text-xs leading-none" data-icon="check_circle">check_circle</span>
+            Vigente
+          </span>
+</div>
+</article>
+</section>
+<!-- SPONSORED BANNER (Discreto con pill Patrocinado) -->
+<aside class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-3.5 flex items-center justify-between gap-3">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 bg-[#EEF0FF] text-[#3730A3] px-2 py-0.5 rounded-full font-caption-bold text-xs">
+<span class="material-symbols-outlined text-xs" data-icon="star">star</span>
+            Patrocinado
+          </span>
+</div>
+<h4 class="font-caption-bold text-caption-bold text-on-surface text-sm">Taller Los Robles</h4>
+<p class="font-caption text-caption text-xs text-on-surface-variant">15% desc. en cambio de aceite con sintético.</p>
+</div>
+<button class="min-h-[48px] px-3 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container text-primary rounded-xl font-caption-bold text-xs shrink-0 active:scale-95 transition-transform flex items-center gap-1">
+<span>Canjear</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</aside>
+<!-- LEGAL DISCLAIMER FOOTER NOTE -->
+<footer class="pt-2 pb-6 px-1 text-center">
+<p class="font-caption text-caption text-xs text-outline leading-relaxed">
+        Precio estimado. El pago se realiza directamente al taller o al proveedor cuando se presta el servicio.
+      </p>
+</footer>
+</main>
+<!-- BOTTOM NAVIGATION BAR (Shared Component Anchor) -->
+<!-- Executed verbatim according to Shared Components JSON: Active is 'Inicio' (index 0) -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest dark:bg-surface border-t border-outline-variant shadow-sm">
+<!-- Item 1: Inicio (Active) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-semibold min-w-[56px] min-h-[56px] active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-caption text-caption text-xs mt-0.5">Inicio</span>
+</a>
+<!-- Item 2: Talleres (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+<span class="font-caption text-caption text-xs mt-0.5">Talleres</span>
+</a>
+<!-- Item 3: Emergencia (Central Emergency Red Accent Target) -->
+<a aria-label="Emergencia" class="flex flex-col items-center justify-center min-w-[56px] min-h-[56px] -mt-5 active:scale-90 transition-transform duration-150" href="#">
+<div class="w-14 h-14 rounded-full bg-[#C62828] text-white flex items-center justify-center shadow-md border-4 border-surface-container-lowest">
+<span class="material-symbols-outlined text-2xl" data-icon="emergency" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-caption text-caption text-xs mt-0.5 text-secondary font-bold">Emergencia</span>
+</a>
+<!-- Item 4: Alertas (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-caption text-caption text-xs mt-0.5">Alertas</span>
+</a>
+<!-- Item 5: Perfil (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline min-w-[56px] min-h-[56px] hover:bg-surface-container-low active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-caption text-caption text-xs mt-0.5">Perfil</span>
+</a>
+</nav>
+</body></html>

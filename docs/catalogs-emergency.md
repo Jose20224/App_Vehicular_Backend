@@ -64,8 +64,8 @@ El backend confirma que el vehículo pertenece al usuario, obtiene nombre y tel�
 
 ## Migración y reversa
 
-- Migración: `prisma/migrations/20261104150000_emergency_catalogs/migration.sql`.
-- Reversa para pruebas aisladas: `prisma/migrations/20261104150000_emergency_catalogs/rollback.sql`.
+- Migración: `backend/prisma/migrations/20261104150000_emergency_catalogs/migration.sql`.
+- Reversa para pruebas aisladas: `backend/prisma/migrations/20261104150000_emergency_catalogs/rollback.sql`.
 - Catálogos territoriales y de asistencia se cargan por `npm run db:seed` con `DATABASE_MIGRATION_URL` y el rol `app_migrator`.
 - En producción no ejecutar `rollback.sql`; usar corrección hacia adelante y procedimiento de despliegue aprobado.
 

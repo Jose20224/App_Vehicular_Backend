@@ -13,18 +13,20 @@
 Requisitos: Node 22.16+, Docker Compose v2 y Git.
 
 ```bash
-cp .env.example .env
-docker compose up -d db redis
-npm ci
+cp backend/.env.example backend/.env
+npm run install:backend
+npm run infra:up
 npm run prisma:generate
-docker compose --profile tools run --rm migrate
-npm run build
-npm run start:dev
+npm run db:migrate
+npm run build:backend
+npm run dev:backend
 ```
 
 El Compose local crea PostgreSQL/PostGIS, Redis con contraseña y roles separados. La migración nunca debe ejecutarse con `DATABASE_URL` de `app_runtime`. `/health` valida API, BD y Redis. Swagger está en `/docs`; el documento OpenAPI JSON está en `/docs-json`.
 
 ## Producción y despliegue automatizado
+
+Con la estructura actual, el checkout del host debe contener `backend/.env` (archivo protegido o enlace al gestor local de secretos). El script de despliegue lo pasa explícitamente a Compose con `--env-file backend/.env`; los scripts de backup/restauración están en `backend/scripts/` y la configuración systemd sigue en `deploy/systemd/`.
 
 La imagen se publica con tag inmutable `ghcr.io/OWNER/REPO:<commit>`. En GitHub, habilitar variable `DEPLOY_ENABLED=true` y definir secretos `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PATH`, `DEPLOY_SSH_PRIVATE_KEY` y `DEPLOY_SSH_KNOWN_HOSTS`. La huella SSH debe verificarse fuera de GitHub Actions y guardarse como known-hosts. El host debe tener Docker Compose, una copia del repositorio y login de solo lectura a GHCR para paquetes privados. Mantener `.env` en `/etc/vehicular/.env` o en el directorio protegido del servicio, nunca dentro de Git.
 
@@ -44,21 +46,21 @@ Simulacro periódico en una base PostgreSQL vacía y desechable (no producción)
 
 ```bash
 RESTORE_DATABASE_URL='postgresql://restore_role:...@restore-host/vehicular_restore?schema=public' \
-  bash scripts/restore-drill.sh s3://private-bucket/vehicular/postgres/vehicular-<timestamp>.dump
+  bash backend/scripts/restore-drill.sh s3://private-bucket/vehicular/postgres/vehicular-<timestamp>.dump
 ```
 
 El script descarga, valida y restaura el dump, y verifica tablas críticas. Registrar fecha, backup, duración, tamaño, resultado y persona responsable en el registro de continuidad. **La restauración no se pudo ejecutar en este entorno**: no está instalado Docker/PostgreSQL cliente y no hay credenciales/bucket S3 conectado.
 
 ## Rendimiento k6
 
-`test/performance/b12-backend.k6.js` carga búsqueda, anuncios, sync pull/push y el worker real de recordatorios. Requiere API/Redis/PostgreSQL de staging, usuarios/token de prueba y fixture seguro: `API_BASE_URL`, `SYNC_ACCESS_TOKEN`, `SYNC_DEVICE_ID`, `SYNC_CURSOR`, `SYNC_PUSH_BODY_JSON`, `ADMIN_ACCESS_TOKEN`, `DEPARTMENT_ID`. Preparar filas de recordatorio vencidas con usuarios/dispositivos de prueba, sin destinos reales; el endpoint administrativo de despacho existe solo con `NODE_ENV=test` y encola una fila por iteración. Usar `FCM_MODE=mock` y limpiar las filas/colas al terminar.
+`backend/test/performance/b12-backend.k6.js` carga búsqueda, anuncios, sync pull/push y el worker real de recordatorios. Requiere API/Redis/PostgreSQL de staging, usuarios/token de prueba y fixture seguro: `API_BASE_URL`, `SYNC_ACCESS_TOKEN`, `SYNC_DEVICE_ID`, `SYNC_CURSOR`, `SYNC_PUSH_BODY_JSON`, `ADMIN_ACCESS_TOKEN`, `DEPARTMENT_ID`. Preparar filas de recordatorio vencidas con usuarios/dispositivos de prueba, sin destinos reales; el endpoint administrativo de despacho existe solo con `NODE_ENV=test` y encola una fila por iteración. Usar `FCM_MODE=mock` y limpiar las filas/colas al terminar.
 
 ```bash
 k6 run -e API_BASE_URL=https://staging.example/api/v1 \
   -e SYNC_ACCESS_TOKEN='...' -e SYNC_DEVICE_ID='...' -e SYNC_CURSOR='...' \
   -e SYNC_PUSH_BODY_JSON='{"device_id":"...","mutations":[...]}' \
   -e ADMIN_ACCESS_TOKEN='...' -e DEPARTMENT_ID='...' \
-  test/performance/b12-backend.k6.js
+  backend/test/performance/b12-backend.k6.js
 ```
 
 Los umbrales son búsqueda p95 <300 ms, sync pull p95 <500 ms, worker p95 <5 s y errores HTTP <1%. Anuncios se comprueban por HTTP 200 y etiqueta `patrocinado: true`. **No se ejecutó k6 aquí** porque no hay binario k6 ni entorno de prueba levantado; esos p95 todavía no están acreditados.
@@ -68,10 +70,10 @@ Los umbrales son búsqueda p95 <300 ms, sync pull p95 <500 ms, worker p95 <5 s y
 Swagger genera el esquema desde los DTOs/controladores Nest: `GET /docs-json`. Con el backend y sus dependencias levantadas, generar tipos con:
 
 ```bash
-OPENAPI_URL=http://localhost:3000/docs-json npm run openapi:types
+OPENAPI_URL=http://localhost:3000/docs-json npm --prefix backend run openapi:types
 ```
 
-El archivo `src/api/client.ts` envuelve `openapi-fetch`; el frontend pasa el `paths` generado para tipar rutas, query, body y respuesta. Exportar el JSON para inspección con `curl http://localhost:3000/docs-json -o openapi.json`.
+El archivo `backend/src/api/client.ts` envuelve `openapi-fetch`; el frontend pasa el `paths` generado para tipar rutas, query, body y respuesta. Exportar el JSON para inspección con `curl http://localhost:3000/docs-json -o openapi.json`.
 
 ## Contrato offline final
 

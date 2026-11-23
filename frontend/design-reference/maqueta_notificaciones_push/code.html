@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Simulación de Notificaciones - Registro S.A.</title>
+<!-- Material Symbols Outlined font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#dce1ff",
+            "secondary-fixed-dim": "#ffb4ac",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed": "#a3f69c",
+            "surface": "#f9f9ff",
+            "surface-variant": "#dce2f7",
+            "on-secondary-fixed": "#410003",
+            "outline": "#747686",
+            "secondary-container": "#d93633",
+            "background": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "primary": "#0037b0",
+            "primary-fixed-dim": "#b7c4ff",
+            "on-primary-fixed": "#001551",
+            "on-surface": "#141b2b",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#88d982",
+            "surface-container-highest": "#dce2f7",
+            "surface-dim": "#d3daef",
+            "on-secondary-container": "#fffbff",
+            "on-secondary-fixed-variant": "#93000e",
+            "on-tertiary-fixed": "#002204",
+            "tertiary-container": "#186a21",
+            "surface-bright": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "primary-container": "#1d4ed8",
+            "inverse-on-surface": "#edf0ff",
+            "surface-container-low": "#f1f3ff",
+            "on-error-container": "#93000a",
+            "tertiary": "#005011",
+            "outline-variant": "#c4c5d7",
+            "on-tertiary-fixed-variant": "#005312",
+            "on-error": "#ffffff",
+            "inverse-surface": "#293040",
+            "surface-tint": "#2151da",
+            "secondary": "#b51a1e",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#ffdad6",
+            "on-primary-fixed-variant": "#0039b5",
+            "on-tertiary-container": "#95e88f",
+            "inverse-primary": "#b7c4ff",
+            "on-surface-variant": "#434655",
+            "on-background": "#141b2b",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#cad3ff",
+            "on-secondary": "#ffffff",
+            "surface-container": "#e9edff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-tablet": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "gutter": "1rem",
+            "gutter-tablet": "1.5rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "body-medium": ["Inter"],
+            "caption": ["Inter"],
+            "display": ["Inter"],
+            "caption-bold": ["Inter"],
+            "title": ["Inter"],
+            "body": ["Inter"],
+            "headline": ["Inter"]
+          },
+          "fontSize": {
+            "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "caption": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "display": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "caption-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-28">
+<!-- TopAppBar Component (from Shared JSON tokens) -->
+<header class="fixed top-0 left-0 right-0 w-full z-40 flex items-center justify-between px-4 h-14 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<button aria-label="Volver" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-primary" type="button">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="font-title text-title text-primary font-bold tracking-tight">Simulación de Notificaciones</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<!-- Status Badge "Vista previa" -->
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high border border-outline-variant font-caption text-caption text-primary font-semibold">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Vista previa</span>
+</span>
+<button aria-label="Ayuda" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-transform duration-150 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined text-[22px]">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Content Container -->
+<main class="pt-16 max-w-xl mx-auto px-4">
+<!-- Intro Banner Card -->
+<section class="mt-4 p-4 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]">notifications_active</span>
+</div>
+<div>
+<h1 class="font-title text-title text-on-surface font-bold">Comportamiento en Android</h1>
+<p class="mt-1 font-body text-body text-on-surface-variant">
+            Así verás los avisos en la pantalla de bloqueo y barra de estado de tu teléfono Android según la urgencia del vencimiento.
+          </p>
+</div>
+</div>
+</section>
+<!-- SECTION 1: Lock Screen Mockup (Preventive 7 days) -->
+<section class="mt-6">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container"></span>
+<h2 class="font-caption-bold text-caption-bold text-on-surface uppercase tracking-wider">
+            1. Pantalla de Bloqueo (Aviso a 7 Días)
+          </h2>
+</div>
+<span class="inline-flex items-center gap-1 font-caption text-caption text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-outline">lock</span>
+          Preventivo
+        </span>
+</div>
+<!-- Android Lockscreen Shell Mockup -->
+<div class="rounded-2xl overflow-hidden border border-outline-variant bg-surface-dim p-4 relative shadow-sm">
+<!-- Status Bar on lockscreen -->
+<div class="flex justify-between items-center text-on-surface font-caption text-caption mb-6 px-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_4_bar</span>
+<span class="font-semibold text-xs tracking-tight">Claro NI</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Android Lock Clock & Date -->
+<div class="text-center my-4">
+<div class="flex justify-center mb-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</div>
+<div class="font-display text-[46px] leading-tight font-bold tracking-tight text-on-surface">10:42</div>
+<div class="font-body-medium text-body-medium text-on-surface-variant">Jueves, 24 de Octubre</div>
+</div>
+<!-- Android Push Notification Card (Preventive / Amber Warning) -->
+<div class="mt-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm">
+<!-- Notification App Header -->
+<div class="flex items-center justify-between mb-2 pb-1 border-b border-outline-variant/40">
+<div class="flex items-center gap-2">
+<!-- App Icon Badge -->
+<div class="w-6 h-6 rounded bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<span class="font-caption-bold text-[12px] uppercase text-on-surface tracking-wider">REGISTRO_S.A</span>
+<span class="text-outline text-[12px]">• hace 15m</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">expand_more</span>
+</div>
+<!-- Notification Content -->
+<div class="mt-1">
+<div class="flex items-start gap-1.5 text-on-surface font-title text-[15px] font-bold">
+<span class="text-amber-600">⚠️</span>
+<span>Tu seguro del Toyota Hilux vence en 7 días</span>
+</div>
+<p class="mt-1.5 font-body text-caption text-on-surface-variant leading-relaxed">
+              Póliza SOAPV No. 892-2023. Renueva a tiempo ante la Policía Nacional y la aseguradora para evitar multas de retén.
+            </p>
+</div>
+<!-- Action Buttons inside notification (Android Style) -->
+<div class="mt-4 pt-2 flex flex-wrap items-center gap-2">
+<button class="min-h-[44px] px-4 py-2 rounded-lg bg-surface-container border border-outline-variant font-caption-bold text-caption-bold text-primary active:scale-95 transition-transform flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span>Ver póliza</span>
+</button>
+<button class="min-h-[44px] px-4 py-2 rounded-lg bg-surface-container-lowest font-caption-bold text-caption-bold text-on-surface-variant hover:bg-surface-container active:scale-95 transition-transform flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span>Recordar mañana</span>
+</button>
+</div>
+</div>
+<!-- Lockscreen Bottom Quick Action Icons -->
+<div class="flex justify-between items-center mt-6 px-3 text-on-surface-variant">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest/60 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">phone</span>
+</div>
+<div class="text-xs text-outline font-medium tracking-tight">Desliza para desbloquear</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest/60 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Heads-up Notification (Critical Day-of Expiration) -->
+<section class="mt-8">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<h2 class="font-caption-bold text-caption-bold text-on-surface uppercase tracking-wider">
+            2. Heads-Up Banner (Día de Vencimiento)
+          </h2>
+</div>
+<span class="inline-flex items-center gap-1 font-caption text-caption text-secondary font-bold">
+<span class="material-symbols-outlined text-[16px] text-secondary">priority_high</span>
+          Crítico
+        </span>
+</div>
+<!-- Android Heads-up Context Box -->
+<div class="rounded-2xl border border-secondary-container bg-surface-container-low p-3 relative shadow-md">
+<!-- Native Android Status Bar Simulation -->
+<div class="bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-t-xl flex justify-between items-center text-xs">
+<div class="flex items-center gap-2">
+<span class="font-bold tracking-tight">11:59</span>
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed">warning</span>
+<span class="material-symbols-outlined text-[14px]">notifications_active</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">wifi</span>
+<span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+<span class="font-semibold">85%</span>
+<span class="material-symbols-outlined text-[16px]">battery_5_bar</span>
+</div>
+</div>
+<!-- Android Heads-up Floating Banner Dropdown -->
+<div class="bg-surface-container-lowest border-2 border-secondary rounded-b-xl rounded-t-none p-4 shadow-xl -mt-0.5">
+<!-- Urgent Header with blinking alert vibe -->
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-secondary flex items-center justify-center text-on-secondary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-caption-bold text-[13px] text-secondary tracking-wide">
+                🚨 REGISTRO_S.A • AVISO CRÍTICO
+              </span>
+</div>
+<span class="text-[12px] font-bold text-secondary bg-error-container px-2 py-0.5 rounded-full">
+              AHORA
+            </span>
+</div>
+<!-- Bold Urgent Headline -->
+<h3 class="font-headline text-[18px] leading-6 font-bold text-on-surface flex items-center gap-1.5 mt-1">
+<span class="text-secondary">¡TU SEGURO VENCE HOY!</span>
+</h3>
+<!-- Urgent Body Text with legal reference -->
+<p class="mt-2 font-body text-caption text-on-surface leading-snug">
+            La póliza del <strong>Toyota Hilux (M 342-890)</strong> expira a las 11:59 p.m. Conducir a partir de mañana constituye infracción a la Ley 431 de Tránsito.
+          </p>
+<!-- High-Priority Immediate Action Buttons -->
+<div class="mt-4 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+<!-- Call Insurer button (Emergency Styling) -->
+<button class="min-h-[56px] w-full bg-secondary text-on-secondary rounded-xl font-body-medium text-body-medium font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">phone_in_talk</span>
+<span>Llamar Aseguradora</span>
+</button>
+<!-- View Policy Now (Primary Action) -->
+<button class="min-h-[56px] w-full bg-primary-container text-on-primary rounded-xl font-body-medium text-body-medium font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+<span>Ver Póliza Ahora</span>
+</button>
+</div>
+</div>
+<div class="p-2 text-center text-xs text-outline font-medium">
+          Muestra en primer plano mientras utilizas Waze, Google Maps o cualquier otra aplicación
+        </div>
+</div>
+</section>
+<!-- SECTION 3: Offline Functionality Guarantee Card -->
+<section class="mt-8">
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant shadow-sm flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">notifications_paused</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h3 class="font-title text-title text-on-surface font-bold">Notificaciones locales automáticas</h3>
+<span class="w-5 h-5 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary text-xs">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+</div>
+<p class="mt-1 font-body text-body text-on-surface-variant leading-relaxed">
+            Ambas notificaciones se generan desde el sistema operativo del teléfono sin consumir saldo ni datos móviles en carretera.
+          </p>
+<div class="mt-3 flex items-center gap-4 text-xs font-semibold text-tertiary">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">wifi_off</span>
+              Funciona Sin Internet
+            </span>
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">battery_saver</span>
+              Bajo Consumo de Batería
+            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Actions (Simulate Push & Return to Settings) -->
+<section class="mt-8 mb-6 flex flex-col gap-3">
+<button class="w-full min-h-[56px] rounded-xl bg-primary text-on-primary font-body-medium text-body-medium font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">send_to_mobile</span>
+<span>Probar envío de prueba ahora</span>
+</button>
+<button class="w-full min-h-[56px] rounded-xl bg-surface-container-lowest border-2 border-primary text-primary font-body-medium text-body-medium font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Volver a Ajustes de Notificaciones</span>
+</button>
+</section>
+</main>
+<!-- BottomNavBar Component (Exact Shared JSON specifications) -->
+<!-- Active Tab: 'Alertas' because this screen directly previews Push Notifications & Expiry Alerts -->
+<nav class="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-around px-2 h-16 bg-surface-container-lowest border-t border-outline-variant shadow-sm">
+<!-- Inicio -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-95 transition-transform duration-150 min-w-[56px] min-h-[56px]" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-caption text-caption text-xs">Inicio</span>
+</a>
+<!-- Talleres -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-95 transition-transform duration-150 min-w-[56px] min-h-[56px]" href="#">
+<span class="material-symbols-outlined text-[24px]">build</span>
+<span class="font-caption text-caption text-xs">Talleres</span>
+</a>
+<!-- Emergencia (Central Prominent Button) -->
+<a class="flex flex-col items-center justify-center text-on-secondary min-w-[56px] min-h-[56px] -mt-5 active:scale-95 transition-transform duration-150" href="#">
+<div class="w-14 h-14 rounded-full bg-secondary flex items-center justify-center shadow-lg border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-caption-bold text-caption-bold text-[11px] text-secondary mt-0.5 font-bold">Emergencia</span>
+</a>
+<!-- Alertas (ACTIVE TAB - Maps directly to notification preview) -->
+<a class="flex flex-col items-center justify-center text-primary font-semibold min-w-[56px] min-h-[56px] active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-caption text-caption text-xs">Alertas</span>
+</a>
+<!-- Perfil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-95 transition-transform duration-150 min-w-[56px] min-h-[56px]" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-caption text-caption text-xs">Perfil</span>
+</a>
+</nav>
+</body></html>
