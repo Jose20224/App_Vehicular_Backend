@@ -1,10 +1,13 @@
 import { BadRequestException, Body, Controller, INestApplication, Post } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { IsInt, Min } from 'class-validator';
+import { execFileSync } from 'node:child_process';
+import { resolve } from 'node:path';
 import { Client } from 'pg';
 import request from 'supertest';
 import { GenericContainer, Wait } from 'testcontainers';
 import { configureApplication } from '../../src/config/configure-application';
+import { Public } from '../../src/common/decorators/public.decorator';
 
 class ValidationProbeDto {
   @IsInt()
@@ -13,6 +16,7 @@ class ValidationProbeDto {
 }
 
 @Controller('validation-probe')
+@Public() // Test-only endpoint: exercise DTO validation without an authenticated fixture.
 class ValidationProbeController {
   @Post()
   create(@Body() body: ValidationProbeDto): { quantity: number } {
@@ -69,6 +73,9 @@ describe('GET /health (PostGIS + Redis mediante Testcontainers)', () => {
     await adminClient.query('GRANT USAGE ON SCHEMA public TO app_runtime');
     await adminClient.query('CREATE EXTENSION IF NOT EXISTS postgis');
     await adminClient.query('CREATE EXTENSION IF NOT EXISTS pgcrypto');
+    // Match the production bootstrap: tables created by migrations are readable
+    // by runtime without granting it DDL, DELETE or sequence privileges.
+    await adminClient.query('ALTER DEFAULT PRIVILEGES FOR ROLE app_migrator IN SCHEMA public GRANT SELECT, INSERT, UPDATE ON TABLES TO app_runtime');
 
     const dbUrl = `postgresql://app_runtime:${runtimePassword}@${dbHost}:${dbPort}/vehicular_test?schema=public&connection_limit=3&pool_timeout=10`;
     const migrationUrl = `postgresql://app_migrator:${migratorPassword}@${dbHost}:${dbPort}/vehicular_test?schema=public`;
@@ -104,7 +111,17 @@ describe('GET /health (PostGIS + Redis mediante Testcontainers)', () => {
       JWT_REFRESH_TTL_SECONDS: '2592000',
     });
 
-    // Importación diferida: la configuración se valida después de preparar los contenedores.
+    // A fresh container has no application schema. Startup hooks (including
+    // reminders) query domain tables during app.init(), so migrate first.
+    const backendRoot = resolve(__dirname, '../..');
+    execFileSync(process.execPath, [resolve(backendRoot, 'node_modules/prisma/build/index.js'), 'migrate', 'deploy'], {
+      cwd: backendRoot,
+      env: { ...process.env, NODE_ENV: 'test', DATABASE_MIGRATION_URL: migrationUrl },
+      stdio: 'inherit',
+      timeout: 60_000,
+    });
+
+    // Importación diferida: la configuración se valida después de preparar y migrar la BD.
     const { AppModule } = await import('../../src/app.module');
     moduleRef = await Test.createTestingModule({
       imports: [AppModule],
@@ -118,7 +135,7 @@ describe('GET /health (PostGIS + Redis mediante Testcontainers)', () => {
 
   afterAll(async () => {
     if (app) await app.close();
-    if (moduleRef) await moduleRef.close();
+    else if (moduleRef) await moduleRef.close();
     if (adminClient) await adminClient.end();
     if (redisContainer) await redisContainer.stop();
     if (postgresContainer) await postgresContainer.stop();
@@ -151,5 +168,10 @@ describe('GET /health (PostGIS + Redis mediante Testcontainers)', () => {
       expect.objectContaining({ property: 'unexpected' }),
     ]));
     expect(response.headers['x-request-id']).toBe(response.body.request_id);
+  });
+
+  it('mantiene la autenticación obligatoria en endpoints reales', async () => {
+    const response = await request(app.getHttpServer()).get('/api/v1/me').expect(401);
+    expect(response.body).toMatchObject({ code: 'AUTH_REQUIRED', request_id: expect.any(String) });
   });
 });
